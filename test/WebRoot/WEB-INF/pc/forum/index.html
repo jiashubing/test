@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>论坛系统-首页</title>
+<link href="/pc/forum/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet" th:href="@{/css/pc/forum/bootstrap/css/bootstrap.css}" />
+<link href="/pc/forum/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet" th:href="@{/css/pc/forum/bootstrap/css/bootstrap-responsive.css}" />
+<link href="/pc/forum/css/style.css" type="text/css" rel="stylesheet" th:href="@{/css/pc/forum/css/style.css}" />
+<script type="text/javascript" src="/pc/forum/bootstrap/js/jquery.js" th:src="@{/js/pc/forum/bootstrap/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="/pc/forum/bootstrap/js/bootstrap.min.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.min.js}" ></script>
+<script type="text/javascript" src="/pc/forum/bootstrap/js/bootstrap.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.js}" ></script>
+</head>
+<body>
+  	<div id="header" class="wrap" style="width: 1200px; margin: 0 auto;">
+		<div th:include="pc/forum/common/top :: top" />
+	</div>
+	<div id="content" style="width: 1200px; margin: 0 auto;">
+		<div th:include="pc/forum/common/default :: default" />
+	</div>
+	<div id="footer" style="width: 1200px; margin: 0 auto;">
+		<div th:include="pc/forum/common/footer :: footer" />
+	</div>
+</body>
+</html>

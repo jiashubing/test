@@ -1,0 +1,42 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="default">
+	<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
+			<tr th:each="zone:${zoneList }" >
+				<td>
+					<table style="width: 1200px;" align="center">
+						<tr height="30">
+							<td style="text-indent:5;" background="pc/forum/images/index/classT.jpg" th:background="@{/image/pc/forum/images/index/classT.jpg}" >
+								<b><font color="white">■ <label th:text="${zone.name }"></label></font></b>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<ul class="unstyled inline" >
+									<tr th:each="section:${zone.sectionList }" >
+										<li style="width: 394px; margin-left: 0px;padding: 0px;">
+											<div align="center" style="margin-top: 20px;">
+												<div><a href="#">
+													<img style="width: 100px;" alt=""  src="/pc/forum/images/logo/20150319072154.jpg" th:src="@{/image/pc/forum/}+${section.logo }" />
+												</a></div>
+												<div style="margin: 10px auto;"> <a href="#"><font style="font-size: 30px;font-weight: bold;"><label th:text="${section.name }"></label></font></a></div>
+												<font style="font-size: 12px;">帖子总数：<label th:text="${section.totalCount}" ></label></font>
+												<font style="font-size: 12px;">精华帖子：<label th:text="${section.goodCount}" ></label></font>
+												<font style="font-size: 12px;">未回复：<label th:text="${section.noReplyCount}" ></label></font>
+												<font style="font-size: 12px;">版主：<label th:text="${section.master.nickName}"></label></font>
+											</div>
+										</li>
+									</tr>
+								</ul>
+							</td>
+						</tr>
+						<tr height="25"><td style="text-indent:10"><font color="#F9F9F9)">论坛介绍：<label th:text="${zone.description }"></label></font></td></tr>
+					</table>
+				</td>
+			</tr>
+	</table>
+</div>
+</body>
+</html>
