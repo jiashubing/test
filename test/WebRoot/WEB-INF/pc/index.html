@@ -1,0 +1,387 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>阿丙的私人订制</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
+	<link rel="stylesheet" type="text/css" href="disc/disc-style.css" th:href="@{/css/pc/disc/disc-style.css}"/>
+    <script type="text/javascript" src="js/cookie_util.js" th:src="@{/js/pc/js/cookie_util.js}" ></script>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="@{/js/pc/js/jquery.SuperSlide.2.1.1.js}" ></script>
+    <script type="text/javascript" src="js/indexuser.js" th:src="@{/js/pc/js/indexuser.js}" ></script>
+    <script type="text/javascript" src="js/confirm.js" th:src="@{/js/pc/js/confirm.js}" ></script>
+	<script type="text/javascript" src="disc/jQueryRotate.2.2.js" th:src="@{/js/pc/disc/jQueryRotate.2.2.js}" ></script>
+	<script type="text/javascript" src="disc/jquery.easing.min.js" th:src="@{/js/pc/disc/jquery.easing.min.js}" ></script>
+</head>
+<body><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
+<div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
+    <ul class="navi">
+        <li class="active"><a href="yun-index.html" th:href="@{/}">首页</a></li>
+        <li><a href="javascript:void(0)" th:href="@{/}">论坛系统</a></li>
+        <li><a href="yun-baomin.html" th:href="@{/}">自然之声</a></li>
+        <li><a href="javascript:void(0)" th:href="@{/}">历史项目</a></li>
+        <li><a href="yun-jxspnewone.html" th:href="@{/}">网页小游戏</a></li>
+        <li>
+            <a href="javascript:void(0)" th:href="@{/}">我的视频</a>
+        </li>
+        <li><a href="#">在线工具</a></li>
+		<li><a href="#">作者亲密度调查</a></li>
+        <li id="loginLi" style="padding:0px 0px 0px 20px;"
+            th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
+            <a href="javascript:void(0)" id="showLoginForm">控制台</a>
+        </li>
+        <!--<li id="userLi" style="padding:0px;display:block"
+            th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
+            <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png"
+                                                                               width="100%"/></a>
+            <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+
+            <p style="display: none" class="lbpo">
+                <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
+                <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                <a href="#" th:href="@{/logout}">退出</a>
+            </p>
+        </li>-->
+    </ul>
+</div>
+
+<p style="clear:both"></p>
+
+
+<div class="fullSlide">
+
+    <div class="bd">
+        <ul>
+            <li style="background:url(images/ice-bg.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/ice-bg.jpg}+')  center 0 no-repeat;'"></li>
+            <li style="background:url(images/ice.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/ice.jpg}+')  center 0 no-repeat;'"></li>
+            <li style="background:url(images/ice-bg.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/ice-bg.jpg}+')  center 0 no-repeat;'"></li>
+			<li style="background:url(images/ice.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/ice.jpg}+')  center 0 no-repeat;'"></li>
+        </ul>
+    </div>
+
+    <div class="hd">
+        <ul></ul>
+    </div>
+</div>
+
+
+<p style="clear:both"></p>
+
+<p style="height:20px"></p>
+<img src="images/wzwz.png" th:src="@{/image/pc/images/wzwz.png}" width="100%"/>
+
+<div class="hx">
+    <p style="clear:both; height:50px"></p>
+
+    <div class="hximg">
+        <ul>
+            <li class="pone">
+                <a href="" th:href="@{/}">
+                    <p class="ystitle">论坛系统</p>
+
+                    <p class="poneimg"></p>
+
+
+                    <p class=" ysmf">分享点滴爱好与兴趣</p>
+
+                    <p class=" yssz">吾之所知<br/>犹如冰山一角</p>
+                </a>
+            </li>
+            <li class="ptwo">
+                <a href="" th:href="@{/}">
+                    <p class="ystitle">自然之声</p>
+
+                    <p class="pthreeimg"></p>
+
+
+                    <p class="ysmf">最纯洁的声音与美景</p>
+
+                    <p class="yssz">吾之所感<br/>寂静相伴入眠</p>
+                </a>
+            </li>
+            <li class="pthree">
+                <p class="pthree ystitle">历史项目</p>
+
+                <p class="ptwoimg"></p>
+
+
+                <p class="ysmf">程序路上是八哥</p>
+
+                <p class="yssz">吾之所学<br/>今生永不停息</p>
+            </li>
+			
+			<li class="pfour">
+                <p class="pfour ystitle">作者亲密度调查</p>
+
+                <p class="pfourimg"></p>
+
+                <p class="ysmf">厚脸皮是怎样炼成的</p>
+
+				<p class="yssz">大哥大姐<br/>烦请多多支持啊</p>
+           </li>
+        </ul>
+    </div>
+</div>
+<img src="images/topone.png" width="100%" th:src="@{/image/pc/images/topone.png}"/>
+
+<div class="listone listhx">
+    <div style="width: 960px; margin: 0 auto;">
+		作者寄语：
+        <!--<ul>
+            <li style=" float:left;">
+                <div>
+                    <p class="tit"><span class="titspan">动态资讯</span> <span><img
+                            src="images/play.png" style="width: 18px; height: 18px;"/></span></p>
+
+                    <p class="titen"><span>Dynamic information</span></p>
+                    <img class="imgleft" src="images/logo_huoban.jpg" style="width:126px; height: 108px;"/>
+                    <a href="javascript:void(0)"><p class="titfont" >
+                        “微商”悄然兴起</p></a>
+                    <a href="javascript:void(0)">
+                        <p class="titlb">
+                            什么是微商？至今没有权威定义。在朋友圈刷屏的卖家、品牌的微信代理商，以及自媒体发展起来的微信卖家，都被视为微商。
+                        </p>
+                    </a>
+
+                    <p class="titxian"></p>
+                </div>
+            </li>
+
+            <li style=" float:left;">
+                <div>
+                    <p class="tit"><span class="titspan">最新公告</span> <span><img
+                            src="images/play.png" style="width: 18px; height: 18px;"/></span></p>
+
+                    <p class="titen"><span>Latest statement</span></p>
+                    <img class="imgleft" src="images/logo_huoban.jpg"
+                                                      style="width:126px; height: 108px;"/>
+                    <a href="javascript:void(0)"><p class="titfont">微商论剑-杭州第五站</p></a>
+                    <a href="javascript:void(0)"><p class="titlb">
+                        火图科技迄今为止已在杭城成功举办4站"微商论剑"，并赶赴衢州、建德多地巡演，吸引当地众多传统企业前来观摩。这一次，火图科技将集结胡庆余堂、姚生记、天天快递、长生鸟于云咖啡，让你看看，品牌微商的力量有多强！</p>
+                    </a>
+
+                    <p class="titxian"></p>
+                </div>
+        
+            </li>
+            <li style=" float:left;">
+                <div>
+                    <p class="tit"><span class="titspan">常见问题</span> <span><img
+                            src="images/play.png" style="width: 18px; height: 18px;"/></span></p>
+
+                    <p class="titen"><span>Common problem</span></p>
+                    <img class="imgleft"
+                                                      th:src="${qaList.size()}>=1?${qaList[0].pictureUri}:'images/logo_huoban.jpg'"
+                                                      src="images/logo_huoban.jpg"
+                                                      style="width:126px; height: 108px;"/>
+                    <a href="javascript:void(0)"><p class="titfont"
+                                                    th:text="${qaList.size()}>=1?${qaList[0].title}:'通过微商运营师的培训能学到什么？'">
+                        微商走进校园</p></a>
+                    <a href="javascript:void(0)"><p class="titlb"
+                                                    th:text="${qaList.size()}>=1?${qaList[0].content}:'微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。'">
+                        考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
+                    </a>
+
+                    <p class="titxian"></p>
+                </div>
+            </li>
+            <li style=" float:left;">
+                <div>
+                    <p class="tit"><span class="titspan">报名须知</span> <span><img
+                            src="images/play.png" style="width: 18px; height: 18px;"/></span></p>
+
+                    <p class="titen"><span>Application notes</span></p>
+                    <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><img class="imgleft"
+                                                                                          src="images/logo_huoban.jpg"
+                                                                                          style="width:126px; height: 108px;"/></a>
+                    <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><p class="titfont">报名时间</p></a>
+                    <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><p class="titlb">
+                        1、报名时间： 即日起报名，每期50人以上即开班。
+                        2、报名渠道：1.公司官网报名；2.代理商处报名；3.公司总部报名；4.微信公众号报名；
+                        3、报名费用： 2680元/人: 包括报名费、证书费、辅导资料费和考务费。
+                        4、报名资料：报名表1张；个人身份证复印件1份；学历证书或学生证复印件一张，或在职证明一张；两寸白底彩色照片2张。
+                        5、考核方式： 理论考试时间100分钟，满分100分，60分即通过。</p>
+                    </a>
+
+                    <p class="titxian"></p>
+                </div>
+            </li>
+        </ul>-->
+    </div>
+</div>
+<img src="images/bottonone.png" width="100%" th:src="@{/image/pc/images/bottonone.png}"/>
+
+<div class="kf"><img src="images/wzwz-1.png" width="100%" th:src="@{/image/pc/images/wzwz-1.png}"/>
+
+    <p style="clear:both; height:30px"></p>
+<script type="text/javascript">
+	$(function() {
+		$("#inner").click(function() {
+			lottery();
+		});
+	});
+	function lottery() {
+		$.ajax({
+			type : 'POST',
+			url : 'AwardServlet',
+			dataType : 'json',
+			cache : false,
+			error : function() {
+				alert('出错了！');
+				return false;
+			},
+
+			success : function(json) {
+				$("#inner").unbind('click').css("cursor", "default");
+				var angle = parseInt(json.angle); //角度 
+				var msg = json.msg; //提示信息
+				$("#outer").rotate({ //inner内部指针转动，outer外部转盘转动
+					duration : 5000, //转动时间 
+					angle : 0, //开始角度 
+					animateTo : 3600 + angle, //转动角度 
+					easing : $.easing.easeOutSine, //动画扩展 
+					callback : function() {
+						var con = confirm(msg + '\n还要再来一次吗？');
+						if (con) {
+							lottery();
+						} else {
+							return false;
+						}
+					}
+				});
+			}
+		});
+	}
+</script>
+    <div class="kfimg">
+		<div id="disc-main">
+		<div id="outer-cont">
+			<div id="outer">
+				<img src="disc/disc-1.png" th:src="@{/image/pc/disc/disc-1.png}"/>
+			</div>
+		</div>
+		<div id="inner-cont">
+			<div id="inner"><img src="disc/disc-2.png" th:src="@{/image/pc/disc/disc-2.png}"/></div>
+		</div>
+	</div>
+    </div>
+    <div style="display:none">
+        <p style="clear:both; height:80px"></p>
+        <a href="">
+            <div class="morebtn">更多</div>
+        </a>
+
+        <p style="clear:both; height:30px"></p>
+    </div>
+</div>
+<!--<div class="lhx" style=" background-color:#0195ff; color:#fff">友情链接|<a th:each="g:${linkList}" th:href="${g.url}"
+                                                                       th:target="'_blank'"
+                                                                       th:text="${g.title}+'  '"></a><a
+        href="http://www.gcvaic.org" target="_blank">公共证书查询入口</a></div>-->
+
+<div th:include="pc/loginPopup::footerDiv" class="footer">
+    <p>阿丙工作室</p>
+    <p>联系邮箱：jiashubing@foxmail.com</p>
+</div>
+
+
+<!--<div style="width: 126px; height: 189px; position: fixed; top:220px; right: 20px; display: block; z-index: 100;">
+    <div style="display: block; width: 126px; height: 126px;"><img src="images/weixin.png"
+                                                                   th:src="@{/pc/images/weixin.png}"
+                                                                   style="width: 126px; height: 126px;"/></div>
+    <div style="background-color: #f1f1f1; text-align: center; font-size: 16px; font-family: '微软雅黑'; color: #666; height: 30px; line-height: 30px; display: block;">
+        <a href="http://www.fanmore.cn/d.html" style="color: #333; font-size: 14px;" target="_blank">点击下载</a></div>
+    <img src="images/call.jpg" th:src="@{/pc/images/call.jpg}" style="width:126px; height:65px;"/></div>-->
+
+<!--登录弹窗-->
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                         onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+        <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+    <div class="sign-in">
+        <div class="user-form">
+            <form accept-charset="UTF-8" action="yun-geren.html" th:action="@{/pc/index}"
+                  class="sign-in__form user-form__form" method="post">
+
+                <div class="user-form__fieldset">
+                    <label class="user-form__label" for="username" style="color:#111">手机号：</label>
+                    <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
+                           id="username" name="username" placeholder="请输入您的手机号" maxlength="20" type="text"/>
+                </div>
+                <div class="user-form__fieldset">
+                    <label class="user-form__label" for="password" style="color:#111">密码：</label>
+                    <input class="sign-in__field user-form__field" id="password" name="password"
+                           placeholder="password" type="password"/>
+
+                </div>
+                <div class="user-form__href" align="right"><a id="goToRegister" href="javascript:void(0)">免费注册</a></div>
+                <button id="btn_login" class="sign-in__button user-form__button" name="btn_login" type="submit">
+                    登录
+                </button>
+            </form>
+            <span style="color:red" id="loginFailedInfo" th:text="${errInfo}"></span>
+        </div>
+    </div>
+</div>
+<!--登录弹窗end-->
+<!--注册弹窗-->
+<div th:replace="pc/loginPopup::registPopupDiv" id="regDiv" class="AsaiDivShow" style="display:none">
+    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                         onclick="javascript:hideRegisterForm()">
+        <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+    <div class="sign-in">
+        <div class="user-form">
+            <form action="yun-baomin.html">
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="regPhoneNo" name="regPhoneNo"
+                           placeholder="真实手机号" maxlength="20" type="text"/>
+                    <span style="color:red" id="phoneErr"/>
+                    <span style="color:green" id="phoneRig"/>
+                </p>
+
+                <p style="height:10px;"></p>
+
+                <p style="margin: 0 auto;">
+                    <input class="ys-form__field" id="regMessage" name="regMessage" placeholder="短信验证码" maxlength="6"
+                           type="text" style="float: left; margin-top: 10px; margin-left:40px; width:430px;"/>
+                    <input id="verify_btn" value="获取验证码" class="user-form__yanzheng" type="button"
+                           onclick="settime(this)"/>
+                </p>
+
+                <p style="text-align:center;">
+                    <button class="sign-in__button user-form__button" id="registerBtn" type="button">
+                        提交
+                    </button>
+                </p>
+                <div style="text-align: center">
+                    <i style="color:#FFBE00">*</i>注册成功后初始密码为手机号后四位，您可以登录后在个人中心修改<br/>
+                </div>
+            </form>
+            <span style="color:red" id="regErrInfo"></span>
+            <span style="color:blue" id="regMsgInfo"></span>
+        </div>
+    </div>
+</div>
+<!--注册弹窗end-->
+<div id="asaimsgbg" class="AsaiDivBG" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'"></div>
+</body>
+
+
+</html>
+<script type="text/javascript">
+    jQuery(".fullSlide").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click"
+    });
+</script>
