@@ -13,6 +13,7 @@
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="@{/js/pc/js/jquery.SuperSlide.2.1.1.js}" ></script>
     <script type="text/javascript" src="js/indexuser.js" th:src="@{/js/pc/js/indexuser.js}" ></script>
     <script type="text/javascript" src="js/confirm.js" th:src="@{/js/pc/js/confirm.js}" ></script>
+    <script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
 	<script type="text/javascript" src="disc/jQueryRotate.2.2.js" th:src="@{/js/pc/disc/jQueryRotate.2.2.js}" ></script>
 	<script type="text/javascript" src="disc/jquery.easing.min.js" th:src="@{/js/pc/disc/jquery.easing.min.js}" ></script>
 </head>
@@ -130,86 +131,6 @@
 <div class="listone listhx">
     <div style="width: 960px; margin: 0 auto;">
 		作者寄语：
-        <!--<ul>
-            <li style=" float:left;">
-                <div>
-                    <p class="tit"><span class="titspan">动态资讯</span> <span><img
-                            src="images/play.png" style="width: 18px; height: 18px;"/></span></p>
-
-                    <p class="titen"><span>Dynamic information</span></p>
-                    <img class="imgleft" src="images/logo_huoban.jpg" style="width:126px; height: 108px;"/>
-                    <a href="javascript:void(0)"><p class="titfont" >
-                        “微商”悄然兴起</p></a>
-                    <a href="javascript:void(0)">
-                        <p class="titlb">
-                            什么是微商？至今没有权威定义。在朋友圈刷屏的卖家、品牌的微信代理商，以及自媒体发展起来的微信卖家，都被视为微商。
-                        </p>
-                    </a>
-
-                    <p class="titxian"></p>
-                </div>
-            </li>
-
-            <li style=" float:left;">
-                <div>
-                    <p class="tit"><span class="titspan">最新公告</span> <span><img
-                            src="images/play.png" style="width: 18px; height: 18px;"/></span></p>
-
-                    <p class="titen"><span>Latest statement</span></p>
-                    <img class="imgleft" src="images/logo_huoban.jpg"
-                                                      style="width:126px; height: 108px;"/>
-                    <a href="javascript:void(0)"><p class="titfont">微商论剑-杭州第五站</p></a>
-                    <a href="javascript:void(0)"><p class="titlb">
-                        火图科技迄今为止已在杭城成功举办4站"微商论剑"，并赶赴衢州、建德多地巡演，吸引当地众多传统企业前来观摩。这一次，火图科技将集结胡庆余堂、姚生记、天天快递、长生鸟于云咖啡，让你看看，品牌微商的力量有多强！</p>
-                    </a>
-
-                    <p class="titxian"></p>
-                </div>
-        
-            </li>
-            <li style=" float:left;">
-                <div>
-                    <p class="tit"><span class="titspan">常见问题</span> <span><img
-                            src="images/play.png" style="width: 18px; height: 18px;"/></span></p>
-
-                    <p class="titen"><span>Common problem</span></p>
-                    <img class="imgleft"
-                                                      th:src="${qaList.size()}>=1?${qaList[0].pictureUri}:'images/logo_huoban.jpg'"
-                                                      src="images/logo_huoban.jpg"
-                                                      style="width:126px; height: 108px;"/>
-                    <a href="javascript:void(0)"><p class="titfont"
-                                                    th:text="${qaList.size()}>=1?${qaList[0].title}:'通过微商运营师的培训能学到什么？'">
-                        微商走进校园</p></a>
-                    <a href="javascript:void(0)"><p class="titlb"
-                                                    th:text="${qaList.size()}>=1?${qaList[0].content}:'微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。'">
-                        考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
-                    </a>
-
-                    <p class="titxian"></p>
-                </div>
-            </li>
-            <li style=" float:left;">
-                <div>
-                    <p class="tit"><span class="titspan">报名须知</span> <span><img
-                            src="images/play.png" style="width: 18px; height: 18px;"/></span></p>
-
-                    <p class="titen"><span>Application notes</span></p>
-                    <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><img class="imgleft"
-                                                                                          src="images/logo_huoban.jpg"
-                                                                                          style="width:126px; height: 108px;"/></a>
-                    <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><p class="titfont">报名时间</p></a>
-                    <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><p class="titlb">
-                        1、报名时间： 即日起报名，每期50人以上即开班。
-                        2、报名渠道：1.公司官网报名；2.代理商处报名；3.公司总部报名；4.微信公众号报名；
-                        3、报名费用： 2680元/人: 包括报名费、证书费、辅导资料费和考务费。
-                        4、报名资料：报名表1张；个人身份证复印件1份；学历证书或学生证复印件一张，或在职证明一张；两寸白底彩色照片2张。
-                        5、考核方式： 理论考试时间100分钟，满分100分，60分即通过。</p>
-                    </a>
-
-                    <p class="titxian"></p>
-                </div>
-            </li>
-        </ul>-->
     </div>
 </div>
 <img src="images/bottonone.png" width="100%" th:src="@{/image/pc/images/bottonone.png}"/>
@@ -217,45 +138,7 @@
 <div class="kf"><img src="images/wzwz-1.png" width="100%" th:src="@{/image/pc/images/wzwz-1.png}"/>
 
     <p style="clear:both; height:30px"></p>
-<script type="text/javascript">
-	$(function() {
-		$("#inner").click(function() {
-			lottery();
-		});
-	});
-	function lottery() {
-		$.ajax({
-			type : 'POST',
-			url : 'AwardServlet',
-			dataType : 'json',
-			cache : false,
-			error : function() {
-				alert('出错了！');
-				return false;
-			},
-
-			success : function(json) {
-				$("#inner").unbind('click').css("cursor", "default");
-				var angle = parseInt(json.angle); //角度 
-				var msg = json.msg; //提示信息
-				$("#outer").rotate({ //inner内部指针转动，outer外部转盘转动
-					duration : 5000, //转动时间 
-					angle : 0, //开始角度 
-					animateTo : 3600 + angle, //转动角度 
-					easing : $.easing.easeOutSine, //动画扩展 
-					callback : function() {
-						var con = confirm(msg + '\n还要再来一次吗？');
-						if (con) {
-							lottery();
-						} else {
-							return false;
-						}
-					}
-				});
-			}
-		});
-	}
-</script>
+    
     <div class="kfimg">
 		<div id="disc-main">
 		<div id="outer-cont">
@@ -277,24 +160,11 @@
         <p style="clear:both; height:30px"></p>
     </div>
 </div>
-<!--<div class="lhx" style=" background-color:#0195ff; color:#fff">友情链接|<a th:each="g:${linkList}" th:href="${g.url}"
-                                                                       th:target="'_blank'"
-                                                                       th:text="${g.title}+'  '"></a><a
-        href="http://www.gcvaic.org" target="_blank">公共证书查询入口</a></div>-->
 
 <div th:include="pc/loginPopup::footerDiv" class="footer">
     <p>阿丙工作室</p>
     <p>联系邮箱：jiashubing@foxmail.com</p>
 </div>
-
-
-<!--<div style="width: 126px; height: 189px; position: fixed; top:220px; right: 20px; display: block; z-index: 100;">
-    <div style="display: block; width: 126px; height: 126px;"><img src="images/weixin.png"
-                                                                   th:src="@{/pc/images/weixin.png}"
-                                                                   style="width: 126px; height: 126px;"/></div>
-    <div style="background-color: #f1f1f1; text-align: center; font-size: 16px; font-family: '微软雅黑'; color: #666; height: 30px; line-height: 30px; display: block;">
-        <a href="http://www.fanmore.cn/d.html" style="color: #333; font-size: 14px;" target="_blank">点击下载</a></div>
-    <img src="images/call.jpg" th:src="@{/pc/images/call.jpg}" style="width:126px; height:65px;"/></div>-->
 
 <!--登录弹窗-->
 <div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
