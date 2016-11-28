@@ -21,6 +21,11 @@ public class HomeAction {
 		return ValidatePcMobile.checkRequest(request, "/index");
 	}
 	
+	@RequestMapping("/forum")
+	public String loadForum(Model model,HttpServletRequest request)throws Exception{
+		return ValidatePcMobile.checkRequest(request, "/forum");
+	}
+	
 	@RequestMapping("/lottery")
     @ResponseBody
     public Result loadLottery() {
