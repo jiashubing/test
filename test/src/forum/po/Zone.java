@@ -14,6 +14,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 论坛大板块表
+ * @author JiaShubing
+ *
+ */
 @Entity
 @Table(name="t_zone")
 public class Zone {

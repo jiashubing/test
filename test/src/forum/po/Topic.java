@@ -19,10 +19,16 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 帖子表
+ * @author JiaShubing
+ *
+ */
 @Entity
 @Table(name="t_topic")
 public class Topic {
 
+	/**帖子表的id*/
 	private int id;						//
 	private Section section;			//
 	private User user;					//

@@ -16,6 +16,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 论坛小版块表
+ * @author JiaShubing
+ *
+ */
 @Entity
 @Table(name="t_section")
 public class Section {
