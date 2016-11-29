@@ -67,14 +67,21 @@
 	<div style="margin-bottom: 10px;">
 		<a class="" href=""><img alt="发帖" src="images/post.jpg"  th:src="@{/image/pc/forum/images/post.jpg}"/></a>
 		<div class="pagination alternate pull-right" align="center" style="margin: 0px;">
-			<ul class="clearfix">
-				<li class="disabled"><a>首页</a></li>
-				<li class="disabled"><a>上一页</a></li>
-				<li class="active"><a>1</a></li>
-				<li><a href=''>2</a></li>
-				<li><a href=''>下一页</a></li>
-				<li><a href=''>末页</a></li>
-			</ul>
+			<span th:if="${totalPages}==0"  th:text="该板块没有发表任何帖子">该板块没有发表任何帖子</span>
+			<span th:unless="${totalPages}==0" >
+				<ul class="clearfix">
+					<!-- <li class="disabled"><a>首页</a></li>
+					<li class="disabled"><a>上一页</a></li>
+					<li class="active"><a>1</a></li>
+					<li><a href=''>2</a></li>
+					<li><a href=''>下一页</a></li>
+					<li><a href=''>末页</a></li> -->
+						<li th:class="${pageNo}==1?'disabled':''" ><a href=''>首页</a></li>
+						<li th:class="${pageNo}>1?'':'disabled'"><a href=''>上一页</a></li>
+						<li th:class="${totalPages}-1>${pageNo}?'':'disabled'" ><a href=''>下一页</a></li>
+						<li th:class="${totalPages}-1==${pageNo}?'disabled':''" ><a href=''>末页</a></li>
+				</ul>
+			</span>
 		</div>
 	</div>
 	<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
@@ -160,10 +167,8 @@
 		
 		<tr>
 			<td>
-
 				<table class="table table-bordered" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
 					<tbody th:remove="all-but-first">
-					<!--<c:forEach items="${ptTopicList }" var="topic">-->
 						<tr th:each="topic:${ptTopicList}">
 							<td style="text-align: center;vertical-align:middle;width: 150px;">
 								<span th:if="${topic.good==0 }" style="color: blue;">【普通】</span>
@@ -208,6 +213,8 @@
 			</td>
 		</tr>
 	</table>
+	<div th:if="${#lists.isEmpty(ptTopicList)}"  style="height:500px;"></div>
+	<div th:if="${#lists.size(ptTopicList)==1}"  style="height:480px;"></div>
 </div>
 <div id="dlg" class="modal hide fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-header">
