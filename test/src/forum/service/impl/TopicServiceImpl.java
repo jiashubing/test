@@ -143,7 +143,7 @@ public class TopicServiceImpl implements TopicService {
 		}
 		hql.append(" and top=0 order by modifyTime desc");
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
-		List<Topic> result = query.getResultList();
+		List<Topic> result = query.setMaxResults(pageSize).setFirstResult(pageNo).getResultList();
 		em.clear();
 		return result;
 	}

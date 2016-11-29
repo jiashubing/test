@@ -33,7 +33,7 @@ public class ReplyServiceImpl implements ReplyService {
 		Query query = em.createQuery(hql.toString());
 		List<Reply> result = query.getResultList();
 		em.clear();
-		if (result != null) {
+		if (result != null && result.size()>0) {
 			return result.get(0);
 		} else {
 			return null;
@@ -45,7 +45,7 @@ public class ReplyServiceImpl implements ReplyService {
 	public Long getReplyCountByTopicId(int topicId) {
 		StringBuffer hql=new StringBuffer("select count(*) from Reply");
 		if (topicId>0) {
-			hql.append(" and topicId ="+topicId);
+			hql.append(" where topicId ="+topicId);
 		}
 		Query query = em.createQuery(hql.toString());
 		return (Long)query.getSingleResult();

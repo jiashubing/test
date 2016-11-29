@@ -18,6 +18,7 @@ public class HomeAction {
 	
 	@RequestMapping("/index")
 	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
+		 model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/index");
 	}
 	

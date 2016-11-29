@@ -1,0 +1,297 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>阿丙的私人订制</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
+
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+
+
+	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap.css" th:href="@{/css/pc/forum/bootstrap/css/bootstrap.css}"/>
+	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap-responsive.css"  th:href="@{/css/pc/forum/bootstrap/css/bootstrap-responsive.css}" />
+	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
+	
+	<script type="text/javascript" src="forum/bootstrap/js/jquery.js" th:src="@{/js/pc/forum/bootstrap/js/jquery.js}" ></script>
+	<script type="text/javascript" src="forum/bootstrap/js/bootstrap.min.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.min.js}" ></script>
+	<script type="text/javascript" src="forum/bootstrap/js/bootstrap.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.js}" ></script>
+	<script type="text/javascript">
+		function logout() {
+			if (confirm("您确定要退出系统吗？")) {
+				window.location.href="User_logout.action";
+			}
+		}
+		function login(){
+			var curPage=window.location.href;
+			window.location.href="login.jsp?prePage="+curPage;
+		}
+		function checkUserLogin(){
+			if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
+				alert("您还未登陆！");
+			} else {
+				window.location.href="User_userCenter.action";
+			}
+		}
+	</script>
+
+
+</head>
+<body><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
+<div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
+    <ul class="navi">
+        <li><a href="yun-index.html" th:href="@{/}">首页</a></li>
+        <li class="active"><a href="javascript:void(0)" th:href="@{/}">论坛系统</a></li>
+        <li><a href="yun-baomin.html" th:href="@{/}">自然之声</a></li>
+        <li><a href="javascript:void(0)" th:href="@{/}">历史项目</a></li>
+        <li><a href="yun-jxspnewone.html" th:href="@{/}">网页小游戏</a></li>
+        <li>
+            <a href="javascript:void(0)" th:href="@{/}">我的视频</a>
+        </li>
+        <li><a href="#">在线工具</a></li>
+		<li><a href="#">作者亲密度调查</a></li>
+        <li id="loginLi" style="padding:0px 0px 0px 20px;"
+            th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
+            <a href="javascript:void(0)" id="showLoginForm">控制台</a>
+        </li>
+        <!--<li id="userLi" style="padding:0px;display:block"
+            th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
+            <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png"
+                                                                               width="100%"/></a>
+            <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+
+            <p style="display: none" class="lbpo">
+                <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
+                <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                <a href="#" th:href="@{/logout}">退出</a>
+            </p>
+        </li>-->
+    </ul>
+</div>
+
+<p style="clear:both"></p>
+<div class="forum" >
+	<div th:replace="pc/forum/common/top::top"  id="content" style="width: 1200px; margin: 0 auto;">
+		<div  id="forum-header-wrapper" >
+			<div id="forum-header" class="container">
+				<div id="forum-logo">
+					<h1><a href="#">冰山一角论坛</a></h1>
+				</div>
+			</div>
+		</div>
+		<div style="margin: 0 auto;" align="right">
+			<!--<c:choose>
+				<c:when test="${not empty currentUser }">
+					当前用户：<a href="#">${currentUser.nickName }</a>&nbsp;『<c:choose>
+													<c:when test="${currentUser.sectionList.size()==0&&currentUser.type!=2 }">
+														<font style="color: black;">普通用户</font>	
+													</c:when>
+													<c:when test="${currentUser.sectionList.size()!=0&&currentUser.type!=2 }">
+														<font style="color: blue;">版主</font>
+													</c:when>
+													<c:otherwise>
+														<font style="color: red;">管理员</font>
+													</c:otherwise>
+												</c:choose>』|
+					<a href="javascript:logout()">注销</a>|
+					<a href="register.jsp">注册</a>|
+					<a href="javascript:checkUserLogin()">个人中心</a>
+				</c:when>
+				<c:otherwise>
+					<a href="javascript:login()">登录</a>|
+					<a href="register.jsp">注册</a>|
+					<a href="javascript:checkUserLogin()">个人中心</a>
+				</c:otherwise>
+			</c:choose>-->
+			<a href="javascript:logout()">注销</a>|
+			<a href="register.jsp">注册</a>|
+			<a href="javascript:checkUserLogin()">个人中心</a>
+		</div>
+	</div>
+<!--<div id="content" style="width: 1200px; margin: 0 auto;">
+	<jsp:include page="common/default.jsp"></jsp:include>
+</div>-->
+	<div id="content" style="width: 1200px; margin: 0 auto;">
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
+			 <tbody th:remove="all-but-first">
+			<!--<c:forEach items="${zoneList }" var="zone">-->
+				<tr th:each="zone:${zoneList}">
+					<td>
+						<table style="width: 1200px;" align="center">
+							<tr height="30">
+								<td style="text-indent:5;" background="forum/images/index/classT.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'">
+									<b><font color="white">■ <span th:text="${zone.name }">网站建设</span></font></b>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<ul class="unstyled inline" th:remove="all-but-first">
+										<li th:each="section:${zone.sectionList }" style="width: 394px; margin-left: 0px;padding: 0px;">
+											<div align="center" style="margin-top: 20px;">
+												<div><a href="#" th:href="@{/forum/topicList(id=${section.id})}">
+												<img style="width: 100px;" alt="" src="forum/images/logo/20150319072154.jpg"  th:src="@{'/image/pc/forum/'+${section.logo }}" /></a></div>
+												<div style="margin: 10px auto;"> <a href="# " th:href="@{/forum/topicList(id=${section.id})}"><font style="font-size: 30px;font-weight: bold;"><span th:text="${section.name }">作者公告</span></font></a></div>
+												<font style="font-size: 12px;">帖子总数：<span th:text="${section.totalCount}">3</span></font>
+												<font style="font-size: 12px;">精华帖子：<span th:text="${section.goodCount}">3</span></font>
+												<font style="font-size: 12px;">未回复：<span th:text="${section.noReplyCount}">3</span></font>
+												<font style="font-size: 12px;">版主：<span th:text="${section.master.nickName }">Shubing</span></font>
+											</div>
+										</li>
+
+										<li style="width: 394px; margin-left: 0px;padding: 0px;">
+											<div align="center" style="margin-top: 20px;">
+												<div><a href="# }">
+												<img style="width: 100px;" alt="" src="forum/images/logo/20150319072205.jpg" th:src="@{/image/pc/forum/images/logo/20150319072205.jpg}" /></a></div>
+												<div style="margin: 10px auto;"> <a href="# }"><font style="font-size: 30px;font-weight: bold;">提供建议</font></a></div>
+												<font style="font-size: 12px;">帖子总数：3</font>
+												<font style="font-size: 12px;">精华帖子：3</font>
+												<font style="font-size: 12px;">未回复：3</font>
+												<font style="font-size: 12px;">版主：Shubing</font>
+											</div>
+										</li>
+										<li style="width: 394px; margin-left: 0px;padding: 0px;">
+											<div align="center" style="margin-top: 20px;">
+												<div><a href="# }">
+												<img style="width: 100px;" alt="" src="forum/images/logo/20150319072926.jpg" th:src="@{/image/pc/forum/images/logo/20150319072926.jpg}" /></a></div>
+												<div style="margin: 10px auto;"> <a href="# }"><font style="font-size: 30px;font-weight: bold;">留个脚印</font></a></div>
+												<font style="font-size: 12px;">帖子总数：3</font>
+												<font style="font-size: 12px;">精华帖子：3</font>
+												<font style="font-size: 12px;">未回复：3</font>
+												<font style="font-size: 12px;">版主：Shubing</font>
+											</div>
+										</li>
+									</ul>
+								</td>
+							</tr>
+							<tr height="25"><td style="text-indent:10" background="forum/images/index/boardE.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classE.jpg}+')  center 0 no-repeat;'"><font color="#F9F9F9)">论坛介绍：感谢您能为我的网站建设出一份力</font></td></tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table style="width: 1200px;" align="center">
+							<tr height="30"><td style="text-indent:5;" background="forum/images/index/classT.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'"><b><font color="white">■ 文艺苑区</font></b></td></tr>
+							<tr>
+								<td>
+									<ul class="unstyled inline" >
+										<li style="width: 394px; margin-left: 0px;padding: 0px;">
+											<div align="center" style="margin-top: 20px;">
+												<div><a href="# }">
+												<img style="width: 100px;" alt="" src="forum/images/logo/20150319072419.jpg" th:src="@{/image/pc/forum/images/logo/20150319072419..jpg}" /></a></div>
+												<div style="margin: 10px auto;"> <a href="# }"><font style="font-size: 30px;font-weight: bold;">杂志文摘</font></a></div>
+												<font style="font-size: 12px;">帖子总数：3</font>
+												<font style="font-size: 12px;">精华帖子：3</font>
+												<font style="font-size: 12px;">未回复：3</font>
+												<font style="font-size: 12px;">版主：Shubing</font>
+											</div>
+										</li>
+									</ul>
+								</td>
+							</tr>
+							<tr height="25"><td style="text-indent:10" background="forum/images/index/boardE.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classE.jpg}+')  center 0 no-repeat;'"><font color="#F9F9F9)">论坛介绍：分享那感动过我们的文章</font></td></tr>
+						</table>
+					</td>
+				</tr>
+			<!--</c:forEach>-->
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+<div th:include="pc/loginPopup::footerDiv" class="footer">
+    <p>阿丙工作室</p>
+    <p>联系邮箱：jiashubing@foxmail.com</p>
+</div>
+
+<!--登录弹窗-->
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                         onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+        <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+    <div class="sign-in">
+        <div class="user-form">
+            <form accept-charset="UTF-8" action="yun-geren.html" th:action="@{/pc/index}"
+                  class="sign-in__form user-form__form" method="post">
+
+                <div class="user-form__fieldset">
+                    <label class="user-form__label" for="username" style="color:#111">手机号：</label>
+                    <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
+                           id="username" name="username" placeholder="请输入您的手机号" maxlength="20" type="text"/>
+                </div>
+                <div class="user-form__fieldset">
+                    <label class="user-form__label" for="password" style="color:#111">密码：</label>
+                    <input class="sign-in__field user-form__field" id="password" name="password"
+                           placeholder="password" type="password"/>
+
+                </div>
+                <div class="user-form__href" align="right"><a id="goToRegister" href="javascript:void(0)">免费注册</a></div>
+                <button id="btn_login" class="sign-in__button user-form__button" name="btn_login" type="submit">
+                    登录
+                </button>
+            </form>
+            <span style="color:red" id="loginFailedInfo" th:text="${errInfo}"></span>
+        </div>
+    </div>
+</div>
+<!--登录弹窗end-->
+<!--注册弹窗-->
+<div th:replace="pc/loginPopup::registPopupDiv" id="regDiv" class="AsaiDivShow" style="display:none">
+    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                         onclick="javascript:hideRegisterForm()">
+        <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+    <div class="sign-in">
+        <div class="user-form">
+            <form action="yun-baomin.html">
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="regPhoneNo" name="regPhoneNo"
+                           placeholder="真实手机号" maxlength="20" type="text"/>
+                    <span style="color:red" id="phoneErr"/>
+                    <span style="color:green" id="phoneRig"/>
+                </p>
+
+                <p style="height:10px;"></p>
+
+                <p style="margin: 0 auto;">
+                    <input class="ys-form__field" id="regMessage" name="regMessage" placeholder="短信验证码" maxlength="6"
+                           type="text" style="float: left; margin-top: 10px; margin-left:40px; width:430px;"/>
+                    <input id="verify_btn" value="获取验证码" class="user-form__yanzheng" type="button"
+                           onclick="settime(this)"/>
+                </p>
+
+                <p style="text-align:center;">
+                    <button class="sign-in__button user-form__button" id="registerBtn" type="button">
+                        提交
+                    </button>
+                </p>
+                <div style="text-align: center">
+                    <i style="color:#FFBE00">*</i>注册成功后初始密码为手机号后四位，您可以登录后在个人中心修改<br/>
+                </div>
+            </form>
+            <span style="color:red" id="regErrInfo"></span>
+            <span style="color:blue" id="regMsgInfo"></span>
+        </div>
+    </div>
+</div>
+<!--注册弹窗end-->
+<div id="asaimsgbg" class="AsaiDivBG" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'"></div>
+</body>
+
+
+</html>
+<script type="text/javascript">
+    jQuery(".fullSlide").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click"
+    });
+</script>

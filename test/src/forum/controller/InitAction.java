@@ -29,7 +29,7 @@ public class InitAction {
 	@Resource(name="sectionServiceImpl")
 	private SectionService sectionService;
 	
-	@RequestMapping("/forum/index")
+	@RequestMapping("/forum")
 	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
 		List<Zone> zoneList=zoneService.findZoneList(null, 10,0);
 		model.addAttribute("zoneList",zoneList);
@@ -52,7 +52,8 @@ public class InitAction {
 			}
 		}
 		
-		return ValidatePcMobile.checkRequest(request, "/forum/index");
+		 model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/forum");
 	}
 	
 }

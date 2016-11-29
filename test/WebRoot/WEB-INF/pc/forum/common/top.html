@@ -1,32 +1,21 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
     <div th:fragment="top">
-    	<div id="header-wrapper">
-			<div id="header" class="container">
-				<div id="logo">
-					<h1><a href="#">Java1234论坛</a></h1>
-					<p> <a href="http://www.java1234.com/" rel="nofollow">Java1234知识分享网</a></p>
+	    <div id="content" style="width: 1200px; margin: 0 auto;">
+	    	<div id="forum-header-wrapper">
+				<div id="forum-header" class="container">
+					<div id="forum-logo">
+						<h1><a href="#">冰山一角论坛</a></h1>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div id="menu-wrapper">
-			<div id="menu" class="container">
-				<ul>
-					<li class="current_page_item"><a href="../index.html">首　页</a></li>
-					<li><a href="#">申请版主</a></li>
-					<li><a href="#">在线文档</a></li>
-					<li><a href="#">站点帮助</a></li>
-					<li><a href="#">资源下载</a></li>
-				</ul>
+			<div style="margin: 0 auto;" align="right">
+				<a href="#">登录</a>|
+				<a href="#">注册</a>|
+				<a href="#">个人中心</a>
 			</div>
-		</div>
-		<div style="margin: 0 auto;" align="right">
-			<a href="#">登录</a>|
-			<a href="#">注册</a>|
-			<a href="#">个人中心</a>
-		</div>
+	    </div>
     </div>
 </body>
 </html>
