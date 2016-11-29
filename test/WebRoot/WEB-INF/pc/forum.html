@@ -130,12 +130,12 @@
 									<ul class="unstyled inline" th:remove="all-but-first">
 										<li th:each="section:${zone.sectionList }" style="width: 394px; margin-left: 0px;padding: 0px;">
 											<div align="center" style="margin-top: 20px;">
-												<div><a href="# }">
+												<div><a href="#" th:href="@{/forum/topicList(id=${section.id})}">
 												<img style="width: 100px;" alt="" src="forum/images/logo/20150319072154.jpg"  th:src="@{'/image/pc/forum/'+${section.logo }}" /></a></div>
-												<div style="margin: 10px auto;"> <a href="# }"><font style="font-size: 30px;font-weight: bold;"><span th:text="${section.name }">作者公告</span></font></a></div>
+												<div style="margin: 10px auto;"> <a href="# " th:href="@{/forum/topicList(id=${section.id})}"><font style="font-size: 30px;font-weight: bold;"><span th:text="${section.name }">作者公告</span></font></a></div>
 												<font style="font-size: 12px;">帖子总数：<span th:text="${section.totalCount}">3</span></font>
 												<font style="font-size: 12px;">精华帖子：<span th:text="${section.goodCount}">3</span></font>
-												<font style="font-size: 12px;">未回复：<span th:text="section.noReplyCount">3</span></font>
+												<font style="font-size: 12px;">未回复：<span th:text="${section.noReplyCount}">3</span></font>
 												<font style="font-size: 12px;">版主：<span th:text="${section.master.nickName }">Shubing</span></font>
 											</div>
 										</li>
