@@ -63,6 +63,7 @@
 	<h4>版主：<span th:text="${section.master.nickName }">Shubing</span></h4>
 	<h4><span th:text="${section.zone.description }">欢迎来到Java web的世界！</span></h4>
 </div>
+<!-- <span th:text="${pageNo}+1<${totalPages}"></span> -->
 <div style="width: 1200px; margin: 0 auto;">
 	<div style="margin-bottom: 10px;">
 		<a class="" href=""><img alt="发帖" src="images/post.jpg"  th:src="@{/image/pc/forum/images/post.jpg}"/></a>
@@ -70,16 +71,19 @@
 			<span th:if="${totalPages}==0"  th:text="该板块没有发表任何帖子">该板块没有发表任何帖子</span>
 			<span th:unless="${totalPages}==0" >
 				<ul class="clearfix">
-					<!-- <li class="disabled"><a>首页</a></li>
-					<li class="disabled"><a>上一页</a></li>
-					<li class="active"><a>1</a></li>
-					<li><a href=''>2</a></li>
-					<li><a href=''>下一页</a></li>
-					<li><a href=''>末页</a></li> -->
-						<li th:class="${pageNo}==1?'disabled':''" ><a href=''>首页</a></li>
-						<li th:class="${pageNo}>1?'':'disabled'"><a href=''>上一页</a></li>
-						<li th:class="${totalPages}-1>${pageNo}?'':'disabled'" ><a href=''>下一页</a></li>
-						<li th:class="${totalPages}-1==${pageNo}?'disabled':''" ><a href=''>末页</a></li>
+					<li th:class="${pageNo}==0?'disabled':''" ><a href=''>首页</a></li>
+					<li th:class="${pageNo}>0?'':'disabled'"><a href=''>上一页</a></li>
+					<li th:style="${pageNo}-4>0?'':'display: none'"><a href=''><span th:text="${pageNo}-3"></span></a></li>
+					<li th:style="${pageNo}-3>0?'':'display: none'"><a href=''><span th:text="${pageNo}-2"></span></a></li>
+					<li th:style="${pageNo}-2>0?'':'display: none'"><a href=''><span th:text="${pageNo}-1"></span></a></li>
+					<li th:style="${pageNo}-1>0?'':'display: none'"><a href=''><span th:text="${pageNo}"></span></a></li>
+					<li th:class="active"><a href=''><span th:text="${pageNo}+1"></span></a></li>
+					<li th:style="${totalPages}-1>${pageNo}?'':'display: none'"><a href=''><span th:text="${pageNo}+2"></span></a></li>
+					<li th:style="${totalPages}-2>${pageNo}?'':'display: none'"><a href=''><span th:text="${pageNo}+3"></span></a></li>
+					<li th:style="${totalPages}-3>${pageNo}?'':'display: none'"><a href=''><span th:text="${pageNo}+4"></span></a></li>
+					<li th:style="${totalPages}-4>${pageNo}?'':'display: none'"><a href=''><span th:text="${pageNo}+5"></span></a></li>
+					<li th:class="${totalPages}-1>${pageNo}?'':'disabled'" ><a href=''>下一页</a></li>
+					<li th:class="${totalPages}-1==${pageNo}?'disabled':''" ><a href=''>末页</a></li>
 				</ul>
 			</span>
 		</div>

@@ -21,6 +21,7 @@ import forum.service.ReplyService;
 import forum.service.SectionService;
 import forum.service.TopicService;
 import forum.service.ZoneService;
+import forum.util.PageUtil;
 
 @Controller
 public class TopicAction {
@@ -75,7 +76,7 @@ public class TopicAction {
 		//计算总页数
 		//TODO 写成公共方法吧
 		long totalNum=topicService.getPtTopicCountBySectionId(id);
-		long totalPages=totalNum%pageSize==0?totalNum/pageSize:totalNum/pageSize+1;
+		int totalPages = PageUtil.getTotalPages(totalNum, pageSize);
 		
 		model.addAttribute("pageNo",pageNo); 
 		model.addAttribute("totalPages",totalPages); 
@@ -87,32 +88,5 @@ public class TopicAction {
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/forum/topicList");
 	}
-
-	//	@RequestMapping("/forum")
-	//	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
-	//		List<Zone> zoneList=zoneService.findZoneList(null, 10,0);
-	//		model.addAttribute("zoneList",zoneList);
-	//		
-	//		for (Zone zone : zoneList) {
-	//			for (Section section : zone.getSectionList()) {
-	//				Topic s_topic=new Topic(); 
-	//				s_topic.setSection(section);
-	//				Long totalCount=topicService.getTopicCount(s_topic);			//
-	//				s_topic.setGood(1);
-	//				Long goodCount=topicService.getTopicCount(s_topic);			//
-	//				s_topic.setGood(0);
-	//				Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			//
-	//				
-	//				section.setTotalCount(totalCount);
-	//				section.setGoodCount(goodCount);
-	//				section.setNoReplyCount(noReplyCount);
-	//				
-	//				sectionService.saveSection(section);
-	//			}
-	//		}
-	//		
-	//		 model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
-	//		return ValidatePcMobile.checkRequest(request, "/forum");
-	//	}
 
 }

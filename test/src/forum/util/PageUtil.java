@@ -2,7 +2,7 @@ package forum.util;
 
 /**
  * 
- * @author Administrator
+ * @author jiashubing
  *
  */
 public class PageUtil {
@@ -81,5 +81,10 @@ public class PageUtil {
 			pageCode.append("<li><a href='"+targetUrl+"?page="+totalPage+"'>βҳ</a></li>");
 			return pageCode.toString();
 		}
+	}
+	
+	public static int getTotalPages(long totalNum,int pageSize){
+		int ans=(int) (totalNum%pageSize==0?totalNum/pageSize:totalNum/pageSize+1);
+		return ans;
 	}
 }

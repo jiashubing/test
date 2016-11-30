@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * �ַ�����
- * @author 
+ * 字符串静态方法类
+ * @author jiashubing
  *
  */
 public class StringUtil {
-
+	
 	/**
-	 * �ж��Ƿ��ǿ�
+	 * 判断是否为空
 	 * @param str
 	 * @return
 	 */
@@ -24,7 +24,7 @@ public class StringUtil {
 	}
 	
 	/**
-	 * �ж��Ƿ��ǿ�
+	 * 判断是否不空
 	 * @param str
 	 * @return
 	 */
@@ -35,8 +35,9 @@ public class StringUtil {
 			return false;
 		}
 	}
+	
 	/**
-	 * �õ�URL���ַ����ֻ�ʺ�URL����һ������
+	 * 
 	 * @param url
 	 * @return
 	 */
