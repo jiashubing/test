@@ -41,11 +41,9 @@ public class TopicAction {
 	private ReplyService replyService;
 
 	@RequestMapping("/forum/topicList")
-	public String loadIndex(Integer id,@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
+	public String loadTopicList(Integer id,@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
 		
-		if (pageNo == null || pageNo < 0) {
-            pageNo = 0;
-        }
+		pageNo = PageUtil.initPageNo(pageNo);
 		
 		Section section=sectionService.findSectionById(id);
 		List<Topic> zdTopicList=topicService.findZdTopicListBySectionId(id,pageSize,pageNo);
@@ -73,8 +71,6 @@ public class TopicAction {
 			topicReplyCount.put(topic, replyCount);
 		}
 		
-		//计算总页数
-		//TODO 写成公共方法吧
 		long totalNum=topicService.getPtTopicCountBySectionId(id);
 		int totalPages = PageUtil.getTotalPages(totalNum, pageSize);
 		
@@ -88,5 +84,20 @@ public class TopicAction {
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/forum/topicList");
 	}
-
+	
+	@RequestMapping("/forum/details")
+	public String loadDetails(Integer id,Model model,@RequestParam(required = false) Integer pageNo,HttpServletRequest request)throws Exception{
+		
+		Topic topic = topicService.findTopicById(id);
+		pageNo = PageUtil.initPageNo(pageNo);
+		List<Reply> replyList=replyService.findReplyListByTopicId(id, pageSize,pageNo);
+		Long total = replyService.getReplyCountByTopicId(id);
+		
+		model.addAttribute("pageNo",pageNo); 
+		model.addAttribute("topic",topic); 
+		model.addAttribute("replyList",replyList); 
+		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/forum/topicDetail");
+	}
+	
 }

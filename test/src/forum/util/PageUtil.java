@@ -87,4 +87,11 @@ public class PageUtil {
 		int ans=(int) (totalNum%pageSize==0?totalNum/pageSize:totalNum/pageSize+1);
 		return ans;
 	}
+	
+	public static int initPageNo(Integer pageNo){
+		if (pageNo == null || pageNo < 0) {
+            pageNo = 0;
+        }
+		return pageNo;
+	}
 }
