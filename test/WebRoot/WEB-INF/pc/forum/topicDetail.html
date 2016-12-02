@@ -18,25 +18,6 @@
 	<script type="text/javascript" src="forum/bootstrap/js/jquery.js" th:src="@{/js/pc/forum/bootstrap/js/jquery.js}" ></script>
 	<script type="text/javascript" src="forum/bootstrap/js/bootstrap.min.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.min.js}" ></script>
 	<script type="text/javascript" src="forum/bootstrap/js/bootstrap.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.js}" ></script>
-<!-- 	<script type="text/javascript">
-		function logout() {
-			if (confirm("您确定要退出系统吗？")) {
-				window.location.href="User_logout.action";
-			}
-		}
-		function login(){
-			var curPage=window.location.href;
-			window.location.href="login.jsp?prePage="+curPage;
-		}
-		function checkUserLogin(){
-			if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-				alert("您还未登陆！");
-			} else {
-				window.location.href="User_userCenter.action";
-			}
-		}
-	</script> -->
-
 
 </head>
 <body><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
@@ -56,18 +37,6 @@
             th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
             <a href="javascript:void(0)" id="showLoginForm">控制台</a>
         </li>
-        <!--<li id="userLi" style="padding:0px;display:block"
-            th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
-            <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png"
-                                                                               width="100%"/></a>
-            <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
-
-            <p style="display: none" class="lbpo">
-                <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
-                <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
-                <a href="#" th:href="@{/logout}">退出</a>
-            </p>
-        </li>-->
     </ul>
 </div>
 
@@ -101,102 +70,256 @@
 				</c:when>
 				<c:otherwise>
 					<a href="javascript:login()">登录</a>|
-					<a href="register.jsp">注册</a>|
+					<a href="../register.jsp">注册</a>|
 					<a href="javascript:checkUserLogin()">个人中心</a>
 				</c:otherwise>
 			</c:choose>-->
 			<a href="javascript:logout()">注销</a>|
-			<a href="register.jsp">注册</a>|
+			<a href="../register.jsp">注册</a>|
 			<a href="javascript:checkUserLogin()">个人中心</a>
 		</div>
 	</div>
 <!--<div id="content" style="width: 1200px; margin: 0 auto;">
 	<jsp:include page="common/default.jsp"></jsp:include>
 </div>-->
-	<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
-		<!--<c:forEach items="${zoneList }" var="zone">-->
+
+<div style="width: 1200px; margin: 0 auto;">
+	<div class="container-fluid" style="padding-left: 0px;padding-right: 0px;">
+		<div class="row-fluid">
+			<div class="span2">
+				<table style="width: 100%;" cellpadding="5px;">
+					<tr>
+						<td>
+							★楼主&nbsp;<a href="#" style="font-size: 9pt;color: black;"><strong>赵云<!--${topic.user.nickName }--></strong></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<!--<c:choose>
+									<c:when test="${(topic.user.face==null||topic.user.face=='')&&topic.user.sex=='男'}">
+										<img alt="" src="${pageContext.request.contextPath}/images/user/user0.gif" style="width: 100px;height: 100px;">
+									</c:when>
+									<c:when test="${(topic.user.face==null||topic.user.face=='')&&topic.user.sex=='女'}">
+										<img alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;">
+									</c:when>
+									<c:otherwise>
+										<img alt="" src="${pageContext.request.contextPath}/${topic.user.face}" style="width: 100px;height: 100px;">
+									</c:otherwise>
+							</c:choose>-->
+							<img th:if="${(topic.user.face==null||topic.user.face=='')&&topic.user.sex=='男'}" 
+									alt="" src="${pageContext.request.contextPath}/images/user/user0.gif" style="width: 100px;height: 100px;">
+							<img th:if="${(topic.user.face==null||topic.user.face=='')&&topic.user.sex=='女'}"  
+									alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;">
+							<img th:unless="${topic.user.face==null||topic.user.face==''}"  
+									alt="" src="${pageContext.request.contextPath}/${topic.user.face}" style="width: 100px;height: 100px;">
+							<!-- <img alt="" src="images/user/20150312105239.jpg" style="width: 100px;height: 100px;"/> -->
+						</td>
+					</tr>
+					<tr>
+						<td>
+							性别：男
+						</td>
+					</tr>
+					<tr>
+						<td>
+							邮箱：123@qq.com
+						</td>
+					</tr>
+					<tr>
+						<td>普通用户
+							<!--<c:choose>
+									<c:when test="${topic.user.sectionList.size()==0&&topic.user.type!=2 }">
+										<font style="color: black;">普通用户</font>
+									</c:when>
+									<c:when test="${topic.user.sectionList.size()!=0&&topic.user.type!=2 }">
+										<font style="color: blue;">版主</font>
+										【<c:forEach items="${topic.user.sectionList }" var="section">
+					                  	  				${section.name }；
+					                  	 </c:forEach>】
+					                </c:when>
+									<c:otherwise>
+										<font style="color: red;">管理员</font>
+									</c:otherwise>
+								</c:choose>-->
+							</td>
+					</tr>
+				</table>
+			</div>
+			<div class="span10">
+				<table style="width: 100%;">
+					<tr style="height: 50px;">
+						<td>
+							【主题】:<strong><span th:text="${topic.title }">帖子一</span></strong>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right;">
+							发表时间:『<span th:text="${topic.publishTime }">2016-11-11</span>』
+						</td>
+					</tr>
+					<tr>
+						<td>
+							【内容】:
+							<div style="width: 982px;padding:6px; background-color: #F0F0F0" class="show_e">
+								<span th:text="${topic.content }">祖国我爱你</span>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<c:forEach items="${replyList }" var="reply" varStatus="status">
+		<div class="row-fluid" style="margin-top: 20px;">
+			<div class="span2">
+				<table style="width: 100%;" cellpadding="5px;">
+					<tr>
+						<td>
+							▲<!--${(page-1)*10+status.index+1 }楼--> 二楼
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<!--<c:choose>
+									<c:when test="${(reply.user.face==null||reply.user.face=='')&&reply.user.sex=='男'}">
+										<img alt="" src="${pageContext.request.contextPath}/images/user/user0.gif" style="width: 100px;height: 100px;">
+									</c:when>
+									<c:when test="${(reply.user.face==null||reply.user.face=='')&&reply.user.sex=='女'}">
+										<img alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;">
+									</c:when>
+									<c:otherwise>
+										<img alt="" src="${pageContext.request.contextPath}/${reply.user.face}" style="width: 100px;height: 100px;">
+									</c:otherwise>
+							</c:choose>-->
+							<img alt="" src="images/user/female.gif" style="width: 100px;height: 100px;"/>
+							<a href="#" style="font-size: 9pt;color: black;"><strong><!--${reply.user.nickName }-->诸葛亮</strong></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							性别：<!--${reply.user.sex }-->女
+						</td>
+					</tr>
+					<tr>
+						<td>
+							邮箱：<!--${reply.user.email }-->1234@qq.com
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<!--<c:choose>
+									<c:when test="${reply.user.sectionList.size()==0&&reply.user.type!=2 }">
+										<font style="color: black;">普通用户</font>
+									</c:when>
+									<c:when test="${reply.user.sectionList.size()!=0&&reply.user.type!=2 }">
+										<font style="color: blue;">版主</font>
+										【<c:forEach items="${reply.user.sectionList }" var="section">
+					                  	  				${section.name }；
+					                  	 </c:forEach>】
+					                </c:when>
+									<c:otherwise>
+										<font style="color: red;">管理员</font>
+									</c:otherwise>
+								</c:choose>-->
+								普通用户
+							</td>
+					</tr>
+				</table>
+			</div>
+			<div class="span10">
+				<table style="width: 100%;">
+					<tr>
+						<td style="text-align: right;">
+							<!--<c:choose>
+								<c:when test="${currentUser.id==section.master.id }">
+									<button class="btn btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
+								</c:when>
+								<c:when test="${currentUser.type==2 }">
+									<button class="btn btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
+								</c:when>
+								<c:otherwise>
+								</c:otherwise>
+							</c:choose>-->
+							<button class="btn btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
+							回复时间:『<!--${reply.publishTime }-->2016-11-11』
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div style="width: 982px;padding:6px; background-color: #F0F0F0" class="show_e">
+								<!--${reply.content }--> 哈哈哈，我也爱
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		</c:forEach>
+	</div>
+	<div class="pagination alternate" align="center">
+		<!--<c:choose>
+			<c:when test="${pageCode =='未查询到数据'}">
+				本帖还没有人回复
+			</c:when>
+			<c:otherwise>
+				<ul class="clearfix">${pageCode }
+				</ul>
+			</c:otherwise>
+		</c:choose>-->
+		本帖还没有人回复
+	</div>
+	<div>
+		<table>
 			<tr>
-				<td>
-					<table style="width: 1200px;" align="center">
-						<tr height="30"><td style="text-indent:5;" background="forum/images/index/classT.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'"><b><font color="white">■ 网站建设</font></b></td></tr>
+				<td style="width: 20%;">
+					回帖许可：
+				</td>
+				<td style="width: 80%;">
+					<form id="replyForm" class="form-horizontal" style="margin-top: 10px;">
+					<table style="width: 100%;" cellpadding="10px;">
+						 <!--<tr>
+							<td>
+								【主题】:
+							</td>
+							<td>
+								<input type="text" id="rTopic" name="reply.rTopic" value="${reply.rTopic }" style="width: 800px;">
+							</td>
+						</tr> -->
 						<tr>
 							<td>
-								<ul class="unstyled inline" >
-								
-										<li style="width: 394px; margin-left: 0px;padding: 0px;">
-											<div align="center" style="margin-top: 20px;">
-												<div><a href="Topic_list.action?sectionId=${section.id }">
-												<img style="width: 100px;" alt="" src="forum/images/logo/20150319072154.jpg"  th:src="@{/image/pc/forum/images/logo/20150319072154.jpg}" /></a></div>
-												<div style="margin: 10px auto;"> <a href="Topic_list.action?sectionId=${section.id }"><font style="font-size: 30px;font-weight: bold;">作者公告</font></a></div>
-												<font style="font-size: 12px;">帖子总数：3</font>
-												<font style="font-size: 12px;">精华帖子：3</font>
-												<font style="font-size: 12px;">未回复：3</font>
-												<font style="font-size: 12px;">版主：Shubing</font>
-											</div>
-										</li>
-
-										<li style="width: 394px; margin-left: 0px;padding: 0px;">
-											<div align="center" style="margin-top: 20px;">
-												<div><a href="Topic_list.action?sectionId=${section.id }">
-												<img style="width: 100px;" alt="" src="forum/images/logo/20150319072205.jpg" th:src="@{/image/pc/forum/images/logo/20150319072205.jpg}" /></a></div>
-												<div style="margin: 10px auto;"> <a href="Topic_list.action?sectionId=${section.id }"><font style="font-size: 30px;font-weight: bold;">提供建议</font></a></div>
-												<font style="font-size: 12px;">帖子总数：3</font>
-												<font style="font-size: 12px;">精华帖子：3</font>
-												<font style="font-size: 12px;">未回复：3</font>
-												<font style="font-size: 12px;">版主：Shubing</font>
-											</div>
-										</li>
-										<li style="width: 394px; margin-left: 0px;padding: 0px;">
-											<div align="center" style="margin-top: 20px;">
-												<div><a href="Topic_list.action?sectionId=${section.id }">
-												<img style="width: 100px;" alt="" src="forum/images/logo/20150319072926.jpg" th:src="@{/image/pc/forum/images/logo/20150319072926.jpg}" /></a></div>
-												<div style="margin: 10px auto;"> <a href="Topic_list.action?sectionId=${section.id }"><font style="font-size: 30px;font-weight: bold;">留个脚印</font></a></div>
-												<font style="font-size: 12px;">帖子总数：3</font>
-												<font style="font-size: 12px;">精华帖子：3</font>
-												<font style="font-size: 12px;">未回复：3</font>
-												<font style="font-size: 12px;">版主：Shubing</font>
-											</div>
-										</li>
-								</ul>
+								【表情】:
+							</td>
+							<td>
+								<div id="container">
+								<a href="JavaScript:void(0)" id="message_face">请选择...</a>
+								</div>
 							</td>
 						</tr>
-						<tr height="25"><td style="text-indent:10" background="forum/images/index/boardE.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classE.jpg}+')  center 0 no-repeat;'"><font color="#F9F9F9)">论坛介绍：感谢您能为我的网站建设出一份力</font></td></tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table style="width: 1200px;" align="center">
-						<tr height="30"><td style="text-indent:5;" background="forum/images/index/classT.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'"><b><font color="white">■ 文艺苑区</font></b></td></tr>
+						<tr>
+							<td style="vertical-align: top;">
+								【内容】:
+							</td>
+							<td>
+								<textarea name="reply.content" id="Content" cols="50" style="height:200px;width: 800px;" ></textarea>
+							</td>
+						</tr>
 						<tr>
 							<td>
-								<ul class="unstyled inline" >
-								
-										<li style="width: 394px; margin-left: 0px;padding: 0px;">
-											<div align="center" style="margin-top: 20px;">
-												<div><a href="Topic_list.action?sectionId=${section.id }">
-												<img style="width: 100px;" alt="" src="forum/images/logo/20150319072419.jpg" th:src="@{/image/pc/forum/images/logo/20150319072419..jpg}" /></a></div>
-												<div style="margin: 10px auto;"> <a href="Topic_list.action?sectionId=${section.id }"><font style="font-size: 30px;font-weight: bold;">杂志文摘</font></a></div>
-												<font style="font-size: 12px;">帖子总数：3</font>
-												<font style="font-size: 12px;">精华帖子：3</font>
-												<font style="font-size: 12px;">未回复：3</font>
-												<font style="font-size: 12px;">版主：Shubing</font>
-											</div>
-										</li>
-
-								</ul>
+								<input id="userId" name="reply.user.id" value="${currentUser.id }" type="hidden"/>
+								<input id="topicId" name="reply.topic.id" value="${topic.id }" type="hidden"/>
+							</td>
+							<td>
+								<Button class="btn btn-primary " data-dismiss="modal" aria-hidden="true" type="button" onClick="javascript:saveReply()">提交</Button>
+								<font id="error"></font>
 							</td>
 						</tr>
-						<tr height="25"><td style="text-indent:10" background="forum/images/index/boardE.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classE.jpg}+')  center 0 no-repeat;'"><font color="#F9F9F9)">论坛介绍：分享那感动过我们的文章</font></td></tr>
 					</table>
+					</form>
 				</td>
 			</tr>
-		<!--</c:forEach>-->
-	</table>
+		</table>
+	</div>
 </div>
-<!--<div id="footer" style="width: 1200px; margin: 0 auto;">
-	<jsp:include page="common/footer.jsp"/>
-</div>-->
+</div>
 
 
 <div th:include="pc/loginPopup::footerDiv" class="footer">
