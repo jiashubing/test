@@ -57,7 +57,7 @@ public class ReplyServiceImpl implements ReplyService {
 		List<Object> param=new LinkedList<Object>();
 		StringBuffer hql=new StringBuffer("from Reply");
 		if (topicId>0) {
-			hql.append(" and topicId="+topicId);
+			hql.append(" where topicId="+topicId);
 		}
 		//hql.append(" order by publishTime desc");
 		Query query = em.createQuery(hql.toString());

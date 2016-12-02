@@ -179,7 +179,7 @@
 								<span th:if="${topic.top==1 }">【置顶】</span>
 							</td>
 							<td style="text-align: center;vertical-align:middle;">
-								<a href="Topic_details.action?topicId=${topic.id}"><span th:text="${topic.title }">帖子3</span></a>
+								<a th:href="@{/forum/details(id=${topic.id})}"><span th:text="${topic.title }">帖子3</span></a>
 							</td>
 							<td style="text-align: center;vertical-align:middle;width: 100px;">
 								<span th:text="${topicReplyCount.get(topic) }">0</span>

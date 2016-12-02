@@ -26,7 +26,7 @@ import forum.util.PageUtil;
 @Controller
 public class TopicAction {
 	
-	public static int pageSize = 3;
+	public static int PageSize = 3;
 
 	@Resource(name="zoneServiceImpl")
 	private ZoneService zoneService;
@@ -46,8 +46,8 @@ public class TopicAction {
 		pageNo = PageUtil.initPageNo(pageNo);
 		
 		Section section=sectionService.findSectionById(id);
-		List<Topic> zdTopicList=topicService.findZdTopicListBySectionId(id,pageSize,pageNo);
-		List<Topic> ptTopicList=topicService.findPtTopicListBySectionId(id,pageSize,pageNo);
+		List<Topic> zdTopicList=topicService.findZdTopicListBySectionId(id,PageSize,pageNo);
+		List<Topic> ptTopicList=topicService.findPtTopicListBySectionId(id,PageSize,pageNo);
 		
 		Map<Topic, Reply> topicLastReply=new HashMap<Topic, Reply>(0);
 		Map<Topic, Long> topicReplyCount=new HashMap<Topic, Long>(0);
@@ -72,7 +72,7 @@ public class TopicAction {
 		}
 		
 		long totalNum=topicService.getPtTopicCountBySectionId(id);
-		int totalPages = PageUtil.getTotalPages(totalNum, pageSize);
+		int totalPages = PageUtil.getTotalPages(totalNum, PageSize);
 		
 		model.addAttribute("pageNo",pageNo); 
 		model.addAttribute("totalPages",totalPages); 
@@ -90,7 +90,7 @@ public class TopicAction {
 		
 		Topic topic = topicService.findTopicById(id);
 		pageNo = PageUtil.initPageNo(pageNo);
-		List<Reply> replyList=replyService.findReplyListByTopicId(id, pageSize,pageNo);
+		List<Reply> replyList=replyService.findReplyListByTopicId(id, PageSize,pageNo);
 		Long total = replyService.getReplyCountByTopicId(id);
 		
 		model.addAttribute("pageNo",pageNo); 

@@ -95,34 +95,22 @@
 					</tr>
 					<tr>
 						<td>
-							<!--<c:choose>
-									<c:when test="${(topic.user.face==null||topic.user.face=='')&&topic.user.sex=='男'}">
-										<img alt="" src="${pageContext.request.contextPath}/images/user/user0.gif" style="width: 100px;height: 100px;">
-									</c:when>
-									<c:when test="${(topic.user.face==null||topic.user.face=='')&&topic.user.sex=='女'}">
-										<img alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;">
-									</c:when>
-									<c:otherwise>
-										<img alt="" src="${pageContext.request.contextPath}/${topic.user.face}" style="width: 100px;height: 100px;">
-									</c:otherwise>
-							</c:choose>-->
-							<img th:if="${(topic.user.face==null||topic.user.face=='')&&topic.user.sex=='男'}" 
-									alt="" src="${pageContext.request.contextPath}/images/user/user0.gif" style="width: 100px;height: 100px;">
-							<img th:if="${(topic.user.face==null||topic.user.face=='')&&topic.user.sex=='女'}"  
-									alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;">
+							<img th:if="${((topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='男')}" 
+									alt="" src="images/user/user0.gif" th:src="@{/image/pc/images/user/user0.gif}" style="width: 100px;height: 100px;" />
+							<img th:if="${(topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='女'}"  
+									alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;" />
 							<img th:unless="${topic.user.face==null||topic.user.face==''}"  
-									alt="" src="${pageContext.request.contextPath}/${topic.user.face}" style="width: 100px;height: 100px;">
-							<!-- <img alt="" src="images/user/20150312105239.jpg" style="width: 100px;height: 100px;"/> -->
+									alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
 						</td>
 					</tr>
 					<tr>
 						<td>
-							性别：男
+							性别：<span th:text="${topic.user.sex }">男</span>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							邮箱：123@qq.com
+							邮箱：<span th:text="${topic.user.email }">123@qq.com</span>
 						</td>
 					</tr>
 					<tr>
@@ -168,92 +156,86 @@
 				</table>
 			</div>
 		</div>
-		<c:forEach items="${replyList }" var="reply" varStatus="status">
-		<div class="row-fluid" style="margin-top: 20px;">
-			<div class="span2">
-				<table style="width: 100%;" cellpadding="5px;">
-					<tr>
-						<td>
-							▲<!--${(page-1)*10+status.index+1 }楼--> 二楼
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<!--<c:choose>
-									<c:when test="${(reply.user.face==null||reply.user.face=='')&&reply.user.sex=='男'}">
-										<img alt="" src="${pageContext.request.contextPath}/images/user/user0.gif" style="width: 100px;height: 100px;">
+		<div th:each="reply:${replyList }">
+			<div class="row-fluid" style="margin-top: 20px;">
+				<div class="span2">
+					<table style="width: 100%;" cellpadding="5px;">
+						<tr>
+							<td>
+								▲<span th:text="${pageNo*10+replyStat.count+1 }">二</span>楼
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img th:if="${((topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='男')}" 
+										alt="" src="images/user/user0.gif" th:src="@{/image/pc/images/user/user0.gif}" style="width: 100px;height: 100px;" />
+								<img th:if="${(topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='女'}"  
+										alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;" />
+								<img th:unless="${topic.user.face==null||topic.user.face==''}"  
+										alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
+								<a href="#" style="font-size: 9pt;color: black;"><strong><!--${reply.user.nickName }-->诸葛亮</strong></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								性别：<span th:text="${reply.user.sex }">男</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								邮箱：<span th:text="${reply.user.email }">123@qq.com</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<!--<c:choose>
+										<c:when test="${reply.user.sectionList.size()==0&&reply.user.type!=2 }">
+											<font style="color: black;">普通用户</font>
+										</c:when>
+										<c:when test="${reply.user.sectionList.size()!=0&&reply.user.type!=2 }">
+											<font style="color: blue;">版主</font>
+											【<c:forEach items="${reply.user.sectionList }" var="section">
+						                  	  				${section.name }；
+						                  	 </c:forEach>】
+						                </c:when>
+										<c:otherwise>
+											<font style="color: red;">管理员</font>
+										</c:otherwise>
+									</c:choose>-->
+									普通用户
+								</td>
+						</tr>
+					</table>
+				</div>
+				<div class="span10">
+					<table style="width: 100%;">
+						<tr>
+							<td style="text-align: right;">
+								<!--<c:choose>
+									<c:when test="${currentUser.id==section.master.id }">
+										<button class="btn btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
 									</c:when>
-									<c:when test="${(reply.user.face==null||reply.user.face=='')&&reply.user.sex=='女'}">
-										<img alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;">
+									<c:when test="${currentUser.type==2 }">
+										<button class="btn btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
 									</c:when>
 									<c:otherwise>
-										<img alt="" src="${pageContext.request.contextPath}/${reply.user.face}" style="width: 100px;height: 100px;">
-									</c:otherwise>
-							</c:choose>-->
-							<img alt="" src="images/user/female.gif" style="width: 100px;height: 100px;"/>
-							<a href="#" style="font-size: 9pt;color: black;"><strong><!--${reply.user.nickName }-->诸葛亮</strong></a>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							性别：<!--${reply.user.sex }-->女
-						</td>
-					</tr>
-					<tr>
-						<td>
-							邮箱：<!--${reply.user.email }-->1234@qq.com
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<!--<c:choose>
-									<c:when test="${reply.user.sectionList.size()==0&&reply.user.type!=2 }">
-										<font style="color: black;">普通用户</font>
-									</c:when>
-									<c:when test="${reply.user.sectionList.size()!=0&&reply.user.type!=2 }">
-										<font style="color: blue;">版主</font>
-										【<c:forEach items="${reply.user.sectionList }" var="section">
-					                  	  				${section.name }；
-					                  	 </c:forEach>】
-					                </c:when>
-									<c:otherwise>
-										<font style="color: red;">管理员</font>
 									</c:otherwise>
 								</c:choose>-->
-								普通用户
+								<button class="btn btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
+								回复时间:『<span th:text="${reply.publishTime }">2016-11-11</span>』
 							</td>
-					</tr>
-				</table>
-			</div>
-			<div class="span10">
-				<table style="width: 100%;">
-					<tr>
-						<td style="text-align: right;">
-							<!--<c:choose>
-								<c:when test="${currentUser.id==section.master.id }">
-									<button class="btn btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
-								</c:when>
-								<c:when test="${currentUser.type==2 }">
-									<button class="btn btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
-								</c:when>
-								<c:otherwise>
-								</c:otherwise>
-							</c:choose>-->
-							<button class="btn btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
-							回复时间:『<!--${reply.publishTime }-->2016-11-11』
-						</td>
-					</tr>
-					<tr>
+						</tr>
+						<tr>
 						<td>
 							<div style="width: 982px;padding:6px; background-color: #F0F0F0" class="show_e">
-								<!--${reply.content }--> 哈哈哈，我也爱
+								<span th:text="${reply.content }">哈哈哈，我也爱</span>
 							</div>
 						</td>
 					</tr>
 				</table>
 			</div>
 		</div>
-		</c:forEach>
+		</div>
 	</div>
 	<div class="pagination alternate" align="center">
 		<!--<c:choose>
