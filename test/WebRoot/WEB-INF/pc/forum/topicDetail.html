@@ -5,11 +5,9 @@
     <title>阿丙的私人订制</title>
     <link rel="stylesheet" type="text/css" href="css/common-branch.css" th:href="@{/css/pc/css/common-branch.css}"/>
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
-    <!-- <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/> -->
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
 
     <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
-
 
 	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap.css" th:href="@{/css/pc/forum/bootstrap/css/bootstrap.css}"/>
 	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap-responsive.css"  th:href="@{/css/pc/forum/bootstrap/css/bootstrap-responsive.css}" />
@@ -25,13 +23,13 @@
 <div class="mythymeleaf">
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
     <ul class="navi">
-        <li><a href="yun-index.html" th:href="@{/}">首页</a></li>
-        <li class="active"><a href="javascript:void(0)" th:href="@{/}">论坛系统</a></li>
-        <li><a href="yun-baomin.html" th:href="@{/}">自然之声</a></li>
-        <li><a href="javascript:void(0)" th:href="@{/}">历史项目</a></li>
-        <li><a href="yun-jxspnewone.html" th:href="@{/}">网页小游戏</a></li>
+        <li><a href="yun-index.html" >首页</a></li>
+        <li class="active"><a href="javascript:void(0)" >论坛系统</a></li>
+        <li><a href="yun-baomin.html" >自然之声</a></li>
+        <li><a href="javascript:void(0)" >历史项目</a></li>
+        <li><a href="yun-jxspnewone.html" >网页小游戏</a></li>
         <li>
-            <a href="javascript:void(0)" th:href="@{/}">我的视频</a>
+            <a href="javascript:void(0)" >我的视频</a>
         </li>
         <li><a href="#">在线工具</a></li>
 		<li><a href="#">作者亲密度调查</a></li>
@@ -118,6 +116,7 @@
 					</tr>
 					<tr>
 						<td>普通用户
+						<font th:if="${not #lists.isEmpty(topic.user.sectionList) &amp;&amp; topic.user.type!=2 }" style="color: black;">普通用户</font>
 							<!--<c:choose>
 									<c:when test="${topic.user.sectionList.size()==0&&topic.user.type!=2 }">
 										<font style="color: black;">普通用户</font>
@@ -176,7 +175,7 @@
 										alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;" />
 								<img th:unless="${topic.user.face==null||topic.user.face==''}"  
 										alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
-								<a href="#" style="font-size: 9pt;color: black;"><strong><!--${reply.user.nickName }-->诸葛亮</strong></a>
+								<a href="#" style="font-size: 9pt;color: black;"><strong><span th:text="${reply.user.nickName }">诸葛亮</span></strong></a>
 							</td>
 						</tr>
 						<tr>

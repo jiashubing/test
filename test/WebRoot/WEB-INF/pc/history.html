@@ -51,114 +51,8 @@
 
 <p style="clear:both"></p>
 
-
-<div class="fullSlide">
-
-    <div class="bd">
-        <ul>
-            <li style="background:url(images/sky-bg.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/sky-bg.jpg}+')  center 0 no-repeat;'"></li>
-            <li style="background:url(images/sky-bg2.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/sky-bg2.jpg}+')  center 0 no-repeat;'"></li>
-            <li style="background:url(images/ice-bg.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/ice-bg.jpg}+')  center 0 no-repeat;'"></li>
-        </ul>
-    </div>
-
-    <div class="hd">
-        <ul></ul>
-    </div>
-</div>
-
-
-<p style="clear:both"></p>
-
-<p style="height:20px"></p>
-<img src="images/wzwz.png" th:src="@{/image/pc/images/wzwz.png}" width="100%"/>
-
-<div class="hx">
-    <p style="clear:both; height:50px"></p>
-
-    <div class="hximg">
-        <ul>
-            <li class="pone">
-                <a href="" >
-                    <p class="ystitle">论坛系统</p>
-
-                    <p class="poneimg"></p>
-
-
-                    <p class=" ysmf">分享点滴爱好与兴趣</p>
-
-                    <p class=" yssz">吾之所知<br/>犹如冰山一角</p>
-                </a>
-            </li>
-            <li class="ptwo">
-                <a href="" >
-                    <p class="ystitle">自然之声</p>
-
-                    <p class="pthreeimg"></p>
-
-
-                    <p class="ysmf">最纯洁的声音与美景</p>
-
-                    <p class="yssz">吾之所感<br/>寂静相伴入眠</p>
-                </a>
-            </li>
-            <li class="pthree">
-                <p class="pthree ystitle">历史项目</p>
-
-                <p class="ptwoimg"></p>
-
-
-                <p class="ysmf">程序路上是bug</p>
-
-                <p class="yssz">吾之所学<br/>今生永不停息</p>
-            </li>
-			
-			<li class="pfour">
-                <p class="pfour ystitle">作者亲密度调查</p>
-
-                <p class="pfourimg"></p>
-
-                <p class="ysmf">厚脸皮是怎样炼成的</p>
-
-				<p class="yssz">大哥大姐<br/>烦请多多支持啊</p>
-           </li>
-        </ul>
-    </div>
-</div>
-<img src="images/topone.png" width="100%" th:src="@{/image/pc/images/topone.png}"/>
-
-<div class="listone listhx">
-    <div style="width: 960px; margin: 0 auto;">
-		<img src="images/zuozhejiyu.png" width="100%" th:src="@{/image/pc/images/zuozhejiyu.png}"/>
-    </div>
-</div>
-<img src="images/bottonone.png" width="100%" th:src="@{/image/pc/images/bottonone.png}"/>
-
-<div class="kf"><img src="images/wzwz-1.png" width="100%" th:src="@{/image/pc/images/wzwz-1.png}"/>
-
-    <p style="clear:both; height:30px"></p>
-    
-    <div class="kfimg">
-		<div id="disc-main">
-		<div id="outer-cont">
-			<div id="outer">
-				<img src="disc/disc-1.png" th:src="@{/image/pc/disc/disc-1.png}"/>
-			</div>
-		</div>
-		<div id="inner-cont">
-			<div id="inner"><img src="disc/disc-2.png" th:src="@{/image/pc/disc/disc-2.png}"/></div>
-		</div>
-	</div>
-    </div>
-    <div style="display:none">
-        <p style="clear:both; height:80px"></p>
-        <a href="">
-            <div class="morebtn">更多</div>
-        </a>
-
-        <p style="clear:both; height:30px"></p>
-    </div>
-</div>
+<a href="http://11.205.52.68:8080/company" target="_blank">Jquery控件</a>
+学习jquery控件的时候，搭建了这样的一个样例，包括了滚动条控件，日期控件
 
 <div th:include="pc/loginPopup::footerDiv" class="footer">
     <p>阿丙工作室</p>
@@ -242,15 +136,4 @@
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
 </body>
 
-
 </html>
-<script type="text/javascript">
-    jQuery(".fullSlide").slide({
-        titCell: ".hd ul",
-        mainCell: ".bd ul",
-        effect: "fold",
-        autoPlay: true,
-        autoPage: true,
-        trigger: "click"
-    });
-</script>
