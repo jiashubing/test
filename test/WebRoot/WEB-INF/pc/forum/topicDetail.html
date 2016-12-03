@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8"/>
     <title>阿丙的私人订制</title>
-    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/common-branch.css" th:href="@{/css/pc/css/common-branch.css}"/>
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
-    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
+    <!-- <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/> -->
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
 
     <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
@@ -14,13 +14,15 @@
 	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap.css" th:href="@{/css/pc/forum/bootstrap/css/bootstrap.css}"/>
 	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap-responsive.css"  th:href="@{/css/pc/forum/bootstrap/css/bootstrap-responsive.css}" />
 	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
+	<link rel="stylesheet"  href="forum/css/emoticon.css" th:href="@{/css/pc/forum/css/emoticon.css}" />
 	
-	<script type="text/javascript" src="forum/bootstrap/js/jquery.js" th:src="@{/js/pc/forum/bootstrap/js/jquery.js}" ></script>
 	<script type="text/javascript" src="forum/bootstrap/js/bootstrap.min.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.min.js}" ></script>
 	<script type="text/javascript" src="forum/bootstrap/js/bootstrap.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.js}" ></script>
+	<script type="text/javascript" src="forum/bootstrap/js/jquery.emoticons.js" th:src="@{/js/pc/forum/bootstrap/js/jquery.emoticons.js}" ></script>
 
 </head>
 <body><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
+<div class="mythymeleaf">
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
     <ul class="navi">
         <li><a href="yun-index.html" th:href="@{/}">首页</a></li>
@@ -38,6 +40,7 @@
             <a href="javascript:void(0)" id="showLoginForm">控制台</a>
         </li>
     </ul>
+</div>
 </div>
 
 <p style="clear:both"></p>
@@ -96,9 +99,9 @@
 					<tr>
 						<td>
 							<img th:if="${((topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='男')}" 
-									alt="" src="images/user/user0.gif" th:src="@{/image/pc/images/user/user0.gif}" style="width: 100px;height: 100px;" />
+									alt="" src="images/user/user0.gif" th:src="@{/image/pc/forum/images/user/user0.gif}" style="width: 100px;height: 100px;" />
 							<img th:if="${(topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='女'}"  
-									alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;" />
+									alt="" src="images/user/female.gif"  th:src="@{/image/pc/forum/images/user/female.gif}"  style="width: 100px;height: 100px;" />
 							<img th:unless="${topic.user.face==null||topic.user.face==''}"  
 									alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
 						</td>
@@ -385,16 +388,4 @@
 <div id="asaimsgbg" class="AsaiDivBG" style="display: none"
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
 </body>
-
-
 </html>
-<script type="text/javascript">
-    jQuery(".fullSlide").slide({
-        titCell: ".hd ul",
-        mainCell: ".bd ul",
-        effect: "fold",
-        autoPlay: true,
-        autoPage: true,
-        trigger: "click"
-    });
-</script>
