@@ -26,7 +26,7 @@ import forum.util.PageUtil;
 @Controller
 public class TopicAction {
 	
-	public static int PageSize = 3;
+	public static int PageSize = 10;
 
 	@Resource(name="zoneServiceImpl")
 	private ZoneService zoneService;
@@ -46,7 +46,7 @@ public class TopicAction {
 		pageNo = PageUtil.initPageNo(pageNo);
 		
 		Section section=sectionService.findSectionById(id);
-		List<Topic> zdTopicList=topicService.findZdTopicListBySectionId(id,PageSize,pageNo);
+		List<Topic> zdTopicList=topicService.findZdTopicListBySectionId(id,PageSize,0);
 		List<Topic> ptTopicList=topicService.findPtTopicListBySectionId(id,PageSize,pageNo);
 		
 		Map<Topic, Reply> topicLastReply=new HashMap<Topic, Reply>(0);

@@ -59,13 +59,13 @@
 <body><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
     <ul class="navi">
-        <li><a href="yun-index.html" th:href="@{/}">首页</a></li>
-        <li class="active"><a href="javascript:void(0)" th:href="@{/}">论坛系统</a></li>
-        <li><a href="yun-baomin.html" th:href="@{/}">自然之声</a></li>
-        <li><a href="javascript:void(0)" th:href="@{/}">历史项目</a></li>
-        <li><a href="yun-jxspnewone.html" th:href="@{/}">网页小游戏</a></li>
+        <li><a href="yun-index.html">首页</a></li>
+        <li class="active"><a href="javascript:void(0)">论坛系统</a></li>
+        <li><a href="yun-baomin.html">自然之声</a></li>
+        <li><a href="javascript:void(0)">历史项目</a></li>
+        <li><a href="yun-jxspnewone.html">网页小游戏</a></li>
         <li>
-            <a href="javascript:void(0)" th:href="@{/}">我的视频</a>
+            <a href="javascript:void(0)">我的视频</a>
         </li>
         <li><a href="#">在线工具</a></li>
 		<li><a href="#">作者亲密度调查</a></li>
@@ -182,7 +182,10 @@
 									</ul>
 								</td>
 							</tr>
-							<tr height="25"><td style="text-indent:10" background="forum/images/index/boardE.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classE.jpg}+')  center 0 no-repeat;'"><font color="#F9F9F9)">论坛介绍：感谢您能为我的网站建设出一份力</font></td></tr>
+							<tr height="25">
+							<td>
+								<font color="#F9F9F9)"><span th:text="${zone.description }">论坛介绍：感谢您能为我的网站建设出一份力</span></font>
+							</td></tr>
 						</table>
 					</td>
 				</tr>
@@ -207,7 +210,11 @@
 									</ul>
 								</td>
 							</tr>
-							<tr height="25"><td style="text-indent:10" background="forum/images/index/boardE.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classE.jpg}+')  center 0 no-repeat;'"><font color="#F9F9F9)">论坛介绍：分享那感动过我们的文章</font></td></tr>
+							<tr height="25">
+								<td>
+									<font color="#F9F9F9)">论坛介绍：分享那感动过我们的文章</font>
+								</td>
+							</tr>
 						</table>
 					</td>
 				</tr>
@@ -300,15 +307,4 @@
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
 </body>
 
-
 </html>
-<script type="text/javascript">
-    jQuery(".fullSlide").slide({
-        titCell: ".hd ul",
-        mainCell: ".bd ul",
-        effect: "fold",
-        autoPlay: true,
-        autoPage: true,
-        trigger: "click"
-    });
-</script>
