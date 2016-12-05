@@ -251,4 +251,14 @@
         trigger: "click"
     });
 </script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+ 	var loginFlag = /*[[${loginFlag}]]*/true;
+    /*]]>*/
+    if(loginFlag==1){
+	    document.getElementById('asaimsg').style.display='block';
+	    document.getElementById('asaimsgbg').style.display='block';
+    }
+</script>
+
 </html>

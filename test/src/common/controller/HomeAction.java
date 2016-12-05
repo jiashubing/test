@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import common.entity.Result;
-
 import config.ValidatePcMobile;
 
 @Controller
@@ -59,39 +58,54 @@ public class HomeAction {
     }
 	
 	//抽奖并返回角度和奖项
-		public Object[] award(Object[][] prizeArr){
-			//概率数组
-			Integer obj[] = new Integer[prizeArr.length];
-			for(int i=0;i<prizeArr.length;i++){
-				obj[i] = (Integer) prizeArr[i][4];
-			}
-			Integer prizeId = getRand(obj); //根据概率获取奖项id
-			//旋转角度
-			int angle = new Random().nextInt((Integer)prizeArr[prizeId][2]-(Integer)prizeArr[prizeId][1])+(Integer)prizeArr[prizeId][1];
-			String msg = (String) prizeArr[prizeId][3];//提示信息
-			return new Object[]{angle,prizeId,msg};
+	public Object[] award(Object[][] prizeArr){
+		//概率数组
+		Integer obj[] = new Integer[prizeArr.length];
+		for(int i=0;i<prizeArr.length;i++){
+			obj[i] = (Integer) prizeArr[i][4];
 		}
-		//根据概率获取奖项
-		public Integer getRand(Integer obj[]){
-			Integer result = null;
-			try {
-				int  sum = 0;//概率数组的总概率精度 
-				for(int i=0;i<obj.length;i++){
-					sum+=obj[i];
-				}
-				for(int i=0;i<obj.length;i++){//概率数组循环 
-					int randomNum = new Random().nextInt(sum);//随机生成1到sum的整数
-					if(randomNum<obj[i]){//中奖
-						result = i;
-						break;
-					}else{
-						sum -=obj[i];
-					}
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+		Integer prizeId = getRand(obj); //根据概率获取奖项id
+		//旋转角度
+		int angle = new Random().nextInt((Integer)prizeArr[prizeId][2]-(Integer)prizeArr[prizeId][1])+(Integer)prizeArr[prizeId][1];
+		String msg = (String) prizeArr[prizeId][3];//提示信息
+		return new Object[]{angle,prizeId,msg};
+	}
+	
+	//根据概率获取奖项
+	public Integer getRand(Integer obj[]){
+		Integer result = null;
+		try {
+			int  sum = 0;//概率数组的总概率精度 
+			for(int i=0;i<obj.length;i++){
+				sum+=obj[i];
 			}
-			return result;
+			for(int i=0;i<obj.length;i++){//概率数组循环 
+				int randomNum = new Random().nextInt(sum);//随机生成1到sum的整数
+				if(randomNum<obj[i]){//中奖
+					result = i;
+					break;
+				}else{
+					sum -=obj[i];
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return result;
+	}
+	
+	@RequestMapping("/common")
+	 public  String getCommonPage(HttpServletRequest request){
+		 return ValidatePcMobile.checkRequest(request, "/commonpage");
+	 }
+	 
+	 /**
+	  * 跳转到adminpage页面
+	  * @return
+	  */
+	 @RequestMapping("/admin")
+	 public String getAdminPage(HttpServletRequest request){
+		 return ValidatePcMobile.checkRequest(request, "/adminpage");
+	 }
 	
 }
