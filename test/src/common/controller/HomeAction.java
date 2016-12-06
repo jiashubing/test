@@ -98,7 +98,7 @@ public class HomeAction {
 	 public  String getCommonPage(HttpServletRequest request){
 		 return ValidatePcMobile.checkRequest(request, "/commonpage");
 	 }
-	 
+	
 	 /**
 	  * 跳转到adminpage页面
 	  * @return

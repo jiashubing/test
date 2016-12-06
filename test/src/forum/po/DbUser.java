@@ -1,10 +1,14 @@
 package forum.po;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="dbuser")
@@ -22,6 +26,12 @@ public class DbUser {
 
 	@Column
 	private Integer access;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+    private Date lasttime;
+	
+	@Column(length=20)
+    private String ipaddr;
 	
 	public DbUser() {
 		
@@ -59,4 +69,20 @@ public class DbUser {
 		this.access = access;
 	}
 
+	public Date getLasttime() {
+		return lasttime;
+	}
+
+	public void setLasttime(Date lasttime) {
+		this.lasttime = lasttime;
+	}
+
+	public String getIpaddr() {
+		return ipaddr;
+	}
+
+	public void setIpaddr(String ipaddr) {
+		this.ipaddr = ipaddr;
+	}
+	
 }

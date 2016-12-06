@@ -21,15 +21,20 @@
 	        <security:form-login  
 	                login-page="/login"   
 	                authentication-failure-url="/login?error=true"
+	                authentication-success-handler-ref="authenticationSuccessHandler"  
 	                login-processing-url="/security_check"	
-	                default-target-url="/common"/>  
+	                />  
 	              
 	        <security:logout   
 	                invalidate-session="true"   
 	                logout-success-url="/login"   
 	                logout-url="/logout"/>  
-		</security:http>
+		 </security:http>
 		
+		<bean id="authenticationSuccessHandler" class="common.security.SimpleLoginSuccessHandler">  
+		    <property name="defaultTargetUrl" value="/common"></property>  
+		    <property name="forwardToDestination" value="true"></property>  
+		</bean>
     
 	 <!-- 指定一个自定义的authentication-manager :customUserDetailsService -->  
     <security:authentication-manager>  
