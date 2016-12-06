@@ -9,7 +9,7 @@ import java.util.List;
  * 该类是结果对象
  * @author shiliting
  */
-public  class Result implements Serializable {
+public class Result implements Serializable {
 
     private static final long serialVersionUID = -349012453592429794L;
     private int status;//状态信息

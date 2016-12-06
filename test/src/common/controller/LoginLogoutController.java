@@ -28,7 +28,7 @@ public class LoginLogoutController {
 			model.put("error", "");
 		}
 		model.put("loginFlag", 1);
-		return ValidatePcMobile.checkRequest(request, "/loginpage");
+		return ValidatePcMobile.checkRequest(request, "/index");
 	}
 
 	/**
