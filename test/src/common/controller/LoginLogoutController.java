@@ -29,6 +29,7 @@ public class LoginLogoutController {
 		}
 		model.put("loginFlag", 1);
 		return ValidatePcMobile.checkRequest(request, "/index");
+//		return ValidatePcMobile.checkRequest(request, "/index");
 	}
 
 	/**
