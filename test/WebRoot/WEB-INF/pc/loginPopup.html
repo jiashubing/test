@@ -84,21 +84,24 @@
 			</li>
 			<li><a href="#">在线工具</a></li>
 			<li><a href="#">作者亲密度调查</a></li>
-			<li id="loginLi" style="padding:0px 0px 0px 20px;">
+			<li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${dbUser==null}?'padding:0px 0px 0px 20px;':'display:none'">
 				<a href="javascript:void(0)" id="showLoginForm">控制台</a>
 			</li>
-			<!--<li id="userLi" style="padding:0px;display:block"
-				th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
-				<a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png"
-																				   width="100%"/></a>
-				<p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+			<li id="userLi" style="padding:0px;display:block;"
+				th:style="${dbUser==null}?'display:none;':'padding:0px 0px 0px 20px;'">
+				
+				<a id="memberLi" href="#">
+					<img class="lodingimg" src="images/toux.png" th:src="@{/image/pc/images/toux.png}" width="100%"/>
+				</a>
+				
+				<p style="display: none" class="zhizheni"><img src="images/lodingj.png" th:src="@{/image/pc/images/lodingj.png}" width="18px" height="7px"/></p>
 	
 				<p style="display: none" class="lbpo">
-					<a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
-					<a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+					<a href="#"><span th:if="${dbUser!=null}" th:text="${dbUser.username}"></span></a>
+					<a href="#">个人中心</a>
 					<a href="#" th:href="@{/logout}">退出</a>
 				</p>
-			</li>-->
+			</li>
     	</ul>
     </div>
 </div>

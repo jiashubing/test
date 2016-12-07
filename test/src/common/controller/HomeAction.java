@@ -4,6 +4,10 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,13 +15,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import common.entity.Result;
 import config.ValidatePcMobile;
+import forum.po.DbUser;
 
 @Controller
 public class HomeAction {
 	
 	@RequestMapping("/index")
-	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
-		 model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
+	public String loadIndex(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
+		if(dbUser != null){
+			model.addAttribute("dbUser",dbUser);
+		}
+		model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/index");
 	}
 	

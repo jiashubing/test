@@ -19,25 +19,25 @@ public class DbUserTest {
 
 	}
 	
-	@Test
-	public void save(){
-		DbUser user = new DbUser(); 
-		user.setAccess(0);
-		user.setUsername("bob");
-		// "admin"经过MD5加密后  
-		user.setPassword("21232f297a57a5a743894a0e4a801fc3");  
-        user.setAccess(1);  
-        dbUserService.save(user);
-  
-        DbUser user2 = new DbUser(); 
-		user2.setAccess(0);
-		user2.setUsername("user");
-		// "user"经过MD5加密后  
-		user2.setPassword("ee11cbb19052e40b07aac0ca060c23ee");  
-        user2.setAccess(0);  
-        dbUserService.save(user2);
-
-	}
+//	@Test
+//	public void save(){
+//		DbUser user = new DbUser(); 
+//		user.setAccess(0);
+//		user.setUsername("bob");
+//		// "admin"经过MD5加密后  
+//		user.setPassword("21232f297a57a5a743894a0e4a801fc3");  
+//        user.setAccess(1);  
+//        dbUserService.save(user);
+//  
+//        DbUser user2 = new DbUser(); 
+//		user2.setAccess(0);
+//		user2.setUsername("user");
+//		// "user"经过MD5加密后  
+//		user2.setPassword("ee11cbb19052e40b07aac0ca060c23ee");  
+//        user2.setAccess(0);  
+//        dbUserService.save(user2);
+//
+//	}
 	
 //	@Test
 //	public void getById(){
@@ -45,11 +45,11 @@ public class DbUserTest {
 //		System.out.println(user.getUsername());
 //	}
 	
-//	@Test
-//	public void getByName(){
-//		DbUser user=dbUserService.getByName("bob");
-//		System.out.println(user.getUsername());
-//		System.out.println(user.getPassword());
-//	}
+	@Test
+	public void getByName(){
+		DbUser user=dbUserService.getByName("bob");
+		System.out.println(user.getUsername());
+		System.out.println(user.getPassword());
+	}
 
 }

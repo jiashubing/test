@@ -7,12 +7,14 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import config.ValidatePcMobile;
+import forum.po.DbUser;
 import forum.po.Reply;
 import forum.po.Section;
 import forum.po.Topic;
@@ -41,7 +43,10 @@ public class TopicAction {
 	private ReplyService replyService;
 
 	@RequestMapping("/forum/topicList")
-	public String loadTopicList(Integer id,@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
+	public String loadTopicList(@AuthenticationPrincipal DbUser dbUser,Integer id,@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
+		if(dbUser != null){
+			model.addAttribute("dbUser",dbUser);
+		}
 		
 		pageNo = PageUtil.initPageNo(pageNo);
 		
@@ -86,7 +91,10 @@ public class TopicAction {
 	}
 	
 	@RequestMapping("/forum/details")
-	public String loadDetails(Integer id,Model model,@RequestParam(required = false) Integer pageNo,HttpServletRequest request)throws Exception{
+	public String loadDetails(@AuthenticationPrincipal DbUser dbUser,Integer id,Model model,@RequestParam(required = false) Integer pageNo,HttpServletRequest request)throws Exception{
+		if(dbUser != null){
+			model.addAttribute("dbUser",dbUser);
+		}
 		
 		Topic topic = topicService.findTopicById(id);
 		pageNo = PageUtil.initPageNo(pageNo);
