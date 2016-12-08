@@ -4,26 +4,27 @@
 <body>
 <!--登录弹窗-->
 <div th:fragment="loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none" th:style="${errInfo}==null?'display: none':'display: block'">
-    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)" onClick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
-        <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+    <P th:align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)" onClick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+        <span style="color:#111; font-size:20px;">×</span></a></P>
     <div class="sign-in">
         <div class="user-form">
             <form id="login_form" accept-charset="UTF-8" action="yun-geren.html" th:action="@{/security_check}"
                   class="sign-in__form user-form__form" method="post">
 
                 <div class="user-form__fieldset">
-                    <label class="user-form__label" for="username" style="color:#111">手机号：</label>
-                    <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
-                           id="username" name="username" placeholder="请输入您的手机号" maxlength="20" type="text"/>
+                    <label class="user-form__label" for="username" style="color:#111">用户名：</label>
+                    <input th:autocapitalize="off" th:autocorrect="off" class="sign-in__field user-form__field"
+                           id="username" name="username" placeholder="请输入您的昵称" maxlength="20" type="text"/>
                 </div>
                 <div class="user-form__fieldset">
                     <label class="user-form__label" for="password" style="color:#111">密码：</label>
                     <input class="sign-in__field user-form__field" id="password" name="password"
 
-                           placeholder="password" type="password"/>
+                           placeholder="请输入您的密码" type="password"/>
 
                 </div>
-                <div class="user-form__href" align="right"><a id="goToRegister" href="javascript:void(0)">免费注册</a></div>
+                <!-- <div class="user-form__href" align="right"><a id="goToRegister" href="javascript:void(0)">免费注册</a></div> -->
+                <div class="user-form__href" th:align="right"><a th:href="@{/regist}">注册</a></div>
                 <button id="btn_login" class="sign-in__button user-form__button" name="btn_login" type="submit">
                     登录
                 </button>
@@ -78,12 +79,13 @@
 			<li th:class="${flag=='forum.html'}?'active'" ><a href="javascript:void(0)" th:href="@{/forum}">论坛系统</a></li>
 			<li><a href="" th:href="@{/}">自然之声</a></li>
 			<li th:class="${flag=='history.html'}?'active'" ><a href="javascript:void(0)" th:href="@{/history}">历史项目</a></li>
-			<li><a href="" th:href="@{/}">在线小游戏</a></li>
+			<li><a href="" th:href="@{/}">在线游戏</a></li>
 			<li>
 				<a href="javascript:void(0)" th:href="@{/}">我的视频</a>
 			</li>
 			<li><a href="#">在线工具</a></li>
-			<li><a href="#">作者亲密度调查</a></li>
+			<li><a href="#">亲密度</a></li>
+			<li th:style="${dbUser==null}?'':'display:none'" th:class="${flag=='regist.html'}?'active'"><a href="#" th:href="@{/regist}">注册</a></li>
 			<li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${dbUser==null}?'padding:0px 0px 0px 20px;':'display:none'">
 				<a href="javascript:void(0)" id="showLoginForm">控制台</a>
 			</li>
@@ -99,6 +101,7 @@
 				<p style="display: none" class="lbpo">
 					<a href="#"><span th:if="${dbUser!=null}" th:text="${dbUser.username}"></span></a>
 					<a href="#">个人中心</a>
+					<a href="#">修改密码</a>
 					<a href="#" th:href="@{/logout}">退出</a>
 				</p>
 			</li>

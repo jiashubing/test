@@ -6,10 +6,13 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -48,6 +51,12 @@ public class DbUser implements UserDetails,Serializable{
 	
 	@Column(columnDefinition="tinyint default 1")
 	private boolean enabled = true;
+	
+	//指定了OneToOne的关联关系，mappedBy同样指定由对方来进行维护关联关系;
+	//CascadeType.ALL包含所有；fetch=FetchType.LAZY懒加载
+	@OneToOne(mappedBy="dbUser",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	private User user;
+	
 	
 	public DbUser() {
 		
@@ -147,5 +156,13 @@ public class DbUser implements UserDetails,Serializable{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }

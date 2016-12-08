@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
@@ -31,6 +32,9 @@ public class User {
 	private String email;		//
 	private String mobile;		//
 	private int type;			//
+	
+	private DbUser dbUser;
+	
 	private List<Section> sectionList=new ArrayList<Section>();
 	private List<Topic> topicList=new ArrayList<Topic>();
 	private List<Reply> replyList=new ArrayList<Reply>();
@@ -136,5 +140,14 @@ public class User {
 		this.replyList = replyList;
 	}
 	
+	// OneToOne指定了一对一的关联关系，一对一中随便指定一方来维护映射关系，这里选择PersonInform来进行维护 
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="dbUserId",unique=true,nullable=false)		//指定外键的名字dbUserId
+	public DbUser getDbUser() {
+		return dbUser;
+	}
+	public void setDbUser(DbUser dbUser) {
+		this.dbUser = dbUser;
+	}
 	
 }

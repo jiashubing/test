@@ -2,23 +2,29 @@ package common.controller;
 
 import java.util.Random;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import common.entity.Result;
 import config.ValidatePcMobile;
 import forum.po.DbUser;
+import forum.po.User;
+import forum.service.DbUserService;
 
 @Controller
 public class HomeAction {
+	
+	@Resource(name="dbUserServiceImpl")
+	private DbUserService dbUserService;
+	
 	
 	@RequestMapping("/index")
 	public String loadIndex(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
@@ -33,6 +39,61 @@ public class HomeAction {
 	public String loadHistory(Model model,HttpServletRequest request)throws Exception{
 		model.addAttribute("flag","history.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/history");
+	}
+	
+	@RequestMapping("/regist")
+	public String loadRegist(Model model,HttpServletRequest request)throws Exception{
+		model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/regist");
+	}
+	
+	@RequestMapping("/doRegist")
+	public String doRegist(Model model,HttpServletRequest request,
+			@RequestParam(required = true) String nickName,
+			@RequestParam(required = false) String trueName,
+			@RequestParam(required = true) String email,
+			@RequestParam(required = false) String mobile,
+			@RequestParam(required = false) Integer sex,
+			@RequestParam(required = false) Integer face,
+//			@RequestParam(required = false,value="face") MultipartFile file,
+			@RequestParam(required = true) String newPwd )throws Exception{
+		
+		/* if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+	        if(file.getSize()==0){throw new Exception("文件为空！");}
+
+	        //保存图片
+	        String fileName = StaticResourceService.EXAMGUIDE_ICON + UUID.randomUUID().toString() + ".png";
+	        staticResourceService.uploadResource(fileName,file.getInputStream());*/
+	        
+		System.out.println("nickName = "+nickName);
+		System.out.println("trueName = "+trueName);
+		System.out.println("email = "+email);
+		System.out.println("mobile = "+mobile);
+		System.out.println("sex = "+sex);
+//		System.out.println("face = "+face);
+		System.out.println("newPwd = "+newPwd);
+		
+		DbUser tmpDbUser = new DbUser();
+		User tmpUser = new User();
+		tmpDbUser.setUsername(nickName);
+		tmpDbUser.setPassword(newPwd);
+
+		tmpUser.setTrueName(trueName);
+		tmpUser.setType(0);
+
+		//一对一关联映射的时候需要这么取值
+		tmpDbUser.setUser(tmpUser);
+		tmpUser.setDbUser(tmpDbUser);
+		tmpUser.setMobile(mobile);
+		tmpUser.setEmail(email);
+		tmpUser.setTrueName(trueName);
+
+		dbUserService.save(tmpDbUser);
+		DbUser dbUser = dbUserService.getByName(nickName);
+		model.addAttribute("dbUser", dbUser);
+		
+		model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/registsuccess");
 	}
 	
 	@RequestMapping("/lottery")

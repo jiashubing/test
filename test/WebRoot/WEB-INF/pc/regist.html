@@ -1,0 +1,158 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>阿丙的私人订制</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/other.css" th:href="@{/css/pc/css/other.css}"/>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="@{/js/pc/js/jquery.SuperSlide.2.1.1.js}" ></script>
+    <script type="text/javascript" src="js/indexuser.js" th:src="@{/js/pc/js/indexuser.js}" ></script>
+    <script type="text/javascript" src="js/confirm.js" th:src="@{/js/pc/js/confirm.js}" ></script>
+    <script type="text/javascript" src="js/other.js" th:src="@{/js/pc/js/other.js}" ></script>
+</head>
+<body style="background-color:#f0f0f0">
+<img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
+<div style="min-height:834px">
+    <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;">
+    </div>
+    <!--<div class="fullSlidei">
+         <div class="bd">
+            <ul style="position: relative; width: 1903px; height: 648px;">
+                <li style="position: absolute; width: 1903px; left: 0px; top: 0px; display: list-item; opacity: 0.975664; background: url(images/baomin.jpg) 50% 0px no-repeat;"></li>
+            </ul>
+        </div> 
+    </div>-->
+
+    <p style="clear:both"></p>
+
+    <p style="height:20px"></p>
+
+    <div class="ysfour">
+    
+          <div class="dddys">
+        <p class="ysxz">
+        <b style="font-size:16px;">注册须知</b><br/>
+        1、设置密码：个人网站，密码使用简单易记的就好。保存在数据库里的密码是加密的，也请放心；<br/>
+    2、设置邮箱：希望能够使用自己的、正确的邮箱，可用于找回密码。<br/>
+         
+        </p>
+        </div>
+        
+        <div class="ys500 ystx">
+            <!-- <form action="" th:action="@{/doRegist}" method="post" enctype="multipart/form-data"> -->
+            <form action="" th:action="@{/doRegist}" method="post">
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="nickName" name="nickName" placeholder="昵称（必填）"
+                           maxlength="20" type="text" />
+                </p>
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="trueName" name="trueName" placeholder="真实姓名"
+                           maxlength="20" type="text" />
+                </p>
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="email" name="email" placeholder="邮箱（必填）"
+                           maxlength="20" type="text" />
+                </p>
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="mobile" name="mobile" placeholder="联系电话"
+                           maxlength="20" type="text" />
+                </p>
+                
+                <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
+                    <input name="sex" value="1" type="radio"/>
+                    &nbsp;男&nbsp;&nbsp;
+                    <input name="sex" value="2" type="radio"/>
+                    &nbsp;女&nbsp;&nbsp;
+                </p>
+                <div style="text-align: center;">
+                <span style="color: red;" id="phoneErr_baomin"></span><span style="color: blue" id="phoneRig_baomin"></span>
+                </div>
+                <!-- <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="phoneNo" name="phoneNo"
+                           placeholder="真实手机号" maxlength="20" type="text"/>
+                </p> -->
+                <table style="width:100%; boredr:0; cellspacing:0; cellpadding:0">
+					<tbody>
+						<tr>
+							<td th:align="center">
+								<div id="localImag">
+									<img id="shubing-toux-preview" th:src="@{/image/pc/images/toux.png}" width="150" height="180" 
+										style="display: block; width: 150px; height: 180px;"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td th:align="center" style="padding-top:10px;">
+								<!-- <input type="file" name="file" id="shubing-toux-doc" style="width:150px;" onchange="javascript:setImagePreview();"/> -->
+								<a href="" class="shubing-file">上传头像
+			   						<input type="file" name="face" id="shubing-toux-doc" onchange="javascript:setImagePreview();"/>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+                
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="newPwd" name="newPwd" placeholder="登录密码（必填）"
+                           maxlength="20" type="text" />
+                </p>
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="confirmPwd" name="confirmPwd" placeholder="确认密码（必填）"
+                           maxlength="20" type="text" />
+                </p>
+
+                <p>
+                    <!-- <select name="areaId" id="areaId" class="ysxlk" size="1">
+                        <option th:each="g:${agentList}" th:value="${g.areaId}" th:text="${g.area}" th:selected="${mbInfo}==null?false:${mbInfo.agent}!=null" >杭州市</option>
+                        <option value="000" style="display: none;"  th:selected="${mbInfo}==null?true:${mbInfo.agent}==null" selected="selected">请选择考点</option>
+                    </select>
+                    <select id="areaId2" class="ysxlk" size="1"
+                            th:style="${#authentication.name}=='anonymousUser'?'display:none':(${mbInfo.agent}==null?'display:none':'display:block')" disabled="disabled">
+                        <option th:each="g:${agentList}" th:value="${g.areaId}" th:text="${g.area}" th:selected="${mbInfo}==null?false:${mbInfo.agent}!=null" >杭州市</option>
+                        <option value="000" style="display: none;" th:selected="${mbInfo}==null?true:${mbInfo.agent}==null" selected="selected">请选择考点</option>
+                    </select> -->
+
+                </p>
+                <p style="text-align:center;">
+                    <button class="ysw500 sign-in__button ys-form__button" id="" type="submit">
+                        我的注册
+                    </button>
+                </p>
+<!--                 <p style="text-align:center;">
+                    <button class="ysw500 sign-in__button ys-form__button" id="baominSubmit" type="button">
+                        注册
+                    </button>
+                </p> -->
+            </form>
+            <div style="text-align: center;">
+                <span style="color:red" id="errInfo"></span>
+                <span style="color:blue" id="msgInfo"></span>
+            </div>
+        </div>
+        <p class="yszhuyi"><i style="color:#FFBE00"></i><br/>
+            <i style="color:#FFBE00">*</i>登陆用户名使用昵称，可用于论坛模块发表帖子和在线游戏中分享战绩<br/>
+        </p>
+        
+        
+    </div>
+</div>
+<p style="clear:both"></p>
+
+<div th:include="pc/loginPopup::footerDiv" class="footer">
+    <p>阿丙工作室</p>
+    <p>联系邮箱：jiashubing@foxmail.com</p>
+</div>
+
+<!--登录弹窗-->
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+</div>
+<!--登录弹窗end-->
+
+</body>
+
+</html>

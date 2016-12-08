@@ -1,0 +1,54 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>阿丙的私人订制</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/other.css" th:href="@{/css/pc/css/other.css}"/>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+    <script type="text/javascript" src="js/indexuser.js" th:src="@{/js/pc/js/indexuser.js}" ></script>
+    <script type="text/javascript" src="js/confirm.js" th:src="@{/js/pc/js/confirm.js}" ></script>
+    <script type="text/javascript" src="js/other.js" th:src="@{/js/pc/js/other.js}" ></script>
+    
+</head>
+<body style="background-color:#f0f0f0">
+<img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
+    <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;">
+    </div>
+
+    <p style="clear:both"></p>
+
+    <p style="height:20px"></p>
+    
+		<div class="shubing-welcom"  style="width: 900px; margin: 100px auto;" th:align="center">
+			<div style="padding-top: 150px;padding-bottom: 150px;">
+				<span style="font-size: 70px;"><strong>感谢您注册我的网站</strong></span>
+			</div>
+			<div class="msg">
+				<p>恭喜：注册成功！</p>
+				<p>正在进入首页...</p>
+				<script type="text/javascript">
+					setTimeout("location.href='index.html'", 3000);
+				</script>
+			</div>
+		</div>
+
+<p style="clear:both"></p>
+
+<div th:include="pc/loginPopup::footerDiv" class="footer">
+    <p>阿丙工作室</p>
+    <p>联系邮箱：jiashubing@foxmail.com</p>
+</div>
+
+<!--登录弹窗-->
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+</div>
+<!--登录弹窗end-->
+
+</body>
+
+</html>
