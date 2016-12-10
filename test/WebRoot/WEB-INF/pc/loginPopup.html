@@ -93,7 +93,8 @@
 				th:style="${dbUser==null}?'display:none;':'padding:0px 0px 0px 20px;'">
 				
 				<a id="memberLi" href="#">
-					<img class="lodingimg" src="images/toux.png" th:src="@{/image/pc/images/toux.png}" width="100%"/>
+					<img class="lodingimg" th:if="${dbUser!=null &amp;&amp; dbUser.user.face!=null}" src="images/toux.png" th:src="@{'/image/pc/forum/'+${dbUser.user.face}}" width="100%"/>
+					<img class="lodingimg" th:if="${dbUser!=null&amp;&amp;dbUser.user.face==null}" src="images/toux.png" th:src="@{/image/pc/images/toux.png}" width="100%"/>
 				</a>
 				
 				<p style="display: none" class="zhizheni"><img src="images/lodingj.png" th:src="@{/image/pc/images/lodingj.png}" width="18px" height="7px"/></p>

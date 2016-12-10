@@ -2,6 +2,7 @@ package forum.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 public class DateUtil {
 
@@ -27,5 +28,9 @@ public class DateUtil {
 		Date date=new Date();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddhhmmss");
 		return sdf.format(date);
+	}
+	
+	public static String getRadomStr()throws Exception{
+		return UUID.randomUUID().toString();
 	}
 }
