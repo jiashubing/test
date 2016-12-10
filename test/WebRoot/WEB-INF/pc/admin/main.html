@@ -1,0 +1,68 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/pc/admin/css/bootstrap.min.css}"/>
+<link rel="stylesheet" href="css/bootstrap-responsive.min.css" th:href="@{/css/pc/admin/css/bootstrap-responsive.min.css}"/>
+<link rel="stylesheet" href="css/uniform.css" th:href="@{/css/pc/admin/css/uniform.css}"/>
+<link rel="stylesheet" href="css/unicorn.main.css" th:href="@{/css/pc/admin/css/unicorn.main.css}"/>
+<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" th:href="@{/css/pc/admin/css/unicorn.grey.css}"/>
+</head>
+
+<body>
+	<div id="header">
+		<h1 style="margin-left: 0px;padding-left: 0px;"><a href="#">shubing</a></h1>	
+	</div>
+
+	<div id="sidebar">
+		<ul>
+			<li id="zoneLi" th:class="${mainPage=='zone.html'}?'active'"><a href="" th:href="@{/admin/zoneList}"><i class="icon icon-home"></i> <span>大板块管理</span></a></li>
+			<li id="sectionLi" th:class="${mainPage=='section.html'}?'active'"><a href="Section_list.action"><i class="icon icon-home"></i> <span>小板块管理</span></a></li>
+			<li id="topicLi" th:class="${mainPage=='topic.html'}?'active'"><a href="Topic_listAdmin.action"><i class="icon icon-home"></i> <span>帖子管理</span></a></li>
+			<li id="userLi" th:class="${mainPage=='user.html'}?'active'"><a href="User_list.action"><i class="icon icon-home"></i> <span>用户管理</span></a></li>
+			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
+					<span>系统管理</span> <span class="label">3</span></a>
+				<ul>
+					<li><a href="#">修改密码</a></li>
+					<li><a href="#">安全退出</a></li>
+					<li><a href="#">刷新系统缓存</a></li>
+				</ul></li>
+		</ul>
+
+	</div>
+
+	<div id="style-switcher">
+		<i class="icon-arrow-left icon-white"></i> <span>颜色:</span> 
+		<a href="#grey" style="background-color: #555555; border-color: #aaaaaa;"></a> 
+		<a href="#blue" style="background-color: #2D2F57;"></a> 
+		<a href="#red" style="background-color: #673232;"></a>
+	</div>
+
+	<div id="content">
+		<div id="content-header">
+			<h1>后台管理</h1>
+		</div>
+		<div id="breadcrumb">
+			<a href="#" title="首页" class="tip-bottom">
+			<i class="icon-home"></i> 首页</a> <a href="#" class="current">${crumb1 }</a>
+		</div>
+		<!-- <jsp:include page="${mainPage }"></jsp:include> -->
+		<div th:replace="pc/admin/zone::zoneDiv">
+		</div>
+		<div class="row-fluid">
+			<div id="footer" class="span12">
+				2016 &copy; 阿丙的私人定制. &nbsp;&nbsp;&nbsp;&nbsp; <a href="http://www.jiashubing.cn" target="_blank">阿丙的私人定制</a>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/jquery.ui.custom.js" th:src="@{/js/pc/admin/js/jquery.ui.custom.js}" ></script>
+<script type="text/javascript" src="js/bootstrap.min.js" th:src="@{/js/pc/admin/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="js/jquery.uniform.js" th:src="@{/js/pc/admin/js/jquery.uniform.js}"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js" th:src="@{/js/pc/admin/js/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" src="js/unicorn.js" th:src="@{/js/pc/admin/js/unicorn.js}"></script>
+<script type="text/javascript" src="js/unicorn.tables.js" th:src="@{/js/pc/admin/js/unicorn.tables.js}"></script>
+<script type="text/javascript" src="js/uploadPreview.min.js" th:src="@{/js/pc/admin/js/uploadPreview.min.js}"></script>
+</body>
+</html>

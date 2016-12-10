@@ -197,10 +197,19 @@ public class HomeAction {
 	 /**
 	  * 跳转到adminpage页面
 	  * @return
-	  */
+	  *//*
 	 @RequestMapping("/admin")
 	 public String getAdminPage(HttpServletRequest request){
 		 return ValidatePcMobile.checkRequest(request, "/adminpage");
+	 }*/
+	
+	 /**
+	  * 跳转到admin控制台页面
+	  * @return
+	  */
+	 @RequestMapping("/admin")
+	 public String getAdminPage(HttpServletRequest request){
+		return ValidatePcMobile.checkRequest(request, "/admin/main");
 	 }
 	
 }
