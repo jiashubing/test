@@ -7,12 +7,12 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
-    <link rel="stylesheet" type="text/css" href="css/other.css" th:href="@{/css/pc/css/other.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/myfile.css" th:href="@{/css/pc/css/myfile.css}"/>
     <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="@{/js/pc/js/jquery.SuperSlide.2.1.1.js}" ></script>
     <script type="text/javascript" src="js/indexuser.js" th:src="@{/js/pc/js/indexuser.js}" ></script>
     <script type="text/javascript" src="js/confirm.js" th:src="@{/js/pc/js/confirm.js}" ></script>
-    <script type="text/javascript" src="js/other.js" th:src="@{/js/pc/js/other.js}" ></script>
+    <script type="text/javascript" src="js/myregist.js" th:src="@{/js/pc/js/myregist.js}" ></script>
 </head>
 <body style="background-color:#f0f0f0">
 <img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
@@ -43,7 +43,7 @@
         </div>
         
         <div class="ys500 ystx">
-            <form action="" th:action="@{/doRegist}" th:method="post">
+            <form action="" th:action="@{/doRegist}" method="post" enctype="multipart/form-data">
             <!-- <form action="" th:action="@{/doRegist}" method="post"> -->
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="nickName" name="nickName" placeholder="昵称（必填）"

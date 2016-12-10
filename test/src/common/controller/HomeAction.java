@@ -52,14 +52,13 @@ public class HomeAction {
 	
 	@RequestMapping(value="/doRegist")
 	public String doRegist(Model model,HttpServletRequest request,
-			@RequestParam(required = true,value="nickName") String nickName,
-			@RequestParam(required = false,value="trueName") String trueName,
-			@RequestParam(required = true,value="email") String email,
-			@RequestParam(required = false,value="mobile") String mobile,
-			@RequestParam(required = false,value="sex") Integer sex,
-			@RequestParam(required = false,value="face") Integer face,
-//			@RequestParam(required = false,value="face") MultipartFile file,
-			@RequestParam(required = true,value="newPwd") String newPwd )throws Exception{
+			@RequestParam(required = true) String nickName,
+			@RequestParam(required = false) String trueName,
+			@RequestParam(required = true) String email,
+			@RequestParam(required = false) String mobile,
+			@RequestParam(required = false) Integer sex,
+			@RequestParam(required = false) MultipartFile face,
+			@RequestParam(required = true) String newPwd )throws Exception{
 		
 //		 if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
 //	        if(file.getSize()==0){throw new Exception("文件为空！");}
@@ -92,9 +91,9 @@ public class HomeAction {
 		tmpUser.setEmail(email);
 		tmpUser.setTrueName(trueName);
 
-		dbUserService.save(tmpDbUser);
-		DbUser dbUser = dbUserService.getByName(nickName);
-		model.addAttribute("dbUser", dbUser);
+//		dbUserService.save(tmpDbUser);
+//		DbUser dbUser = dbUserService.getByName(nickName);
+//		model.addAttribute("dbUser", dbUser);
 		
 		model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/registsuccess");
