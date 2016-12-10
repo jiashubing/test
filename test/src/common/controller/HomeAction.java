@@ -3,12 +3,14 @@ package common.controller;
 import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +20,7 @@ import config.ValidatePcMobile;
 import forum.po.DbUser;
 import forum.po.User;
 import forum.service.DbUserService;
+import forum.util.Md5Util;
 
 @Controller
 public class HomeAction {
@@ -47,21 +50,21 @@ public class HomeAction {
 		return ValidatePcMobile.checkRequest(request, "/regist");
 	}
 	
-	@RequestMapping("/doRegist")
+	@RequestMapping(value="/doRegist")
 	public String doRegist(Model model,HttpServletRequest request,
-			@RequestParam(required = true) String nickName,
-			@RequestParam(required = false) String trueName,
-			@RequestParam(required = true) String email,
-			@RequestParam(required = false) String mobile,
-			@RequestParam(required = false) Integer sex,
-			@RequestParam(required = false) Integer face,
+			@RequestParam(required = true,value="nickName") String nickName,
+			@RequestParam(required = false,value="trueName") String trueName,
+			@RequestParam(required = true,value="email") String email,
+			@RequestParam(required = false,value="mobile") String mobile,
+			@RequestParam(required = false,value="sex") Integer sex,
+			@RequestParam(required = false,value="face") Integer face,
 //			@RequestParam(required = false,value="face") MultipartFile file,
-			@RequestParam(required = true) String newPwd )throws Exception{
+			@RequestParam(required = true,value="newPwd") String newPwd )throws Exception{
 		
-		/* if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-	        if(file.getSize()==0){throw new Exception("文件为空！");}
+//		 if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+//	        if(file.getSize()==0){throw new Exception("文件为空！");}
 
-	        //保存图片
+	       /* //保存图片
 	        String fileName = StaticResourceService.EXAMGUIDE_ICON + UUID.randomUUID().toString() + ".png";
 	        staticResourceService.uploadResource(fileName,file.getInputStream());*/
 	        
@@ -76,6 +79,7 @@ public class HomeAction {
 		DbUser tmpDbUser = new DbUser();
 		User tmpUser = new User();
 		tmpDbUser.setUsername(nickName);
+		newPwd = Md5Util.toMD5(newPwd);
 		tmpDbUser.setPassword(newPwd);
 
 		tmpUser.setTrueName(trueName);

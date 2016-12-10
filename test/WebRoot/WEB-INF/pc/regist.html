@@ -43,8 +43,8 @@
         </div>
         
         <div class="ys500 ystx">
-            <!-- <form action="" th:action="@{/doRegist}" method="post" enctype="multipart/form-data"> -->
-            <form action="" th:action="@{/doRegist}" method="post">
+            <form action="" th:action="@{/doRegist}" th:method="post">
+            <!-- <form action="" th:action="@{/doRegist}" method="post"> -->
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="nickName" name="nickName" placeholder="昵称（必填）"
                            maxlength="20" type="text" />
@@ -89,7 +89,8 @@
 							<td th:align="center" style="padding-top:10px;">
 								<!-- <input type="file" name="file" id="shubing-toux-doc" style="width:150px;" onchange="javascript:setImagePreview();"/> -->
 								<a href="" class="shubing-file">上传头像
-			   						<input type="file" name="face" id="shubing-toux-doc" onchange="javascript:setImagePreview();"/>
+			   						<input type="file" name="face" id="" />
+<!-- 			   						<input type="file" name="face" id="shubing-toux-doc" onchange="javascript:setImagePreview();"/> -->
 								</a>
 							</td>
 						</tr>
@@ -152,6 +153,18 @@
      th:style="${errInfo}==null?'display: none':'display: block'">
 </div>
 <!--登录弹窗end-->
+<div id="asaimsgbg" class="AsaiDivBG" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+ 	var loginFlag = /*[[${loginFlag}]]*/true;
+    /*]]>*/
+    if(loginFlag==1){
+	    document.getElementById('asaimsg').style.display='block';
+	    document.getElementById('asaimsgbg').style.display='block';
+    }
+</script>
 
 </body>
 
