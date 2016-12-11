@@ -3,6 +3,52 @@
 
 <body>
 <div th:fragment="zoneDiv">
+<script type="text/javascript">
+function openAddDlg(){
+	$("#myModalLabel").html("增加大板块");
+}
+ function saveZone(){
+	 if ($("#zoneName").val()==null||$("#zoneName").val()=='') {
+		 $("#error").html("请输入大板块名称！");
+		 return false;
+	}
+	$("#fm").submit();
+ }
+ function modifyZone(obj){
+	 var id=$(obj).closest(".zonetr").find(".zoneid").text();
+	 var zonename=$(obj).closest(".zonetr").find(".zonename").text();
+	 var description=$(obj).closest(".zonetr").find(".zonedesc").text();
+ 
+	 $("#myModalLabel").html("修改大板块");
+	 $("#id").val(id);
+	 $("#zoneName").val(zonename);
+	 $("#description").val(description);
+ }
+function zoneDelete(obj){
+	if(confirm("确定要删除这条数据吗?")){
+		var id=$(obj).closest(".zonetr").find(".zoneid").text();
+		$.ajax({
+				url : "zoneDelete",
+				type : "post",
+				data:{"id":id},
+				dataType : "json",
+				success : function(result) {
+					if (result.status == 1) {
+						alert("删除成功！");
+						window.location.reload(true);
+					}
+				},
+				error : function() {
+					alert("请求失败！");
+				}
+			});
+		}
+	}
+	function resetValue() {
+		$("#id").val("");
+		$("#zoneName").val("");
+	}
+</script>
 	<div class="container-fluid">
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<button class="btn btn-primary" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return openAddDlg()">添加大板块</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -25,24 +71,37 @@
 								</tr>
 							</thead>
 							<tbody>
-								<!-- <c:forEach items="${zoneList }" var="zone">
-									<tr>
-										<td><input type="checkbox" /></td>
-										<td style="text-align: center;">${zone.id }</td>
-										<td style="text-align: center;">${zone.name }</td>
-										<td style="text-align: center;">${zone.description }</td>
-										<td style="text-align: center;">
-											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return modifyZone(${zone.id},'${zone.name }','${zone.description }')">修改
-											</button>&nbsp;&nbsp;<button class="btn btn-danger" type="button" onclick="javascript:zoneDelete(${zone.id})">删除</button>
-										</td>
-									</tr>
-								</c:forEach> -->
+								<tr th:each="zone:${zoneList}" class="zonetr">
+									<td><input type="checkbox" /></td>
+									<td style="text-align: center;"><span class="zoneid" th:text="${zone.id}"></span></td>
+									<td style="text-align: center;"><span class="zonename" th:text="${zone.name}"></span></td>
+									<td style="text-align: center;"><span class="zonedesc" th:text="${zone.description}"></span></td>
+									<td style="text-align: center;">
+										<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyZone(this)">修改
+										</button>&nbsp;&nbsp;<button class="btn btn-danger" type="button" onclick="zoneDelete(this)">删除</button>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<div class="pagination alternate">
-					<ul class="clearfix">${pageCode }
+					<ul class="clearfix">
+						<li th:class="${pageNo}==0?'disabled':''" ><a href='' th:href="@{/admin/zoneList(pageNo=0)}">首页</a></li>
+						<li th:class="${pageNo}>0?'':'disabled'"><a th:unless="${pageNo}>0" href=''>上一页</a>
+							<a href='' th:if="${pageNo}>0" th:href="@{/admin/zoneList(pageNo=${pageNo}-1)}">上一页</a></li>
+						<li th:style="${pageNo}-3>0?'':'display: none'"><a href='' th:href="@{/admin/zoneList(pageNo=${pageNo}-4)}"><span th:text="${pageNo}-3"></span></a></li>
+						<li th:style="${pageNo}-2>0?'':'display: none'"><a href='' th:href="@{/admin/zoneList(pageNo=${pageNo}-3)}"><span th:text="${pageNo}-2"></span></a></li>
+						<li th:style="${pageNo}-1>0?'':'display: none'"><a href='' th:href="@{/admin/zoneList(pageNo=${pageNo}-2)}"><span th:text="${pageNo}-1"></span></a></li>
+						<li th:style="${pageNo}>0?'':'display: none'"><a href='' th:href="@{/admin/zoneList(pageNo=${pageNo}-1)}"><span th:text="${pageNo}"></span></a></li>
+						<li th:class="active"><a href=''><span th:text="${pageNo}+1"></span></a></li>
+						<li th:style="${totalPages}-1>${pageNo}?'':'display: none'"><a href='' th:href="@{/admin/zoneList(pageNo=${pageNo}+1)}"><span th:text="${pageNo}+2"></span></a></li>
+						<li th:style="${totalPages}-2>${pageNo}?'':'display: none'"><a href='' th:href="@{/admin/zoneList(pageNo=${pageNo}+2)}"><span th:text="${pageNo}+3"></span></a></li>
+						<li th:style="${totalPages}-3>${pageNo}?'':'display: none'"><a href='' th:href="@{/admin/zoneList(pageNo=${pageNo}+3)}"><span th:text="${pageNo}+4"></span></a></li>
+						<li th:style="${totalPages}-4>${pageNo}?'':'display: none'"><a href='' th:href="@{/admin/zoneList(pageNo=${pageNo}+4)}"><span th:text="${pageNo}+5"></span></a></li>
+						<li th:class="${totalPages}-1>${pageNo}?'':'disabled'" ><a href='' th:unless="${totalPages}-1>${pageNo}">下一页</a>
+							<a href='' th:if="${totalPages}-1>${pageNo}" th:href="@{/admin/zoneList(pageNo=${pageNo}+1)}">下一页</a></li>
+						<li th:class="${totalPages}-1==${pageNo}?'disabled':''" ><a href='' th:href="@{/admin/zoneList(pageNo=${totalPages}-1)}">末页</a></li>
 					</ul>
 				</div>
 
@@ -56,14 +115,14 @@
 				<h3 id="myModalLabel">增加大板块</h3>
 			</div>
 			<div class="modal-body">
-				<form id="fm" action="">
+				<form id="fm" th:action="@{/admin/zoneAdd}" method="post">
 					<table>
 						<tr>
 							<td>
 								<label class="control-label" for="zoneName">请输入大板块名称：</label>
 							</td>
 							<td>
-								 <input id="zoneName" type="text" name="zone.name" placeholder="请输入…"/>
+								 <input id="zoneName" type="text" name="zname" placeholder="请输入…"/>
 							</td>
 						</tr>
 						<tr>
@@ -71,15 +130,15 @@
 								<label class="control-label" for="description">请输入备注：</label>
 							</td>
 							<td>
-								<textarea rows="5" cols="50" style="width: 405px;" id="description" name="zone.description"></textarea>
+								<textarea rows="5" cols="50" style="width: 405px;" id="description" name="zdescription"></textarea>
 							</td>
 						</tr>
 					</table>
-					<input id="id" type="hidden" name="zone.id"/>
+					<input id="id" type="hidden" name="zid"/>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<font id="error" style="color: red;"></font>
+				<span id="error" style="color: red;"></span>
 				<button class="btn" data-dismiss="modal" aria-hidden="true"
 					onclick="return resetValue()">关闭</button>
 				<button class="btn btn-primary" onclick="javascript:saveZone()">保存</button>

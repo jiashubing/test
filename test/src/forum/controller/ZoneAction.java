@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import common.entity.Result;
 
 import config.ValidatePcMobile;
 import forum.po.DbUser;
@@ -43,26 +46,43 @@ public class ZoneAction {
 	private ReplyService replyService;
 	
 	@RequestMapping("/admin/zoneList")
-	public String loadZoneList(@AuthenticationPrincipal DbUser dbUser,@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		}
+	public String loadZoneList(@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
 		
 		pageNo = PageUtil.initPageNo(pageNo);
-//		List<Zone> zoneList = zoneService.findZoneList(s_zone, PageSize,pageNo);
-//		PageBean pageBean=new PageBean(Integer.parseInt(page), 6);
-//		zoneList=zoneService.findZoneList(s_zone, pageBean);
-//		total=zoneService.getZoneCount(s_zone);
-//		pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/Zone_list.action", total, Integer.parseInt(page), 6,null);
+		List<Zone> zoneList = zoneService.findZoneList(null, PageSize,pageNo);
 		String mainPage="zone.html";
-//		crumb1="�������";
+		
+		long totalNum = zoneService.getZoneCount(null);
+		int totalPages = PageUtil.getTotalPages(totalNum, PageSize);
 		
 		model.addAttribute("pageNo",pageNo); 
 		model.addAttribute("mainPage",mainPage); 
-//		model.addAttribute("topic",topic); 
-//		model.addAttribute("zoneList",zoneList); 
+		model.addAttribute("totalPages",totalPages); 
+		model.addAttribute("zoneList",zoneList); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/admin/main");
 	}
+	
+	@RequestMapping("/admin/zoneAdd")
+	public String saveZone(@RequestParam(required = false) Integer pageNo,@RequestParam Integer zid,
+			@RequestParam String zname,@RequestParam String zdescription,Model model,HttpServletRequest request)throws Exception{
+		Zone zone =new Zone();
+		if(zid != null){
+			zone.setId(zid);
+		}
+		zone.setName(zname);
+		zone.setDescription(zdescription);
+		zoneService.saveZone(zone);
+		return "redirect:/admin/zoneList";
+	}
+	
+	@RequestMapping("/admin/zoneDelete")
+    @ResponseBody
+    public Result loadLottery(Integer id) {
+        Result result = new Result();
+        zoneService.deleteZoneById(id);
+        result.setStatus(1);
+        return result;
+    }
 	
 }

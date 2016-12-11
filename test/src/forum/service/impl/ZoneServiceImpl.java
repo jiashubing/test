@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import forum.po.Zone;
@@ -31,7 +32,14 @@ public class ZoneServiceImpl implements ZoneService {
 		Query query=em.createQuery("delete from Zone where id= "+zone.getId());
 		query.executeUpdate();
 	}
+	
+	@Override
+	public void deleteZoneById(Integer id) {
+		Query query=em.createQuery("delete from Zone where id= "+id);
+		query.executeUpdate();
+	}
 
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public List<Zone> findZoneList(Zone s_zone,int pageSize,int pageNo) {
 		StringBuffer hql=new StringBuffer("from Zone");
@@ -46,6 +54,7 @@ public class ZoneServiceImpl implements ZoneService {
 		return result;
 	}
 	
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public Long getZoneCount(Zone s_zone) {
 		List<Object> param=new LinkedList<Object>();
@@ -59,6 +68,7 @@ public class ZoneServiceImpl implements ZoneService {
 		return (Long)query.getSingleResult();
 	}
 
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public Zone findZoneById(int zoneId) {
 		return em.find(Zone.class, zoneId);

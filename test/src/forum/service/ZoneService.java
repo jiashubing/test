@@ -10,6 +10,8 @@ public interface ZoneService {
 	
 	public void deleteZone(Zone zone);
 	
+	public void deleteZoneById(Integer id);
+	
 	public List<Zone> findZoneList(Zone s_zone,int pageSize,int pageNo);
 	
 	public Long getZoneCount(Zone s_zone);
