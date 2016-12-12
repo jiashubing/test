@@ -51,7 +51,7 @@ public class SectionServiceImpl implements SectionService {
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
-		List<Section> result = query.getResultList();
+		List<Section> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
 		return result;
 	}

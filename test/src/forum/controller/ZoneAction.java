@@ -1,13 +1,10 @@
 package forum.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,17 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import common.entity.Result;
 
 import config.ValidatePcMobile;
-import forum.po.DbUser;
-import forum.po.Reply;
-import forum.po.Section;
-import forum.po.Topic;
 import forum.po.Zone;
-import forum.service.ReplyService;
-import forum.service.SectionService;
-import forum.service.TopicService;
 import forum.service.ZoneService;
 import forum.util.PageUtil;
 
+/**
+ * 大板块管理控制器
+ * @author jiashubing
+ *
+ */
 @Controller
 public class ZoneAction {
 	
@@ -35,15 +30,6 @@ public class ZoneAction {
 
 	@Resource(name="zoneServiceImpl")
 	private ZoneService zoneService;
-
-	@Resource(name="topicServiceImpl")
-	private TopicService topicService;
-
-	@Resource(name="sectionServiceImpl")
-	private SectionService sectionService;
-	
-	@Resource(name="replyServiceImpl")
-	private ReplyService replyService;
 	
 	@RequestMapping("/admin/zoneList")
 	public String loadZoneList(@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{

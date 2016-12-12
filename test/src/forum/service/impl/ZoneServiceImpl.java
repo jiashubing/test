@@ -49,7 +49,7 @@ public class ZoneServiceImpl implements ZoneService {
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
-		List<Zone> result = query.getResultList();
+		List<Zone> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
 		return result;
 	}

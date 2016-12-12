@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
-		List<User> result = query.getResultList();
+		List<User> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
 		return result;
 	}
@@ -101,10 +101,18 @@ public class UserServiceImpl implements UserService {
 	public User getUserByNickName(String nickName) {
 		StringBuffer hql=new StringBuffer("from User");
 		if (StringUtil.isNotEmpty(nickName)) {
-			hql.append(" and nickName = "+nickName);
+			hql.append(" and nickName = '"+nickName+"'");
 		}
+		System.out.println(hql.toString().replaceFirst("and", "where"));
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
-		return (User)query.getSingleResult();
+		
+		Object obj;
+		try {
+			obj = query.getSingleResult();
+			return (User)obj;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }
