@@ -27,29 +27,40 @@ function saveSection(){
 	 $("#fm").submit();
 	 alert("保存成功！");
 	 resetValue();
-	 location.reload(true);
+	 /* location.reload(true); */
  }
- function modifySection(id,name,zone,masterNickName,logo){
+ function modifySection(obj){
+	var id=$(obj).closest(".sectiontr").find(".sectionid").text();
+	var name=$(obj).closest(".sectiontr").find(".sectionname").text();
+	var zone=$(obj).closest(".sectiontr").find(".sectionzoneid").text();
+	var masterNickName=$(obj).closest(".sectiontr").find(".sectionmasternickName").text();
+	var logo=$(obj).closest(".sectiontr").find(".sectionlogo").text();
 	 $("#myModalLabel").html("修改小板块");
-	 $("#id").val(id);
+	 $("#secId").val(id);
 	 $("#sectionName").val(name);
-	 $("#ImgPr").attr("src","${pageContext.request.contextPath}/"+logo);
+	/*  $("#logo").val(logo);
+	 $("#ImgPr").attr("src","../forum/"+logo) */
 	 $("#zone").val(zone);
 	 $("#masterNickName").val(masterNickName);
  }
-function sectionDelete(sectionId){
+function sectionDelete(obj){
 	if(confirm("确定要删除这条数据吗?")){
-		$.post("Section_delete.action",{sectionId:sectionId},
-				function(result){
-					var result=eval('('+result+')');
-					if(result.error){
-						alert(result.error);
-					}else{
+		var sectionId= $(obj).closest(".sectiontr").find(".sectionid").text();
+		$.ajax({
+				url : "sectionDelete",
+				type : "post",
+				data:{"sectionId":sectionId},
+				dataType : "json",
+				success : function(result) {
+					if (result.status == 1) {
 						alert("删除成功！");
 						window.location.reload(true);
 					}
+				},
+				error : function() {
+					alert("请求失败！");
 				}
-			);
+			});
 	}
 }
 function resetValue(){
@@ -130,18 +141,20 @@ function searchUserByNickName(obj){
 								</tr>
 							</thead>
 							<tbody>
-									<tr th:each="section:${sectionList}">
+									<tr th:each="section:${sectionList}" class="sectiontr">
 										<td><input type="checkbox" /></td>
-										<td style="text-align: center;vertical-align: middle;"><span th:text="${section.id }"></span></td>
-										<td style="text-align: center;vertical-align: middle;"><span th:text="${section.name }"></span></td>
+										<td style="text-align: center;vertical-align: middle;"><span class="sectionid" th:text="${section.id }"></span></td>
+										<td style="text-align: center;vertical-align: middle;"><span class="sectionname" th:text="${section.name }"></span></td>
 										<td style="text-align: center;vertical-align: middle;width: 110px;vertical-align: middle;">
 											<img style="width: 100px;" src='s' th:src="@{'/image/pc/forum/'+${section.logo }}"></img>
 										</td>
-										<td style="text-align: center;vertical-align: middle;"><span th:text="${section.zone.name }"></span></td>
-										<td style="text-align: center;vertical-align: middle;"><span th:text="${section.master.nickName }"></span></td>
+										<td style="text-align: center;vertical-align: middle;"><span class="sectionzonename" th:text="${section.zone.name }"></span></td>
+										<td style="text-align: center;vertical-align: middle;"><span class="sectionmasternickName" th:text="${section.master.nickName }"></span></td>
+										<td style="display:none"><span th:if="${section.zone != null}" class="sectionzoneid" th:text="${section.zone.id }"></span></td>
+										<td style="display:none"><span class="sectionlogo" th:text="${section.logo }"></span></td>
 										<td style="text-align: center;vertical-align: middle;">
-											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return modifySection(${section.id},'${section.name }',${section.zone.id },'${section.master.nickName }','${section.logo }')">修改
-											</button>&nbsp;&nbsp;<button class="btn btn-danger" type="button" onclick="javascript:sectionDelete(${section.id})">删除</button>
+											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifySection(this)">修改
+											</button>&nbsp;&nbsp;<button class="btn btn-danger" type="button" onclick="sectionDelete(this)">删除</button>
 										</td>
 									</tr>
 							</tbody>
@@ -227,7 +240,7 @@ function searchUserByNickName(obj){
 							</td>
 						</tr>
 					</table>
-					<input id="id" type="hidden" name="secId"/>
+					<input id="secId" type="hidden" name="secId"/>
 					<input id="masterId" type="hidden" name="secMasterId"/>
 				</form>
 			</div>

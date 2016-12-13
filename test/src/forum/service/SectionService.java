@@ -9,6 +9,7 @@ public interface SectionService {
 	public void saveSection(Section section);
 	
 	public void deleteSection(Section section);
+	public void deleteSectionById(Integer sectionId);
 	
 //	public List<Section> findSectionList(Section s_section,PageBean pageBean);
 	public List<Section> findSectionList(Section s_section,int pageSize,int pageNo);

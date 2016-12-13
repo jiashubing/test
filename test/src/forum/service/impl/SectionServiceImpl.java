@@ -33,6 +33,12 @@ public class SectionServiceImpl implements SectionService {
 		Query query=em.createQuery("delete from Section where id= "+section.getId());
 		query.executeUpdate();
 	}
+	
+	@Override
+	public void deleteSectionById(Integer sectionId) {
+		Query query=em.createQuery("delete from Section where id= "+sectionId);
+		query.executeUpdate();
+	}
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override

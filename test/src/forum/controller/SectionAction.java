@@ -24,6 +24,7 @@ import forum.service.TopicService;
 import forum.service.UserService;
 import forum.service.ZoneService;
 import forum.util.DateUtil;
+import forum.util.FileEcodeUtil;
 import forum.util.ImgUtil;
 import forum.util.PageUtil;
 
@@ -98,6 +99,9 @@ public class SectionAction {
 		if (logo!=null) {
 			if(ImageIO.read(logo.getInputStream())==null){throw new Exception("上传文件不是图片！");}
 			if(logo.getSize()==0){throw new Exception("文件为空！");}
+			//如果是修改section的话，如果原来有logo，需要把原来的logo删除掉
+			this.deleteSectionLogo(secId,request);
+			
 			String realPath=request.getSession().getServletContext().getRealPath(ImgUtil.FORUM_PATH+ImgUtil.SECTION_FACE);
 			String imgName = DateUtil.getRadomStr();
 			String imgPath = "/"+imgName+ ".png";
@@ -115,15 +119,22 @@ public class SectionAction {
 		sectionService.saveSection(section);
 		return "redirect:/admin/sectionList";
 	}
-//	
-//	@RequestMapping("/admin/sectionDelete")
-//    @ResponseBody
-//    public Result loadLottery(Integer id) {
-//        Result result = new Result();
-//        zoneService.deleteZoneById(id);
-//        result.setStatus(1);
-//        return result;
-//    }
+	
+	/**
+	 * 异步 删除section
+	 * @param sectionId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/admin/sectionDelete")
+    @ResponseBody
+    public Result deleteSection(Integer sectionId,HttpServletRequest request) {
+        Result result = new Result();
+        this.deleteSectionLogo(sectionId,request);
+        sectionService.deleteSectionById(sectionId);
+        result.setStatus(1);
+        return result;
+    }
 	
 	/**
 	 * 异步 通过昵称获取用户
@@ -147,5 +158,21 @@ public class SectionAction {
         }
         return result;
     }
+	
+	/**
+	 * 删除section对应的logo
+	 * @param secId
+	 * @param request
+	 * @return
+	 */
+	public boolean deleteSectionLogo(Integer secId,HttpServletRequest request){
+		if(secId != null){
+			Section tmpSec = sectionService.findSectionById(secId);
+			String tmpLogo = tmpSec.getLogo();
+			String tmpPath = request.getSession().getServletContext().getRealPath(ImgUtil.FORUM_PATH+tmpLogo);
+			return FileEcodeUtil.deleteFile(tmpPath);
+		}
+		return false;
+	}
 	
 }

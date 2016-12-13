@@ -103,7 +103,6 @@ public class UserServiceImpl implements UserService {
 		if (StringUtil.isNotEmpty(nickName)) {
 			hql.append(" and nickName = '"+nickName+"'");
 		}
-		System.out.println(hql.toString().replaceFirst("and", "where"));
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
 		
 		Object obj;
