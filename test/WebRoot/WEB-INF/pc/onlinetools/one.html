@@ -1,0 +1,36 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="oneDiv">
+<div id="mainContent" class="shubing-tool-wrapper">
+		<div class="shubing-toolName">自定义加密工具</div>
+		<div class="shubing-toolUsing shubing-clearfix">
+		    <ul class="nav nav-tabs">
+		    	<li class="active"><a th:href="@{/tools/one}">Native/Unicode</a></li>
+				<li><a th:href="@{/tools/two}">Native/UTF-8</a></li>
+	
+			</ul>
+			
+			
+		<div class="shubing-leftBar">
+			<div class="title">Native:</div>
+	    	<textarea name="cipher" id="a_source">这是一个例子,this is a example</textarea>
+		</div>
+	
+	    <div class="shubing-operateLR">
+	    	<div class="OptDetail Button">
+				<button class="btn btn-primary" onclick="javascript:Native2Unicode();" style="margin:0 0 10px 0;"> Unicode</button><br/>
+	            <button class="btn btn-primary" onclick="javascript:Unicode2Native();"> Native </button>
+	        </div>
+	    </div>
+	
+	    <div class="shubing-rightBar">
+			<div class="title">Unicode:</div>
+			<textarea name="message" id="u_source" class="text_source"></textarea>
+	    </div>		
+	</div>
+</div>
+</div>
+</body>
+</html>

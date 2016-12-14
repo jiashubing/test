@@ -1,0 +1,83 @@
+/* 公共部分 */
+
+.shubing-tool-wrapper {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.shubing-clearfix:after {
+	clear: both;
+	content: " ";
+	display: block;
+	font-size: 0;
+	height: 0;
+	visibility: hidden;
+}
+
+.shubing-clearfix {
+	display: block;
+	height: 1%;
+}
+
+
+
+.shubing-toolUsing {
+	margin-top: 30px;
+}
+
+
+.shubing-toolName {
+	line-height:24px;
+	font-size: 24px;
+	color: #777;
+	margin-top: 10px;
+}
+/* 　END description  */
+
+/*  END public  */
+
+/*  左右版式  */
+.shubing-leftBar {
+	float: left;
+}
+
+.shubing-rightBar {
+	float: right;
+}
+
+.shubing-leftBar textarea,.shubing-rightBar textarea {
+	width: 410px;
+	height: 500px;
+}
+
+.shubing-operateLR {
+	float: left;
+	width: 136px;
+	text-align: center;
+	margin: 30px 5px 0 5px;
+}
+/*  END 左右版式  */
+
+/* .shubing-nav{
+	display:block;
+	list-style:none;
+}
+.shubing-nav>li>a{
+	display:block;
+}
+
+.shubing-nav-tabs{
+	*zoom:1;
+}
+.shubing-nav-tabs:before,.shubing-nav-tabs:after{display:table;line-height:0;content:""}
+.shubing-nav-tabs:after{clear:both}
+.shubing-nav-tabs>li,{float:left}
+.shubing-nav-tabs>li>a{padding-right:12px;padding-left:12px;margin-right:2px;line-height:14px}
+.shubing-nav-tabs{border-bottom:1px solid #ddd}
+.shubing-nav-tabs>li{margin-bottom:-1px}
+.shubing-nav-tabs>li>a{padding-top:8px;padding-bottom:8px;line-height:20px;border:1px solid transparent;-webkit-border-radius:4px 4px 0 0;-moz-border-radius:4px 4px 0 0;border-radius:4px 4px 0 0}
+.shubing-nav-tabs>li>a:hover,.shubing-nav-tabs>li>a:focus{border-color:#eee #eee #ddd}
+.shubing-nav-tabs>.active>a,.shubing-nav-tabs>.active>a:hover,.shubing-nav-tabs>.active>a:focus{color:#555;cursor:default;background-color:#fff;border:1px solid #ddd;border-bottom-color:transparent}
+
+#mainContent a:hover,a:active{outline:0;} */
+

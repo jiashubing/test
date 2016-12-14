@@ -83,7 +83,7 @@
 			<li>
 				<a href="javascript:void(0)" th:href="@{/}">我的视频</a>
 			</li>
-			<li><a href="#" th:href="@{/index}">在线工具</a></li>
+			<li th:class="${flag=='tools.html'}?'active'"><a href="#" th:href="@{/tools}">在线工具</a></li>
 			<li><a href="#" th:href="@{/index}">亲密度</a></li>
 			<li th:style="${dbUser==null}?'':'display:none'" th:class="${flag=='regist.html'}?'active'"><a href="#" th:href="@{/regist}">注册</a></li>
 			<li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${dbUser==null}?'padding:0px 0px 0px 20px;':'display:none'">
