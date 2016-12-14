@@ -1,0 +1,186 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>阿丙的私人订制</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
+
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+    <script type="text/javascript" src="js/indexuser.js" th:src="@{/js/pc/js/indexuser.js}" ></script>
+
+	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap.css" th:href="@{/css/pc/forum/bootstrap/css/bootstrap.css}"/>
+	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap-responsive.css"  th:href="@{/css/pc/forum/bootstrap/css/bootstrap-responsive.css}" />
+	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
+	
+	<script type="text/javascript" src="forum/bootstrap/js/bootstrap.min.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.min.js}" ></script>
+	<script type="text/javascript" src="forum/bootstrap/js/bootstrap.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.js}" ></script>
+
+</head>
+<body><img src="../images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
+<div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
+</div>
+
+<p style="clear:both"></p>
+<div class="forum" >
+	<div id="content" style="width: 1200px; margin: 0 auto;">
+		<div id="forum-header-wrapper">
+			<div id="forum-header" class="container">
+				<div id="forum-logo">
+					<h1><a href="#">冰山一角论坛</a></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div style="width: 1200px; margin: 0 auto;">
+	<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;width: 1400px;" align="center">
+		<tr height="30" background="images/index/classT.jpg">
+			<td style="text-indent:5;">
+				<b><font color="white">■ 发表帖子</font></b>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td style="width: 220px;" valign="top">
+				<table style="margin-top: 10;margin-left: 20px;" class="">
+					<tr>
+						<td valign="top" width="99%">发帖许可：<br/><br/>
+							<ul class="unstyled">
+								<li>*请不要发表危害祖国的非法信息！</li><br/><br/>
+								<li>*请不要发表侵犯个人名誉的信息！</li><br/><br/>
+								<li>*请不要发表不文明内容！</li>
+							</ul>
+						</td>
+					</tr>
+					<tr height="40">
+						<td align="center">违反以上规则所发生的后果自负！</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<form class="form-horizontal" style="margin-top: 10px;" action="Topic_save.action" method="post" onsubmit="return checkForm()">
+					<div class="control-group">
+						<label class="control-label" for="title">【主题】</label>
+						<div class="controls">
+							<input type="text" id="title" name="topic.title" value="${topic.title }" style="width: 800px;"/>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="section">【板块】</label>
+						<div class="controls">
+							<select id="section" name="topic.section.id" style="width: 400px;"><option value="0">请选择板块...</option>
+								<c:forEach var="section" items="${sectionList }">
+									<option value="${section.id }">${section.name }</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="Content">【内容】</label>
+						<div class="controls">
+							<textarea name="topic.content" id="Content" class="ckeditor" cols="50" style="height:200px;width: 800px;" ></textarea>
+						</div>
+					</div>
+					<input id="user" name="topic.user.id" value="${currentUser.id }" type="hidden"/>
+					<div class="control-group">
+						<div class="controls">
+							<Button class="btn btn-primary " data-dismiss="modal" aria-hidden="true" type="submit">提交</Button>
+							<font id="error"></font>
+						</div>
+					</div>
+				</form>
+			</td>
+		</tr>
+	</table>
+</div>
+
+</div>
+
+
+<div th:include="pc/loginPopup::footerDiv" class="footer">
+    <p>阿丙工作室</p>
+    <p>联系邮箱：jiashubing@foxmail.com</p>
+</div>
+
+<!--登录弹窗-->
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                         onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+        <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+    <div class="sign-in">
+        <div class="user-form">
+            <form accept-charset="UTF-8" action="../yun-geren.html" th:action="@{/pc/index}"
+                  class="sign-in__form user-form__form" method="post">
+
+                <div class="user-form__fieldset">
+                    <label class="user-form__label" for="username" style="color:#111">手机号：</label>
+                    <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
+                           id="username" name="username" placeholder="请输入您的手机号" maxlength="20" type="text"/>
+                </div>
+                <div class="user-form__fieldset">
+                    <label class="user-form__label" for="password" style="color:#111">密码：</label>
+                    <input class="sign-in__field user-form__field" id="password" name="password"
+                           placeholder="password" type="password"/>
+
+                </div>
+                <div class="user-form__href" align="right"><a id="goToRegister" href="javascript:void(0)">免费注册</a></div>
+                <button id="btn_login" class="sign-in__button user-form__button" name="btn_login" type="submit">
+                    登录
+                </button>
+            </form>
+            <span style="color:red" id="loginFailedInfo" th:text="${errInfo}"></span>
+        </div>
+    </div>
+</div>
+<!--登录弹窗end-->
+<!--注册弹窗-->
+<div th:replace="pc/loginPopup::registPopupDiv" id="regDiv" class="AsaiDivShow" style="display:none">
+    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                         onclick="javascript:hideRegisterForm()">
+        <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+    <div class="sign-in">
+        <div class="user-form">
+            <form action="../yun-baomin.html">
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="regPhoneNo" name="regPhoneNo"
+                           placeholder="真实手机号" maxlength="20" type="text"/>
+                    <span style="color:red" id="phoneErr"/>
+                    <span style="color:green" id="phoneRig"/>
+                </p>
+
+                <p style="height:10px;"></p>
+
+                <p style="margin: 0 auto;">
+                    <input class="ys-form__field" id="regMessage" name="regMessage" placeholder="短信验证码" maxlength="6"
+                           type="text" style="float: left; margin-top: 10px; margin-left:40px; width:430px;"/>
+                    <input id="verify_btn" value="获取验证码" class="user-form__yanzheng" type="button"
+                           onclick="settime(this)"/>
+                </p>
+
+                <p style="text-align:center;">
+                    <button class="sign-in__button user-form__button" id="registerBtn" type="button">
+                        提交
+                    </button>
+                </p>
+                <div style="text-align: center">
+                    <i style="color:#FFBE00">*</i>注册成功后初始密码为手机号后四位，您可以登录后在个人中心修改<br/>
+                </div>
+            </form>
+            <span style="color:red" id="regErrInfo"></span>
+            <span style="color:blue" id="regMsgInfo"></span>
+        </div>
+    </div>
+</div>
+<!--注册弹窗end-->
+<div id="asaimsgbg" class="AsaiDivBG" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'"></div>
+</body>
+
+
+</html>

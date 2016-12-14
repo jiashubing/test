@@ -28,7 +28,8 @@ import forum.util.PageUtil;
 @Controller
 public class TopicAction {
 	
-	public static int PageSize = 10;
+	public static int PageSize = 6;
+	public static int MaxPageSize = 100;
 
 	@Resource(name="zoneServiceImpl")
 	private ZoneService zoneService;
@@ -106,6 +107,21 @@ public class TopicAction {
 		model.addAttribute("replyList",replyList); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/forum/topicDetail");
+	}
+	
+	@RequestMapping("/forum/preSave")
+	public String preSave(@AuthenticationPrincipal DbUser dbUser,Integer sectionId,Model model,HttpServletRequest request)throws Exception{
+		if(dbUser != null){
+			model.addAttribute("dbUser",dbUser);
+		}else{
+			return "redirect:/login";
+		}
+		
+		List<Section> sectionList = sectionService.findSectionList(null, MaxPageSize, 0);
+		
+		model.addAttribute("sectionList",sectionList); 
+		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/forum/topicAdd");
 	}
 	
 }

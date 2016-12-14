@@ -24,22 +24,6 @@
 <body><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
 <div class="mythymeleaf">
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
-    <ul class="navi">
-        <li><a href="yun-index.html" >首页</a></li>
-        <li class="active"><a href="javascript:void(0)" >论坛系统</a></li>
-        <li><a href="yun-baomin.html" >自然之声</a></li>
-        <li><a href="javascript:void(0)" >历史项目</a></li>
-        <li><a href="yun-jxspnewone.html" >网页小游戏</a></li>
-        <li>
-            <a href="javascript:void(0)" >我的视频</a>
-        </li>
-        <li><a href="#">在线工具</a></li>
-		<li><a href="#">作者亲密度调查</a></li>
-        <li id="loginLi" style="padding:0px 0px 0px 20px;"
-            th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
-            <a href="javascript:void(0)" id="showLoginForm">控制台</a>
-        </li>
-    </ul>
 </div>
 </div>
 
@@ -98,12 +82,17 @@
 					</tr>
 					<tr>
 						<td>
-							<img th:if="${((topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='男')}" 
-									alt="" src="images/user/user0.gif" th:src="@{/image/pc/forum/images/user/user0.gif}" style="width: 100px;height: 100px;" />
-							<img th:if="${(topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='女'}"  
-									alt="" src="images/user/female.gif"  th:src="@{/image/pc/forum/images/user/female.gif}"  style="width: 100px;height: 100px;" />
-							<img th:unless="${topic.user.face==null||topic.user.face==''}"  
-									alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
+							<span th:unless="${topic==null||topic.user==null}">
+								<span th:if="${topic.user.face==null||topic.user.face==''}">
+									<img th:if="${topic.user.sex=='男'}" 
+										alt="" src="images/user/user0.gif" th:src="@{/image/pc/forum/images/user/user0.gif}" style="width: 100px;height: 100px;" />
+									<img th:if="${topic.user.sex=='女'}"  
+										alt="" src="images/user/female.gif"  th:src="@{/image/pc/forum/images/user/female.gif}"  style="width: 100px;height: 100px;" />
+								</span>
+								<span th:unless="${topic.user.face==null||topic.user.face==''}">
+									<img alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
+								</span>
+							</span>
 						</td>
 					</tr>
 					<tr>
