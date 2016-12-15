@@ -43,6 +43,10 @@ public class HomeAction {
 	public String loadIndex(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
 		if(dbUser != null){
 			model.addAttribute("dbUser",dbUser);
+			//如果是我的管理员账号登陆，那就跳转到后台
+			if("myadmin".equals(dbUser.getUsername())){
+				return "redirect:/admin";
+			}
 		}
 		model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/index");

@@ -50,7 +50,7 @@
                            maxlength="20" type="text" />
                 </p>
                 <p>
-                    <input class="ysw500 sign-in__field ys-form__field" id="trueName" name="trueName" placeholder="真实姓名"
+                    <input class="ysw500 sign-in__field ys-form__field" id="trueName" name="trueName" placeholder="真实姓名（只你与作者可见）"
                            maxlength="20" type="text" />
                 </p>
                 <p>
@@ -89,10 +89,12 @@
 							<td th:align="center" style="padding-top:10px;">
 								<!-- <input type="file" name="file" id="shubing-toux-doc" style="width:150px;" onchange="javascript:setImagePreview();"/> -->
 								<a href="" class="shubing-file">上传头像
-			   						<input type="file" name="face" id="shubing-toux-doc" onchange="javascript:setImagePreview();"/>
+			   						<input type="file" name="face" id="shubing-toux-doc"/>
 								</a>
+								
 							</td>
 						</tr>
+						<tr><td th:align="center"><span id="fileSize">&nbsp;</span></td></tr>
 					</tbody>
 				</table>
                 

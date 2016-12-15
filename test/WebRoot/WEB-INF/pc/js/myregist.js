@@ -1,4 +1,45 @@
-function setImagePreview(avalue) {
+
+$("#shubing-toux-doc").live("change",function(){
+	
+	//var filepath = $("input[name='myFile']").val();    //可以直接使用this获取
+    var filepath = $(this).val();
+    var extStart = filepath.lastIndexOf(".");
+    var ext = filepath.substring(extStart, filepath.length).toUpperCase();
+    if (ext != ".BMP" && ext != ".PNG" && ext != ".GIF" && ext != ".JPG" && ext != ".JPEG") {
+        alert("图片限于png,gif,jpg,bmp,jpeg格式");
+        $("#fileSize").val(" ");
+        return false;
+    }
+    var file_size = 0;
+    if ($.browser.msie) {//IE
+        var img = new Image();
+        img.src = filepath;
+        while (true) {
+            if (img.fileSize > 0) {
+                if (img.fileSize > 50) {
+                    alert("图片不大于50KB！小本网站，截张图就好啦！");
+                } else {
+                    var num03 = img.fileSize / 1024;
+                    num04 = num03.toFixed(2)
+                    $("#fileSize").text(num04 + "KB");
+                }
+                break;
+            }
+        }
+    } else {
+        file_size = this.files[0].size;
+        var size = file_size / 1024;
+        if (size > 50) {
+            alert("上传的图片大小不能超过50KB！小本网站，截张图就好啦！");
+        } else {
+            var num01 = file_size / 1024;
+            num02 = num01.toFixed(2);
+            $("#fileSize").text(num02 + " KB");
+        }
+    }
+	//以上是限制图片格式和大小
+	
+    //以下是将图片显示到网页
 	var docObj=document.getElementById("shubing-toux-doc");
 	var imgObjPreview=document.getElementById("shubing-toux-preview");
 	if(docObj.files &&docObj.files[0])
@@ -35,4 +76,4 @@ function setImagePreview(avalue) {
 		document.selection.empty();
 	}
 	return true;
-}
+});

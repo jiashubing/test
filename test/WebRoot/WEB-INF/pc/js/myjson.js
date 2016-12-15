@@ -18,6 +18,7 @@
 								callback : function() {
 									var con = confirm(msg + '\n还要再来一次吗？');
 									if (con) {
+										$("#inner").click();
 									} else {
 										return false;
 									}
