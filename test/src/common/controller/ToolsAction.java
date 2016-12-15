@@ -1,6 +1,8 @@
 package common.controller;
 
 
+import java.io.File;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,10 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import common.entity.Result;
 import config.ValidatePcMobile;
 import forum.po.DbUser;
 import forum.service.DbUserService;
+import forum.util.DateUtil;
+import forum.util.FileEcodeUtil;
+import forum.util.ImgUtil;
 
 @Controller
 public class ToolsAction {
@@ -59,6 +66,37 @@ public class ToolsAction {
 		return ValidatePcMobile.checkRequest(request, "/tools");
 	}
 	
+	/**
+	 * 每行文本的首尾增加相同字符工具
+	 * @param startText
+	 * @param startChar
+	 * @param endChar
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/tools/insertString")
+    @ResponseBody
+    public Result insertString(String startText,String startChar,String endChar,
+    		HttpServletRequest request) throws Exception {
+        Result result = new Result();
+        
+        String inName = DateUtil.getRadomStr();
+		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+inName+".txt";
+		File cin =  new File(inPath);
+		String ans = "";
+		boolean flag= FileEcodeUtil.writeStrToFile(startText, cin);
+		
+		if(flag){
+			ans = FileEcodeUtil.modifyString(cin,startChar,endChar);
+		}
+		FileEcodeUtil.deleteFile(inPath);
+        
+        result.setStatus(1);
+        result.setBody(ans);
+
+        return result;
+    }
 	
 	
 }

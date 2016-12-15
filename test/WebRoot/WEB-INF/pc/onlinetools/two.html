@@ -1,35 +1,50 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <body>
-<div th:fragment="twoDiv">
-<div id="mainContent" class="shubing-tool-wrapper">
-		<div class="shubing-toolName">自定义加密工具</div>
-		<div class="shubing-toolUsing shubing-clearfix">
-		    <ul class="nav nav-tabs">
-		    	<li><a th:href="@{/tools/one}">Native/Unicode</a></li>
-				<li class="active"><a th:href="@{/tools/two}">Native/UTF-8</a></li>
-			</ul>
-			
-			
-		<div class="shubing-leftBar">
-			<div class="title">Native:</div>
-	    	<textarea name="cipher" id="a_source">这是一个例子,this is a example</textarea>
+	<div th:fragment="twoDiv">
+		<div id="bootstrap-shubing">
+			<div id="mainContent" class="shubing-tool-wrapper">
+				<div class="shubing-toolName">每行文本的首尾增加相同字符工具</div>
+				<div class="shubing-toolUsing shubing-clearfix">
+					<ul class="shubing-nav shubing-nav-tabs">
+						<li><a th:href="@{/tools/one}">Custom Encryption</a></li>
+						<li class="active"><a th:href="@{/tools/two}">Insert String</a></li>
+					</ul>
+					<div class="shubing-leftBar">
+						<div class="title">原文本:</div>
+						<textarea id="startText" name="startText" th:text="${startText}">这是一个例子,this is a example</textarea>
+					</div>
+
+					<div class="shubing-operateLR">
+						<div class="OptDetail Button">
+							<p>行首增加文本：</p>
+							<input type="text" name="startChar" id="startChar" th:value="${startChar}" style="height:20px;width:80%"/>
+							<br/><br/>
+							<p>行尾增加文本：</p>
+							<input type="text" name="endChar" id="endChar" th:value="${endChar}" style="height:20px;width:80%"/>
+							<br/><br/>
+							<!-- <button id="insertStringBtn" class="shubing-btn shubing-btn-primary">提交</button> -->
+							<input type="button" id="insertStringBtn" class="shubing-btn shubing-btn-primary" value="提交"/>
+							<br/>
+						</div>
+					</div>
+
+					<div class="shubing-rightBar">
+						<div class="title">修改后:</div>
+						<textarea name="endText" id="endText" class="text_source" readonly="readonly"></textarea>
+					</div>
+				</div>
+				 <div class="dddys" style="margin-top:10px; margin-bottom:25px;">
+			        <p class="ysxz">
+			        <b style="font-size:16px;">使用须知</b><br/>
+			        	1、设计初衷：在进行数据库插入数据操作时，要将原来的数据，每行开始加单引号，每行最后加单引号和逗号，重复操作差点累死我。于是就想着写了个小工具，现在正好把他搬到网站上。<br/>
+			    		2、使用说明：在左边文本框输入初始文本，中间的两个框框中输入首尾要增加的字符，最后点击【提交】，就会在右侧生成目标文本。<br/>
+			    		3、注意要点：原文本不能为空，空行也被算作是文本；行首、行尾增加的文本不能都为空。<br/>
+         				4、PS：其实还有一些操作本地文件的小工具，只是不能放到网站上。因为除了服务器以外，网站并不能访问任何电脑。<br/>
+        			</p>
+       			 </div>
+			</div>
 		</div>
-	
-	    <div class="shubing-operateLR">
-	    	<div class="OptDetail Button">
-				<button class="btn btn-primary" onclick="javascript:Native2Unicode();" style="margin:0 0 10px 0;"> Unicode</button><br/>
-	            <button class="btn btn-primary" onclick="javascript:Unicode2Native();"> Native </button>
-	        </div>
-	    </div>
-	
-	    <div class="shubing-rightBar">
-			<div class="title">Unicode:</div>
-			<textarea name="message" id="u_source" class="text_source"></textarea>
-	    </div>		
 	</div>
-</div>
-</div>
 </body>
 </html>

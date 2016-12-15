@@ -236,13 +236,13 @@ public class FileEcodeUtil {
 	}
 	
 	/**
-	 * 修改字符串
+	 * 
 	 * @param file
-	 * @param x	每一行首添加字符串x
-	 * @param y 每一行首添加字符串y
+	 * @param startChar
+	 * @param endChar
 	 * @return
 	 */
-	public static String modifyString(File file,String x,String y){
+	public static String modifyString(File file,String startChar,String endChar){
 		String ans="";
 		try {
             String encoding="UTF-8";
@@ -253,7 +253,7 @@ public class FileEcodeUtil {
                 //写入新文件
 //                FileWriter writer = new FileWriter("D:\\smc_menu123.unl", true);
                 while((lineTxt = bufferedReader.readLine()) != null){
-                    String temp = modifyLine(lineTxt,x,y);        //修改每一行
+                    String temp = modifyLine(lineTxt,startChar,endChar);        //修改每一行
                     ans += temp+'\n';
 //                    writer.write(temp+'\n');        //写入新文件
                 }
@@ -271,11 +271,12 @@ public class FileEcodeUtil {
 	}
 	
 	//修改数据
-	public static String modifyLine(String str,String x,String y){
-	    StringBuffer sb = new StringBuffer(str);
-	    sb.insert(0, "x");
-	    sb.append("y");
-	    str= sb.toString();
-	    return str;
+	public static String modifyLine(String x ,String a,String b){
+	    StringBuffer sb = new StringBuffer(x);
+	    sb.insert(0, a);
+	    sb.append(b);
+	    x= sb.toString();
+	    return x;
 	}
+	
 }
