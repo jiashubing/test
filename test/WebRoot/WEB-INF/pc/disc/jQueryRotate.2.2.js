@@ -1,18 +1,7 @@
-// VERSION: 2.2 LAST UPDATE: 13.03.2012
-/* 
- * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
- * 
- * Made by Wilq32, wilq32@gmail.com, Wroclaw, Poland, 01.2009
- * Website: http://code.google.com/p/jqueryrotate/ 
- */
-
-// Documentation removed from script file (was kinda useless and outdated)
 
 (function($) {
 var supportedCSS,styles=document.getElementsByTagName("head")[0].style,toCheck="transformProperty WebkitTransform OTransform msTransform MozTransform".split(" ");
 for (var a=0;a<toCheck.length;a++) if (styles[toCheck[a]] !== undefined) supportedCSS = toCheck[a];
-// Bad eval to preven google closure to remove it from code o_O
-// After compresion replace it back to var IE = 'v' == '\v'
 var IE = eval('"v"=="\v"');
 
 jQuery.fn.extend({
@@ -59,7 +48,6 @@ jQuery.fn.extend({
     }
 });
 
-// Library agnostic interface
 
 Wilq32=window.Wilq32||{};
 Wilq32.PhotoEffect=(function(){
@@ -75,7 +63,6 @@ Wilq32.PhotoEffect=(function(){
 		}
 	} else {
 		return function(img,parameters) {
-			// Make sure that class and id are also copied - just in case you would like to refeer to an newly created object
             this._img = img;
 
 			this._rootObj=document.createElement('span');
@@ -90,7 +77,6 @@ Wilq32.PhotoEffect=(function(){
 				this._Loader(parameters);
 			} else {
 				var self=this;
-				// TODO: Remove jQuery dependency
 				jQuery(this._img).bind("load", function()
 				{
 					self._Loader(parameters);
@@ -126,17 +112,14 @@ Wilq32.PhotoEffect.prototype={
 	_BindEvents:function(events){
 		if (events && this._eventObj) 
 		{
-            // Unbinding previous Events
             if (this._parameters.bind){
                 var oldEvents = this._parameters.bind;
                 for (var a in oldEvents) if (oldEvents.hasOwnProperty(a)) 
-                        // TODO: Remove jQuery dependency
                         jQuery(this._eventObj).unbind(a,oldEvents[a]);
             }
 
             this._parameters.bind = events;
 			for (var a in events) if (events.hasOwnProperty(a)) 
-				// TODO: Remove jQuery dependency
 					jQuery(this._eventObj).bind(a,events[a]);
 		}
 	},
@@ -154,20 +137,19 @@ Wilq32.PhotoEffect.prototype={
 			this._vimage.src=this._img.src;
 			this._vimage.style.height=height+"px";
 			this._vimage.style.width=width+"px";
-			this._vimage.style.position="absolute"; // FIXES IE PROBLEM - its only rendered if its on absolute position!
+			this._vimage.style.position="absolute"; 
 			this._vimage.style.top = "0px";
 			this._vimage.style.left = "0px";
 
-			/* Group minifying a small 1px precision problem when rotating object */
 			this._container =  this.createVMLNode('group');
 			this._container.style.width=width;
 			this._container.style.height=height;
 			this._container.style.position="absolute";
-			this._container.setAttribute('coordsize',width-1+','+(height-1)); // This -1, -1 trying to fix ugly problem with small displacement on IE
+			this._container.setAttribute('coordsize',width-1+','+(height-1)); 
 			this._container.appendChild(this._vimage);
 			
 			this._rootObj.appendChild(this._container);
-			this._rootObj.style.position="relative"; // FIXES IE PROBLEM
+			this._rootObj.style.position="relative";
 			this._rootObj.style.width=width+"px";
 			this._rootObj.style.height=height+"px";
 			this._rootObj.setAttribute('id',this._img.getAttribute('id'));
@@ -183,15 +165,15 @@ Wilq32.PhotoEffect.prototype={
 			
 			this._width=this._img.width;
 			this._height=this._img.height;
-			this._widthHalf=this._width/2; // used for optimisation
-			this._heightHalf=this._height/2;// used for optimisation
+			this._widthHalf=this._width/2; 
+			this._heightHalf=this._height/2;
 			
 			var _widthMax=Math.sqrt((this._height)*(this._height) + (this._width) * (this._width));
 
 			this._widthAdd = _widthMax - this._width;
-			this._heightAdd = _widthMax - this._height;	// widthMax because maxWidth=maxHeight
-			this._widthAddHalf=this._widthAdd/2; // used for optimisation
-			this._heightAddHalf=this._heightAdd/2;// used for optimisation
+			this._heightAdd = _widthMax - this._height;	
+			this._widthAddHalf=this._widthAdd/2; 
+			this._heightAddHalf=this._heightAdd/2;
 			
 			this._img.parentNode.removeChild(this._img);	
 			
@@ -229,7 +211,6 @@ Wilq32.PhotoEffect.prototype={
          var actualTime = +new Date;
          var checkEnd = actualTime - this._animateStartTime > this._parameters.duration;
 
-         // TODO: Bug for animatedGif for static rotation ? (to test)
          if (checkEnd && !this._parameters.animatedGif) 
          {
              clearTimeout(this._timer);
@@ -250,7 +231,6 @@ Wilq32.PhotoEffect.prototype={
                      }, 10);
          }
 
-         // To fix Bug that prevents using recursive function in callback I moved this function to back
          if (this._parameters.callback && checkEnd){
              this._angle = this._parameters.animateTo;
              this._rotate(this._angle);
@@ -277,17 +257,15 @@ Wilq32.PhotoEffect.prototype={
 		{
             this._angle = angle;
 			angle=(angle%360)* rad;
-			// clear canvas	
 			this._canvas.width = this._width+this._widthAdd;
 			this._canvas.height = this._height+this._heightAdd;
 						
-			// REMEMBER: all drawings are read from backwards.. so first function is translate, then rotate, then translate, translate..
-			this._cnv.translate(this._widthAddHalf,this._heightAddHalf);	// at least center image on screen
-			this._cnv.translate(this._widthHalf,this._heightHalf);			// we move image back to its orginal 
-			this._cnv.rotate(angle);										// rotate image
-			this._cnv.translate(-this._widthHalf,-this._heightHalf);		// move image to its center, so we can rotate around its center
-			this._cnv.scale(this._aspectW,this._aspectH); // SCALE - if needed ;)
-			this._cnv.drawImage(this._img, 0, 0);							// First - we draw image
+			this._cnv.translate(this._widthAddHalf,this._heightAddHalf);	
+			this._cnv.translate(this._widthHalf,this._heightHalf);			
+			this._cnv.rotate(angle);										
+			this._cnv.translate(-this._widthHalf,-this._heightHalf);	
+			this._cnv.scale(this._aspectW,this._aspectH); 
+			this._cnv.drawImage(this._img, 0, 0);							
 		}
 
 	})()

@@ -1052,7 +1052,7 @@ legend small {
 }
 
 label,
-input,
+.forum input,
 button,
 select,
 textarea {
@@ -1061,7 +1061,7 @@ textarea {
   line-height: 20px;
 }
 
-input,
+.forum input,
 button,
 select,
 textarea {
@@ -1075,8 +1075,8 @@ label {
 
 select,
 textarea,
-input[type="text"],
-input[type="password"],
+.forum input[type="text"],
+.forum input[type="password"],
 input[type="datetime"],
 input[type="datetime-local"],
 input[type="date"],

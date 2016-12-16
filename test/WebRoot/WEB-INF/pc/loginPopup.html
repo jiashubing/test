@@ -35,42 +35,6 @@
 </div>
 <!--登录弹窗end-->
 
-<!--注册弹窗-->
-<div th:fragment="registPopupDiv" id="regDiv" class="AsaiDivShow" style="display:none">
-    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
-                                                         onclick="javascript:hideRegisterForm()">
-        <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-
-    <div class="sign-in">
-        <div class="user-form">
-            <form action="yun-baomin.html">
-                <p>
-                    <input class="ysw500 sign-in__field ys-form__field" id="regPhoneNo" name="regPhoneNo"
-                           placeholder="真实手机号" maxlength="20" type="text"/>
-                    <span style="color:red" id="phoneErr"/>
-                    <span style="color:green" id="phoneRig"/>
-                </p>
-                <p style="height:10px;"></p>
-                <p style="margin: 0 auto;">
-                    <input class="ys-form__field" id="regAuthCode" name="regMessage" placeholder="短信验证码" maxlength="6" type="text" style="float: left; margin-top: 10px; margin-left:40px; width:430px;"/>
-                    <input id="regAuthCodeBtn" value="获取验证码" class="user-form__yanzheng" type="button" />
-                </p>
-                <p style="text-align:center;">
-                    <button class="sign-in__button user-form__button" id="registerBtn" type="button">
-                        提交
-                    </button>
-                </p>
-                <div style="text-align: center">
-                    <i style="color:#FFBE00">*</i>注册成功后初始密码为手机号后四位，您可以登录后在个人中心修改<br/>
-                </div>
-            </form>
-            <span style="color:red" id="regErrInfo"></span>
-            <span style="color:blue" id="regMsgInfo"></span>
-        </div>
-    </div>
-</div>
-<!--注册弹窗end-->
-
 <!--头部header-->
 <div style="background-color:#fff;" th:fragment="headerDiv">
     <div class="headeri">
@@ -111,14 +75,10 @@
 </div>
 <!--头部headerEnd-->
 
-
-
 <!--底部footer-->
 <div th:fragment="footerDiv" class="footer">
     <p>阿丙工作室</p>
-
     <p>联系邮箱：jiashubing@foxmail.com</p>
-
 </div>
 <!--底部footerEnd-->
 

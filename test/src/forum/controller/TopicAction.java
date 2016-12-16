@@ -18,7 +18,6 @@ import forum.po.DbUser;
 import forum.po.Reply;
 import forum.po.Section;
 import forum.po.Topic;
-import forum.po.Zone;
 import forum.service.ReplyService;
 import forum.service.SectionService;
 import forum.service.TopicService;
@@ -100,7 +99,6 @@ public class TopicAction {
 		Topic topic = topicService.findTopicById(id);
 		pageNo = PageUtil.initPageNo(pageNo);
 		List<Reply> replyList=replyService.findReplyListByTopicId(id, PageSize,pageNo);
-		Long total = replyService.getReplyCountByTopicId(id);
 		
 		model.addAttribute("pageNo",pageNo); 
 		model.addAttribute("topic",topic); 

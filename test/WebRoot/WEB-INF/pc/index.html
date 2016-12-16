@@ -7,15 +7,12 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
-	<link rel="stylesheet" type="text/css" href="disc/disc-style.css" th:href="@{/css/pc/disc/disc-style.css}"/>
-    <script type="text/javascript" src="js/cookie_util.js" th:src="@{/js/pc/js/cookie_util.js}" ></script>
     <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="@{/js/pc/js/jquery.SuperSlide.2.1.1.js}" ></script>
-    <script type="text/javascript" src="js/indexuser.js" th:src="@{/js/pc/js/indexuser.js}" ></script>
-    <script type="text/javascript" src="js/confirm.js" th:src="@{/js/pc/js/confirm.js}" ></script>
     <script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
+	<link rel="stylesheet" type="text/css" href="disc/disc-style.css" th:href="@{/css/pc/disc/disc-style.css}"/>
+	<script type="text/javascript" src="disc/myjson.js" th:src="@{/js/pc/disc/myjson.js}" ></script>
 	<script type="text/javascript" src="disc/jQueryRotate.2.2.js" th:src="@{/js/pc/disc/jQueryRotate.2.2.js}" ></script>
-	<script type="text/javascript" src="disc/jquery.easing.min.js" th:src="@{/js/pc/disc/jquery.easing.min.js}" ></script>
 </head>
 <body><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
@@ -34,18 +31,6 @@
             th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
             <a href="javascript:void(0)" id="showLoginForm">控制台</a>
         </li>
-        <!--<li id="userLi" style="padding:0px;display:block"
-            th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
-            <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png"
-                                                                               width="100%"/></a>
-            <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
-
-            <p style="display: none" class="lbpo">
-                <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
-                <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
-                <a href="#" th:href="@{/logout}">退出</a>
-            </p>
-        </li>-->
     </ul>
 </div>
 
@@ -78,47 +63,28 @@
     <div class="hximg">
         <ul>
             <li class="pone">
-                <a href="" >
-                    <p class="ystitle">论坛系统</p>
-
-                    <p class="poneimg"></p>
-
-
-                    <p class=" ysmf">分享点滴爱好与兴趣</p>
-
-                    <p class=" yssz">吾之所知<br/>犹如冰山一角</p>
-                </a>
+                <p class="ystitle">论坛系统</p>
+                <p class="poneimg"></p>
+                <p class=" ysmf">分享点滴爱好与兴趣</p>
+                <p class=" yssz">吾之所知<br/>犹如冰山一角</p>
             </li>
             <li class="ptwo">
-                <a href="" >
-                    <p class="ystitle">自然之声</p>
-
-                    <p class="pthreeimg"></p>
-
-
-                    <p class="ysmf">最纯洁的声音与美景</p>
-
-                    <p class="yssz">吾之所感<br/>寂静相伴入眠</p>
-                </a>
+                <p class="ystitle">自然之声</p>
+                <p class="pthreeimg"></p>
+                <p class="ysmf">最纯洁的声音与美景</p>
+                <p class="yssz">吾之所感<br/>寂静相伴入眠</p>
             </li>
             <li class="pthree">
                 <p class="pthree ystitle">历史项目</p>
-
                 <p class="ptwoimg"></p>
-
-
                 <p class="ysmf">程序路上是bug</p>
-
                 <p class="yssz">吾之所学<br/>今生永不停息</p>
             </li>
 			
 			<li class="pfour">
                 <p class="pfour ystitle">作者亲密度调查</p>
-
                 <p class="pfourimg"></p>
-
                 <p class="ysmf">厚脸皮是怎样炼成的</p>
-
 				<p class="yssz">大哥大姐<br/>烦请多多支持啊</p>
            </li>
         </ul>
@@ -139,23 +105,15 @@
     
     <div class="kfimg">
 		<div id="disc-main">
-		<div id="outer-cont">
-			<div id="outer">
-				<img src="disc/disc-1.png" th:src="@{/image/pc/disc/disc-1.png}"/>
+			<div id="outer-cont">
+				<div id="outer">
+					<img src="disc/disc-1.png" th:src="@{/image/pc/disc/disc-1.png}"/>
+				</div>
+			</div>
+			<div id="inner-cont">
+				<div id="inner"><img src="disc/disc-2.png" th:src="@{/image/pc/disc/disc-2.png}"/></div>
 			</div>
 		</div>
-		<div id="inner-cont">
-			<div id="inner"><img src="disc/disc-2.png" th:src="@{/image/pc/disc/disc-2.png}"/></div>
-		</div>
-	</div>
-    </div>
-    <div style="display:none">
-        <p style="clear:both; height:80px"></p>
-        <a href="">
-            <div class="morebtn">更多</div>
-        </a>
-
-        <p style="clear:both; height:30px"></p>
     </div>
 </div>
 
@@ -167,76 +125,8 @@
 <!--登录弹窗-->
 <div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
      th:style="${errInfo}==null?'display: none':'display: block'">
-    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
-                                                         onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
-        <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-
-    <div class="sign-in">
-        <div class="user-form">
-            <form accept-charset="UTF-8" action="yun-geren.html" th:action="@{/pc/index}"
-                  class="sign-in__form user-form__form" method="post">
-
-                <div class="user-form__fieldset">
-                    <label class="user-form__label" for="username" style="color:#111">手机号：</label>
-                    <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
-                           id="username" name="username" placeholder="请输入您的手机号" maxlength="20" type="text"/>
-                </div>
-                <div class="user-form__fieldset">
-                    <label class="user-form__label" for="password" style="color:#111">密码：</label>
-                    <input class="sign-in__field user-form__field" id="password" name="password"
-                           placeholder="password" type="password"/>
-
-                </div>
-                <div class="user-form__href" align="right"><a id="goToRegister" href="javascript:void(0)">免费注册</a></div>
-                <button id="btn_login" class="sign-in__button user-form__button" name="btn_login" type="submit">
-                    登录
-                </button>
-            </form>
-            <span style="color:red" id="loginFailedInfo" th:text="${errInfo}"></span>
-        </div>
-    </div>
 </div>
 <!--登录弹窗end-->
-<!--注册弹窗-->
-<div th:replace="pc/loginPopup::registPopupDiv" id="regDiv" class="AsaiDivShow" style="display:none">
-    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
-                                                         onclick="javascript:hideRegisterForm()">
-        <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-
-    <div class="sign-in">
-        <div class="user-form">
-            <form action="yun-baomin.html">
-                <p>
-                    <input class="ysw500 sign-in__field ys-form__field" id="regPhoneNo" name="regPhoneNo"
-                           placeholder="真实手机号" maxlength="20" type="text"/>
-                    <span style="color:red" id="phoneErr"/>
-                    <span style="color:green" id="phoneRig"/>
-                </p>
-
-                <p style="height:10px;"></p>
-
-                <p style="margin: 0 auto;">
-                    <input class="ys-form__field" id="regMessage" name="regMessage" placeholder="短信验证码" maxlength="6"
-                           type="text" style="float: left; margin-top: 10px; margin-left:40px; width:430px;"/>
-                    <input id="verify_btn" value="获取验证码" class="user-form__yanzheng" type="button"
-                           onclick="settime(this)"/>
-                </p>
-
-                <p style="text-align:center;">
-                    <button class="sign-in__button user-form__button" id="registerBtn" type="button">
-                        提交
-                    </button>
-                </p>
-                <div style="text-align: center">
-                    <i style="color:#FFBE00">*</i>注册成功后初始密码为手机号后四位，您可以登录后在个人中心修改<br/>
-                </div>
-            </form>
-            <span style="color:red" id="regErrInfo"></span>
-            <span style="color:blue" id="regMsgInfo"></span>
-        </div>
-    </div>
-</div>
-<!--注册弹窗end-->
 <div id="asaimsgbg" class="AsaiDivBG" style="display: none"
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
 </body>
@@ -255,8 +145,8 @@
  	var loginFlag = /*[[${loginFlag}]]*/true;
     /*]]>*/
     if(loginFlag==1){
-	    document.getElementById('asaimsg').style.display='block';
-	    document.getElementById('asaimsgbg').style.display='block';
+	   $("#asaimsg").show();
+       $("#asaimsgbg").show();
     }
 </script>
 
