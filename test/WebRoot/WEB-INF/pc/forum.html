@@ -55,9 +55,9 @@
 									<ul class="unstyled inline" th:remove="all-but-first">
 										<li th:each="section:${zone.sectionList }" style="width: 394px; margin-left: 0px;padding: 0px;">
 											<div align="center" style="margin-top: 20px;">
-												<div><a href="#" th:href="@{/forum/topicList(id=${section.id})}">
+												<div><a href="#" th:href="@{/forum/topicList(sectionId=${section.id})}">
 												<img style="width: 100px;" alt="" src="forum/images/logo/20150319072154.jpg"  th:src="@{'/image/pc/forum/'+${section.logo }}" /></a></div>
-												<div style="margin: 10px auto;"> <a href="# " th:href="@{/forum/topicList(id=${section.id})}">
+												<div style="margin: 10px auto;"> <a href="# " th:href="@{/forum/topicList(sectionId=${section.id})}">
 													<span style="font-size: 30px;font-weight: bold;" th:text="${section.name }">作者公告</span></a></div>
 												<span style="font-size: 12px;" th:text="'帖子总数：'+${section.totalCount}">帖子总数：3</span>
 												<span style="font-size: 12px;" th:text="'精华帖子0：'+${section.goodCount}">精华帖子：3</span>

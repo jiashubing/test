@@ -115,7 +115,7 @@ function zoneDelete(obj){
 				<h3 id="myModalLabel">增加大板块</h3>
 			</div>
 			<div class="modal-body">
-				<form id="fm" th:action="@{/admin/zoneAdd}" method="post">
+				<form id="fm" th:action="@{/admin/zoneAdd(pageNo=${pageNo})}" method="post">
 					<table>
 						<tr>
 							<td>

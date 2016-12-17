@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import common.entity.Result;
 import config.ValidatePcMobile;
@@ -36,7 +37,7 @@ import forum.util.PageUtil;
 @Controller
 public class SectionAction {
 	
-	public static int PageSize = 6;
+	public static int PageSize = 10;
 	public static int MaxPageSize = 100;
 
 	@Resource(name="zoneServiceImpl")
@@ -103,7 +104,7 @@ public class SectionAction {
 			@RequestParam Integer secZoneId,
 			@RequestParam String secName,
 			@RequestParam(required = false) CommonsMultipartFile logo,
-			Model model,HttpServletRequest request)throws Exception{
+			RedirectAttributes model,HttpServletRequest request)throws Exception{
 		Section section =new Section();
 		if(secId != null){
 			section.setId(secId);
@@ -137,6 +138,8 @@ public class SectionAction {
 			section.setLogo("");
 		}
 		sectionService.saveSection(section);
+		//重定向时传递参数
+		model.addFlashAttribute("pageNo", pageNo); 
 		return "redirect:/admin/sectionList";
 	}
 	

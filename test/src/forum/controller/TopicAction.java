@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import common.entity.Result;
-
 import config.ValidatePcMobile;
 import forum.po.DbUser;
 import forum.po.Reply;
@@ -51,16 +52,16 @@ public class TopicAction {
 	private UserService userService;
 
 	@RequestMapping("/forum/topicList")
-	public String loadTopicList(@AuthenticationPrincipal DbUser dbUser,Integer id,@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
+	public String loadTopicList(@AuthenticationPrincipal DbUser dbUser,Integer sectionId,@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
 		if(dbUser != null){
 			model.addAttribute("dbUser",dbUser);
 		}
 		
 		pageNo = PageUtil.initPageNo(pageNo);
 		
-		Section section=sectionService.findSectionById(id);
-		List<Topic> zdTopicList=topicService.findZdTopicListBySectionId(id,PageSize,0);
-		List<Topic> ptTopicList=topicService.findPtTopicListBySectionId(id,PageSize,pageNo);
+		Section section=sectionService.findSectionById(sectionId);
+		List<Topic> zdTopicList=topicService.findZdTopicListBySectionId(sectionId,PageSize,0);
+		List<Topic> ptTopicList=topicService.findPtTopicListBySectionId(sectionId,PageSize,pageNo);
 		
 		Map<Topic, Reply> topicLastReply=new HashMap<Topic, Reply>(0);
 		Map<Topic, Long> topicReplyCount=new HashMap<Topic, Long>(0);
@@ -84,7 +85,7 @@ public class TopicAction {
 			topicReplyCount.put(topic, replyCount);
 		}
 		
-		long totalNum=topicService.getPtTopicCountBySectionId(id);
+		long totalNum=topicService.getPtTopicCountBySectionId(sectionId);
 		int totalPages = PageUtil.getTotalPages(totalNum, PageSize);
 		
 		model.addAttribute("pageNo",pageNo); 
@@ -185,7 +186,7 @@ public class TopicAction {
 	}
 	
 	@RequestMapping("/forum/preSave")
-	public String preSave(@AuthenticationPrincipal DbUser dbUser,Integer sectionId,Model model,HttpServletRequest request)throws Exception{
+	public String preSave(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
 		if(dbUser != null){
 			model.addAttribute("dbUser",dbUser);
 		}else{
@@ -198,5 +199,38 @@ public class TopicAction {
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/forum/topicAdd");
 	}
+	
+	@RequestMapping("/forum/topicUpdate")
+	public String updateToipc(@AuthenticationPrincipal DbUser dbUser,
+			@RequestParam(required = false) Integer pageNo,
+			@RequestParam(required = false) Integer topicId,
+			@RequestParam(required = false) Integer topicGood,
+			@RequestParam(required = false) Integer topicTop,
+			@RequestParam(required = false) Integer sectionId,
+			RedirectAttributes model,HttpServletRequest request)throws Exception{
+		if(dbUser != null){
+			model.addFlashAttribute("dbUser", dbUser); 
+		}
+		
+		Topic topic = new Topic();
+		if(topicId!=null){
+			topic = topicService.findTopicById(topicId);
+		}
+		if(topicGood != null){
+			topic.setGood(topicGood);
+		}
+		if(topicTop != null){
+			topic.setTop(topicTop);
+		}
+		topicService.saveTopic(topic);
+		
+		//重定向时传递参数
+//		model.addFlashAttribute("sectionId", sectionId);  
+//		model.addFlashAttribute("pageNo", pageNo);  
+		return "redirect:/forum/topicList?sectionId="+sectionId+"&pageNo="+pageNo;
+	}
+	
+	
+	
 	
 }
