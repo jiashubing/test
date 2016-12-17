@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -191,8 +190,11 @@ public class TopicAction {
 		Topic topic = topicService.findTopicById(id);
 		pageNo = PageUtil.initPageNo(pageNo);
 		List<Reply> replyList=replyService.findReplyListByTopicId(id, PageSize,pageNo);
+		Long totalNum =replyService.getReplyCountByTopicId(id);
+		int totalPages = PageUtil.getTotalPages(totalNum, PageSize);
 		
 		model.addAttribute("pageNo",pageNo); 
+		model.addAttribute("totalPages",totalPages); 
 		model.addAttribute("topic",topic); 
 		model.addAttribute("replyList",replyList); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面

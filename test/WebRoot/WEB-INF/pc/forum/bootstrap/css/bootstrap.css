@@ -637,6 +637,14 @@ a:focus {
   *zoom: 1;
 }
 
+.container-fluid div,.container-fluid tr,.container-fluid td {
+  padding:4px;
+}
+
+.shubing-huitie td {
+	padding:10px;
+}
+
 .container-fluid:before,
 .container-fluid:after {
   display: table;

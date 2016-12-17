@@ -33,7 +33,9 @@
 </div>
 <div style="width: 1200px; margin: 0 auto;">
 	<div style="margin-bottom: 10px;">
-		<a class="" th:href="@{/forum/preSave(sectionId=${section.id})}"><img alt="发帖" src="images/post.jpg"  th:src="@{/image/pc/forum/images/post.jpg}"/></a>
+		<a id="preSaveHref" th:href="@{/forum/preSave(sectionId=${section.id})}"></a>
+		<form id="preSaveForm" th:action="@{/forum/preSave(sectionId=${section.id})}"></form>
+		<a onclick="checkUser()"><img alt="发帖" src="images/post.jpg"  th:src="@{/image/pc/forum/images/post.jpg}"/></a>
 		<div class="pagination alternate pull-right" th:align="center" style="margin: 0px;">
 			<span th:if="${totalPages}==0"  th:text="该板块没有发表任何帖子">该板块没有发表任何帖子</span>
 			<span th:unless="${totalPages}==0" >
@@ -68,10 +70,6 @@
 		</div>
 	</div>
 	<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
-		<!-- 置顶帖子 -->
-		<!-- <tr height="30">
-			<td style="text-indent:5;" background="images/index/classT.jpg"><b><font color="white">■ 置顶帖子</font></b></td>
-		</tr> -->
 		<tr height="30">
 			<td style="text-indent:5;" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'"><b><span style="color:white">■ 置顶帖子</span></b></td>
 		</tr>
@@ -126,15 +124,21 @@
 								<span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).publishTime }"></span>
 							</td>
 							<td th:unless="${dbUser==null}" style="text-align: center;vertical-align:middle;">
-								<span th:if="${topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id==topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
-									<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
-								</span>
-								<span th:if="${dbUser.access==1 || section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
+								<span th:if="${dbUser.access==1}">
 									<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 									<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 								</span>
-								<span th:if="${dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id!=topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
-									<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg">查看</button></a>
+								<span th:unless="${dbUser.access==1}">
+									<span th:if="${topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id==topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
+										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
+									</span>
+									<span  th:if="section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
+										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
+										<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
+									</span>
+									<span th:if="${dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id!=topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
+										<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg">查看</button></a>
+									</span>
 								</span>
 							</td>
 						</tr>
@@ -177,15 +181,21 @@
 								<span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).publishTime }"></span>
 							</td>
 							<td th:unless="${dbUser==null}" style="text-align: center;vertical-align:middle;width: 150px;">
-								<span th:if="${topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id==topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
-									<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
-								</span>
-								<span th:if="${dbUser.access==1 || section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
+								<span th:if="${dbUser.access==1}">
 									<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 									<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 								</span>
-								<span th:if="${dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id!=topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
-									<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg">查看</button></a>
+								<span th:unless="${dbUser.access==1}">
+									<span th:if="${topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id==topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
+										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
+									</span>
+									<span  th:if="section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
+										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
+										<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
+									</span>
+									<span th:if="${dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id!=topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
+										<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg">查看</button></a>
+									</span>
 								</span>
 							</td>
 						</tr>
@@ -270,10 +280,26 @@
 <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 <script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
 <script type="text/javascript" src="js/jquery.ui.custom.js" th:src="@{/js/pc/admin/js/jquery.ui.custom.js}" ></script>
+<script type="text/javascript" src="js/bootstrap.js" th:src="@{/js/pc/admin/js/bootstrap.min.js}"></script>
 <script type="text/javascript" src="js/bootstrap.min.js" th:src="@{/js/pc/admin/js/bootstrap.min.js}"></script>
 <script type="text/javascript" src="js/jquery.dataTables.min.js" th:src="@{/js/pc/admin/js/jquery.dataTables.min.js}"></script>
 <script type="text/javascript" src="js/unicorn.tables.js" th:src="@{/js/pc/admin/js/unicorn.tables.js}"></script>
 <script type="text/javascript" src="js/uploadPreview.min.js" th:src="@{/js/pc/admin/js/uploadPreview.min.js}"></script>
 <script type="text/javascript" src="/js/myjson.js" th:src="@{/js/pc/forum/js/myListJson.js}" ></script>
-
+<script th:inline="javascript">
+function checkUser(){
+    /*<![CDATA[*/
+ 	var flag= /*[[${dbUser!=null}]]*/true;
+    /*]]>*/
+    
+    if(flag){
+    	console.log($("#preSaveHref"));
+   	 	$("#preSaveForm").submit();
+    }else{
+    	$("#loginFailedInfo").text("");
+        $("#asaimsg").show();
+        $("#asaimsgbg").show();
+    }
+}
+</script>
 </html>
