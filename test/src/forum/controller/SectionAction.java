@@ -52,13 +52,32 @@ public class SectionAction {
 	private UserService userService;
 	
 	@RequestMapping("/admin/sectionList")
-	public String loadZoneList(@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
+	public String loadSectionList(
+			@RequestParam(required = false) Integer pageNo,
+			@RequestParam(required = false) String s_name,
+			@RequestParam(required = false) Integer s_zoneId,
+			@RequestParam(required = false) Integer s_masterId,
+			Model model,HttpServletRequest request)throws Exception{
 		
 		pageNo = PageUtil.initPageNo(pageNo);
+		
+		Section s_section = new Section();
+		if(s_name != null){
+			s_section.setName(s_name);
+		}
+		if(s_zoneId != null){
+			Zone tmp = zoneService.findZoneById(s_zoneId);
+			s_section.setZone(tmp);
+		}
+		if(s_masterId != null){
+			User tmp = userService.getUserById(s_masterId);
+			s_section.setMaster(tmp);
+		}
+		List<Section> sectionList = sectionService.findSectionList(s_section, PageSize, pageNo);
+		
 		User master=new User();
 		master.setType(2);
 		List<User> masterList=userService.findUserList(master, MaxPageSize,0);
-		List<Section> sectionList = sectionService.findSectionList(null, PageSize, pageNo);
 		
 		List<Zone> zoneList = zoneService.findZoneList(null, MaxPageSize,0);
 		String mainPage="section.html";
@@ -69,6 +88,7 @@ public class SectionAction {
 		model.addAttribute("pageNo",pageNo); 
 		model.addAttribute("mainPage",mainPage); 
 		model.addAttribute("totalPages",totalPages); 
+		model.addAttribute("s_section",s_section); 
 		model.addAttribute("masterList",masterList); 
 		model.addAttribute("sectionList",sectionList); 
 		model.addAttribute("zoneList",zoneList); 

@@ -17,8 +17,8 @@
 	<div id="sidebar">
 		<ul>
 			<li id="zoneLi" th:class="${mainPage=='zone.html'}?'active'"><a href="" th:href="@{/admin/zoneList}"><i class="icon icon-home"></i> <span>大板块管理</span></a></li>
-			<li id="sectionLi" th:class="${mainPage=='section.html'}?'active'"><a href="Section_list.action"><i class="icon icon-home"></i> <span>小板块管理</span></a></li>
-			<li id="topicLi" th:class="${mainPage=='topic.html'}?'active'"><a href="Topic_listAdmin.action"><i class="icon icon-home"></i> <span>帖子管理</span></a></li>
+			<li id="sectionLi" th:class="${mainPage=='section.html'}?'active'"><a th:href="@{/admin/sectionList}"><i class="icon icon-home"></i> <span>小板块管理</span></a></li>
+			<li id="topicLi" th:class="${mainPage=='topic.html'}?'active'"><a th:href="@{/admin/topicList}"><i class="icon icon-home"></i> <span>帖子管理</span></a></li>
 			<li id="userLi" th:class="${mainPage=='user.html'}?'active'"><a href="User_list.action"><i class="icon icon-home"></i> <span>用户管理</span></a></li>
 			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
 					<span>系统管理</span> <span class="label">3</span></a>
@@ -51,6 +51,9 @@
 		</div>
 		<div th:if="${mainPage=='section.html'}">
 			<div th:replace="pc/admin/section::sectionDiv"></div>
+		</div>
+		<div th:if="${mainPage=='topic.html'}">
+			<div th:replace="pc/admin/topic::topicDiv"></div>
 		</div>
 		<div class="row-fluid">
 			<div id="footer" class="span12">

@@ -1,0 +1,155 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="topicDiv">
+<script type="text/javascript">
+function deleteTopic(obj){
+	if(confirm("确定要删除这条数据吗?")){
+		var topicId=$(obj).closest(".topictr").find(".topicid").text();
+		$.ajax({
+				url : "topicDelete",
+				type : "post",
+				data:{"topicId":topicId},
+				dataType : "json",
+				success : function(result) {
+					if (result.status == 1) {
+						alert("删除成功！");
+						window.location.reload(true);
+					}
+				},
+				error : function() {
+					alert("请求失败！");
+				}
+			});
+	}
+}
+function deleteTopics(){
+}
+</script>
+<div class="container-fluid">
+		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
+			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteTopics()">批量删除</a>
+			<form th:action="@{/admin/topicList}" method="post" class="form-search">
+			<table cellpadding="5px;">
+				<tr>
+					<td>帖子标题:</td>
+					<td><input name="s_title" th:value="${s_topic.title }" type="text" class="input-medium search-query" placeholder="输入帖子标题..." style="width: 165px;"/></td>
+					<td>发帖人:</td>
+					<td>
+						<input name="s_userNickName" th:if="${s_topic.user==null}" type="text" class="input-medium search-query" placeholder="输入发帖人..." style="width: 165px;"/>
+						<input name="s_userNickName" th:unless="${s_topic.user==null}" th:value="${s_topic.user.nickName }" type="text" class="input-medium search-query" placeholder="输入发帖人..." style="width: 165px;"/>
+					</td>
+					<td>所属小板块:</td>
+					<td>
+						<select id="section" name="s_sectionId" style="width: 165px;">
+							<option th:each="section:${sectionList}" th:value="${section.id}" th:text="${section.name}"
+								th:selected="${s_topic.section!=null &amp;&amp; s_topic.section.id==section.id?'selected':''}"></option>
+							<option value="0" th:selected="${s_topic.section==null?'selected':''}">请选择板块...</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<!-- <td>发帖时间:</td>
+					<td><input type="text" id="publishTime" class="input-medium search-query Wdate" onClick="WdatePicker()" name="s_topic.publishTime" value="<fmt:formatDate value="${s_topic.publishTime }" type="date" pattern="yyyy-MM-dd"/>" style="width: 165px;"/></td>
+					<td>最后修改时间:</td>
+					<td><input type="text" id="modifyTime" class="input-medium search-query Wdate" onClick="WdatePicker()" name="s_topic.modifyTime" value="<fmt:formatDate value="${s_topic.modifyTime }" type="date" pattern="yyyy-MM-dd"/>" style="width: 165px;"/></td>  -->
+					<td>是否置顶:</td>
+					<td>
+						<select name="s_top" style="width: 195px;">
+							<option value="1" th:selected="${s_topic.top==1?'selected':''}">置顶</option>
+							<option value="0" th:selected="${s_topic.top==0?'selected':''}">非置顶</option>
+							<option value="2" th:selected="${s_topic.top==2?'selected':''}">全部</option>
+						</select>
+					</td>
+					<td>是否精华:</td>
+					<td>
+						<select name="s_good" style="width: 195px;">
+							<option value="1" th:section="${s_topic.good==1?'selected':''}">精华</option>
+							<option value="0" th:section="${s_topic.good==0?'selected':''}">非精华</option>
+							<option value="2" th:section="${s_topic.good==2?'selected':''}">全部</option>
+						</select>
+					</td>
+					<td></td>
+					<td>
+						<button type="submit" class="btn btn-primary" title="Search">查询&nbsp;<i class="icon  icon-search"></i></button>
+					</td>
+				</tr>
+			</table>
+			</form>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="widget-box">
+					<div class="widget-title">
+						<h5>主题列表</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<table class="table table-bordered table-striped with-check">
+							<thead>
+								<tr>
+									<th><i class=""></i></th>
+									<th>编号</th>
+									<th>帖子标题</th>
+									<th>发帖人</th>
+									<th>所属小板块</th>
+									<th>发帖时间</th>
+									<th>最后修改时间</th>
+									<th>是否置顶</th>
+									<th>是否精华</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="topic:${topicList}" class="topictr">
+									<td><input type="checkbox" /></td>
+									<td style="text-align: center;vertical-align: middle;"><span class="topicid" th:text="${topic.id }"></span></td>
+									<td style="text-align: center;vertical-align: middle;"><span th:text="${topic.title }"></span></td>
+									<td style="text-align: center;vertical-align: middle;width: 110px;vertical-align: middle;">
+										<span th:text="${topic.user.nickName }"></span>
+									</td>
+									<td style="text-align: center;vertical-align: middle;"><span th:text="${topic.section.name }"></span></td>
+									<td style="text-align: center;vertical-align: middle;"><span th:text="${topic.publishTime }"></span></td>
+									<td style="text-align: center;vertical-align: middle;"><span th:text="${topic.modifyTime }"></span></td>
+									<td style="text-align: center;vertical-align: middle;">
+										<span th:if="${topic.top==1 }" th:text="置顶" style="color: red;"></span>
+										<span th:unless="${topic.top==1 }" th:text="非置顶"></span>
+									</td>
+									<td style="text-align: center;vertical-align: middle;">
+										<span th:if="${topic.good==1 }" th:text="精华" style="color: red;"></span>
+										<span th:unless="${topic.good==1 }" th:text="非精华"></span>
+									</td>
+									<td style="text-align: center;vertical-align: middle;">
+										<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return modifyTopic()">修改
+										</button>&nbsp;&nbsp;<button class="btn btn-danger" type="button" onclick="javascript:deleteTopic(this)">删除</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="pagination alternate">
+					<ul class="clearfix">
+						<li th:class="${pageNo}==0?'disabled':''" ><a href='' th:href="@{/admin/topicList(pageNo=0)}">首页</a></li>
+						<li th:class="${pageNo}>0?'':'disabled'"><a th:unless="${pageNo}>0" href=''>上一页</a>
+							<a href='' th:if="${pageNo}>0" th:href="@{/admin/topicList(pageNo=${pageNo}-1)}">上一页</a></li>
+						<li th:style="${pageNo}-3>0?'':'display: none'"><a href='' th:href="@{/admin/topicList(pageNo=${pageNo}-4)}"><span th:text="${pageNo}-3"></span></a></li>
+						<li th:style="${pageNo}-2>0?'':'display: none'"><a href='' th:href="@{/admin/topicList(pageNo=${pageNo}-3)}"><span th:text="${pageNo}-2"></span></a></li>
+						<li th:style="${pageNo}-1>0?'':'display: none'"><a href='' th:href="@{/admin/topicList(pageNo=${pageNo}-2)}"><span th:text="${pageNo}-1"></span></a></li>
+						<li th:style="${pageNo}>0?'':'display: none'"><a href='' th:href="@{/admin/topicList(pageNo=${pageNo}-1)}"><span th:text="${pageNo}"></span></a></li>
+						<li th:class="active"><a href=''><span th:text="${pageNo}+1"></span></a></li>
+						<li th:style="${totalPages}-1>${pageNo}?'':'display: none'"><a href='' th:href="@{/admin/topicList(pageNo=${pageNo}+1)}"><span th:text="${pageNo}+2"></span></a></li>
+						<li th:style="${totalPages}-2>${pageNo}?'':'display: none'"><a href='' th:href="@{/admin/topicList(pageNo=${pageNo}+2)}"><span th:text="${pageNo}+3"></span></a></li>
+						<li th:style="${totalPages}-3>${pageNo}?'':'display: none'"><a href='' th:href="@{/admin/topicList(pageNo=${pageNo}+3)}"><span th:text="${pageNo}+4"></span></a></li>
+						<li th:style="${totalPages}-4>${pageNo}?'':'display: none'"><a href='' th:href="@{/admin/topicList(pageNo=${pageNo}+4)}"><span th:text="${pageNo}+5"></span></a></li>
+						<li th:class="${totalPages}-1>${pageNo}?'':'disabled'" ><a href='' th:unless="${totalPages}-1>${pageNo}">下一页</a>
+							<a href='' th:if="${totalPages}-1>${pageNo}" th:href="@{/admin/topicList(pageNo=${pageNo}+1)}">下一页</a></li>
+						<li th:class="${totalPages}-1==${pageNo}?'disabled':''" ><a href='' th:href="@{/admin/topicList(pageNo=${totalPages}-1)}">末页</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

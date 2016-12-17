@@ -93,26 +93,19 @@ function searchUserByNickName(obj){
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<button class="btn btn-primary" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return openAddDlg()">添加小板块</button>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteSections()">批量删除</a>
-			<form action="Section_list.action" method="post" class="form-search" style="display: inline;">
+			<form th:action="@{/admin/sectionList}" method="post" class="form-search" style="display: inline;">
 	          &nbsp;小板块名称：
-			  <input th:if="${s_section==null}" name="s_secname" type="text" class="input-medium search-query" placeholder="输入小板块名称..."/>
-			  <input th:unless="${s_section==null}" name="s_secname" th:value="${s_section.name }" type="text" class="input-medium search-query" placeholder="输入小板块名称..."/>
+			  <input name="s_name" th:value="${s_section.name }" type="text" class="input-medium search-query" placeholder="输入小板块名称..."/>
 			  &nbsp;所属大板块：
-			  <select name="s_section.zone.id"><option value="">请选择...</option>
+			  <select name="s_zoneId"><option value="">请选择...</option>
 				<!-- 这里和原来的写法不一样，少了一点东西，可以回去再看看-->
-				<span th:each="zone:${zoneList}">
-					<option th:value="${zone.id}">
-						<span th:text="${zone.name}"></span>
+					<option th:each="zone:${zoneList}" th:value="${zone.id}" th:text="${zone.name}">
 					</option>
-				</span>
 			  </select>
 			  &nbsp;版主：
-			  <select name="s_section.master.id"><option value="">请选择...</option>
-				<span th:each="master:${masterList}">
-					<option th:value="${master.id}">
-						<span th:text="${master.nickName}"></span>
+			  <select name="s_masterId"><option value="">请选择...</option>
+					<option th:each="master:${masterList}" th:value="${master.id}" th:text="${master.nickName}">
 					</option>
-				</span>
 			  </select>
 			  &nbsp;
 			  <button type="submit" class="btn btn-primary" title="Search">查询&nbsp;<i class="icon  icon-search"></i></button>
@@ -221,12 +214,9 @@ function searchUserByNickName(obj){
 								<label class="control-label" for="zone">请选择所属大板块：</label>
 							</td>
 							<td>
-								<select id="zone" name="secZoneId"><option value="">请选择...</option>
-									<span th:each="zone:${zoneList}">
-										<option th:value="${zone.id}">
-											<span th:text="${zone.name}"></span>
-										</option>
-									</span>
+								<select id="zone" name="secZoneId">
+										<option value="">请选择...</option>
+										<option th:each="zone:${zoneList}" th:value="${zone.id}" th:text="${zone.name}"></option>
 								</select>
 							</td>
 						</tr>

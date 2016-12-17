@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 		StringBuffer hql=new StringBuffer("from User");
 		if (s_user!=null) {
 			if (StringUtil.isNotEmpty(s_user.getNickName())) {
-				hql.append(" and nickName like %"+s_user.getNickName()+"%");
+				hql.append(" and nickName like '%"+s_user.getNickName()+"%'");
 			}
 			if (s_user.getType()>0) {
 				hql.append(" and type = "+s_user.getType());
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
 		StringBuffer hql=new StringBuffer("select count(*) from User");
 		if (s_user!=null) {
 			if (StringUtil.isNotEmpty(s_user.getNickName())) {
-				hql.append(" and nickName like %"+s_user.getNickName()+"%");
+				hql.append(" and nickName like '%"+s_user.getNickName()+"%'");
 			}
 			if (s_user.getType()>0) {
 				hql.append(" and type = "+s_user.getType());

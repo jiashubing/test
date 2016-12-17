@@ -61,7 +61,7 @@ public class ReplyServiceImpl implements ReplyService {
 		}
 		//hql.append(" order by publishTime desc");
 		Query query = em.createQuery(hql.toString());
-		List<Reply> result = query.setMaxResults(pageSize).setFirstResult(pageNo).getResultList();
+		List<Reply> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
 		return result;
 	}

@@ -43,11 +43,10 @@ public class SectionServiceImpl implements SectionService {
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public List<Section> findSectionList(Section s_section,int pageSize,int pageNo) {
-		List<Object> param=new LinkedList<Object>();
 		StringBuffer hql=new StringBuffer("from Section");
 		if (s_section!=null) {
 			if (StringUtil.isNotEmpty(s_section.getName())) {
-				hql.append(" and name like %"+s_section.getName()+"%");
+				hql.append(" and name like '%"+s_section.getName()+"%'");
 			}
 			if (s_section.getZone()!=null&&s_section.getZone().getId()>0) {
 				hql.append(" and zoneId = "+s_section.getZone().getId());
@@ -68,7 +67,7 @@ public class SectionServiceImpl implements SectionService {
 		StringBuffer hql=new StringBuffer("select count(*) from Section");
 		if (s_section!=null) {
 			if (StringUtil.isNotEmpty(s_section.getName())) {
-				hql.append(" and name like %"+s_section.getName()+"%");
+				hql.append(" and name like '%"+s_section.getName()+"%'");
 			}
 			if (s_section.getZone()!=null&&s_section.getZone().getId()>0) {
 				hql.append(" and zoneId = "+s_section.getZone().getId());
