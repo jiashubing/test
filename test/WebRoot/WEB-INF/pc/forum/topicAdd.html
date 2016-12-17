@@ -7,14 +7,8 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
-
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
-
 	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap.css" th:href="@{/css/pc/forum/bootstrap/css/bootstrap.css}"/>
 	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
-	
-	<script type="text/javascript" src="forum/bootstrap/js/bootstrap.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.js}" ></script>
-
 </head>
 <body><img src="../images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
@@ -109,6 +103,7 @@
 <div id="asaimsgbg" class="AsaiDivBG" style="display: none"
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
 </body>
-
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="forum/bootstrap/js/bootstrap.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.js}" ></script>
 
 </html>

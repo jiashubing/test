@@ -11,12 +11,13 @@ public interface ReplyService {
 	
 	public Long getReplyCountByTopicId(int topicId);
 	
-//	public List<Reply> findReplyListByTopicId(int topicId, PageBean pageBean);
 	public List<Reply> findReplyListByTopicId(int topicId,  int pageSize,int pageNo);
 	
 	public void saveReply(Reply reply);
 	
 	public void deleteReply(Reply reply);
+	
+	public void deleteReplyByTopicId(Integer topicId);
 	
 	public Reply findReplyById(int replyId);
 }

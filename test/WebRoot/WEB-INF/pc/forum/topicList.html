@@ -9,45 +9,6 @@
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
 	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
 	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap.css" th:href="@{/css/pc/forum/bootstrap/css/bootstrap.css}"/>
-	<script type="text/javascript">
-function deleteTopic(topicId){
-	if(confirm("您确定要删除这条数据吗？")){
-		$.post("Topic_delete.action",{topicId:topicId},function(result){
-			if(result.success){
-				/* var result=eval('('+result+')'); */
-				alert("数据已成功删除！");
-				location.reload(true);
-			}else{
-				alert("数据删除失败！");
-			}
-		},"json");
-	}else{
-		return;
-	}
-}
-function modifyTopic(obj){
-	var topicId = $(obj).closest(".topictr").find(".topicid").text();
-	var topicTop = $(obj).closest(".topictr").find(".topictop").text();
-	var topicGood = $(obj).closest(".topictr").find(".topicgood").text();
-	$("#topicId").val(topicId);
-	$("#topicTop").val(topicTop);
-	$("#topicGood").val(topicGood);
-}
-function saveTopic(){
-	var topicId=$("#topicId").val();
-	var topicTop=$("#topicTop").val();
-	var topicGood=$("#topicGood").val();
-	$("#fm").submit();
-	alert("保存成功！");
-	 resetValue();
-}
-
-function resetValue(){
-	$("#topicId").val("");
-	$("#topicTop").val("");
-	$("#topicGood").val("");
-}
-</script>
 </head>
 <body><img src="../images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
@@ -111,6 +72,9 @@ function resetValue(){
 		<!-- <tr height="30">
 			<td style="text-indent:5;" background="images/index/classT.jpg"><b><font color="white">■ 置顶帖子</font></b></td>
 		</tr> -->
+		<tr height="30">
+			<td style="text-indent:5;" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'"><b><span style="color:white">■ 置顶帖子</span></b></td>
+		</tr>
 		<tr>
 			<td>
 				<table class="table table-bordered" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
@@ -142,6 +106,8 @@ function resetValue(){
 								<span th:if="${topic.good==0 }" style="color: blue;">【普通】</span>
 								<span th:unless="${topic.good==0 }" style="color: red;">【精华】</span>
 								<span th:if="${topic.top==1 }">【置顶】</span>
+							</td>
+							<td style="display:none">
 								<span style="visibility:hidden" class="topicid" th:text="${topic.id}"></span>
 								<span style="visibility:hidden" class="topictop" th:text="${topic.top}"></span>
 								<span style="visibility:hidden" class="topicgood" th:text="${topic.good}"></span>
@@ -165,7 +131,7 @@ function resetValue(){
 								</span>
 								<span th:if="${dbUser.access==1 || section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
 									<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
-									<button class="shubing-btn shubing-btn-danger" onclick="javascript:deleteTopic(${topic.id })">删除</button>
+									<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 								</span>
 								<span th:if="${dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id!=topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
 									<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg">查看</button></a>
@@ -179,7 +145,7 @@ function resetValue(){
 		
 		<!-- 其他帖子 -->
 		<tr height="30">
-			<td style="text-indent:5;" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'"><b><font color="white">■ 其它帖子</font></b></td>
+			<td style="text-indent:5;" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'"><b><span style="color:white">■ 其它帖子</span></b></td>
 		</tr>
 		
 		<tr>
@@ -191,6 +157,8 @@ function resetValue(){
 								<span th:if="${topic.good==0 }" style="color: blue;">【普通】</span>
 								<span th:unless="${topic.good==0 }" style="color: red;">【精华】</span>
 								<span th:if="${topic.top==1 }">【置顶】</span>
+							</td>
+							<td style="display:none">
 								<span style="visibility:hidden" class="topicid" th:text="${topic.id}"></span>
 								<span style="visibility:hidden" class="topictop" th:text="${topic.top}"></span>
 								<span style="visibility:hidden" class="topicgood" th:text="${topic.good}"></span>
@@ -214,7 +182,7 @@ function resetValue(){
 								</span>
 								<span th:if="${dbUser.access==1 || section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
 									<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
-									<button class="shubing-btn shubing-btn-danger" onclick="javascript:deleteTopic(${topic.id })">删除</button>
+									<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 								</span>
 								<span th:if="${dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id!=topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
 									<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg">查看</button></a>
@@ -274,8 +242,6 @@ function resetValue(){
 						</tr> -->
 					</table>
 					<input id="topicId" name="topicId" type="hidden"/>
-					<input id="pageNo" name="pageNo" type="hidden"/>
-					<!-- <span th:name="pageNo" style="visibility:hidden" th:text="${pageNo}"></span> -->
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -308,5 +274,6 @@ function resetValue(){
 <script type="text/javascript" src="js/jquery.dataTables.min.js" th:src="@{/js/pc/admin/js/jquery.dataTables.min.js}"></script>
 <script type="text/javascript" src="js/unicorn.tables.js" th:src="@{/js/pc/admin/js/unicorn.tables.js}"></script>
 <script type="text/javascript" src="js/uploadPreview.min.js" th:src="@{/js/pc/admin/js/uploadPreview.min.js}"></script>
+<script type="text/javascript" src="/js/myjson.js" th:src="@{/js/pc/forum/js/myListJson.js}" ></script>
 
 </html>

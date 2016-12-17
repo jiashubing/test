@@ -83,4 +83,10 @@ public class ReplyServiceImpl implements ReplyService {
 		return em.find(Reply.class, replyId);
 	}
 
+	@Override
+	public void deleteReplyByTopicId(Integer topicId) {
+		Query query=em.createQuery("delete from Reply where topicId= "+topicId);
+		query.executeUpdate();
+	}
+
 }

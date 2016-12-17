@@ -157,16 +157,30 @@ public class TopicAction {
 	}
 	
 	/**
-	 * 异步 删除topic
+	 * 管理员页面 异步 删除topic
 	 */
 	@RequestMapping("/admin/topicDelete")
     @ResponseBody
-    public Result deleteSection(Integer topicId,HttpServletRequest request) {
+    public Result deleteTopicAdmin(Integer topicId,HttpServletRequest request) {
         Result result = new Result();
+        replyService.deleteReplyByTopicId(topicId);
         topicService.deleteTopicById(topicId);
         result.setStatus(1);
         return result;
     }
+	
+	/**
+	 * 论坛页面 异步 删除topic
+	 */
+	@RequestMapping("/forum/topicDelete")
+	@ResponseBody
+	public Result deleteTopicForum(Integer topicId,HttpServletRequest request) {
+		Result result = new Result();
+		replyService.deleteReplyByTopicId(topicId);
+		topicService.deleteTopicById(topicId);
+		result.setStatus(1);
+		return result;
+	}
 	
 	@RequestMapping("/forum/details")
 	public String loadDetails(@AuthenticationPrincipal DbUser dbUser,Integer id,Model model,@RequestParam(required = false) Integer pageNo,HttpServletRequest request)throws Exception{
