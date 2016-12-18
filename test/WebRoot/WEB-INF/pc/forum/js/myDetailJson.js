@@ -1,28 +1,3 @@
-function saveReply(){
-	/*<![CDATA[*/
- 	var flag= /*[[${dbUser==null}]]*/true;
-    /*]]>*/
-    
-    if(flag){
-   	 	alert("请先登陆，再回帖！");
-		return false;
-    }
-    
-    var len = $("#myContent").val().length;
-    if (10 > len) {
-		alert("最少输入10个字符！");
-		return false;
-	}
-	
-	if (len > 1000) {
-		alert("最多输入1000个字符！");
-		return false;
-	}
-	
-	$("#fm").submit();
-	alert("回复成功！");
-	resetValue();    
-}
 function resetValue(){
 	$("#replyContent").val("");
 }

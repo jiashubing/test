@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
 	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap.css" th:href="@{/css/pc/forum/bootstrap/css/bootstrap.css}"/>
 	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 </head>
 <body><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
@@ -62,7 +63,7 @@
 					</tr>
 					<tr>
 						<td>普通用户
-						<font th:if="${not #lists.isEmpty(topic.user.sectionList) &amp;&amp; topic.user.type!=2 }" style="color: black;">普通用户</font>
+						<span th:if="${not #lists.isEmpty(topic.user.sectionList) &amp;&amp; topic.user.type!=2 }" style="color: black;">普通用户</span>
 							<!--<c:choose>
 									<c:when test="${topic.user.sectionList.size()==0&&topic.user.type!=2 }">
 										<font style="color: black;">普通用户</font>
@@ -97,7 +98,12 @@
 						<td>
 							【内容】:
 							<div style="width: 982px;padding:6px; background-color: #F0F0F0" class="show_e">
-								<span th:text="${topic.content }">祖国我爱你</span>
+								<span id="topiccontent">祖国我爱你</span>
+								<script th:inline="javascript">
+									/*<![CDATA[*/
+									$("#topiccontent").html(/*[[${topic.content}]]*/);
+   									 /*]]>*/
+								</script>
 							</div>
 						</td>
 					</tr>
@@ -116,9 +122,9 @@
 						<tr>
 							<td>
 								<img th:if="${((topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='男')}" 
-										alt="" src="images/user/user0.gif" th:src="@{/image/pc/images/user/user0.gif}" style="width: 100px;height: 100px;" />
+										alt="" src="images/user/user0.gif" th:src="@{/image/pc/forum/images/user/user0.gif}" style="width: 100px;height: 100px;" />
 								<img th:if="${(topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='女'}"  
-										alt="" src="images/user/female.gif" th:src="@{/image/pc/images/user/female.gif}" style="width: 100px;height: 100px;" />
+										alt="" src="images/user/female.gif" th:src="@{/image/pc/forum/images/user/female.gif}" style="width: 100px;height: 100px;" />
 								<img th:unless="${topic.user.face==null||topic.user.face==''}"  
 										alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
 								<a href="#" style="font-size: 9pt;color: black;"><strong><span th:text="${reply.user.nickName }">诸葛亮</span></strong></a>
@@ -179,7 +185,12 @@
 						<tr>
 						<td>
 							<div style="width: 982px;padding:6px; background-color: #F0F0F0" class="show_e">
-								<span th:text="${reply.content }">哈哈哈，我也爱</span>
+								<span class="replycontent">哈哈哈，我也爱</span>
+								<script th:inline="javascript">
+									/*<![CDATA[*/
+									$(".replycontent:last").html(/*[[${reply.content}]]*/);
+   									 /*]]>*/
+								</script>
 							</div>
 						</td>
 					</tr>
@@ -252,7 +263,7 @@
 								【内容】:
 							</td>
 							<td>
-								<textarea name="replyContent" id="myContent" cols="50" style="height:200px;width: 800px;" ></textarea>
+								<textarea name="replyContent" id="kindcontent" cols="50" style="height:200px;width: 800px;" ></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -288,8 +299,39 @@
 <div id="asaimsgbg" class="AsaiDivBG" style="display: none"
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
 </body>
-<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script th:inline="javascript">
+
+   function saveReply(){
+	/*<![CDATA[*/
+ 	var flag= /*[[${dbUser==null}]]*/true;
+    /*]]>*/
+    
+    if(flag){
+   	 	alert("请先登陆，再回帖！");
+		return false;
+    }
+    editor.sync();
+    var len = $("#kindcontent").val().length;
+    alert(len);
+    if (10 > len) {
+		alert("最少输入10个字符！");
+		return false;
+	}
+	
+	if (len > 1000) {
+		alert("最多输入1000个字符！");
+		return false;
+	}
+	
+	$("#fm").submit();
+	alert("回复成功！");
+	resetValue();    
+}
+</script>
+
 <script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
 <script type="text/javascript" src="" th:src="@{/js/pc/forum/js/myDetailJson.js}" ></script>
-<script type="text/javascript" src="forum/bootstrap/js/bootstrap.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.js}" ></script>
+<script charset="utf-8" src="pc/kindeditor-4.1.10/kindeditor-min.js" th:src="@{/js/pc/kindeditor-4.1.10/kindeditor-min.js}"></script>
+<script charset="utf-8" src="pc/kindeditor-4.1.10/lang/zh_CN.js" th:src="@{/js/pc/kindeditor-4.1.10/lang/zh_CN.js}"></script>
+<script charset="utf-8" src="pc/kindeditor-4.1.10/init.js"  th:src="@{/js/pc/kindeditor-4.1.10/init.js}"></script>
 </html>
