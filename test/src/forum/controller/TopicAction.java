@@ -1,5 +1,6 @@
 package forum.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -213,6 +214,34 @@ public class TopicAction {
 		return ValidatePcMobile.checkRequest(request, "/forum/topicAdd");
 	}
 	
+	@RequestMapping("/forum/topicSave")
+	public String saveTopic(@AuthenticationPrincipal DbUser dbUser,
+			@RequestParam(required = false) String topicTitle,
+			@RequestParam(required = false) String topicContent,
+			@RequestParam(required = false) Integer topicSectionId,
+			Model model)throws Exception{
+		Topic topic = new Topic();
+		if(dbUser != null){
+			topic.setUser(dbUser.getUser());
+			model.addAttribute("dbUser",dbUser);
+		}else{
+			return "redirect:/login";
+		}
+		topic.setTitle(topicTitle);
+		topic.setContent(topicContent);
+		
+		Section section = sectionService.findSectionById(topicSectionId);
+		if(section != null){
+			topic.setSection(section);
+		}
+		topic.setPublishTime(new Date());
+		topic.setModifyTime(new Date());
+		
+		topic = topicService.saveTopic2(topic);
+		
+		return "redirect:/forum/details?id="+topic.getId();
+	}
+	
 	@RequestMapping("/forum/topicUpdate")
 	public String updateToipc(@AuthenticationPrincipal DbUser dbUser,
 			@RequestParam(required = false) Integer pageNo,
@@ -235,8 +264,6 @@ public class TopicAction {
 		topicService.saveTopic(topic);
 		
 		//重定向时传递参数
-//		model.addFlashAttribute("sectionId", sectionId);  
-//		model.addFlashAttribute("pageNo", pageNo);  
 		return "redirect:/forum/topicList?sectionId="+sectionId+"&pageNo="+pageNo;
 	}
 	

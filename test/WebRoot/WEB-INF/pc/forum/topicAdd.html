@@ -24,13 +24,13 @@
 				</div>
 			</div>
 		</div>
-	</div>
+</div>
 
 <div style="width: 1200px; margin: 0 auto">
 	<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;width: 1400px;" align="center">
-		<tr height="30" background="images/index/classT.jpg">
+		<tr height="30" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'">
 			<td style="text-indent:5;">
-				<b><font color="white">■ 发表帖子</font></b>
+				<b><span style="color:white">■ 发表帖子</span></b>
 			</td>
 			<td></td>
 		</tr>
@@ -38,7 +38,7 @@
 			<td style="width: 220px;" valign="top">
 				<table style="margin-top: 10;margin-left: 20px;" class="">
 					<tr>
-						<td valign="top" width="99%">发帖许可：<br/><br/>
+						<td valign="top" width="99%" style="line-height:20px;">发帖许可：<br/><br/>
 							<ul class="unstyled">
 								<li>*请不要发表危害祖国的非法信息！</li><br/><br/>
 								<li>*请不要发表侵犯个人名誉的信息！</li><br/><br/>
@@ -52,34 +52,32 @@
 				</table>
 			</td>
 			<td>
-				<form class="form-horizontal" style="margin-top: 10px;" action="Topic_save.action" method="post" onsubmit="return checkForm()">
+				<form id="fm" class="form-horizontal" style="margin-top: 10px;" th:action="@{/forum/topicSave}" method="post">
 					<div class="control-group">
 						<label class="control-label" for="title">【主题】</label>
 						<div class="controls">
-							<input type="text" id="title" name="topic.title" value="${topic.title }" style="width: 800px;"/>
+							<input type="text" id="title" name="topicTitle" style="height:30px; width: 800px; padding:4px 6px;"/>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="section">【板块】</label>
 						<div class="controls">
-							<select id="section" name="topic.section.id" style="width: 400px;"><option value="0">请选择板块...</option>
-								<c:forEach var="section" items="${sectionList }">
-									<option value="${section.id }">${section.name }</option>
-								</c:forEach>
+							<select id="section" name="topicSectionId" style="width: 400px;">
+								<option value="0">请选择板块...</option>
+								<option th:each="section:${sectionList}" th:value="${section.id}" th:text="${section.name}"></option>
 							</select>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="Content">【内容】</label>
+						<label class="control-label" for="kindcontent">【内容】</label>
 						<div class="controls">
-							<textarea name="topic.content" id="Content" class="ckeditor" cols="50" style="height:200px;width: 800px;" ></textarea>
+							<textarea name="topicContent" id="kindcontent" class="ckeditor" style="height:500px;width: 800px;" ></textarea>
 						</div>
 					</div>
-					<input id="user" name="topic.user.id" value="${currentUser.id }" type="hidden"/>
 					<div class="control-group">
 						<div class="controls">
-							<Button class="btn btn-primary " data-dismiss="modal" aria-hidden="true" type="submit">提交</Button>
-							<font id="error"></font>
+							<Button class="shubing-btn shubing-btn-primary " data-dismiss="modal" aria-hidden="true" type="button" onclick="checkForm()">提交</Button>
+							<span id="error"></span>
 						</div>
 					</div>
 				</form>
@@ -104,6 +102,39 @@
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
 </body>
 <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
-<script type="text/javascript" src="forum/bootstrap/js/bootstrap.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.js}" ></script>
+<script charset="utf-8" src="pc/kindeditor-4.1.10/kindeditor-min.js" th:src="@{/js/pc/kindeditor-4.1.10/kindeditor-min.js}"></script>
+<script charset="utf-8" src="pc/kindeditor-4.1.10/lang/zh_CN.js" th:src="@{/js/pc/kindeditor-4.1.10/lang/zh_CN.js}"></script>
+<script charset="utf-8" src="pc/kindeditor-4.1.10/init.js"  th:src="@{/js/pc/kindeditor-4.1.10/init.js}"></script>
+<script th:inline="javascript">
+function checkForm() {
 
+	/*<![CDATA[*/
+	var flag = /*[[${dbUser==null}]]*/true;
+	/*]]>*/
+
+	if (flag) {
+		alert("请先登陆，再回帖！");
+		return false;
+	}
+	if ($("#title").val() == "" || $("#title").val() == null) {
+		alert("请填写帖子主题！");
+		return false;
+	}
+	if ($("#section").val() == 0 || $("#section").val() == null) {
+		alert("请选择板块！");
+		return false;
+	}
+	editor.sync();
+	var len = $("#kindcontent").val().length;
+	console.log($("#kindcontent").val());
+	console.log(len);
+	if (10 > len) {
+		alert("帖子内容最少10个字符！");
+		return false;
+	}
+
+	$("#fm").submit();
+	alert("发表成功！");
+}
+</script>
 </html>

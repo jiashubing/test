@@ -27,6 +27,12 @@ public class TopicServiceImpl implements TopicService {
 	private ReplyService replyService;
 
 	@Override
+	public Topic saveTopic2(Topic topic) {
+		topic = em.merge(topic);
+		return topic;
+	}
+	
+	@Override
 	public void saveTopic(Topic topic) {
 		em.merge(topic);
 	}

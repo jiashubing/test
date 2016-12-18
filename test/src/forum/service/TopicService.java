@@ -7,6 +7,7 @@ import forum.po.Topic;
 public interface TopicService {
 
 	public void saveTopic(Topic topic);
+	public Topic saveTopic2(Topic topic);
 	
 	public void deleteTopic(Topic topic);
 	public void deleteTopicById(Integer topicId);
