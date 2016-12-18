@@ -17,6 +17,8 @@ public interface ReplyService {
 	
 	public void deleteReply(Reply reply);
 	
+	public void deleteReplyById(Integer replyId);
+	
 	public void deleteReplyByTopicId(Integer topicId);
 	
 	public Reply findReplyById(int replyId);

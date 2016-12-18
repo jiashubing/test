@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import common.entity.Result;
 import config.ValidatePcMobile;
@@ -162,7 +161,6 @@ public class TopicAction {
     @ResponseBody
     public Result deleteTopicAdmin(Integer topicId,HttpServletRequest request) {
         Result result = new Result();
-        replyService.deleteReplyByTopicId(topicId);
         topicService.deleteTopicById(topicId);
         result.setStatus(1);
         return result;
@@ -175,7 +173,6 @@ public class TopicAction {
 	@ResponseBody
 	public Result deleteTopicForum(Integer topicId,HttpServletRequest request) {
 		Result result = new Result();
-		replyService.deleteReplyByTopicId(topicId);
 		topicService.deleteTopicById(topicId);
 		result.setStatus(1);
 		return result;
@@ -222,11 +219,8 @@ public class TopicAction {
 			@RequestParam(required = false) Integer topicId,
 			@RequestParam(required = false) Integer topicGood,
 			@RequestParam(required = false) Integer topicTop,
-			@RequestParam(required = false) Integer sectionId,
-			RedirectAttributes model,HttpServletRequest request)throws Exception{
-		if(dbUser != null){
-			model.addFlashAttribute("dbUser", dbUser); 
-		}
+			@RequestParam(required = false) Integer sectionId
+			)throws Exception{
 		
 		Topic topic = new Topic();
 		if(topicId!=null){

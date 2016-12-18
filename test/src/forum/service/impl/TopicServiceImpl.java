@@ -2,6 +2,7 @@ package forum.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import forum.po.Topic;
+import forum.service.ReplyService;
 import forum.service.TopicService;
 import forum.util.StringUtil;
 
@@ -20,6 +22,9 @@ public class TopicServiceImpl implements TopicService {
 	
 	@PersistenceContext 
 	protected EntityManager em;	
+	
+	@Resource(name="replyServiceImpl")
+	private ReplyService replyService;
 
 	@Override
 	public void saveTopic(Topic topic) {
@@ -28,12 +33,14 @@ public class TopicServiceImpl implements TopicService {
 
 	@Override
 	public void deleteTopic(Topic topic) {
+		replyService.deleteReplyByTopicId(topic.getId());
 		Query query=em.createQuery("delete from Topic where id= "+topic.getId());
 		query.executeUpdate();
 	}
 	
 	@Override
 	public void deleteTopicById(Integer topicId) {
+		replyService.deleteReplyByTopicId(topicId);
 		Query query=em.createQuery("delete from Topic where id= "+topicId);
 		query.executeUpdate();
 	}

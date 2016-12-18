@@ -104,7 +104,7 @@ public class SectionAction {
 			@RequestParam Integer secZoneId,
 			@RequestParam String secName,
 			@RequestParam(required = false) CommonsMultipartFile logo,
-			RedirectAttributes model,HttpServletRequest request)throws Exception{
+			HttpServletRequest request)throws Exception{
 		Section section =new Section();
 		if(secId != null){
 			section.setId(secId);
@@ -139,8 +139,7 @@ public class SectionAction {
 		}
 		sectionService.saveSection(section);
 		//重定向时传递参数
-		model.addFlashAttribute("pageNo", pageNo); 
-		return "redirect:/admin/sectionList";
+		return "redirect:/admin/sectionList?pageNo="+pageNo;
 	}
 	
 	/**

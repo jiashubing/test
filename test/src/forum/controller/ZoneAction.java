@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import common.entity.Result;
 import config.ValidatePcMobile;
@@ -51,7 +50,7 @@ public class ZoneAction {
 	
 	@RequestMapping("/admin/zoneAdd")
 	public String saveZone(@RequestParam(required = false) Integer pageNo,@RequestParam Integer zid,
-			@RequestParam String zname,@RequestParam String zdescription,RedirectAttributes model,HttpServletRequest request)throws Exception{
+			@RequestParam String zname,@RequestParam String zdescription)throws Exception{
 		Zone zone =new Zone();
 		if(zid != null){
 			zone.setId(zid);
@@ -60,8 +59,7 @@ public class ZoneAction {
 		zone.setDescription(zdescription);
 		zoneService.saveZone(zone);
 		//重定向时传递参数
-		model.addFlashAttribute("pageNo", pageNo);  
-		return "redirect:/admin/zoneList";
+		return "redirect:/admin/zoneList?pageNo="+pageNo;
 	}
 	
 	@RequestMapping("/admin/zoneDelete")

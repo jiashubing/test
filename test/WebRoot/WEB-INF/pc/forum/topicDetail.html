@@ -118,7 +118,7 @@
 								<img th:if="${((topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='男')}" 
 										alt="" src="images/user/user0.gif" th:src="@{/image/pc/images/user/user0.gif}" style="width: 100px;height: 100px;" />
 								<img th:if="${(topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='女'}"  
-										alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;" />
+										alt="" src="images/user/female.gif" th:src="@{/image/pc/images/user/female.gif}" style="width: 100px;height: 100px;" />
 								<img th:unless="${topic.user.face==null||topic.user.face==''}"  
 										alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
 								<a href="#" style="font-size: 9pt;color: black;"><strong><span th:text="${reply.user.nickName }">诸葛亮</span></strong></a>
@@ -157,7 +157,7 @@
 				</div>
 				<div class="span10">
 					<table style="width: 100%;">
-						<tr>
+						<tr class="replytr">
 							<td style="text-align: right;">
 								<!--<c:choose>
 									<c:when test="${currentUser.id==section.master.id }">
@@ -169,8 +169,11 @@
 									<c:otherwise>
 									</c:otherwise>
 								</c:choose>-->
-								<button class="shubing-btn shubing-btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
+								<button class="shubing-btn shubing-btn-danger" onClick="javascript:deleteReply(this)">删除</button>
 								回复时间:『<span th:text="${reply.publishTime }">2016-11-11</span>』
+							</td>
+							<td>
+								<input class="replyid" th:value="${reply.id }" type="hidden"/>
 							</td>
 						</tr>
 						<tr>
@@ -224,7 +227,7 @@
 					回帖许可：
 				</td>
 				<td style="width: 80%;">
-					<form id="replyForm" class="form-horizontal" style="margin-top: 10px;">
+					<form id="fm" class="form-horizontal" style="margin-top: 10px;" method="post" th:action="@{/forum/replyAdd}">
 					<table style="width: 100%;" cellpadding="10px;">
 						 <!--<tr>
 							<td>
@@ -249,17 +252,17 @@
 								【内容】:
 							</td>
 							<td>
-								<textarea name="reply.content" id="Content" cols="50" style="height:200px;width: 800px;" ></textarea>
+								<textarea name="replyContent" id="myContent" cols="50" style="height:200px;width: 800px;" ></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input id="userId" name="reply.user.id" value="${currentUser.id }" type="hidden"/>
-								<input id="topicId" name="reply.topic.id" value="${topic.id }" type="hidden"/>
+								<input id="replyTopicId" name="replyTopicId" th:value="${topic.id }" type="hidden"/>
+								<input id="pageNo" name="pageNo" th:value="${pageNo}" type="hidden"/>
 							</td>
 							<td>
 								<Button class="shubing-btn shubing-btn-primary " data-dismiss="modal" aria-hidden="true" type="button" onClick="javascript:saveReply()">提交</Button>
-								<font id="error"></font>
+								<span id="error"></span>
 							</td>
 						</tr>
 					</table>
@@ -286,5 +289,7 @@
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
 </body>
 <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
+<script type="text/javascript" src="" th:src="@{/js/pc/forum/js/myDetailJson.js}" ></script>
 <script type="text/javascript" src="forum/bootstrap/js/bootstrap.js" th:src="@{/js/pc/forum/bootstrap/js/bootstrap.js}" ></script>
 </html>

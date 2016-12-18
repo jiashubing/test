@@ -33,7 +33,6 @@
 </div>
 <div style="width: 1200px; margin: 0 auto;">
 	<div style="margin-bottom: 10px;">
-		<a id="preSaveHref" th:href="@{/forum/preSave(sectionId=${section.id})}"></a>
 		<form id="preSaveForm" th:action="@{/forum/preSave(sectionId=${section.id})}"></form>
 		<a onclick="checkUser()"><img alt="发帖" src="images/post.jpg"  th:src="@{/image/pc/forum/images/post.jpg}"/></a>
 		<div class="pagination alternate pull-right" th:align="center" style="margin: 0px;">
@@ -281,7 +280,6 @@
 <script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
 <script type="text/javascript" src="js/jquery.ui.custom.js" th:src="@{/js/pc/admin/js/jquery.ui.custom.js}" ></script>
 <script type="text/javascript" src="js/bootstrap.js" th:src="@{/js/pc/admin/js/bootstrap.min.js}"></script>
-<script type="text/javascript" src="js/bootstrap.min.js" th:src="@{/js/pc/admin/js/bootstrap.min.js}"></script>
 <script type="text/javascript" src="js/jquery.dataTables.min.js" th:src="@{/js/pc/admin/js/jquery.dataTables.min.js}"></script>
 <script type="text/javascript" src="js/unicorn.tables.js" th:src="@{/js/pc/admin/js/unicorn.tables.js}"></script>
 <script type="text/javascript" src="js/uploadPreview.min.js" th:src="@{/js/pc/admin/js/uploadPreview.min.js}"></script>
@@ -293,7 +291,6 @@ function checkUser(){
     /*]]>*/
     
     if(flag){
-    	console.log($("#preSaveHref"));
    	 	$("#preSaveForm").submit();
     }else{
     	$("#loginFailedInfo").text("");

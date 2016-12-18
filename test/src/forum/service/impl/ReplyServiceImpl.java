@@ -89,4 +89,10 @@ public class ReplyServiceImpl implements ReplyService {
 		query.executeUpdate();
 	}
 
+	@Override
+	public void deleteReplyById(Integer replyId) {
+		Query query=em.createQuery("delete from Reply where id= "+replyId);
+		query.executeUpdate();
+	}
+
 }

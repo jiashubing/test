@@ -1,7 +1,6 @@
 function deleteTopic(obj){
 	if(confirm("您确定要删除这条数据吗？")){
 		var topicId=$(obj).closest(".topictr").find(".topicid").text();
-		alert(topicId);
 		$.ajax({
 				url : "topicDelete",
 				type : "post",
@@ -33,7 +32,7 @@ function saveTopic(){
 	var topicGood=$("#topicGood").val();
 	$("#fm").submit();
 	alert("保存成功！");
-	 resetValue();
+	resetValue();
 }
 
 function resetValue(){
