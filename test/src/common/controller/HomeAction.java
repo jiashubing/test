@@ -74,7 +74,6 @@ public class HomeAction {
 			@RequestParam(required = false) CommonsMultipartFile face,
 			@RequestParam String newPwd )throws Exception{
 		
-	    
 	    DbUser tmpDbUser = new DbUser();
 		User tmpUser = new User();
 
@@ -103,6 +102,11 @@ public class HomeAction {
 		tmpDbUser.setPassword(newPwd);
 		tmpDbUser.setAccess(0);
 
+		if(sex==1){
+			tmpUser.setSex("男");
+		}else{
+			tmpUser.setSex("女");
+		}
 		tmpUser.setTrueName(trueName);
 		tmpUser.setType(0);
 		tmpUser.setMobile(mobile);

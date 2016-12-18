@@ -35,9 +35,8 @@
 
     <div class="bd">
         <ul>
-            <li style="background:url(images/sky-bg.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/sky-bg.jpg}+')  center 0 no-repeat;'"></li>
-            <li style="background:url(images/sky-bg2.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/sky-bg2.jpg}+')  center 0 no-repeat;'"></li>
-            <li style="background:url(images/ice-bg.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/ice-bg.jpg}+')  center 0 no-repeat;'"></li>
+            <li style="background:url(images/sky-bg.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/sky-bg.png}+')  center 0 no-repeat;'"></li>
+            <li style="background:url(images/sky-bg2.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/sky-bg2.png}+')  center 0 no-repeat;'"></li>
         </ul>
     </div>
 
@@ -50,8 +49,11 @@
 <p style="clear:both"></p>
 
 <p style="height:20px"></p>
-<img src="images/wzwz.png" th:src="@{/image/pc/images/wzwz.png}" width="100%"/>
-
+<div style="text-align:center;" >
+	<span style="font-size:16px; color:blue; display:block; margin-bottom:10px;">四大板块</span>
+	<hr style="width:60px; height:1px;border:none;border-top:1px solid #CCCCCC;"/>
+	<span style="font-size:12px; color:grey; display:block; margin-top:10px;">似的发射点反对撒发射点发射点</span>
+</div>
 <div class="hx">
     <p style="clear:both; height:50px"></p>
 
@@ -94,8 +96,12 @@
 </div>
 <img src="images/bottonone.png" width="100%" th:src="@{/image/pc/images/bottonone.png}"/>
 
-<div class="kf"><img src="images/wzwz-1.png" width="100%" th:src="@{/image/pc/images/wzwz-1.png}"/>
-
+<div class="kf">
+	<div style="text-align:center;" >
+		<span style="font-size:16px; color:blue; display:block; margin-bottom:10px;">幸运大转盘</span>
+		<hr style="width:60px; height:1px;border:none;border-top:1px solid #CCCCCC;"/>
+		<span style="font-size:12px; color:grey; display:block; margin-top:10px;">这个转盘的中奖概率看起来很高吧，实际上你最多只能抽中三等奖或者一毛钱</span>
+	</div>
     <p style="clear:both; height:30px"></p>
     
     <div class="kfimg">

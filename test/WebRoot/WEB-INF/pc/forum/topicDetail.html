@@ -33,7 +33,7 @@
 				<table style="width: 100%;" cellpadding="5px;">
 					<tr>
 						<td>
-							★楼主&nbsp;<a href="#" style="font-size: 9pt;color: black;"><strong>赵云<!--${topic.user.nickName }--></strong></a>
+							★楼主&nbsp;<a href="#" style="font-size: 9pt;color: black;"><strong><span th:unless="${topic==null||topic.user==null}" th:text="${topic.user.nickName }">赵云</span></strong></a>
 						</td>
 					</tr>
 					<tr>

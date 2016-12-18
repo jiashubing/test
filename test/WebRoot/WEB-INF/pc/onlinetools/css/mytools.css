@@ -48,6 +48,7 @@
 .shubing-leftBar textarea,.shubing-rightBar textarea {
 	width: 410px;
 	height: 500px;
+	resize: none;
 }
 
 .shubing-operateLR {
