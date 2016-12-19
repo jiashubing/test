@@ -39,6 +39,20 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 	}
+	
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
+	@Override
+	public boolean checkEmail(String email) {
+		String hql="select count(*) from User where email=?1";
+		Query query = em.createQuery(hql);
+		query.setParameter(1, email);
+		long count=(Long)query.getSingleResult();
+		if (count>0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override

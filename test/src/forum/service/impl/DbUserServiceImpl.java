@@ -63,9 +63,26 @@ public class DbUserServiceImpl implements DbUserService {
 		String hql="from DbUser where username=?1";
 		Query query = em.createQuery(hql);
 		query.setParameter(1, name);
+		@SuppressWarnings("unchecked")
 		List<DbUser> result = query.getResultList();
 		em.clear();
 		return result==null ? null : result.get(0);
+	}
+
+
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
+	@Override
+	public boolean checkUserName(String name) {
+		String hql="select count(*) from DbUser where username=?1";
+		Query query = em.createQuery(hql);
+		query.setParameter(1, name);
+		long count=(Long)query.getSingleResult();
+		if (count>0) {
+			return false;
+		} else {
+			return true;
+		}
+		
 	}
 
 }

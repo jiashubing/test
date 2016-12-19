@@ -77,3 +77,126 @@ $("#shubing-toux-doc").live("change",function(){
 	}
 	return true;
 });
+
+$("#registButton").click(function() {
+    var reg=/^(13|14|15|17|18)\d{9}$/;
+    var nickName = $("#nickName").val();
+    var trueName = $("#trueName").val();
+    var email = $("#email").val();
+    var mobile = $("#mobile").val();
+    var newPwd = $("#newPwd").val();
+    var nickNameErr = $("#nickNameErr").val();
+    var emailErr = $("#emailErr").val();
+    var confirmPwd = $("#confirmPwd").val();
+    var sex = $("input[name='sex']:checked").val();
+    if(nickName=="") {
+        $("#msgInfo").text("");
+        $("#registErrInfo").text("昵称（用户名）不能为空");
+        return;
+    }
+    if(email=="") {
+    	$("#msgInfo").text("");
+    	$("#registErrInfo").text("邮箱不能为空");
+    	return;
+    }
+    if(newPwd=="") {
+    	$("#msgInfo").text("");
+    	$("#registErrInfo").text("登陆密码不能为空");
+    	return;
+    }
+    if(confirmPwd=="") {
+    	$("#msgInfo").text("");
+    	$("#registErrInfo").text("确认密码不能为空");
+    	return;
+    }
+    if(confirmPwd != newPwd) {
+    	$("#msgInfo").text("");
+    	$("#registErrInfo").text("两次密码不一致");
+    	return;
+    }
+    if(mobile!="" && !reg.test(mobile)){
+        $("#msgInfo").text("");
+        $("#registErrInfo").text("如您愿意留下手机号，请填入正确的号码");
+        return;
+    }else{
+        $("#msgInfo").text("");
+        $("#registErrInfo").text("");
+    }
+    if(nickNameErr!="") {
+    	$("#msgInfo").text("");
+    	$("#registErrInfo").text("请输入正确的昵称");
+    	return;
+    }
+    if(emailErr!="") {
+    	$("#msgInfo").text("");
+    	$("#registErrInfo").text("请输入正确的邮箱");
+    	return;
+    }
+    
+    $("#registFm").submit();
+    
+});
+
+
+$("#nickName").blur(checkNickName);
+function checkNickName() {
+    var nickName = $("#nickName").val();
+    if(nickName=="") {
+        $("#nickNameMsg").text("");
+        $("#nickNameErr").text("昵称不能为空");
+        return false;
+    }
+    $.ajax({
+        url:"checkUserName",
+        type:"post",
+        dataType:"json",
+        data:{"name":nickName},
+        success:function(result){
+            if(result.status==0) {
+                $("#nickNameMsg").text("");
+                $("#nickNameErr").text(result.message);
+            }else if(result.status==1) {
+                $("#nickNameMsg").text("该昵称可以使用");
+                $("#nickNameErr").text("");
+            }
+        },
+        error:function(){
+            alert("系统异常","请求失败");
+        }
+    });
+}
+
+
+$("#email").blur(checkEmail);
+function checkEmail() {
+	var email = $("#email").val();
+	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/; 
+	if(email=="") {
+		$("#emailMsg").text("");
+		$("#emailErr").text("邮箱不能为空");
+		return false;
+	}
+	if(!reg.test(email)){
+        $("#emailMsg").text("");
+        $("#emailErr").text("请填入正确的邮箱");
+        return false;
+    }
+	$.ajax({
+		url:"checkEmail",
+		type:"post",
+		dataType:"json",
+		data:{"email":email},
+		success:function(result){
+			if(result.status==0) {
+				$("#emailMsg").text("");
+				$("#emailErr").text(result.message);
+			}else if(result.status==1) {
+				$("#emailMsg").text("该邮箱尚未注册");
+				$("#emailErr").text("");
+			}
+		},
+		error:function(){
+			alert("系统异常","请求失败");
+		}
+	});
+}

@@ -29,6 +29,7 @@ import config.ValidatePcMobile;
 import forum.po.DbUser;
 import forum.po.User;
 import forum.service.DbUserService;
+import forum.service.UserService;
 import forum.util.DateUtil;
 import forum.util.ImgUtil;
 import forum.util.Md5Util;
@@ -38,6 +39,9 @@ public class HomeAction {
 	
 	@Resource(name="dbUserServiceImpl")
 	private DbUserService dbUserService;
+	
+	@Resource(name="userServiceImpl")
+	private UserService userService;
 	
 	@RequestMapping("/index")
 	public String loadIndex(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
@@ -62,6 +66,40 @@ public class HomeAction {
 	public String loadRegist(Model model,HttpServletRequest request)throws Exception{
 		model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/regist");
+	}
+	
+	/**
+	 * 异步 校验昵称
+	 */
+	@RequestMapping("/checkUserName")
+	@ResponseBody
+	public Result checkUserName(String name) {
+		Result result = new Result();
+		boolean flag = dbUserService.checkUserName(name);
+		if(flag == true){
+			result.setStatus(1);
+		}else{
+			result.setStatus(0);
+			result.setMessage("该昵称已经存在，请使用其他昵称");
+		}
+		return result;
+	}
+	
+	/**
+	 * 异步 校验邮箱
+	 */
+	@RequestMapping("/checkEmail")
+	@ResponseBody
+	public Result checkEmail(String email) {
+		Result result = new Result();
+		boolean flag = userService.checkEmail(email);
+		if(flag == true){
+			result.setStatus(1);
+		}else{
+			result.setStatus(0);
+			result.setMessage("该邮箱已经存在，请使用其他邮箱");
+		}
+		return result;
 	}
 	
 	@RequestMapping(value="/doRegist")
@@ -97,6 +135,7 @@ public class HomeAction {
 		}
 	        
 		tmpDbUser.setUsername(nickName);
+		tmpUser.setPassword(newPwd);
 		//密码需要md5加密
 		newPwd = Md5Util.toMD5(newPwd);
 		tmpDbUser.setPassword(newPwd);
@@ -107,6 +146,7 @@ public class HomeAction {
 		}else{
 			tmpUser.setSex("女");
 		}
+		tmpUser.setNickName(nickName);
 		tmpUser.setTrueName(trueName);
 		tmpUser.setType(0);
 		tmpUser.setMobile(mobile);

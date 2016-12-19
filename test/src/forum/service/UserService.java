@@ -9,6 +9,7 @@ public interface UserService {
 	public void saveUser(User user);
 	
 	public boolean existUserWithNickName(String nickName);
+	public boolean checkEmail(String email);
 	
 	public User login(User user);
 	

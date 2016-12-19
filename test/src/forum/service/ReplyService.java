@@ -2,7 +2,6 @@ package forum.service;
 
 import java.util.List;
 
-import forum.po.PageBean;
 import forum.po.Reply;
 
 public interface ReplyService {

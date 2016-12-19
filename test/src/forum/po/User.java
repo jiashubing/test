@@ -63,7 +63,7 @@ public class User {
 	public void setTrueName(String trueName) {
 		this.trueName = trueName;
 	}
-	@Column(length=20)
+	@Column(length=50)
 	public String getEmail() {
 		return email;
 	}
@@ -112,8 +112,6 @@ public class User {
 	public void setType(int type) {
 		this.type = type;
 	}
-	/*@OneToMany(mappedBy="master")*/
-	/*@OneToMany(targetEntity=Section.class,cascade=CascadeType.ALL)*/
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="masterId", updatable=false)
 	public List<Section> getSectionList() {

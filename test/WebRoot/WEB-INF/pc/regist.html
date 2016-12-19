@@ -31,12 +31,15 @@
         </div>
         
         <div class="ys500 ystx">
-            <form action="" th:action="@{/doRegist}" method="post" enctype="multipart/form-data">
+            <form id="registFm" action="" th:action="@{/doRegist}" method="post" enctype="multipart/form-data">
             <!-- <form action="" th:action="@{/doRegist}" method="post"> -->
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="nickName" name="nickName" placeholder="昵称（必填）"
                            maxlength="20" type="text" />
                 </p>
+                <div style="text-align: center;">
+               		<span style="color: red;" id="nickNameErr"></span><span style="color: blue" id="nickNameMsg"></span>
+                </div>
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="trueName" name="trueName" placeholder="真实姓名（只你与作者可见）"
                            maxlength="20" type="text" />
@@ -45,6 +48,9 @@
                     <input class="ysw500 sign-in__field ys-form__field" id="email" name="email" placeholder="邮箱（必填）"
                            maxlength="20" type="text" />
                 </p>
+                <div style="text-align: center;">
+                	<span style="color: red;" id="emailErr"></span><span style="color: blue" id="emailMsg"></span>
+                </div>
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="mobile" name="mobile" placeholder="联系电话"
                            maxlength="20" type="text" />
@@ -56,9 +62,6 @@
                     <input name="sex" value="2" type="radio"/>
                     &nbsp;女&nbsp;&nbsp;
                 </p>
-                <div style="text-align: center;">
-                <span style="color: red;" id="phoneErr_baomin"></span><span style="color: blue" id="phoneRig_baomin"></span>
-                </div>
                 <!-- <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="phoneNo" name="phoneNo"
                            placeholder="真实手机号" maxlength="20" type="text"/>
@@ -108,7 +111,7 @@
 
                 </p>
                 <p style="text-align:center;">
-                    <button class="ysw500 sign-in__button ys-form__button" id="" type="submit">
+                    <button class="ysw500 sign-in__button ys-form__button" id="registButton" type="button">
                         注册
                     </button>
                 </p>
@@ -119,7 +122,7 @@
                 </p> -->
             </form>
             <div style="text-align: center;">
-                <span style="color:red" id="errInfo"></span>
+                <span style="color:red" id="registErrInfo"></span>
                 <span style="color:blue" id="msgInfo"></span>
             </div>
         </div>
