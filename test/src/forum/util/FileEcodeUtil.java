@@ -279,4 +279,37 @@ public class FileEcodeUtil {
 	    return x;
 	}
 	
+	/**
+	 * file 转字 String
+	 * @param fileName
+	 * @return
+	 */
+	public static String readFileByLines(String fileName) {
+        FileInputStream file = null;
+        BufferedReader reader = null;
+        InputStreamReader inputFileReader = null;
+        String content = "";
+        String tempString = null;
+        try {
+            file = new FileInputStream(fileName);
+            inputFileReader = new InputStreamReader(file, "GBK");
+            reader = new BufferedReader(inputFileReader);
+            // 一次读入一行，直到读入null为文件结束
+            while ((tempString = reader.readLine()) != null) {
+                content += tempString;
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e1) {
+                }
+            }
+        }
+        return content;
+    }
 }
