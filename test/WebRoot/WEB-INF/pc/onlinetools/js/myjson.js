@@ -30,16 +30,18 @@
        
        
       $("#loadFile").live("change",function(){
+    	$("#loadFileFlag").val("0");
    	    var filepath = $(this).val();
    	    var extStart = filepath.lastIndexOf(".");
    	    var ext = filepath.substring(extStart, filepath.length).toUpperCase();
    	    if (ext != ".TXT") {
    	        $("#loadFileErr").text("原始文本只能是txt格式");
+   	        $("#startPassText").text("");
    	        return false;
    	    }else{
    	    	$("#loadFileErr").text("");
+   	    	$("#startPassText").text("");
    	    }
-   	 $("#startPassText").text("123");
 	   //ajax文件上传
    	    $.ajaxFileUpload({
    	        url: 'loadFile',
@@ -50,11 +52,16 @@
    	        success:function(result){
    	            if(result.status==1){
    	                $("#startPassText").text(result.body);
+   	                $("#inName").val(result.message);
+   	                
+   	                $("#loadFileFlag").val("1");
    	            }else {
+   	            	$("#startPassText").text("");
    	            	alert("系统异常","请求失败");
    	            }
    	        },
    	        error:function(e){
+   	        	$("#startPassText").text("");
    	        	alert("系统异常","请求失败");
    	        }
    	    });
@@ -69,11 +76,75 @@
       		return false;
       	}
       	if(!reg.test(customKey)){
-      		$("#customKeyErr").text("密匙是不能大于8位的数字");
+      		$("#customKeyErr").text("密匙必须是数字数字");
+            return false;
+        }
+      	if(customKey.length>8){
+      		$("#customKeyErr").text("密匙不能超过8位");
             return false;
         }
       	$("#customKeyErr").text("");
       }
+      
+      $("#encryptionBtn").click(function(){
+    	  var loadFileFlag = $("#loadFileFlag").val();
+    	  //不为空并且格式正确
+    	  if(loadFileFlag != "1" ){
+    		  alert("请导入正确格式的原始文本");
+    		  return false;
+    	  }
+    	  var customKey = $("#customKey").val();
+    	  var customKeyErr = $("#customKeyErr").val();
+    	  if(customKey == "" || customKeyErr != ""){
+    		  alert("请输入正确的密匙");
+    		  return false;
+    	  }
+    	  //$("#cusKeyFm").submit();
+    	  var inName = $("#inName").val();
+    	  var customKey = $("#customKey").val();
+    	  $.ajax({
+              url:"customEncryption",
+              type:"post",
+              dataType:"json",
+              data:{"inName":inName,"customKey":customKey},
+              success:function(result){
+               if(result.status==1){
+					var endPassText = result.body.endPassText;  
+					var outName = result.body.outName;  
+					var outPath = result.body.outPath;  
+					$("#endPassText").val(endPassText);
+					$("#outName").val(outName);
+					$("#outPath").val(outPath);
+				}
+          	 },
+           error: function () {
+               alert("请求失败！");
+           }
+    	  }); 
+       }); 
+      
+      $("#deleteBtn").click(function(){
+    	  if(confirm("确定要删除服务器上的对应文件吗?")){
+    		  var outName= $("#outName").val();
+    		  $.ajax({
+    			  url : "deleteFile",
+    			  type : "post",
+    			  data:{"outName":outName},
+    			  dataType : "json",
+    			  success : function(result) {
+    				  if (result.status == 1) {
+    					  alert("删除成功！");
+    				  }
+    				  else{
+    					  alert(result.message);
+    				  }
+    			  },
+    			  error : function() {
+    				  alert("请求失败！");
+    			  }
+    		  });
+    	  }
+       }); 
       
       
       

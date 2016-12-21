@@ -39,15 +39,16 @@ public class InitAction {
 		List<Zone> zoneList=zoneService.findZoneList(null, 10,0);
 		model.addAttribute("zoneList",zoneList);
 		
-		for (Zone zone : zoneList) {
+		//计算总数，这样写不好，增加了打开论坛页面的压力，导致经常报错
+		/*for (Zone zone : zoneList) {
 			for (Section section : zone.getSectionList()) {
 				Topic s_topic=new Topic(); 
 				s_topic.setSection(section);
-				Long totalCount=topicService.getTopicCount(s_topic);			//
+				Long totalCount=topicService.getTopicCount(s_topic);			
 				s_topic.setGood(1);
-				Long goodCount=topicService.getTopicCount(s_topic);			//
+				Long goodCount=topicService.getTopicCount(s_topic);			
 				s_topic.setGood(0);
-				Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			//
+				Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
 				
 				section.setTotalCount(totalCount);
 				section.setGoodCount(goodCount);
@@ -55,7 +56,7 @@ public class InitAction {
 				
 				sectionService.saveSection(section);
 			}
-		}
+		}*/
 		
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/forum");

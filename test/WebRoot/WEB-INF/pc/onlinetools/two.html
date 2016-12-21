@@ -4,47 +4,67 @@
 	<div th:fragment="twoDiv">
 		<div id="bootstrap-shubing">
 			<div id="mainContent" class="shubing-tool-wrapper">
-				<div class="shubing-toolName">每行文本的首尾增加相同字符工具</div>
+				<div class="shubing-toolName">自定义加密工具</div>
 				<div class="shubing-toolUsing shubing-clearfix">
 					<ul class="shubing-nav shubing-nav-tabs">
-						<li><a th:href="@{/tools/one}">Custom Encryption</a></li>
-						<li class="active"><a th:href="@{/tools/two}">Insert String</a></li>
+						<li><a th:href="@{/tools/one}">Insert String</a></li>
+						<li class="active"><a th:href="@{/tools/two}">Custom Encryption</a></li>
 					</ul>
-					<div class="shubing-leftBar">
-						<div class="title">原文本:</div>
-						<textarea id="startText" name="startText" th:text="${startText}">这是一个例子,this is a example</textarea>
-					</div>
-
-					<div class="shubing-operateLR">
-						<div class="OptDetail Button">
-							<p>行首增加文本：</p>
-							<input type="text" name="startChar" id="startChar" th:value="${startChar}" style="height:20px;width:80%"/>
-							<br/><br/>
-							<p>行尾增加文本：</p>
-							<input type="text" name="endChar" id="endChar" th:value="${endChar}" style="height:20px;width:80%"/>
-							<br/><br/>
-							<!-- <button id="insertStringBtn" class="shubing-btn shubing-btn-primary">提交</button> -->
-							<input type="button" id="insertStringBtn" class="shubing-btn shubing-btn-primary" value="提交"/>
-							<br/>
+					
+					<!-- <form id="cusKeyFm" method="post" th:action="@{/tools/customEncryption}"> -->
+						<div class="shubing-leftBar">
+							<div class="title">编码前:</div>
+							<textarea name="startPassText" id="startPassText" readonly="readonly"></textarea>
 						</div>
-					</div>
-
-					<div class="shubing-rightBar">
-						<div class="title">修改后:</div>
-						<textarea name="endText" id="endText" class="text_source" readonly="readonly"></textarea>
-					</div>
+	
+						<div class="shubing-operateLR">
+							<div class="OptDetail Button">
+								<a href="" class="shubing-file">导入原始txt文本
+			   						<input type="file" name="loadFile" id="loadFile" style="cursor:pointer"/>
+								</a>
+			   						<input type="hidden" id="inName" name="inName"/>
+			   						<input type="hidden" id="loadFileFlag" value="0"/>
+								<div style="text-align: center;">
+               						<span style="color: red;" id="loadFileErr"></span>
+               					</div>
+								<br/>
+								<p>自定义密匙：</p>
+									<input type="text" name="customKey" id="customKey" style="height:20px;width:80%" maxlength="8"
+									 onkeyup="this.value=this.value.replace(/\D/g,'')"/>
+								<div style="text-align: center;">
+               						<span style="color: red;" id="customKeyErr"></span>
+               					</div>
+								<br/><br/>
+									<input type="button" id="encryptionBtn" class="shubing-btn shubing-btn-primary" value="加/解密"/>
+								<br/><br/>
+									<input type="button" id="downloadBtn" class="shubing-btn shubing-btn-primary" value="下载加密文本"/>
+								<br/><br/>
+									<input type="hidden" id="outPath" name="outPath"/>
+									<input type="hidden" id="outName" name="outName"/>
+									<input type="button" id="deleteBtn" class="shubing-btn shubing-btn-primary" value="删除服务器文件"/>
+								<br/>
+							</div>
+						</div>
+	
+						<div class="shubing-rightBar">
+							<div class="title">编码后:</div>
+							<textarea name="endPassText" id="endPassText" class="text_source" readonly="readonly"></textarea>
+						</div>
+					<!-- </form> -->
 				</div>
-				 <div class="dddys" style="margin-top:10px; margin-bottom:25px;">
+				<div class="dddys" style="margin-top:10px; margin-bottom:25px;">
 			        <p class="ysxz">
 			        <b style="font-size:16px;">使用须知</b><br/>
-			        	1、设计初衷：在进行数据库插入数据操作时，要将原来的数据，每行开始加单引号，每行最后加单引号和逗号，重复操作差点累死我。于是就想着写了个小工具，现在正好把他搬到网站上。<br/>
-			    		2、使用说明：在左边文本框输入初始文本，中间的两个框框中输入首尾要增加的字符，最后点击【提交】，就会在右侧生成目标文本。<br/>
-			    		3、注意要点：原文本不能为空，空行也被算作是文本；行首、行尾增加的文本不能都为空。<br/>
-         				4、PS：其实还有一些操作本地文件的小工具，只是不能放到网站上。因为除了服务器以外，网站并不能访问任何电脑。<br/>
+			        	1、设计初衷：网上的加密工具都是固定的编码，而使用与运算编码，既简单又可安全，太实用了。<br/>
+			    		2、使用说明：加密方式是：将加密内容输入到本地txt文件中，点击【导入原始txt文本】导入，再输入一个不大于8位的自定义密钥（只能是数字），点击【提交】即可在服务器中生成加密的txt文件，点击【下载加密文本】就可以下载查看。服务器上的文件会在每晚的定时任务里自动删除，
+			    		当然也可以通过点击【删除服务器文件】手动删除。解密的方式同加密方式，只是导入原始txt文档时，导入加密的文本，输入同一个密匙，得到解密文本。<br/>
+			    		3、加密解密原理：将字符转换为ASCII编码，然后与自定义密钥进行二进制的与运算。根据进行两次相同的与运算就会得到原来数据的原理，解密方法也只是使用该密钥再次加密而已。<br/>
+         				4、PS：文本框中不能输入，因为直接的文本，会丢失字符格式，所以只能通过上传文件的方式加密；此外也可以使用多重密钥，比如先用1234加密，把加密文件再用6789加密。解密的时候先用6789解密，再用1234解密，就会得到原来的文件了。不过如此反人类的设计，估计没人会这么干吧。<br/>
         			</p>
-       			 </div>
+       			</div>
 			</div>
 		</div>
+		
 	</div>
 </body>
 </html>
