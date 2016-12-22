@@ -37,9 +37,9 @@
 								<br/><br/>
 									<input type="button" id="encryptionBtn" class="shubing-btn shubing-btn-primary" value="加/解密"/>
 								<br/><br/>
-									<input type="button" id="downloadBtn" class="shubing-btn shubing-btn-primary" value="下载加密文本"/>
+									<a th:href="@{/tools/printContract}" id="tempHref"></a>
+									<a th:href="@{/tools/printContract}" id="downloadHref" target="_blank"><input type="button" id="downloadBtn" class="shubing-btn shubing-btn-primary" value="下载加密文本"/></a>
 								<br/><br/>
-									<input type="hidden" id="outPath" name="outPath"/>
 									<input type="hidden" id="outName" name="outName"/>
 									<input type="button" id="deleteBtn" class="shubing-btn shubing-btn-primary" value="删除服务器文件"/>
 								<br/>
@@ -55,9 +55,11 @@
 				<div class="dddys" style="margin-top:10px; margin-bottom:25px;">
 			        <p class="ysxz">
 			        <b style="font-size:16px;">使用须知</b><br/>
-			        	1、设计初衷：网上的加密工具都是固定的编码，而使用与运算编码，既简单又可安全，太实用了。<br/>
-			    		2、使用说明：加密方式是：将加密内容输入到本地txt文件中，点击【导入原始txt文本】导入，再输入一个不大于8位的自定义密钥（只能是数字），点击【提交】即可在服务器中生成加密的txt文件，点击【下载加密文本】就可以下载查看。服务器上的文件会在每晚的定时任务里自动删除，
-			    		当然也可以通过点击【删除服务器文件】手动删除。解密的方式同加密方式，只是导入原始txt文档时，导入加密的文本，输入同一个密匙，得到解密文本。<br/>
+			        	1、设计初衷：网上的加密工具大部分是固定的编码，而使用与运算编码，既简单又可安全，太实用了。<br/>
+			    		2、使用说明：
+			    		<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加密方式是：将加密内容输入到本地txt文件中，点击【导入原始txt文本】导入，再输入一个不大于8位的自定义密钥（只能是数字），点击【提交】即可在服务器中生成加密的txt文件，点击【下载加密文本】就可以下载查看。服务器上的文件会在每晚的定时任务里自动删除，
+			    		当然也可以通过点击【删除服务器文件】手动删除。
+			    		<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解密的方式同加密方式，只是导入原始txt文档时，导入加密的文本，输入同一个密匙，得到解密文本。<br/>
 			    		3、加密解密原理：将字符转换为ASCII编码，然后与自定义密钥进行二进制的与运算。根据进行两次相同的与运算就会得到原来数据的原理，解密方法也只是使用该密钥再次加密而已。<br/>
          				4、PS：文本框中不能输入，因为直接的文本，会丢失字符格式，所以只能通过上传文件的方式加密；此外也可以使用多重密钥，比如先用1234加密，把加密文件再用6789加密。解密的时候先用6789解密，再用1234解密，就会得到原来的文件了。不过如此反人类的设计，估计没人会这么干吧。<br/>
         			</p>

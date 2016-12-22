@@ -29,11 +29,16 @@
     <param-value>
     	/WEB-INF/classes/resources/spring.xml
     	/WEB-INF/classes/resources/spring-security.xml
+    	/WEB-INF/classes/resources/spring-quartz.xml
     </param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+  
+  <!-- <listener>  
+	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>  
+  </listener>   -->
   
   <!-- springmvc前端控制器 -->
   <servlet>

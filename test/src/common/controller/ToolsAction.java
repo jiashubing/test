@@ -128,47 +128,6 @@ public class ToolsAction {
 		return result;
 	}
 	
-	/*@RequestMapping("/tools/customEncryption")
-	public String filepage(Model model,HttpServletRequest request
-			,@RequestParam(required = false) String inName
-			,@RequestParam(required = false) Integer customKey,
-			@RequestParam(required=false)Integer showId,
-			@AuthenticationPrincipal DbUser dbUser
-			)throws Exception{
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		}
-		if(showId == null){
-			showId = 2;
-		}
-		model.addAttribute("showId",showId); 
-		if(customKey == null){
-			return ValidatePcMobile.checkRequest(request, "/tools");
-		}
-		if(inName == null){
-			return ValidatePcMobile.checkRequest(request, "/tools");
-		}
-		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+inName+".txt";
-		String outName = DateUtil.getRadomStr();
-		String outPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+outName+".txt";
-		File cin =  new File(inPath);
-		File cout =  new File(outPath);
-		boolean flag = FileEcodeUtil.fileEncrypt(cin,cout,(int)customKey);
-		if(!flag){
-			//加密失败
-			return ValidatePcMobile.checkRequest(request, "/tools");
-		}
-		String startPassText = FileEcodeUtil.readFileByLines(inPath);
-		String endPassText = FileEcodeUtil.readFileByLines(outPath);
-		//删除临时生成的文件
-		FileEcodeUtil.deleteFile(inPath);
-		
-		model.addAttribute("startPassText", startPassText);
-		model.addAttribute("endPassText", endPassText);
-		model.addAttribute("outPath", outPath);
-		model.addAttribute("outName", outName);
-		return ValidatePcMobile.checkRequest(request, "/tools");
-	}*/
 	
 	/**
 	 * 异步 删除文件
@@ -195,7 +154,6 @@ public class ToolsAction {
 		}
 		return result;
 	}
-	
 	
 //	文件不能上传后台两次，所以改了，这个方法保留，毕竟那个CommonsMultipartFile很神奇
  /* @RequestMapping("/tools/customEncryption")
@@ -278,6 +236,18 @@ public class ToolsAction {
         result.setBody(ans);
 
         return result;
+    }
+	
+	@RequestMapping(value = "/tools/printContract")
+    public void cell(HttpServletResponse response,HttpServletRequest request,String outName) throws Exception {
+        String filePath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+outName+".txt";
+        byte[] bytes = FileEcodeUtil.File2byte(filePath);
+        response.setContentType("application/x-msdownload");
+        response.setHeader("Content-Disposition", "attachment;filename=" + "ttt.txt");
+        response.setContentLength(bytes.length);
+        response.getOutputStream().write(bytes);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
     }
 	
 	

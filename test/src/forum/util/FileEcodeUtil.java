@@ -1,6 +1,7 @@
 package forum.util;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -214,6 +215,39 @@ public class FileEcodeUtil {
     }
     
     /**
+     * 删除目录下的文件
+     * @param   sPath 被删除目录的文件路径
+     * @return  目录删除成功返回true，否则返回false
+     */
+    public static boolean deleteDirectoryChildren(String sPath) {
+    	//如果sPath不以文件分隔符结尾，自动添加文件分隔符
+    	if (!sPath.endsWith(File.separator)) {
+    		sPath = sPath + File.separator;
+    	}
+    	File dirFile = new File(sPath);
+    	//如果dir对应的文件不存在，或者不是一个目录，则退出
+    	if (!dirFile.exists() || !dirFile.isDirectory()) {
+    		return false;
+    	}
+    	boolean flag = true;
+    	//删除文件夹下的所有文件(包括子目录)
+    	File[] files = dirFile.listFiles();
+    	for (int i = 0; i < files.length; i++) {
+    		//删除子文件
+    		if (files[i].isFile()) {
+    			flag = deleteFile(files[i].getAbsolutePath());
+    			if (!flag) break;
+    		} //删除子目录
+    		else {
+    			flag = deleteDirectory(files[i].getAbsolutePath());
+    			if (!flag) break;
+    		}
+    	}
+    	if (!flag) return false;
+    	return true;
+    }
+    
+    /**
      * 把String写入到file中
      * @param xml
      * @param outFile
@@ -312,4 +346,39 @@ public class FileEcodeUtil {
         }
         return content;
     }
+	
+	/**
+	 * File to byte[]
+	 * @param filePath
+	 * @return
+	 */
+	public static byte[] File2byte(String filePath)  
+	{  
+		byte[] buffer = null;  
+		try  
+		{  
+			File file = new File(filePath);  
+			FileInputStream fis = new FileInputStream(file);  
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();  
+			byte[] b = new byte[1024];  
+			int n;  
+			while ((n = fis.read(b)) != -1)  
+			{  
+				bos.write(b, 0, n);  
+			}  
+			fis.close();  
+			bos.close();  
+			buffer = bos.toByteArray();  
+		}  
+		catch (FileNotFoundException e)  
+		{  
+			e.printStackTrace();  
+		}  
+		catch (IOException e)  
+		{  
+			e.printStackTrace();  
+		}  
+		return buffer;  
+	}  
+
 }
