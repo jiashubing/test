@@ -326,7 +326,9 @@ public class FileEcodeUtil {
         String tempString = null;
         try {
             file = new FileInputStream(fileName);
-            inputFileReader = new InputStreamReader(file, "GBK");
+            inputFileReader = new InputStreamReader(file);
+//            inputFileReader = new InputStreamReader(file, "UTF-8");
+//            inputFileReader = new InputStreamReader(file,"GBK"); 我的电脑上本地好像只有使用这个才行
             reader = new BufferedReader(inputFileReader);
             // 一次读入一行，直到读入null为文件结束
             while ((tempString = reader.readLine()) != null) {
