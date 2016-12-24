@@ -1,11 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <title>阿丙的私人订制</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" content=""/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/common.css" th:href="@{/css/mobile/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/schoolm.css" th:href="@{/css/mobile/css/schoolm.css}"/>
+    <title>云商学院首页</title>
 </head>
 <body>
-<h1>亲，不要看啦，人家还没有化妆呢！！</h1>
-</body>
 
+<div class="xwlv_tab_wrap">
+    <span class="xwlv_tab_inner">
+        <a class="on" href="" th:href="@{/index}">首页</a>
+        <a href="" th:href="@{/}">论坛</a>
+        <a href="" th:href="@{/}">助眠</a>
+        <a href="" th:href="@{/}">调查</a>
+        <a href="" th:href="@{/}">登录</a>
+    </span>
+</div>
+<div style="height: 44px;"></div>
+
+
+<!--1-->
+<div>
+    <p><img src="../mobile/images/pc1.jpg" th:src="@{/image/mobile/images/pc1.jpg}" width="100%"/></p>
+
+    <p class="pcone"><span style="font-size:50px; color:white;">欢迎来到我的网站</span></p>
+  
+</div>
+<!--1-->
+<!--2-->
+<div>
+    <div style="background-color:#ffb700; min-height:600px;">
+        这里应该写些什么东西啊。。。。
+    </div>
+</div>
+<!--2-->
+<!--3-->
+<div style="background:url(../mobile/images/pc3.jpg) no-repeat;  background-size: 100%; padding-top:20px; min-height:600px" 
+th:attr="style='background:url('+@{/image/mobile/images/pc3.jpg}+')  center 0 no-repeat;background-size: 100%; padding-top:20px; min-height:600px;'" >
+    这里也不知道该添加点什么
+    <p style="height:20px; clear:both"></p>
+</div>
+<!--3-->
+
+
+</body>
 </html>

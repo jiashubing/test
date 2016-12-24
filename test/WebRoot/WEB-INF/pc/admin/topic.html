@@ -106,9 +106,9 @@ function deleteTopics(){
 									<td style="text-align: center;vertical-align: middle;"><span class="topicid" th:text="${topic.id }"></span></td>
 									<td style="text-align: center;vertical-align: middle;"><span th:text="${topic.title }"></span></td>
 									<td style="text-align: center;vertical-align: middle;width: 110px;vertical-align: middle;">
-										<span th:text="${topic.user.nickName }"></span>
+										<span th:if="${topic.user!=null}" th:text="${topic.user.nickName }"></span>
 									</td>
-									<td style="text-align: center;vertical-align: middle;"><span th:text="${topic.section.name }"></span></td>
+									<td style="text-align: center;vertical-align: middle;"><span th:if="${topic.section != null}" th:text="${topic.section.name }"></span></td>
 									<td style="text-align: center;vertical-align: middle;"><span th:text="${topic.publishTime }"></span></td>
 									<td style="text-align: center;vertical-align: middle;"><span th:text="${topic.modifyTime }"></span></td>
 									<td style="text-align: center;vertical-align: middle;">

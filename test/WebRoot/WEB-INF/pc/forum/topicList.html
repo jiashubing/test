@@ -131,7 +131,7 @@
 									<span th:if="${topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id==topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
 										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 									</span>
-									<span  th:if="section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
+									<span  th:if="${section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
 										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 										<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 									</span>
@@ -188,7 +188,7 @@
 									<span th:if="${topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id==topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
 										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 									</span>
-									<span  th:if="section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
+									<span  th:if="${section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
 										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 										<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 									</span>
