@@ -1,19 +1,17 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8" />
-<title>阿丙的私人订制</title>
+    <meta charset="utf-8"/>
+    <title>阿丙的私人订制</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
 	<link rel="stylesheet"  href="forum/bootstrap/css/bootstrap.css" th:href="@{/css/pc/forum/bootstrap/css/bootstrap.css}"/>
 	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
-	<link rel="stylesheet" href="forum/css/shubingcsdn.css" th:href="@{/css/pc/forum/css/shubingbbs.css}" />
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 </head>
-<body>
-<img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
+<body><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/logo.png}"/>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
 </div>
 
@@ -28,165 +26,177 @@
 			</div>
 		</div>
 	</div>
-
 <div style="width: 1200px; margin: 40px auto 0 auto;">
-	<div id="shubing-topics-show" class="shubing-bbs">
-		<div class="detail_tbox">
-			<div class="detail_title">
-				<h1>
-					<span>【主题】</span> 
-					<span th:text="${topic.title }">帖子一</span>
-				</h1>
+	<div class="container-fluid" style="padding-left: 0px;padding-right: 0px;">
+		<div class="row-fluid">
+			<div class="span2">
+				<table style="width: 100%;" cellpadding="5px;">
+					<tr>
+						<td>
+							★楼主&nbsp;<a href="#" style="font-size: 9pt;color: black;"><strong><span th:unless="${topic==null||topic.user==null}" th:text="${topic.user.nickName }">赵云</span></strong></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span th:unless="${topic==null||topic.user==null}">
+								<span th:if="${topic.user.face==null||topic.user.face==''}">
+									<img th:if="${topic.user.sex=='男'}" 
+										alt="" src="images/user/user0.gif" th:src="@{/image/pc/forum/images/user/user0.gif}" style="width: 100px;height: 100px;" />
+									<img th:if="${topic.user.sex=='女'}"  
+										alt="" src="images/user/female.gif"  th:src="@{/image/pc/forum/images/user/female.gif}"  style="width: 100px;height: 100px;" />
+								</span>
+								<span th:unless="${topic.user.face==null||topic.user.face==''}">
+									<img alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
+								</span>
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							性别：<span th:text="${topic.user.sex }">男</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							邮箱：<span th:text="${topic.user.email }">123@qq.com</span>
+						</td>
+					</tr>
+					<tr>
+						<td>普通用户
+						<span th:if="${not #lists.isEmpty(topic.user.sectionList) &amp;&amp; topic.user.type!=2 }" style="color: black;">普通用户</span>
+							<!--<c:choose>
+									<c:when test="${topic.user.sectionList.size()==0&&topic.user.type!=2 }">
+										<font style="color: black;">普通用户</font>
+									</c:when>
+									<c:when test="${topic.user.sectionList.size()!=0&&topic.user.type!=2 }">
+										<font style="color: blue;">版主</font>
+										【<c:forEach items="${topic.user.sectionList }" var="section">
+					                  	  				${section.name }；
+					                  	 </c:forEach>】
+					                </c:when>
+									<c:otherwise>
+										<font style="color: red;">管理员</font>
+									</c:otherwise>
+								</c:choose>-->
+							</td>
+					</tr>
+				</table>
+			</div>
+			<div class="span10">
+				<table style="width: 100%;">
+					<tr style="height: 50px;">
+						<td>
+							【主题】:<strong><span th:text="${topic.title }">帖子一</span></strong>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right;">
+							发表时间:『<span th:text="${topic.publishTime }">2016-11-11</span>』
+						</td>
+					</tr>
+					<tr>
+						<td>
+							【内容】:
+							<div style="width: 982px;padding:6px; background-color: #F0F0F0" class="show_e">
+								<span id="topiccontent">祖国我爱你</span>
+								<script th:inline="javascript">
+									/*<![CDATA[*/
+									$("#topiccontent").html(/*[[${topic.content}]]*/);
+   									 /*]]>*/
+								</script>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
-		<div class="detailed">
-			<table border="0" cellspacing="0" cellpadding="0" class="post topic" data-is-topic-locked="false">
-				<colgroup>
-					<col width="180"></col>
-				</colgroup>
-				<tbody>
-					<tr>
-						<td rowspan="2" valign="top" class="wirter">
-							<dl class="user_info ">
-								<dt class="user_head">
-										
-									<span th:unless="${topic==null||topic.user==null}">
-										<span th:if="${topic.user.face==null||topic.user.face==''}">
-											<img th:if="${topic.user.sex=='男'}" 
-												alt="" src="images/user/user0.gif" th:src="@{/image/pc/forum/images/user/user0.gif}" style="width: 100px;height: 100px;" />
-											<img th:if="${topic.user.sex=='女'}"  
-												alt="" src="images/user/female.gif"  th:src="@{/image/pc/forum/images/user/female.gif}"  style="width: 100px;height: 100px;" />
-										</span>
-										<span th:unless="${topic.user.face==null||topic.user.face==''}">
-											<img alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
-										</span>
-									</span>
-								</dt>
-
-
-								<dd>
-									<!-- <span class="name2nick">我还未入门</span> -->
-									<span class="name2nick" th:unless="${topic==null||topic.user==null}" th:text="${topic.user.nickName }">赵云</span>
-								</dd>
-								
-								<dd>
-									性别：<span th:text="${topic.user.sex }">男</span>
-								</dd>
-								
-								<dd>
-									邮箱：<span th:text="${topic.user.email }" style="padding-right:20px;">123@qq.com</span>
-								</dd>
-
-								<dd class="showTittleDD"></dd>
-							</dl>
-						</td>
-						<td valign="top" class="post_info topic"
-							data-username="imfree2010" data-floor="">
-							<div class="data">
-								<span> 发表于：
-								<span th:text="${#calendars.format(topic.publishTime,'yyyy-MM-dd hh:mm:ss')}">2016-11-11</span></span>
-								<strong class="fr"> 楼主 </strong> 
-							</div>
-							<div class="post_body">
-								<div class="tag"></div>
-									<div style="width: 982px;padding:6px;" class="show_e">
-									<span id="topiccontent">祖国我爱你</span>
-									<script th:inline="javascript">
-										/*<![CDATA[*/
-										$("#topiccontent").html(/*[[${topic.content}]]*/);
-	   									 /*]]>*/
-									</script>
-								</div>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td valign="bottom">
-							<div class="control">
-								<div class="fr">
-									<a href="" class="quote" rel="nofollow">回复</a>
-								</div>
-								<span class="return_time">回复次数：6</span>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
-			<div th:each="reply:${replyList }">
-			<table border="0" cellspacing="0" cellpadding="0" class="post" data-is-topic-locked="false">
-				<colgroup>
-					<col width="180"></col>
-				</colgroup>
-				<tbody>
-					<tr>
-						<td rowspan="2" valign="top" class="wirter">
-							<dl class="user_info ">
-								<dt class="user_head">
-										
-									<span th:unless="${reply==null||reply.user==null}">
-										<span th:if="${reply.user.face==null||reply.user.face==''}">
-											<img th:if="${reply.user.sex=='男'}" 
-												alt="" src="images/user/user0.gif" th:src="@{/image/pc/forum/images/user/user0.gif}" style="width: 100px;height: 100px;" />
-											<img th:if="${reply.user.sex=='女'}"  
-												alt="" src="images/user/female.gif"  th:src="@{/image/pc/forum/images/user/female.gif}"  style="width: 100px;height: 100px;" />
-										</span>
-										<span th:unless="${reply.user.face==null||reply.user.face==''}">
-											<img alt="" src="${reply.user.face}" th:src="@{'/image/pc/forum/'+${reply.user.face}}" style="width: 100px;height: 100px;" />
-										</span>
-									</span>
-								</dt>
-								
-								<dd>
-									<span class="name2nick" th:unless="${reply==null||reply.user==null}" th:text="${reply.user.nickName }">赵云</span>
-								</dd>
-								
-								<dd>
-									性别：<span th:text="${reply.user.sex }">男</span>
-								</dd>
-								
-								<dd>
-									邮箱：<span th:text="${reply.user.email }" style="padding-right:20px;">123@qq.com</span>
-								</dd>
-
-								<dd class="showTittleDD"></dd>
-
-							</dl>
-
-						</td>
-						<td valign="top" class="post_info " data-username="Saleayas"
-							data-floor="1">
-							<div class="data">
-								<span class="fr"> #<span th:text="${pageNo*10+replyStat.count }">1</span></span> 
-								<span> 回复于： <span th:text="${#calendars.format(reply.publishTime,'yyyy-MM-dd hh:mm:ss')}">2016-11-11</span> </span>
+		<div th:each="reply:${replyList }">
+			<div class="row-fluid" style="margin-top: 20px;">
+				<div class="span2">
+					<table style="width: 100%;" cellpadding="5px;">
+						<tr>
+							<td>
+								▲<span th:text="${pageNo*10+replyStat.count+1 }">二</span>楼
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img th:if="${((topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='男')}" 
+										alt="" src="images/user/user0.gif" th:src="@{/image/pc/forum/images/user/user0.gif}" style="width: 100px;height: 100px;" />
+								<img th:if="${(topic.user.face==null||topic.user.face=='')&amp;&amp;topic.user.sex=='女'}"  
+										alt="" src="images/user/female.gif" th:src="@{/image/pc/forum/images/user/female.gif}" style="width: 100px;height: 100px;" />
+								<img th:unless="${topic.user.face==null||topic.user.face==''}"  
+										alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
+								<a href="#" style="font-size: 9pt;color: black;"><strong><span th:text="${reply.user.nickName }">诸葛亮</span></strong></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								性别：<span th:text="${reply.user.sex }">男</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								邮箱：<span th:text="${reply.user.email }">123@qq.com</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<!--<c:choose>
+										<c:when test="${reply.user.sectionList.size()==0&&reply.user.type!=2 }">
+											<font style="color: black;">普通用户</font>
+										</c:when>
+										<c:when test="${reply.user.sectionList.size()!=0&&reply.user.type!=2 }">
+											<font style="color: blue;">版主</font>
+											【<c:forEach items="${reply.user.sectionList }" var="section">
+						                  	  				${section.name }；
+						                  	 </c:forEach>】
+						                </c:when>
+										<c:otherwise>
+											<font style="color: red;">管理员</font>
+										</c:otherwise>
+									</c:choose>-->
+									普通用户
+								</td>
+						</tr>
+					</table>
+				</div>
+				<div class="span10">
+					<table style="width: 100%;">
+						<tr class="replytr">
+							<td style="text-align: right;">
+								<!--<c:choose>
+									<c:when test="${currentUser.id==section.master.id }">
+										<button class="shubing-btn shubing-btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
+									</c:when>
+									<c:when test="${currentUser.type==2 }">
+										<button class="shubing-btn shubing-btn-danger" onClick="javascript:deleteReply(${reply.id })">删除</button>
+									</c:when>
+									<c:otherwise>
+									</c:otherwise>
+								</c:choose>-->
+								<button class="shubing-btn shubing-btn-danger" onClick="javascript:deleteReply(this)">删除</button>
+								回复时间:『<span th:text="${reply.publishTime }">2016-11-11</span>』
+							</td>
+							<td>
 								<input class="replyid" th:value="${reply.id }" type="hidden"/>
-							</div>
-							<div class="post_body">
-								<div style="width: 982px;padding:6px;" class="show_e">
-									<span class="replycontent">哈哈哈，我也爱</span>
-									<script th:inline="javascript">
-										/*<![CDATA[*/
-										$(".replycontent:last").html(/*[[${reply.content}]]*/);
-	   									 /*]]>*/
-									</script>
-								</div>
-							</div>
-
-						</td>
-					</tr>
-					<tr>
-						<td valign="bottom">
-							<div class="control">
-								<div class="fr">
-									<a href="" rel="nofollow">回复</a> | 
-									<a href="" rel="nofollow"><span style="color:red">删除</span> </a>
-								</div>
+							</td>
+						</tr>
+						<tr>
+						<td>
+							<div style="width: 982px;padding:6px; background-color: #F0F0F0" class="show_e">
+								<span class="replycontent">哈哈哈，我也爱</span>
+								<script th:inline="javascript">
+									/*<![CDATA[*/
+									$(".replycontent:last").html(/*[[${reply.content}]]*/);
+   									 /*]]>*/
+								</script>
 							</div>
 						</td>
 					</tr>
-				</tbody>
-			</table>
+				</table>
 			</div>
+		</div>
 		</div>
 	</div>
 	<div class="pagination alternate" align="center">
@@ -272,9 +282,10 @@
 			</tr>
 		</table>
 	</div>
-	</div>
-	
-	</div>
+</div>
+</div>
+
+
 <div th:include="pc/loginPopup::footerDiv" class="footer">
     <p>阿丙工作室</p>
     <p>联系邮箱：jiashubing@foxmail.com</p>
@@ -287,7 +298,7 @@
 <!--登录弹窗end-->
 <div id="asaimsgbg" class="AsaiDivBG" style="display: none"
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
-
+</body>
 <script th:inline="javascript">
 
    function saveReply(){
@@ -301,6 +312,7 @@
     }
     editor.sync();
     var len = $("#kindcontent").val().length;
+    alert(len);
     if (10 > len) {
 		alert("最少输入10个字符！");
 		return false;
@@ -322,5 +334,4 @@
 <script charset="utf-8" src="pc/kindeditor-4.1.10/kindeditor-min.js" th:src="@{/js/pc/kindeditor-4.1.10/kindeditor-min.js}"></script>
 <script charset="utf-8" src="pc/kindeditor-4.1.10/lang/zh_CN.js" th:src="@{/js/pc/kindeditor-4.1.10/lang/zh_CN.js}"></script>
 <script charset="utf-8" src="pc/kindeditor-4.1.10/init.js"  th:src="@{/js/pc/kindeditor-4.1.10/init.js}"></script>
-</body>
 </html>

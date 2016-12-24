@@ -19,10 +19,13 @@ import forum.util.ImgUtil;
 @Lazy(false) 
 public class QuartzService {
 
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");  
+//	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");  
 	
 	 @Value("#{configProperties['http.windows']}")  
 	 private String windowsUrl;   
+	 
+	 @Value("#{configProperties['http.linux']}")  
+	 private String linuxUrl;   
 	
 //	private static final String toolsPath = (((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest())
 //			.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/";     
@@ -42,12 +45,12 @@ public class QuartzService {
 //		System.out.println("************toolsPath" + toolsPath);
 //		String inPath2 = (((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest()).getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/";    
 //		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/";
-		String inPath = windowsUrl+ImgUtil.TOOLS_PATH;
-		System.out.println(windowsUrl);  
-		System.out.println(inPath);  
+		String inPath = linuxUrl+ImgUtil.TOOLS_PATH;
+//		System.out.println(windowsUrl);  
+//		System.out.println(inPath);  
 //		System.out.println("inPath = "+inPath);
 		FileEcodeUtil.deleteDirectoryChildren(inPath);
-		System.out.println("*******************############ " + dateFormat.format(new Date()));  
+//		System.out.println("*******************############ " + dateFormat.format(new Date()));  
 	}  
 
 }

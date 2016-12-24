@@ -1,0 +1,48 @@
+#shubing-topics-show,.shubing-bbs blockquote,.shubing-bbs code,.shubing-bbs dd,.shubing-bbs div,.shubing-bbs dl,.shubing-bbs dt,.shubing-bbs fieldset,.shubing-bbs form,.shubing-bbs h1,.shubing-bbs h2,.shubing-bbs h3,.shubing-bbs h4,.shubing-bbs h5,.shubing-bbs h6,.shubing-bbs label,.shubing-bbs legend,.shubing-bbs li,.shubing-bbs p,.shubing-bbs pre,.shubing-bbs td,.shubing-bbs th,.shubing-bbs ul{list-style:none;margin:0;padding:0;border:none;outline:0 none}
+#shubing-topics-show{background:#f5f5f5;color:#333;font:400 12px/24px Helvetica,Tahoma,Arial,sans-serif;text-decoration:none}
+.shubing-bbs img{border:none}
+.shubing-bbs a:link,.shubing-bbs a:visited{color:#335aa4;text-decoration:none}
+.shubing-bbs a:active,.shubing-bbs a:hover{color:#ca0000;text-decoration:underline}
+.shubing-bbs .fl{float:left}
+.shubing-bbs .fr{float:right}
+.shubing-bbs .tl{text-align:left!important}
+.shubing-bbs .tc{text-align:center!important}
+.shubing-bbs .tr{text-align:right!important}
+.shubing-bbs .more{float:right;display:block;font-size:12px}
+.shubing-bbs .detail_title{margin:0 0 10px 0;padding:5px 10px;background:#069;color:#fff;overflow:hidden;display:block}
+.shubing-bbs .detail_title:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.shubing-bbs .detail_title .fr{margin-top:3px}
+.shubing-bbs .detail_title .fr .manage-toggle{padding-bottom:2px}
+.shubing-bbs .detail_title h1{float:left;font-size:15px;line-height:24px;width:730px;word-break:break-all;word-wrap:break-word}
+.shubing-bbs .detail_title select{border:solid 1px #7f9db9}
+.shubing-bbs .detail_title .fav{padding:2px 5px;border:solid 1px #7f9db9;background:#fff;color:#333;text-decoration:none}
+.shubing-bbs .detail_title .fav img{margin:0 2px 0 0;vertical-align:middle}
+.shubing-bbs .detailed table{width:100%;margin:0 0 8px 0;border:1px solid #A9CBEE}
+.shubing-bbs .detailed table .wirter{text-align:center;max-width:180px;background:#eff4fb;border-right:1px solid #A9CBEE}
+.shubing-bbs .detailed table .wirter dd img{vertical-align:middle}
+.shubing-bbs .detailed table .user_info{margin:0 auto;padding:10px 0 10px 26px;text-align:left}
+.shubing-bbs .detailed table .user_info .showTittleDD span{position:relative}
+.shubing-bbs .detailed table .user_info .showTittle{position:absolute;text-align:center;width:252px;background-color:#fff;border:2px #DDD solid;box-shadow:0 2px 2px rgba(0,0,0,.1);left:-55px;top:33px;z-index:100;vertical-align:top;padding:20px;display:none;min-height:100px}
+.expert_point_main .showTittle:hover .smallTittle{display:inline-block}
+.shubing-bbs .detailed table .user_head{position:relative;width:127px}
+.shubing-bbs .detailed table .user_head img{mix-width:160px;mix-height:160px;padding:1px;border:solid 1px #ccc}
+.shubing-bbs .detailed table .data{border-bottom:1px solid #A9CBEE;padding:0 10px}
+.shubing-bbs .detailed table .control{height:28px;background:#eff4fb;border-top:1px solid #A9CBEE;padding:0 10px;line-height:28px}
+.shubing-bbs .detailed table .control a{margin:0 2px;color:#333}
+.shubing-bbs .detailed table .control .fr .manage-toggle{position:relative}
+.shubing-bbs .detailed table .post_body img{max-width:750px}
+.shubing-bbs .detailed table .post_body img.image_border{margin:10px 0 0;padding:1px;border:1px #CCC solid}
+.shubing-bbs .detailed img.avatar{max-width:120px;max-height:120px}
+.shubing-bbs .post .close_rate{display:none}
+.shubing-bbs .post.topic .close_rate{display:block}
+.shubing-bbs .post.deleted{display:none}
+.shubing-bbs .post_body{font-size:14px;word-wrap:break-word;overflow:hidden;padding:10px;min-height:170px}
+.shubing-bbs .post_body .deleted_message{border:1px solid #CCC;background-color:#EFEFEF;color:#B00;padding:5px 15px;margin:10px 0}
+.shubing-bbs .post_body .modified_message{color:#AAA;text-align:center;margin:5px auto;font-size:12px;border:1px #ccc solid;width:340px;background:#F7F7F7}
+.shubing-bbs .post_body fieldset{font-size:12px;border:1px solid #CCC;padding:0 5px 5px;margin:0 0 5px 0;overflow-x:hidden;word-wrap:break-word;word-break:break-word}
+.shubing-bbs .post_body fieldset legend{color:#666;padding:0 10px}
+.shubing-bbs input.text{height:22px;margin:0 5px 0 0;padding:0 5px;border:solid 1px #ccc;color:#333;font-size:12px;line-height:22px;outline:0}
+.topic_show_posts{position:relative}
+.topic_show_posts .smallTittle{position:absolute;left:-10px;top:5px;text-align:center;width:130px;height:32px;background-color:#fff;line-height:32px;border:2px #DDD solid;box-shadow:0 2px 2px rgba(0,0,0,.1);display:none;z-index:999}
+.topic_show_user_level{margin-top:-3px}
+.shubing-bbs .post_body .tag{margin-bottom:10px;margin-top:10px;display:block}
