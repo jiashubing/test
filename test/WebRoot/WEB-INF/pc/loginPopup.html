@@ -23,7 +23,6 @@
                            placeholder="请输入您的密码" type="password"/>
 
                 </div>
-                <!-- <div class="user-form__href" align="right"><a id="goToRegister" href="javascript:void(0)">免费注册</a></div> -->
                 <div class="user-form__href" th:align="right"><a th:href="@{/regist}">注册</a></div>
                 <button id="btn_login" class="sign-in__button user-form__button" name="btn_login" type="submit">
                     登录
@@ -56,9 +55,13 @@
 			<li id="userLi" style="padding:0px;display:block;"
 				th:style="${dbUser==null}?'display:none;':'padding:0px 0px 0px 20px;'">
 				
-				<a id="memberLi" href="#">
-					<img class="lodingimg" th:if="${dbUser!=null &amp;&amp; dbUser.user!=null}" src="images/toux.png" th:src="@{'/image/pc/forum/'+${dbUser.user.face}}" width="100%"/>
-					<img class="lodingimg" th:if="${dbUser!=null&amp;&amp;dbUser.user==null}" src="images/toux.png" th:src="@{/image/pc/images/toux.png}" width="100%"/>
+				<a th:if="${dbUser!=null &amp;&amp; dbUser.user!=null}" id="memberLi" href="#">
+					<img class="lodingimg" th:if="${dbUser.user.face!=null  &amp;&amp; dbUser.user.face!=''}" src="images/toux.png" th:src="@{'/image/pc/forum/'+${dbUser.user.face}}" width="100%"/>
+					<span th:if="${dbUser.user.face==null || dbUser.user.face==''}">
+						<img class="lodingimg" th:if="${dbUser.user.sex==null || dbUser.user.sex=='未知' || dbUser.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" width="100%"/>
+						<img class="lodingimg" th:if="${dbUser.user.sex!=null &amp;&amp; dbUser.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" width="100%"/>
+						<img class="lodingimg" th:if="${dbUser.user.sex!=null &amp;&amp; dbUser.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" width="100%"/>
+					</span>
 				</a>
 				
 				<p style="display: none" class="zhizheni"><img src="images/lodingj.png" th:src="@{/image/pc/images/lodingj.png}" width="18px" height="7px"/></p>

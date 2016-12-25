@@ -3,20 +3,14 @@ package common.controller;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Random;
-import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FileUtils;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
-import org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -153,8 +147,10 @@ public class HomeAction {
 
 		if(sex==1){
 			tmpUser.setSex("男");
-		}else{
+		}else if(sex==0){
 			tmpUser.setSex("女");
+		}else{
+			tmpUser.setSex("未知");
 		}
 		tmpUser.setNickName(nickName);
 		tmpUser.setTrueName(trueName);
