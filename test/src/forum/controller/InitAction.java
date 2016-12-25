@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import config.ValidatePcMobile;
 import forum.po.DbUser;
-import forum.po.Section;
-import forum.po.Topic;
 import forum.po.Zone;
 import forum.service.SectionService;
 import forum.service.TopicService;

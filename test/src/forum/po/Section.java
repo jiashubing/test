@@ -31,9 +31,9 @@ public class Section {
 	private String logo;		//
 	private List<Topic> topicList=new ArrayList<Topic>();
 	private Zone zone;			//
-	private Long totalCount;
-	private Long goodCount;
-	private Long noReplyCount;
+	private Long totalCount;	//帖子松鼠
+	private Long goodCount;		//精华总数
+	private Long noReplyCount;	//未回复总数
 	/*private Section parent;*/		//
 	/*private List<Section> sectionList=new ArrayList<Section>();*/
 	

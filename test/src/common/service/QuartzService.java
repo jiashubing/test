@@ -1,17 +1,20 @@
 package common.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
+import forum.po.Section;
+import forum.po.Topic;
+import forum.po.Zone;
+import forum.service.SectionService;
+import forum.service.TopicService;
+import forum.service.ZoneService;
 import forum.util.FileEcodeUtil;
 import forum.util.ImgUtil;
 
@@ -19,38 +22,51 @@ import forum.util.ImgUtil;
 @Lazy(false) 
 public class QuartzService {
 
-//	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");  
 	
 	 @Value("#{configProperties['http.windows']}")  
 	 private String windowsUrl;   
 	 
 	 @Value("#{configProperties['http.linux']}")  
 	 private String linuxUrl;   
+	 
+	 @Resource(name="zoneServiceImpl")
+	 private ZoneService zoneService;
+		
+	 @Resource(name="topicServiceImpl")
+	 private TopicService topicService;
 	
-//	private static final String toolsPath = (((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest())
-//			.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/";     
-
-//	@Scheduled(cron = "0 */01 * * * *")//每十分钟执行一次  
-//	public void reportCurrentTime() {  
-//		System.out.println("The time is now " + dateFormat.format(new Date()));  
-//	}  
-//	  
-//	@Scheduled(cron = "0-59 * * * * *")//每秒执行一次  
-//	public void reportCurrentTime2() {  
-//		System.out.println("****************** " + dateFormat.format(new Date()));  
-//	}  
+	 @Resource(name="sectionServiceImpl")
+	 private SectionService sectionService;
+	
+	@Scheduled(cron = "0 */60 * * * *")//每六十分钟执行一次  
+	public void reportCurrentTime() {  
+		List<Zone> zoneList=zoneService.findZoneList(null, 10,0);
+		
+		//定时任务，计算帖子总数
+		for (Zone zone : zoneList) {
+			for (Section section : zone.getSectionList()) {
+				Topic s_topic=new Topic(); 
+				s_topic.setSection(section);
+				Long totalCount=topicService.getTopicCount(s_topic);			
+				s_topic.setGood(1);
+				Long goodCount=topicService.getTopicCount(s_topic);			
+				s_topic.setGood(0);
+				Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
+				
+				section.setTotalCount(totalCount);
+				section.setGoodCount(goodCount);
+				section.setNoReplyCount(noReplyCount);
+				
+				sectionService.saveSection(section);
+			}
+		}
+		
+	}  
 	
 	@Scheduled(cron = "0 10 2 * * ?")//每天2：10触发
 	public void reportCurrentTime3() {  
-//		System.out.println("************toolsPath" + toolsPath);
-//		String inPath2 = (((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest()).getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/";    
-//		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/";
 		String inPath = linuxUrl+ImgUtil.TOOLS_PATH;
-//		System.out.println(windowsUrl);  
-//		System.out.println(inPath);  
-//		System.out.println("inPath = "+inPath);
 		FileEcodeUtil.deleteDirectoryChildren(inPath);
-//		System.out.println("*******************############ " + dateFormat.format(new Date()));  
 	}  
 
 }

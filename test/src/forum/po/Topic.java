@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -32,12 +31,13 @@ public class Topic {
 	private int id;						//
 	private Section section;			//
 	private User user;					//
-	private String title;				//
-	private String content;				//
-	private Date publishTime;			//
-	private Date modifyTime;			//
-	private int good=0;					//
-	private int top=0;					//
+	private String title;				//标题
+	private String content;				//内容
+	private Date publishTime;			//发表时间
+	private Date modifyTime;			//最新时间
+	private int good=0;					//是否精华
+	private int top=0;					//是否置顶
+	private long replySum=0;					//回复总数
 	private List<Reply> replyList=new ArrayList<Reply>();
 	
 	@Id
@@ -109,6 +109,12 @@ public class Topic {
 	public void setReplyList(List<Reply> replyList) {
 		this.replyList = replyList;
 	}
+	public long getReplySum() {
+		return replySum;
+	}
+	public void setReplySum(long replySum) {
+		this.replySum = replySum;
+	}
 	public int getGood() {
 		return good;
 	}
@@ -121,5 +127,6 @@ public class Topic {
 	public void setTop(int top) {
 		this.top = top;
 	}
+	
 	
 }

@@ -60,6 +60,12 @@ public class ReplyAction {
 		if(replyTopicId!=null){
 			Topic topic = topicService.findTopicById(replyTopicId);
 			topic.setModifyTime(new Date());
+			Long tmp =replyService.getReplyCountByTopicId(replyTopicId);
+			if(tmp == null){
+				topic.setReplySum(0);
+			}else{
+				topic.setReplySum(replyService.getReplyCountByTopicId(replyTopicId));
+			}
 			topicService.saveTopic(topic);
 			reply.setTopic(topic);
 		}
