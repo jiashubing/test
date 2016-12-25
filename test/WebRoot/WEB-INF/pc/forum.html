@@ -55,8 +55,8 @@
 												<div style="margin: 10px auto;"> <a href="# " th:href="@{/forum/topicList(sectionId=${section.id})}">
 													<span style="font-size: 30px;font-weight: bold;" th:text="${section.name }">作者公告</span></a></div>
 												<span style="font-size: 12px;" th:text="'帖子总数：'+${section.totalCount}">帖子总数：3</span>
-												<span style="font-size: 12px;" th:text="'精华帖子0：'+${section.goodCount}">精华帖子：3</span>
-												<span style="font-size: 12px;" th:text="'未回复：'+${section.noReplyCount}">未回复：3</span>
+												<span style="font-size: 12px;" th:text="'&nbsp;&nbsp;精华帖子：'+${section.goodCount}">精华帖子：3</span>
+												<span style="font-size: 12px;" th:text="'&nbsp;&nbsp;未回复：'+${section.noReplyCount}">未回复：3</span>
 												<!-- <span style="font-size: 12px;" th:text="'版主：'+${section.master.nickName }">版主：Shubing</span> -->
 											</div>
 										</li>

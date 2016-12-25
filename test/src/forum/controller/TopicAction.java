@@ -162,7 +162,26 @@ public class TopicAction {
     @ResponseBody
     public Result deleteTopicAdmin(Integer topicId,HttpServletRequest request) {
         Result result = new Result();
+        
+        //更新小版块对应的数目
+        Topic tmp = topicService.findTopicById(topicId);
+        Section section = tmp.getSection();
+        
         topicService.deleteTopicById(topicId);
+        
+        Topic s_topic = new Topic();
+		s_topic.setSection(section);
+		Long totalCount=topicService.getTopicCount(s_topic);			
+		s_topic.setGood(1);
+		Long goodCount=topicService.getTopicCount(s_topic);			
+		s_topic.setGood(0);
+		Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
+		section.setTotalCount(totalCount);
+		section.setGoodCount(goodCount);
+		section.setNoReplyCount(noReplyCount);
+		sectionService.saveSection(section);
+		
+		
         result.setStatus(1);
         return result;
     }
@@ -174,7 +193,25 @@ public class TopicAction {
 	@ResponseBody
 	public Result deleteTopicForum(Integer topicId,HttpServletRequest request) {
 		Result result = new Result();
-		topicService.deleteTopicById(topicId);
+		
+		//更新小版块对应的数目
+        Topic tmp = topicService.findTopicById(topicId);
+        Section section = tmp.getSection();
+        
+        topicService.deleteTopicById(topicId);
+        
+        Topic s_topic = new Topic();
+		s_topic.setSection(section);
+		Long totalCount=topicService.getTopicCount(s_topic);			
+		s_topic.setGood(1);
+		Long goodCount=topicService.getTopicCount(s_topic);			
+		s_topic.setGood(0);
+		Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
+		section.setTotalCount(totalCount);
+		section.setGoodCount(goodCount);
+		section.setNoReplyCount(noReplyCount);
+		sectionService.saveSection(section);
+		
 		result.setStatus(1);
 		return result;
 	}
@@ -234,10 +271,21 @@ public class TopicAction {
 		if(section != null){
 			topic.setSection(section);
 		}
+		
 		topic.setPublishTime(new Date());
 		topic.setModifyTime(new Date());
 		
 		topic = topicService.saveTopic2(topic);
+		
+		//更新小版块对应的数目
+		Topic s_topic = new Topic();
+		s_topic.setSection(section);
+		Long totalCount=topicService.getTopicCount(s_topic);			
+		s_topic.setGood(0);
+		Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
+		section.setTotalCount(totalCount);
+		section.setNoReplyCount(noReplyCount);
+		sectionService.saveSection(section);
 		
 		return "redirect:/forum/details?id="+topic.getId();
 	}
@@ -262,6 +310,17 @@ public class TopicAction {
 			topic.setTop(topicTop);
 		}
 		topicService.saveTopic(topic);
+		
+		//更新小版块对应的数目
+		Section section = topic.getSection();
+		Topic s_topic = new Topic();
+		s_topic.setGood(1);
+		Long goodCount=topicService.getTopicCount(s_topic);			
+		s_topic.setGood(0);
+		Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
+		section.setGoodCount(goodCount);
+		section.setNoReplyCount(noReplyCount);
+		sectionService.saveSection(section);
 		
 		//重定向时传递参数
 		return "redirect:/forum/topicList?sectionId="+sectionId+"&pageNo="+pageNo;

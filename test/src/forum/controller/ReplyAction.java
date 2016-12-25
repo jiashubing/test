@@ -41,7 +41,21 @@ public class ReplyAction {
 	@ResponseBody
 	public Result deleteReply(Integer replyId,HttpServletRequest request) {
 		Result result = new Result();
+		
+		Reply reply = replyService.findReplyById(replyId);
+		Topic topic = reply.getTopic();
+		
 		replyService.deleteReplyById(replyId);
+		
+		topic.setModifyTime(new Date());
+		Long tmp =replyService.getReplyCountByTopicId(topic.getId());
+		if(tmp == null){
+			topic.setReplySum(0);
+		}else{
+			topic.setReplySum(tmp);
+		}
+		topicService.saveTopic(topic);
+		
 		result.setStatus(1);
 		return result;
 	}
@@ -64,11 +78,12 @@ public class ReplyAction {
 			if(tmp == null){
 				topic.setReplySum(0);
 			}else{
-				topic.setReplySum(replyService.getReplyCountByTopicId(replyTopicId));
+				topic.setReplySum(tmp);
 			}
 			topicService.saveTopic(topic);
 			reply.setTopic(topic);
 		}
+		
 		if(dbUser != null){
 			reply.setUser(dbUser.getUser());
 		}
