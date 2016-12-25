@@ -1,6 +1,7 @@
 package common.controller;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Random;
 import java.util.UUID;
 
@@ -116,7 +117,17 @@ public class HomeAction {
 
 		//保存图片到本地，并且在数据库中赋值为路径
 		if (face!=null) {
-			if(ImageIO.read(face.getInputStream())==null){throw new Exception("上传文件不是图片！");}
+			InputStream tmpStream = null;
+			try {
+				tmpStream = face.getInputStream();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			} finally{
+				if(tmpStream != null){
+					tmpStream.close();
+				}
+			}
+			if(ImageIO.read(tmpStream)==null){throw new Exception("上传文件不是图片！");}
 			if(face.getSize()==0){throw new Exception("文件为空！");}
 			String realPath=request.getSession().getServletContext().getRealPath(ImgUtil.FORUM_PATH+ImgUtil.USER_FACE);
 			String imgName = DateUtil.getRadomStr();

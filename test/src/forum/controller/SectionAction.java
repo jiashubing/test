@@ -1,6 +1,8 @@
 package forum.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -118,7 +120,22 @@ public class SectionAction {
 		
 		//保存图片到本地，并且在数据库中赋值为路径
 		if (logo!=null) {
-			if(ImageIO.read(logo.getInputStream())==null){throw new Exception("上传文件不是图片！");}
+			InputStream tmpStream = null;
+			try {
+				tmpStream = logo.getInputStream();
+				if(ImageIO.read(tmpStream)==null){throw new Exception("上传文件不是图片！");}
+				tmpStream.close();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}finally{
+				try {
+					if(tmpStream != null){
+						tmpStream.close();
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 			if(logo.getSize()==0){throw new Exception("文件为空！");}
 			//如果是修改section的话，如果原来有logo，需要把原来的logo删除掉
 			this.deleteSectionLogo(secId,request);

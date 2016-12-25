@@ -254,16 +254,30 @@ public class FileEcodeUtil {
      */
 	public static boolean writeStrToFile(String xml,File outFile){
 		boolean flag = false;
+		FileOutputStream fos = null;
+		Writer os = null;
         try {  
-            FileOutputStream fos = new FileOutputStream(outFile);
-            Writer os = new OutputStreamWriter(fos, "UTF-8");
+            fos = new FileOutputStream(outFile);
+            os = new OutputStreamWriter(fos, "UTF-8");
             os.write(xml);
             os.flush();
+            os.close();
             fos.close();
             flag = true;
         } catch (FileNotFoundException e) {  
             e.printStackTrace();  
-        } catch (IOException e) {  
+        } catch (IOException e) {
+    		try {
+    			if(os!=null) {
+    				os.flush();
+    				os.close();
+    			}
+    			if(fos!=null) {
+    				fos.close();
+    			}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
             e.printStackTrace();  
         } 
         return flag;
@@ -278,11 +292,13 @@ public class FileEcodeUtil {
 	 */
 	public static String modifyString(File file,String startChar,String endChar){
 		String ans="";
+		InputStreamReader read = null;
+		BufferedReader bufferedReader = null;
 		try {
             String encoding="UTF-8";
             if(file.isFile() && file.exists()){ //判断文件是否存在
-                InputStreamReader read = new InputStreamReader(new FileInputStream(file),encoding);//考虑到编码格式
-                BufferedReader bufferedReader = new BufferedReader(read);
+                read = new InputStreamReader(new FileInputStream(file),encoding);//考虑到编码格式
+                bufferedReader = new BufferedReader(read);
                 String lineTxt = null;
                 //写入新文件
 //                FileWriter writer = new FileWriter("D:\\smc_menu123.unl", true);
@@ -292,6 +308,7 @@ public class FileEcodeUtil {
 //                    writer.write(temp+'\n');        //写入新文件
                 }
                 read.close();
+                bufferedReader.close();
 //                writer.close();
 //                System.out.println("执行成功");
             }else{
@@ -300,6 +317,18 @@ public class FileEcodeUtil {
         } catch (Exception e) {
 //            System.out.println("读取文件内容出错");
             e.printStackTrace();
+        }finally{
+        	try {
+				if(read!=null){
+					read.close();
+				}
+				if(bufferedReader!=null){
+					bufferedReader.close();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
 		return ans;
 	}
@@ -335,15 +364,19 @@ public class FileEcodeUtil {
                 content += tempString;
             }
             reader.close();
+            inputFileReader.close();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e1) {
-                }
+            try {
+            	if (reader != null) {
+            		reader.close();
+            	}
+            	if (inputFileReader != null) {
+            		inputFileReader.close();
+            	}
+            } catch (IOException e1) {
             }
         }
         return content;
@@ -357,11 +390,13 @@ public class FileEcodeUtil {
 	public static byte[] File2byte(String filePath)  
 	{  
 		byte[] buffer = null;  
+		FileInputStream fis = null;
+		ByteArrayOutputStream bos  = null;
 		try  
 		{  
 			File file = new File(filePath);  
-			FileInputStream fis = new FileInputStream(file);  
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();  
+			fis = new FileInputStream(file);  
+			bos = new ByteArrayOutputStream();  
 			byte[] b = new byte[1024];  
 			int n;  
 			while ((n = fis.read(b)) != -1)  
@@ -380,6 +415,18 @@ public class FileEcodeUtil {
 		{  
 			e.printStackTrace();  
 		}  
+		finally{
+			try {
+				if(fis!=null){
+					fis.close();
+				}
+				if(bos != null){
+					bos.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		return buffer;  
 	}  
 

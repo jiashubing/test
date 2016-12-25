@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import config.ValidatePcMobile;
 import forum.po.DbUser;
 import forum.po.Zone;
-import forum.service.SectionService;
-import forum.service.TopicService;
 import forum.service.ZoneService;
 
 @Controller
@@ -23,12 +21,6 @@ public class InitAction {
 	@Resource(name="zoneServiceImpl")
 	private ZoneService zoneService;
 	
-	@Resource(name="topicServiceImpl")
-	private TopicService topicService;
-	
-	@Resource(name="sectionServiceImpl")
-	private SectionService sectionService;
-	
 	@RequestMapping("/forum")
 	public String loadIndex(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
 		if(dbUser != null){
@@ -36,25 +28,6 @@ public class InitAction {
 		}
 		List<Zone> zoneList=zoneService.findZoneList(null, 10,0);
 		model.addAttribute("zoneList",zoneList);
-		
-		//计算总数，这样写不好，增加了打开论坛页面的压力，导致经常报错
-		/*for (Zone zone : zoneList) {
-			for (Section section : zone.getSectionList()) {
-				Topic s_topic=new Topic(); 
-				s_topic.setSection(section);
-				Long totalCount=topicService.getTopicCount(s_topic);			
-				s_topic.setGood(1);
-				Long goodCount=topicService.getTopicCount(s_topic);			
-				s_topic.setGood(0);
-				Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
-				
-				section.setTotalCount(totalCount);
-				section.setGoodCount(goodCount);
-				section.setNoReplyCount(noReplyCount);
-				
-				sectionService.saveSection(section);
-			}
-		}*/
 		
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/forum");

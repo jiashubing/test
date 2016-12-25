@@ -2,6 +2,8 @@ package common.controller;
 
 
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -239,15 +241,30 @@ public class ToolsAction {
     }
 	
 	@RequestMapping(value = "/tools/printContract")
-    public void cell(HttpServletResponse response,HttpServletRequest request,String outName) throws Exception {
+    public void cell(HttpServletResponse response,HttpServletRequest request,String outName) {
         String filePath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+outName+".txt";
-        byte[] bytes = FileEcodeUtil.File2byte(filePath);
-        response.setContentType("application/x-msdownload");
-        response.setHeader("Content-Disposition", "attachment;filename=" + "ttt.txt");
-        response.setContentLength(bytes.length);
-        response.getOutputStream().write(bytes);
-        response.getOutputStream().flush();
-        response.getOutputStream().close();
+        OutputStream out = null;
+        try {
+			out = response.getOutputStream();
+	        byte[] bytes = FileEcodeUtil.File2byte(filePath);
+	        response.setContentType("application/x-msdownload");
+	        response.setHeader("Content-Disposition", "attachment;filename=" + "ttt.txt");
+	        response.setContentLength(bytes.length);
+	        out.write(bytes);
+	        out.flush();
+	        out.close();
+        } catch (IOException e) {
+        	e.printStackTrace();
+        }finally{
+	        try {
+	        	if(out != null){
+	        		out.flush();
+	        		out.close();
+	        	}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        }
     }
 	
 	
