@@ -63,9 +63,21 @@ public class QuartzService {
 		
 	}  
 	
+	/**
+	 * 定时删除在线工具生成的临时txt
+	 */
 	@Scheduled(cron = "0 10 2 * * ?")//每天2：10触发
-	public void reportCurrentTime3() {  
+	public void deleteTxtFiles() {  
 		String inPath = linuxUrl+ImgUtil.TOOLS_PATH;
+		FileEcodeUtil.deleteDirectoryChildren(inPath);
+	}  
+	
+	/**
+	 * 定时删除论坛生成的临时png
+	 */
+	@Scheduled(cron = "0 20 2 * * ?")//每天2：20触发
+	public void deleteImgFiles() {  
+		String inPath = linuxUrl+ImgUtil.TMPIMG_PATH;
 		FileEcodeUtil.deleteDirectoryChildren(inPath);
 	}  
 

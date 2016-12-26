@@ -27,6 +27,7 @@ import forum.service.SectionService;
 import forum.service.TopicService;
 import forum.service.UserService;
 import forum.service.ZoneService;
+import forum.util.FileEcodeUtil;
 import forum.util.PageUtil;
 
 @Controller
@@ -167,6 +168,39 @@ public class TopicAction {
         Topic tmp = topicService.findTopicById(topicId);
         Section section = tmp.getSection();
         
+        //先删除和帖子一起的回复的对应的图片
+        List<Reply> list = replyService.findReplyListByTopicId(topicId, MaxPageSize, 0);
+        for(int k =0; k<list.size(); k++){
+        	Reply reply = list.get(k);
+        	//删除之前数据之前，也要删除图片
+    		//提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
+    		String[] url = reply.getContent().split("/");
+            String imgName;
+            for (int i = 0 ; i <url.length ; i++ ) {
+                if(url[i].contains(".png")){
+                    imgName = url[i].substring(0,40);
+                    String realOutPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/reaImg");
+                    String outName=realOutPath + '/' + imgName;
+                    //删除图片
+                    FileEcodeUtil.deleteFile(outName);
+                }
+            }
+        }
+        
+        //删除数据之前，也要删除图片
+        //提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
+        String[] url = tmp.getContent().split("/");
+        String imgName;
+        for (int i = 0 ; i <url.length ; i++ ) {
+        	if(url[i].contains(".png")){
+        		imgName = url[i].substring(0,40);
+        		String realOutPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/reaImg");
+        		String outName=realOutPath + '/' + imgName;
+        		//删除图片
+        		FileEcodeUtil.deleteFile(outName);
+        	}
+        }
+        
         topicService.deleteTopicById(topicId);
         
         Topic s_topic = new Topic();
@@ -197,6 +231,39 @@ public class TopicAction {
 		//更新小版块对应的数目
         Topic tmp = topicService.findTopicById(topicId);
         Section section = tmp.getSection();
+        
+        //先删除和帖子一起的回复的对应的图片
+        List<Reply> list = replyService.findReplyListByTopicId(topicId, MaxPageSize, 0);
+        for(int k =0; k<list.size(); k++){
+        	Reply reply = list.get(k);
+        	//删除之前数据之前，也要删除图片
+    		//提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
+    		String[] url = reply.getContent().split("/");
+            String imgName;
+            for (int i = 0 ; i <url.length ; i++ ) {
+                if(url[i].contains(".png")){
+                    imgName = url[i].substring(0,40);
+                    String realOutPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/reaImg");
+                    String outName=realOutPath + '/' + imgName;
+                    //删除图片
+                    FileEcodeUtil.deleteFile(outName);
+                }
+            }
+        }
+        
+        //删除数据之前，也要删除图片
+        //提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
+        String[] url = tmp.getContent().split("/");
+        String imgName;
+        for (int i = 0 ; i <url.length ; i++ ) {
+        	if(url[i].contains(".png")){
+        		imgName = url[i].substring(0,40);
+        		String realOutPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/reaImg");
+        		String outName=realOutPath + '/' + imgName;
+        		//删除图片
+        		FileEcodeUtil.deleteFile(outName);
+        	}
+        }
         
         topicService.deleteTopicById(topicId);
         
@@ -256,7 +323,7 @@ public class TopicAction {
 			@RequestParam(required = false) String topicTitle,
 			@RequestParam(required = false) String topicContent,
 			@RequestParam(required = false) Integer topicSectionId,
-			Model model)throws Exception{
+			Model model,HttpServletRequest request)throws Exception{
 		Topic topic = new Topic();
 		if(dbUser != null){
 			topic.setUser(dbUser.getUser());
@@ -264,8 +331,38 @@ public class TopicAction {
 		}else{
 			return "redirect:/login";
 		}
+		
+		//System.out.println("before : "+topicContent);		//首先检测上传内容中的图片
+		//提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
+		String[] url = topicContent.split("/");
+        String imgName;
+        StringBuffer buf = new StringBuffer();
+        int i = 0;
+        for (i = 0 ; i <url.length ; i++ ) {
+            if(url[i].contains(".png")){
+                imgName = url[i].substring(0,40);
+                //System.out.println("imgName = "+imgName);
+                String realInPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/tmpImg");
+                String realOutPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/reaImg");
+                String inName=realInPath + '/' + imgName;
+                String outName=realOutPath + '/' + imgName;
+                boolean flag = FileEcodeUtil.fileRemove(inName, outName);
+                //如果移动成功了，应该把内容中的路径修改，替换最后一个'tmpImg'为'reaImg'
+                if(flag){
+                	url[i-1]="reaImg";
+                }
+            }
+            if(i>0){
+            	buf.append(url[i-1]).append('/');
+            }
+        }
+        if(i>0){
+        	buf.append(url[i-1]);
+        }
+        //System.out.println("after : "+buf.toString());	//这就是实际应当报错到数据库里的内容
+		
 		topic.setTitle(topicTitle);
-		topic.setContent(topicContent);
+		topic.setContent(buf.toString());
 		
 		Section section = sectionService.findSectionById(topicSectionId);
 		if(section != null){

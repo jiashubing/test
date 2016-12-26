@@ -7,7 +7,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
@@ -429,5 +431,56 @@ public class FileEcodeUtil {
 		}
 		return buffer;  
 	}  
+	
+	/**
+	 * inputStream转File
+	 * @param ins
+	 * @param file
+	 */
+	public static void inputStreamToFile(InputStream ins,File file){
+		OutputStream os = null;
+		try {
+			os = new FileOutputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		int bytesRead = 0;
+		byte[] buffer = new byte[8192];
+		try {
+			while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+				os.write(buffer, 0, bytesRead);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				if(os!=null){
+					os.close();
+				}
+				if(ins!=null){
+					ins.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 移动文件
+	 * @param inName		移动前路径
+	 * @param outName	移动后路径
+	 * @return
+	 */
+	public static boolean fileRemove(String inName,String outName){
+		boolean flag = false;
+        try {  
+            File afile = new File(inName);  
+            flag = afile.renameTo(new File(outName));
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+        return flag;
+    }  
 
 }
