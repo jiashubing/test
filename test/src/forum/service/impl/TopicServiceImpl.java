@@ -92,6 +92,29 @@ public class TopicServiceImpl implements TopicService {
 		em.clear();
 		return result;
 	}
+	
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
+	@Override
+	public List<Topic> findGoodTopicListDesc(int pageSize,int pageNo){
+		StringBuffer hql=new StringBuffer("from Topic t where t.good=1 order by t.publishTime desc");
+		Query query = em.createQuery(hql.toString());
+		@SuppressWarnings("unchecked")
+		List<Topic> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
+		em.clear();
+		return result;
+	}
+	
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
+	@Override
+	public List<Topic> findNewTopicListDesc(int pageSize,int pageNo){
+		StringBuffer hql=new StringBuffer("from Topic t order by t.modifyTime desc");
+		Query query = em.createQuery(hql.toString());
+		@SuppressWarnings("unchecked")
+		List<Topic> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
+		em.clear();
+		return result;
+	}
+	
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override

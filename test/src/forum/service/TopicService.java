@@ -28,6 +28,24 @@ public interface TopicService {
 	public List<Topic> findZdTopicListBySectionId(int sectionId, int pageSize,int pageNo);
 	
 	/**
+	 * 搜索精华的帖子
+	 * @param sectionId
+	 * @param pageSize
+	 * @param pageNo
+	 * @return
+	 */
+	public List<Topic> findGoodTopicListDesc(int pageSize,int pageNo);
+	
+	/**
+	 * 搜索最新的帖子
+	 * @param sectionId
+	 * @param pageSize
+	 * @param pageNo
+	 * @return
+	 */
+	public List<Topic> findNewTopicListDesc(int pageSize,int pageNo);
+	
+	/**
 	 * 搜索普通的帖子
 	 * @param sectionId
 	 * @param pageSize
