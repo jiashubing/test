@@ -44,7 +44,7 @@ body {
 
 .header {
 	font-size: 16px;
-	width: 1000px;
+	width: 1200px;
 	margin: 0 auto;
 	height: 45px;
 }
@@ -126,12 +126,12 @@ body {
 .logoimgi {
 	float: left;
 	vertical-align: middle;
-	margin-top:11px;
+	width:161px;
 }
 
 .headeri {
 	font-size: 16px;
-	width: 1000px;
+	width: 1160px;
 	margin: 0 auto;
 	height:64px;
 }
