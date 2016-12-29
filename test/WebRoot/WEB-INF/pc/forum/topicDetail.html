@@ -48,16 +48,14 @@
 						<td rowspan="2" valign="top" class="wirter">
 							<dl class="user_info ">
 								<dt class="user_head">
-										
 									<span th:unless="${topic==null||topic.user==null}">
 										<span th:if="${topic.user.face==null||topic.user.face==''}">
-											<img th:if="${topic.user.sex=='男'}" 
-												alt="" src="images/user/user0.gif" th:src="@{/image/pc/forum/images/user/user0.gif}" style="width: 100px;height: 100px;" />
-											<img th:if="${topic.user.sex=='女'}"  
-												alt="" src="images/user/female.gif"  th:src="@{/image/pc/forum/images/user/female.gif}"  style="width: 100px;height: 100px;" />
+											<img th:if="${topic.user.sex==null || topic.user.sex=='未知' || topic.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" width="100%"/>
+											<img th:if="${topic.user.sex!=null &amp;&amp; dbUser.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" width="100%"/>
+											<img th:if="${topic.user.sex!=null &amp;&amp; dbUser.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" width="100%"/>
 										</span>
 										<span th:unless="${topic.user.face==null||topic.user.face==''}">
-											<img alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" style="width: 100px;height: 100px;" />
+											<img alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" width="100%" />
 										</span>
 									</span>
 								</dt>
@@ -122,16 +120,14 @@
 						<td rowspan="2" valign="top" class="wirter">
 							<dl class="user_info ">
 								<dt class="user_head">
-										
-									<span th:unless="${reply==null||reply.user==null}">
-										<span th:if="${reply.user.face==null||reply.user.face==''}">
-											<img th:if="${reply.user.sex=='男'}" 
-												alt="" src="images/user/user0.gif" th:src="@{/image/pc/forum/images/user/user0.gif}" style="width: 100px;height: 100px;" />
-											<img th:if="${reply.user.sex=='女'}"  
-												alt="" src="images/user/female.gif"  th:src="@{/image/pc/forum/images/user/female.gif}"  style="width: 100px;height: 100px;" />
+									<span th:unless="${topic==null||topic.user==null}">
+										<span th:if="${topic.user.face==null||topic.user.face==''}">
+											<img th:if="${topic.user.sex==null || topic.user.sex=='未知' || topic.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" width="100%"/>
+											<img th:if="${topic.user.sex!=null &amp;&amp; dbUser.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" width="100%"/>
+											<img th:if="${topic.user.sex!=null &amp;&amp; dbUser.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" width="100%"/>
 										</span>
-										<span th:unless="${reply.user.face==null||reply.user.face==''}">
-											<img alt="" src="${reply.user.face}" th:src="@{'/image/pc/forum/'+${reply.user.face}}" style="width: 100px;height: 100px;" />
+										<span th:unless="${topic.user.face==null||topic.user.face==''}">
+											<img alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" width="100%" />
 										</span>
 									</span>
 								</dt>
@@ -305,8 +301,8 @@
 		return false;
 	}
 	
-	if (len > 1000) {
-		alert("最多输入1000个字符！");
+	if (len > 10000) {
+		alert("最多输入10000个字符！");
 		return false;
 	}
 	

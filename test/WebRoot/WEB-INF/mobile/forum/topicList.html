@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="./css/common.shubing.css" th:href="@{/css/mobile/css/common.shubing.css}"/> 
   	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/forum/css/topic.shubing.css}"/> 
   	<link rel="stylesheet" href="./css/daoliu.shubing.css" th:href="@{/css/mobile/forum/css/daoliu.shubing.css}"/> 
+  	
+  	<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 </head>
 <body class="ue_revision">
   <div class="container j_container">
@@ -31,11 +33,13 @@
     <div id="blue_kit_wrapper" class="blue_kit_wrapper blue_kit_wrapper_light ">
      <div id="top_kit" class="blue_kit">
       <div class="blue_kit_left"> 
-       <a href="" class="j_back_btn blue_kit_btn blue_kit_btn_back"><span class="icon_tieba_logo blue_kit_btn_logo"></span></a> 
-       <a href="javascript:;" class="j_forum_title_text"><span th:text="${section.name }">网站建设</span></a>
+       <a href="#" onclick="history.go(-1)" class="j_back_btn blue_kit_btn blue_kit_btn_back"><!-- <span class="icon_tieba_logo blue_kit_btn_logo"></span> -->
+       	<span style="display: inline-block;width: 10px;"></span>
+       </a> 
+       <span th:text="${section.name }">网站建设</span>
       </div> 
       <div class="blue_kit_right"> 
-       <a href="" data-blue-kit="1" class="icon_btn blue_kit_icon new_frs_sprite_icons search_btn">搜索</a> 
+       <!-- <a href="" data-blue-kit="1" class="icon_btn blue_kit_icon new_frs_sprite_icons search_btn">搜索</a>-->
        <!-- <a href="" class="setup_btn icon_btn blue_kit_icon blue_kit_icon_tool new_frs_sprite_icons j_setup_btn j_message_count_wrap">设置</a> -->
       </div> 
      </div>
@@ -51,11 +55,14 @@
    <div class="j_main main">
     <div id="j_light_forum_top_area" class="light_forum_top_area">
      <div class="forum_portrait" 
-      th:attr="style='background-image:url('+@{/image/pc/forum/images/logo/youxi.png}+');'">
+      th:attr="style='background-image:url('+@{'/image/pc/forum/'+${section.logo}}+');'">
      </div>
      <p class="forum-name"><span class="forum-name-txt" th:text="${section.name }">谢娜吧</span> </p> 
-     <a href="" class="tag_link tag_link2">内地明星</a> 
-     <p class="info_paragraph"><span class="info_label">关注</span><span class="info_value">789884</span><span class="info_label">贴子</span><span class="info_value">3720366</span></p>
+     <a href="" class="tag_link tag_link2"><span th:text="${section.zone.name}">内地明星</span></a> 
+     <p class="info_paragraph">
+	     <span class="info_label">帖子</span><span class="info_value" th:text="${section.totalCount}">789884</span>
+	     <span class="info_label">精华</span><span class="info_value" th:text="${section.goodCount}">3720366</span>
+	 </p>
      <div class="sign_arrow j_sign_arrow function-area" id="sign_like"> 
       <!-- <div class="daoliu_sign_in_prompt j_daoliu_sign_in_prompt daoliu_sign_in_show j_daoliu_sign_in_show"></div>
       <div class="daoliu_sign_in_prompt_img daoliu_sign_in_show j_daoliu_sign_in_show">
@@ -86,34 +93,41 @@
       <li class="tl_gap"></li>
 	  
       <li class="tl_shadow" th:each="topic:${ptTopicList}">
-      	<a href="" class="j_common ti_item">
+      	<a href="" th:href="@{/forum/details(id=${topic.id})}" class="j_common ti_item">
         <div class="ti_title"> 
          <span th:unless="${topic.good==0 }" class="ti_title_icon ti_icon_jing">精</span> 
-         <span>S.U.N.女神「原创」太阳☀女神-谢娜</span>
+         <span th:text="${topic.title}">S.U.N.女神「原创」太阳☀女神-谢娜</span>
         </div>
         <!-- <div class="medias_wrap clearfix">
          <div class="medias_item "> 
           <img class="j_media_thumb medias_img_r" th:src="@{/image/mobile/images/123.jpg}" style="opacity: 1;" /> 
          </div> 
         </div>  -->
-		<p class="ti_abs">此贴作为刷经验专用楼，请勿另开水贴。 此贴作为刷经验专用楼，请勿另开水贴。 此贴作为刷经验专用楼</p>
+		<p class="ti_abs"><span class="topiccontent">哈哈哈，我也爱</span></p>
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+			$(".topiccontent:last").text(/*[[${#strings.abbreviate(topic.content,200)}]]*/); 
+			/*]]>*/
+		</script>
         <div class="ti_infos clearfix">
          <div class="ti_author_time"> 
           <span class="ti_author"  th:text="${topic.user.nickName }"> 离开待long</span>
           <span class="ti_time"  th:text="${#calendars.format(topic.modifyTime,'yyyy-MM-dd hh:mm:ss')}">19:33</span>
          </div>
          <div class="ti_zan_reply"> 
-          <div class="ti_func_btn j_btn_zan btn_zan">
+          <!-- <div class="ti_func_btn j_btn_zan btn_zan">
            <span class="j_btn_zan_icon btn_zan_icon"></span>
            <span class="j_btn_zan_text btn_zan_text">赞</span>
-          </div> 
+          </div>  -->
           <div class="ti_func_btn btn_reply">
-           <span class="btn_icon">1</span>
+           <span th:if="${topic.replySum==0}" class="btn_icon">回复</span>
+           <span th:unless="${topic.replySum==0}" class="btn_icon" th:text="${topic.replySum}">1</span>
           </div> 
          </div>
         </div> </a></li>
 		
-      <li class="tl_shadow"><a href="https://tieba.baidu.com/p/4541751142?lp=5028&amp;mo_device=1&amp;is_jingpost=1" class="j_common ti_item" tid="4541751142">
+      <li class="tl_shadow" th:remove="all">
+      	<a href="" class="j_common ti_item">
         <div class="ti_title">
          <span class="ti_title_icon ti_icon_jing">精</span> 
          <span>S.U.N.女神「专楼」娜吧刷经验专用楼。</span>
