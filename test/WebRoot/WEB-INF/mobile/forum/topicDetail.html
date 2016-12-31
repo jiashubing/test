@@ -17,21 +17,20 @@
   	<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 </head>
 <body class="ue_revision portrait" style="margin-bottom: 40px;">
-        
+        <a name="goTop"></a>
         <div id="glob" class="glob">
             <a id="top"></a>
             <div id="i_head" class="blue_kit blue_kit_top ">
                 <div class="blue_kit_left">
 					<a href="#" onclick="history.go(-1)" class="j_back_btn blue_kit_btn blue_kit_btn_back"><!-- <span class="icon_tieba_logo blue_kit_btn_logo"></span> -->
        					<span style="display: inline-block;width: 10px;"></span>
-      				</a> 
-					<a href="" class="post_title_text">
-					<span th:text="${topic.title }">主题贴</span>
-                 </a>
+      				</a>
+					<span class="post_title_text" style="padding-left:10px;">主题贴</span>
                 </div>
             <div class="blue_kit_right" style="padding-right:10px">
                     <span
-                    id="j_see_lz" class="blue_kit_icon blue_kit_icon_see_lz pb_icon icon_btn">
+                    id="j_see_lz" class="icon_btn blue_kit_icon blue_kit_icon_see_lz" 
+                    th:attr="style='background:url('+@{/image/mobile/images/louzhu1.png}+') no-repeat; background-size:45px 45px;'">
                         楼主
                     </span>
                    <!--  <a href="https://tieba.baidu.com/mo/q/searchpage?page=pb&amp;word=%E8%B0%A2%E5%A8%9C"
@@ -50,7 +49,7 @@
                         class="list_item post_list_item default_feedback j_post_list_item">
                             <div class="list_item_wrapper">
                                 <div class="list_main">
-                                    <div class="post_title_embed">
+                                    <div class="post_title_embed" th:text="${topic.title }">
                                         S.U.N.女神「原创」我娜姐
                                     </div>
                                     <div class="list_item_top clearfix">
@@ -58,8 +57,8 @@
 		                                    <span th:unless="${topic==null||topic.user==null}">
 												<span th:if="${topic.user.face==null||topic.user.face==''}">
 													<img th:if="${topic.user.sex==null || topic.user.sex=='未知' || topic.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" alt="头像" width="36" height="36" class="user_img"/>
-													<img th:if="${topic.user.sex!=null &amp;&amp; dbUser.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" alt="头像" width="36" height="36" class="user_img"/>
-													<img th:if="${topic.user.sex!=null &amp;&amp; dbUser.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" alt="头像" width="36" height="36" class="user_img"/>
+													<img th:if="${topic.user.sex!=null &amp;&amp; topic.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" alt="头像" width="36" height="36" class="user_img"/>
+													<img th:if="${topic.user.sex!=null &amp;&amp; topic.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" alt="头像" width="36" height="36" class="user_img"/>
 												</span>
 												<span th:unless="${topic.user.face==null||topic.user.face==''}">
 													<img src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" alt="头像" width="36" height="36" class="user_img"/>
@@ -87,7 +86,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="content" lz="1">
+                                    <div class="content">
 	                                    <span id="topiccontent">祖国我爱你</span>
 										<script th:inline="javascript">
 											/*<![CDATA[*/
@@ -116,7 +115,7 @@
                                 <div class="list_main">
                                     <div class="list_item_top clearfix">
                                         <div class="list_item_top_avatar">
-                                            <a href="https://tieba.baidu.com/home/main?un=%E8%8B%8F%E9%9B%AA%E8%9C%9C%E8%9C%82&amp;tj=1">
+                                            <a href="">
                                                 <span th:unless="${reply==null||reply.user==null}">
 													<span th:if="${reply.user.face==null||reply.user.face==''}">
 														<img th:if="${reply.user.sex==null || reply.user.sex=='未知' || reply.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" alt="头像" width="36" height="36" class="user_img"/>
@@ -178,22 +177,24 @@
                         </a>
                     </div>
                 </div>
-                <div class="j_zan_reply zan_reply" style="margin-bottom: 0px;">
-                    <div class="bottom-bar-button j_btn_zan btn_zan" data-info=""
+                <div class="j_zan_reply zan_reply">
+                   <!--<a href="" class="bottom-bar-button j_btn_zan btn_zan" data-info=""
                     zanstatus="0">
                         <span class="j_btn_zan_icon btn_zan_icon">
                         </span>
                         <span class="j_btn_zan_text btn_zan_text">
                             赞
                         </span>
-                    </div>
+                    </a>-->
                     <a href="" class="bottom-bar-button btn_reply j_btn_reply">
-                        <span class="btn_reply_text pb_icon">
-                            8
+                        <span class="btn_reply_text"
+                        th:attr="style='background:url('+@{/image/mobile/images/btn-huifu.png}+') no-repeat; background-size:30px;' ">
+                            
+                           <span style="padding-left:10px">8</span>
                         </span>
                     </a>
-                    <a href="" class="bottom-bar-button bottom-share-button" id="bottom-share-button">
-                    </a>
+                    <!-- <a href="" class="bottom-bar-button bottom-share-button" id="bottom-share-button">
+                    </a> -->
                 </div>
                 
                 <div class="j_pb_footer j_footer footer">
@@ -214,8 +215,10 @@
                     </a>
                     <br/>
                 </div>
-                <a href=""
-                class="client_ghost_icon j_client_ghost_icon" style="background-image:url(https://tb1.bdstatic.com/tb/icon_tieba_new.png)">
+                <a href="#goTop"
+                class="client_ghost_icon j_client_ghost_icon"
+                th:attr="style='background-image:url('+@{/image/mobile/images/icon_tieba_new.png}+');'"
+                >
                 </a>
             </div>
         </div>

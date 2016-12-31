@@ -11,4 +11,17 @@
 		$(".lbpo").fadeIn("fast");
 		$(".zhizheni").fadeIn("fast");
 	});
+    
+    //鼠标悬停在控制台文字上
+    $("#loginLi").on("mouseover",function(){
+ 	   $(".lbpo").fadeIn("fast");
+ 	   $(".zhizheni").fadeIn("fast");
+ 	});
+    
+    $(".lbpo").on("mouseleave",function(){
+    	$(this).fadeOut("fast");
+    	$(".zhizheni").fadeOut("fast");
+    });
+    
+    
 });

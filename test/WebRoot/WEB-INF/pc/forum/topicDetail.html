@@ -51,8 +51,8 @@
 									<span th:unless="${topic==null||topic.user==null}">
 										<span th:if="${topic.user.face==null||topic.user.face==''}">
 											<img th:if="${topic.user.sex==null || topic.user.sex=='未知' || topic.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" width="100%"/>
-											<img th:if="${topic.user.sex!=null &amp;&amp; dbUser.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" width="100%"/>
-											<img th:if="${topic.user.sex!=null &amp;&amp; dbUser.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" width="100%"/>
+											<img th:if="${topic.user.sex!=null &amp;&amp; topic.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" width="100%"/>
+											<img th:if="${topic.user.sex!=null &amp;&amp; topic.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" width="100%"/>
 										</span>
 										<span th:unless="${topic.user.face==null||topic.user.face==''}">
 											<img alt="" src="${topic.user.face}" th:src="@{'/image/pc/forum/'+${topic.user.face}}" width="100%" />
