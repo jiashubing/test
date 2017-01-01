@@ -45,13 +45,10 @@ public class QuartzService {
 		//定时任务，计算帖子总数
 		for (Zone zone : zoneList) {
 			for (Section section : zone.getSectionList()) {
-				Topic s_topic=new Topic(); 
-				s_topic.setSection(section);
-				Long totalCount=topicService.getTopicCount(s_topic);			
-				s_topic.setGood(1);
-				Long goodCount=topicService.getTopicCount(s_topic);			
-				s_topic.setGood(0);
-				Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
+				
+				Long totalCount=topicService.getTotalTopicCount(section.getId());			
+				Long goodCount=topicService.getGoodTopicCount(section.getId());			
+				Long noReplyCount=topicService.getNoReplyTopicCount(section.getId());	
 				
 				section.setTotalCount(totalCount);
 				section.setGoodCount(goodCount);

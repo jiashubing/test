@@ -169,14 +169,15 @@
 
 						</td>
 					</tr>
-					<tr>
+					<tr class="replytr">
 						<td valign="bottom">
 							<div class="control">
 								<div class="fr">
 									<a href="" rel="nofollow">回复</a> | 
-									<a href="" rel="nofollow"><span style="color:red">删除</span> </a>
+									<a href="" rel="nofollow" onclick="javascript:deleteReply(this)"><span style="color:red">删除</span> </a>
 								</div>
 							</div>
+							<input class="replyid" th:value="${reply.id }" type="hidden"/>
 						</td>
 					</tr>
 				</tbody>

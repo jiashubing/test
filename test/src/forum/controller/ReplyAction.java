@@ -120,15 +120,14 @@ public class ReplyAction {
         }
         //System.out.println("after : "+buf.toString());	//这就是实际应当报错到数据库里的内容
 		
-		
 		if(replyTopicId!=null){
 			Topic topic = topicService.findTopicById(replyTopicId);
 			topic.setModifyTime(new Date());
 			Long tmp =replyService.getReplyCountByTopicId(replyTopicId);
 			if(tmp == null){
-				topic.setReplySum(0);
+				topic.setReplySum(1);
 			}else{
-				topic.setReplySum(tmp);
+				topic.setReplySum(tmp+1);
 			}
 			topicService.saveTopic(topic);
 			reply.setTopic(topic);

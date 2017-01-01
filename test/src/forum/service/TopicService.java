@@ -60,5 +60,24 @@ public interface TopicService {
 	
 	public List<Topic> findNotGoodTopicListBySectionId(int sectionId, int pageSize,int pageNo);
 	
-	public Long getNoReplyTopicCount(Topic s_topic);
+	/**
+	 * 搜索未回复帖子
+	 * @param sectionId
+	 * @return
+	 */
+	public Long getNoReplyTopicCount(int sectionId);
+	
+	/**
+	 * 搜索精华帖子数
+	 * @param sectionId
+	 * @return
+	 */
+	public Long getGoodTopicCount(int sectionId);
+	
+	/**
+	 * 搜索帖子总数
+	 * @param sectionId
+	 * @return
+	 */
+	public Long getTotalTopicCount(int sectionId);
 }

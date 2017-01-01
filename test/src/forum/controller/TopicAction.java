@@ -204,13 +204,10 @@ public class TopicAction {
         
         topicService.deleteTopicById(topicId);
         
-        Topic s_topic = new Topic();
-		s_topic.setSection(section);
-		Long totalCount=topicService.getTopicCount(s_topic);			
-		s_topic.setGood(1);
-		Long goodCount=topicService.getTopicCount(s_topic);			
-		s_topic.setGood(0);
-		Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
+		Long totalCount=topicService.getTotalTopicCount(section.getId());			
+		Long goodCount=topicService.getGoodTopicCount(section.getId());			
+		Long noReplyCount=topicService.getNoReplyTopicCount(section.getId());	
+		
 		section.setTotalCount(totalCount);
 		section.setGoodCount(goodCount);
 		section.setNoReplyCount(noReplyCount);
@@ -268,13 +265,9 @@ public class TopicAction {
         
         topicService.deleteTopicById(topicId);
         
-        Topic s_topic = new Topic();
-		s_topic.setSection(section);
-		Long totalCount=topicService.getTopicCount(s_topic);			
-		s_topic.setGood(1);
-		Long goodCount=topicService.getTopicCount(s_topic);			
-		s_topic.setGood(0);
-		Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
+		Long totalCount=topicService.getTotalTopicCount(section.getId());			
+		Long goodCount=topicService.getGoodTopicCount(section.getId());			
+		Long noReplyCount=topicService.getNoReplyTopicCount(section.getId());			
 		section.setTotalCount(totalCount);
 		section.setGoodCount(goodCount);
 		section.setNoReplyCount(noReplyCount);
@@ -366,15 +359,16 @@ public class TopicAction {
 		topic.setContent(buf.toString());
 		
 		//保存摘要
-		String remark = HtmlUtil.delHTMLTag(topicContent);
+		String remark = HtmlUtil.getTextFromHtml(topicContent);
 		int tmp = remark.length();
 		remark = remark.substring(0, tmp<200?tmp:200);
 		topic.setRemark(remark);
 		
 		Section section = sectionService.findSectionById(topicSectionId);
-		if(section != null){
-			topic.setSection(section);
+		if(section == null){
+			throw new Exception("该帖子没有对应的小版块，这表示了一个错误。");
 		}
+		topic.setSection(section);
 		
 		topic.setPublishTime(new Date());
 		topic.setModifyTime(new Date());
@@ -382,11 +376,8 @@ public class TopicAction {
 		topic = topicService.saveTopic2(topic);
 		
 		//更新小版块对应的数目
-		Topic s_topic = new Topic();
-		s_topic.setSection(section);
-		Long totalCount=topicService.getTopicCount(s_topic);			
-		s_topic.setGood(0);
-		Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
+		Long totalCount=topicService.getTotalTopicCount(section.getId());			
+		Long noReplyCount=topicService.getNoReplyTopicCount(section.getId());			
 		section.setTotalCount(totalCount);
 		section.setNoReplyCount(noReplyCount);
 		sectionService.saveSection(section);
@@ -417,11 +408,8 @@ public class TopicAction {
 		
 		//更新小版块对应的数目
 		Section section = topic.getSection();
-		Topic s_topic = new Topic();
-		s_topic.setGood(1);
-		Long goodCount=topicService.getTopicCount(s_topic);			
-		s_topic.setGood(0);
-		Long noReplyCount=topicService.getNoReplyTopicCount(s_topic);			
+		Long goodCount=topicService.getGoodTopicCount(section.getId());			
+		Long noReplyCount=topicService.getNoReplyTopicCount(section.getId());			
 		section.setGoodCount(goodCount);
 		section.setNoReplyCount(noReplyCount);
 		sectionService.saveSection(section);

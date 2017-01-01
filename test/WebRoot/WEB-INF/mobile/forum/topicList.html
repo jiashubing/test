@@ -106,7 +106,7 @@
 		<p class="ti_abs"><span class="topiccontent">哈哈哈，我也爱</span></p>
 		<script th:inline="javascript">
 			/*<![CDATA[*/
-			$(".topiccontent:last").text(/*[[${#strings.abbreviate(topic.content,200)}]]*/); 
+			$(".topiccontent:last").text(/*[[${topic.remark}]]*/); 
 			/*]]>*/
 		</script>
         <div class="ti_infos clearfix">

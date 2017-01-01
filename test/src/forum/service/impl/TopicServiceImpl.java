@@ -163,12 +163,11 @@ public class TopicServiceImpl implements TopicService {
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public List<Topic> findZdTopicListBySectionId(int sectionId,int pageSize,int pageNo) {
-		StringBuffer hql=new StringBuffer("from Topic");
+		StringBuffer hql=new StringBuffer("from Topic where top=1");
 		if (sectionId>0) {
 			hql.append(" and sectionId="+sectionId);
 		}
-		hql.append(" and top=1");
-		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
+		Query query = em.createQuery(hql.toString());
 		@SuppressWarnings("unchecked")
 		List<Topic> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
@@ -192,14 +191,24 @@ public class TopicServiceImpl implements TopicService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public Long getNoReplyTopicCount(Topic s_topic) {
-		//StringBuffer hql=new StringBuffer("select count(*) from Topic t where t.id not in (select t.id from Reply r,Topic t where r.topic.id=t.id)");
-		StringBuffer hql=new StringBuffer("select count(*) from Topic where id not in (select r.topic.id from Reply r)");
-		if (s_topic!=null) {
-			if (s_topic.getSection().getId()>0) {
-				hql.append(" and sectionId="+s_topic.getSection().getId());
-			}
-		}
+	public Long getNoReplyTopicCount(int sectionId) {
+		StringBuffer hql=new StringBuffer("select count(*) from Topic where replySum=0 and sectionId="+sectionId);
+		Query query = em.createQuery(hql.toString());
+		return (Long)query.getSingleResult();
+	}
+	
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
+	@Override
+	public Long getGoodTopicCount(int sectionId) {
+		StringBuffer hql=new StringBuffer("select count(*) from Topic where good=1 and sectionId="+sectionId);
+		Query query = em.createQuery(hql.toString());
+		return (Long)query.getSingleResult();
+	}
+	
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
+	@Override
+	public Long getTotalTopicCount(int sectionId) {
+		StringBuffer hql=new StringBuffer("select count(*) from Topic where sectionId="+sectionId);
 		Query query = em.createQuery(hql.toString());
 		return (Long)query.getSingleResult();
 	}
@@ -208,12 +217,11 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public List<Topic> findGoodTopicListBySectionId(int sectionId,
 			int pageSize,int pageNo) {
-		StringBuffer hql=new StringBuffer("from Topic");
+		StringBuffer hql=new StringBuffer("from Topic where good=1");
 		if (sectionId>0) {
 			hql.append(" and sectionId="+sectionId);
 		}
-		hql.append(" and good=1");
-		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
+		Query query = em.createQuery(hql.toString());
 		@SuppressWarnings("unchecked")
 		List<Topic> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
@@ -224,12 +232,11 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public List<Topic> findNotGoodTopicListBySectionId(int sectionId,
 			int pageSize,int pageNo) {
-		StringBuffer hql=new StringBuffer("from Topic");
+		StringBuffer hql=new StringBuffer("from Topic where good=0");
 		if (sectionId>0) {
 			hql.append(" and sectionId="+sectionId);
 		}
-		hql.append(" and good=0");
-		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
+		Query query = em.createQuery(hql.toString());
 		@SuppressWarnings("unchecked")
 		List<Topic> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
@@ -239,12 +246,8 @@ public class TopicServiceImpl implements TopicService {
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public Long getPtTopicCountBySectionId(int sectionId) {
-		StringBuffer hql=new StringBuffer("select count(*) from Topic");
-		if (sectionId>0) {
-			hql.append(" and sectionId="+sectionId);
-		}
-		hql.append(" and top=0");
-		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
+		StringBuffer hql=new StringBuffer("select count(*) from Topic where top=0 and sectionId="+sectionId);
+		Query query = em.createQuery(hql.toString());
 		return (Long)query.getSingleResult();
 	}
 }
