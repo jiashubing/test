@@ -66,12 +66,12 @@
 											</span>
                                         </div>
                                         <div class="list_item_top_name">
+                                            <span class="level level_16">
+                                            LZ
+                                            </span>
                                             <span class="user_name" th:unless="${topic==null||topic.user==null}" th:text="${topic.user.nickName }">
                                                  你是什么逗比啊
                                             </span>
-                                            <!-- <span class="level level_10">
-                                                10
-                                            </span> -->
                                             <br/>
                                             <span class="list_item_floor_num">
                                                楼主
@@ -119,8 +119,8 @@
                                                 <span th:unless="${reply==null||reply.user==null}">
 													<span th:if="${reply.user.face==null||reply.user.face==''}">
 														<img th:if="${reply.user.sex==null || reply.user.sex=='未知' || reply.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" alt="头像" width="36" height="36" class="user_img"/>
-														<img th:if="${reply.user.sex!=null &amp;&amp; dbUser.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" alt="头像" width="36" height="36" class="user_img"/>
-														<img th:if="${reply.user.sex!=null &amp;&amp; dbUser.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" alt="头像" width="36" height="36" class="user_img"/>
+														<img th:if="${reply.user.sex!=null &amp;&amp; reply.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" alt="头像" width="36" height="36" class="user_img"/>
+														<img th:if="${reply.user.sex!=null &amp;&amp; reply.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" alt="头像" width="36" height="36" class="user_img"/>
 													</span>
 													<span th:unless="${reply.user.face==null||reply.user.face==''}">
 														<img src="${reply.user.face}" th:src="@{'/image/pc/forum/'+${reply.user.face}}" alt="头像" width="36" height="36" class="user_img"/>
@@ -136,6 +136,9 @@
                                                 8
                                             </span> -->
                                             <br/>
+                                            <span th:if="${reply.user.id == topic.user.id}" class="level level_16">
+                                            LZ
+                                            </span>
                                             <span class="list_item_floor_num">
                                                 <span th:text="${pageNo*10+replyStat.count }">1</span>楼
                                             </span>

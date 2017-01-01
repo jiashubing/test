@@ -28,6 +28,7 @@ import forum.service.TopicService;
 import forum.service.UserService;
 import forum.service.ZoneService;
 import forum.util.FileEcodeUtil;
+import forum.util.HtmlUtil;
 import forum.util.PageUtil;
 
 @Controller
@@ -363,6 +364,12 @@ public class TopicAction {
 		
 		topic.setTitle(topicTitle);
 		topic.setContent(buf.toString());
+		
+		//保存摘要
+		String remark = HtmlUtil.delHTMLTag(topicContent);
+		int tmp = remark.length();
+		remark = remark.substring(0, tmp<200?tmp:200);
+		topic.setRemark(remark);
 		
 		Section section = sectionService.findSectionById(topicSectionId);
 		if(section != null){

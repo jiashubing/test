@@ -33,6 +33,7 @@ public class Topic {
 	private User user;					//
 	private String title;				//标题
 	private String content;				//内容
+	private String remark;				//摘要
 	private Date publishTime;			//发表时间
 	private Date modifyTime;			//最新时间
 	private int good=0;					//是否精华
@@ -85,7 +86,13 @@ public class Topic {
 		this.content = content;
 	}
 	
-	
+	@Column(length=200)
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	public Date getPublishTime() {
 		return publishTime;
 	}

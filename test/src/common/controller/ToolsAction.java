@@ -240,6 +240,29 @@ public class ToolsAction {
         return result;
     }
 	
+	@RequestMapping("/insertString")
+	@ResponseBody
+	public Result insertStringOne(String startText,String startChar,String endChar,
+			HttpServletRequest request) throws Exception {
+		Result result = new Result();
+		
+		String inName = DateUtil.getRadomStr();
+		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+inName+".txt";
+		File cin =  new File(inPath);
+		String ans = "";
+		boolean flag= FileEcodeUtil.writeStrToFile(startText, cin);
+		
+		if(flag){
+			ans = FileEcodeUtil.modifyString(cin,startChar,endChar);
+		}
+		FileEcodeUtil.deleteFile(inPath);
+		
+		result.setStatus(1);
+		result.setBody(ans);
+		
+		return result;
+	}
+	
 	@RequestMapping(value = "/tools/printContract")
     public void cell(HttpServletResponse response,HttpServletRequest request,String outName) {
         String filePath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+outName+".txt";
