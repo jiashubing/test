@@ -18,8 +18,8 @@
     <a href="" class="j_back_btn blue_kit_btn"><span class="icon_tieba_logo blue_kit_btn_logo"></span><span class="blue_kit_text">阿丙的私人定制</span></a>
    </div>
    <div class="blue_kit_right"> 
-    <a href="" class="blue_kit_icon j_top_message index_icon top_message"> </a>
-    <a href="" class="blue_kit_icon index_icon top_search"></a> 
+    <!-- <a href="" class="blue_kit_icon j_top_message index_icon top_message"> </a>
+    <a href="" class="blue_kit_icon index_icon top_search"></a>-->
    </div>
   </div>
   <div class="j_tab_index tab_index"> 
@@ -55,7 +55,7 @@
         <h1>版主推荐</h1>
        </header>
        <ul class="module_list"> 
-        <li th:each="topic:${goodTopicList}"><a href="" th:href="@{/forum/details(id=${topic.id})}" ><label th:text="${#strings.abbreviate(topic.title,10)}">范冰冰大秀长腿</label></a></li>
+        <li th:each="topic:${goodTopicList}"><a href="" th:href="@{/forum/details(id=${topic.id})}" ><label th:text="${#strings.abbreviate(topic.title,12)}">范冰冰大秀长腿</label></a></li>
         <li><a href="" class="more">更多热议 &gt;</a></li>
        </ul>
       </section>
@@ -64,7 +64,7 @@
         <h1>最新更新</h1>
        </header>
        <ul class="module_list"> 
-        <li th:each="topic:${newTopicList}"><a href="" th:href="@{/forum/details(id=${topic.id})}" ><label th:text="${#strings.abbreviate(topic.title,10)}">谢霆锋演唱会遭痛批</label></a></li>
+        <li th:each="topic:${newTopicList}"><a href="" th:href="@{/forum/details(id=${topic.id})}" ><label th:text="${#strings.abbreviate(topic.title,12)}">谢霆锋演唱会遭痛批</label></a></li>
         <li><a href="" class="more">更多热议 &gt;</a></li>
        </ul>
       </section>

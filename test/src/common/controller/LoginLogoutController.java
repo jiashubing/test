@@ -25,9 +25,9 @@ public class LoginLogoutController {
 	public String getLoginPage(@AuthenticationPrincipal DbUser dbUser,@RequestParam(value = "error", required = false) boolean error, ModelMap model,HttpServletRequest request) {
 		if (error == true) {
 			// Assign an error message
-			model.put("error", "用户名或密码错误!");
+			model.put("errInfo", "用户名或密码错误!");
 		} else {
-			model.put("error", "");
+			model.put("errInfo", "");
 		}
 		if(dbUser != null){
 			model.addAttribute("dbUser",dbUser);

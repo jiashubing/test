@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" style="font-size: 66.67%;">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -28,8 +28,9 @@
 				th:attr="style='background:url('+@{/image/pc/images/shubinglogo.png}+') no-repeat; background-size:100% 100%;'">
 				</div>
 			</div>
-			<p class="error_area" id="error">
-			</p>
+			<span class="error_area" id="loginFailedInfo" th:text="${errInfo}">
+			阿斯蒂芬
+			</span>
 			<p class="form-item form-input-wrapper form-item-username form-input-mobile">
 				<input name="username" class="text-input" maxlength="60" placeholder="用户名" id="login-username" type="text" />
 				<span class="input-clearValue"></span>
@@ -50,7 +51,7 @@
 			<p class="form-item form-item-btn">
 				<!-- <input name="action" value="login" type="hidden" />
 				<input id="login-loginmerge" name="loginmerge" value="1" type="hidden" /> -->
-				<input value="登录" id="login-submit" class="pass-button-full pass-button-full-disabled" type="submit" />
+				<input value="登录" id="login-submit" class="pass-button-full pass-button-full-disabled" type="button" />
 			</p>
 			<div class="f14 clearfix login-problem">
 				<a class="left" href="">登录遇到问题</a>
@@ -62,6 +63,18 @@
 		</p>
 	</div>
 </div>
-   
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/myjson.js" th:src="@{/js/mobile/js/myjson.js}" ></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+ 	var errInfo = /*[[${errInfo}]]*/"";
+    /*]]>*/
+    console.log(errInfo);
+    if(errInfo!=""){
+    	$("#loginFailedInfo").text(errInfo);
+		$("#loginFailedInfo").fadeIn( 200 );
+		setTimeout("shubingDelTime()", 3000);
+    }
+</script>
  </body>
 </html>
