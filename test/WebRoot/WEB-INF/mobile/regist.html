@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="font-size: 66.67%;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta charset="utf-8"/>
+<title>阿丙的私人定制</title>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="viewport" content="width=240, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+<meta name="format-detection" content="telephone=no, email=no"/>
+<link rel="stylesheet" href="./css/base.shubing.css" th:href="@{/css/mobile/css/base.shubing.css}"/>
+</head>
+<body>
+<div id="pageWrapper" style="padding-bottom:50px;">
+	<header class="pass-header ">
+	<a class="pass-header-back" id="goBack" th:attr="style='background:url('+@{/image/mobile/images/goback.png}+') no-repeat 15px 13px;-webkit-background-size:1.2rem 2rem; padding:1.3rem 0 1.3rem 2.3rem; padding:13px 0 13px 15px; padding:1.3rem 0 1.3rem 2.3rem; width:36px; width:3.6rem; height:18px; height:1.8rem; position:absolute; left:0; top:0'"></a>
+	<span class="pass-header-title">
+        帐号注册        
+	</span>
+	</header>
+	<div class="mod-content">
+		<form autocomplete="off" method="POST" class="form-wrapper" id="reg-formWrapper">
+			<p class="error_area" id="error">
+			</p>
+			<div class="img-div">
+				<div class="logo-dom" style="width:138px; height:46px; margin:0 auto; background:url('css/baidu.png') no-repeat; background-size:100% 100%" th:attr="style='background:url('+@{/image/pc/images/shubinglogo.png}+') no-repeat; background-size:100% 100%;'">
+				</div>
+			</div>
+			<p class="form-item form-input-wrapper form-item-username form-input-mobile">
+				<input name="username" class="text-input" maxlength="60" placeholder="用户名/昵称（必填）" id="login-username" type="text"/>
+				<span class="input-clearValue"></span>
+				<span id="login-userlist" class="pass-input-aide pass-input-userlist"></span>
+			</p>
+			<p class="form-item form-input-wrapper form-item-username form-input-mobile">
+				<input name="username" class="text-input" maxlength="60" placeholder="真实姓名（只你与作者可见）" id="login-username" type="text"/>
+				<span class="input-clearValue"></span>
+				<span id="login-userlist" class="pass-input-aide pass-input-userlist"></span>
+			</p>
+			<p class="form-item form-input-wrapper form-item-username form-input-mobile">
+				<input name="username" class="text-input" maxlength="60" placeholder="邮箱（必填）" id="login-username" type="text"/>
+				<span class="input-clearValue"></span>
+				<span id="login-userlist" class="pass-input-aide pass-input-userlist"></span>
+			</p>
+			<select id="sex" name="sex" style="height: 53.33px; font-size: 17.06px; line-height:21px; border:1px solid #ccc; border-top-right-radius:0; border-top-left-radius:0; border-bottom-right-radius:2px; border-bottom-left-radius:2px; padding: 0px 11.93px; width: 100%; background-color: #FFFFFF; color: #ccc; box-sizing:border-box; -webkit-box-sizing:border-box; -o-box-sizing:border-box; -ms-box-sizing:border-box; -moz-box-sizing:border-box; -moz-box-flex:1; -webkit-box-flex:1; box-flex:1; position:relative ">
+				<option selected="selected" value="" disabled="disabled">性别</option>
+				<option value="1">男</option>
+				<option value="2">女</option>
+			</select>
+			<p class="form-item form-input-verifycode m-t10" id="login-verifyWrapper">
+				<span class="form-input-wrapper form-input-mobile vcode-span vcode-input-span">
+				<input name="verifycode" class="text-input" placeholder="登录密码（必填）" autocomplete="off" maxlength="6" id="login-verifycode" type="password"/>
+				<span class="input-clearValue"></span>
+				</span>
+				<input id="login-vcodestr" name="vcodestr" value="" type="hidden"/>
+			</p>
+			<p class="form-item form-input-verifycode m-t10" id="login-verifyWrapper">
+				<span class="form-input-wrapper form-input-mobile vcode-span vcode-input-span">
+				<input name="verifycode" class="text-input" placeholder="确认密码（必填）" maxlength="6" id="login-verifycode" type="text"/>
+				<span class="input-clearValue"></span>
+				</span>
+				<input id="login-vcodestr" name="vcodestr" value="" type="hidden"/>
+			</p>
+			<p class="form-item form-item-btn">
+				<input value="注册" id="reg-verifyCodeSend" class="pass-button-full pass-button-full-disabled" type="button" disabled="disabled"/>
+			</p>
+			<p class="f14 gray">
+				阅读&nbsp;
+				<a class="agreement-a" href="">说明</a>
+			</p>
+			<!-- <p class="pass-mod-loadingWrap" id="reg-loading">
+				<span class="pass-mod-loadingImg"></span>
+正在加载...
+			</p> 
+			<p class="form-item form-item-btn">
+				<input type="hidden" name="action" value="reg"/>
+			</p>-->
+		</form>
+		<p style="margin-top:60px;text-align:center; color:#bcbcbc;font-size:14px;width:100%;">
+			感谢每一位注册的朋友，您的注册就是对我的鼓励
+		</p>
+	</div>
+</div>
+</body>
+</html>

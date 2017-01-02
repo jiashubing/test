@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="font-size: 66.67%;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  	<meta charset="utf-8" />
+  	<title>阿丙的私人定制</title>
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=240, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+  	
+	<link rel="stylesheet" href="./css/base.shubing.css" th:href="@{/css/mobile/css/base.shubing.css}"/> 
+</head>
+<body>
+  
+<div id="pageWrapper">
+	<header class="pass-header ">
+	<a class="pass-header-back" id="goBack"
+	th:attr="style='background:url('+@{/image/mobile/images/goback.png}+') no-repeat 15px 13px;-webkit-background-size:1.2rem 2rem; padding:1.3rem 0 1.3rem 2.3rem; padding:13px 0 13px 15px; padding:1.3rem 0 1.3rem 2.3rem; width:36px; width:3.6rem; height:18px; height:1.8rem; position:absolute; left:0; top:0'"></a>
+	<span class="pass-header-title">
+        登录我的帐号        
+	</span>
+	</header>
+	<div class="mod-content">
+		<form autocomplete="off" method="POST" class="form-wrapper" id="login-formWrapper" th:action="@{/security_check}">
+			<div class="img-div">
+				<div class="logo-dom" style="width:138px; height:46px; margin:0 auto; background:url('css/baidu.png') no-repeat; background-size:100% 100%"
+				th:attr="style='background:url('+@{/image/pc/images/shubinglogo.png}+') no-repeat; background-size:100% 100%;'">
+				</div>
+			</div>
+			<p class="error_area" id="error">
+			</p>
+			<p class="form-item form-input-wrapper form-item-username form-input-mobile">
+				<input name="username" class="text-input" maxlength="60" placeholder="用户名" id="login-username" type="text" />
+				<span class="input-clearValue"></span>
+				<span id="login-userlist" class="pass-input-aide pass-input-userlist"></span>
+			</p>
+			<p class="form-item form-input-wrapper form-item-password form-input-mobile">
+				<input name="password" class="text-input" id="login-password" placeholder="密码" value="" type="password" />
+				<span class="input-clearValue"></span>
+				<span id="login-pwdToggle" class="input-aide input-pwdToggle"></span>
+			</p>
+			<!-- <p class="form-item form-input-verifycode m-t10" id="login-verifyWrapper">
+				<span class="form-input-wrapper form-input-mobile vcode-span vcode-input-span">
+				<input name="verifycode" class="text-input" placeholder="验证码" autocomplete="off" maxlength="6" id="login-verifycode" type="text" />
+				<span class="input-clearValue"></span>
+				</span>
+				<input id="login-vcodestr" name="vcodestr" value="" type="hidden" />
+			</p> -->
+			<p class="form-item form-item-btn">
+				<!-- <input name="action" value="login" type="hidden" />
+				<input id="login-loginmerge" name="loginmerge" value="1" type="hidden" /> -->
+				<input value="登录" id="login-submit" class="pass-button-full pass-button-full-disabled" type="submit" />
+			</p>
+			<div class="f14 clearfix login-problem">
+				<a class="left" href="">登录遇到问题</a>
+				<a id="login-other" class="type-other-login">忘记密码</a>
+			</div>
+		</form>
+		<p class="f14 account-login account-login-width">
+			<a href="" th:href="@{/regist}">立即注册</a>
+		</p>
+	</div>
+</div>
+   
+ </body>
+</html>

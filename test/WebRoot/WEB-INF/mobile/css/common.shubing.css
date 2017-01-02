@@ -325,7 +325,7 @@
 }
 
 .blue_kit_btn_return:empty:after {
-	content: '·µ»Ø'
+	content: 'ï¿½ï¿½ï¿½ï¿½'
 }
 
 .ui_checkbox {
@@ -413,7 +413,7 @@
 	border-radius: 0
 }
 
-@font-face {
+/* @font-face {
 	font-family:moicon;src:url(//tb2.bdstatic.com/tb/mobile/sglobal/lib/moui/dist/font/moicon_cb527d7.eot);src:url(//tb2.bdstatic.com/tb/mobile/sglobal/lib/moui/dist/font/moicon_cb527d7.eot) format('embedded-opentype'),url(//tb2.bdstatic.com/tb/mobile/sglobal/lib/moui/dist/font/moicon_2af3d33.woff) format('woff'),url(//tb2.bdstatic.com/tb/mobile/sglobal/lib/moui/dist/font/moicon_b3472da.ttf) format('truetype'),url(//tb2.bdstatic.com/tb/mobile/sglobal/lib/moui/dist/font/moicon_66b530f.svg) format('svg');font-weight:400;font-style:normal
 }[class^=icon_],[class*=" icon_"] {
 	font-family: moicon;
@@ -425,7 +425,7 @@
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale
-}
+} */
 
 .icon_check_outline:before {
 	content: "\e600"
@@ -537,7 +537,7 @@
 	z-index: 100000
 }
 
-@font-face {
+/* @font-face {
 	font-family:iconfontv1;src:url(//tb2.bdstatic.com/tb/mobile/sglobal/lib/moui/dist/font/iconfontv1_f18f73d.eot);src:url(//tb2.bdstatic.com/tb/mobile/sglobal/lib/moui/dist/font/iconfontv1_f18f73d.eot#iefix?t=1476789635213) format('embedded-opentype'),url(//tb2.bdstatic.com/tb/mobile/sglobal/lib/moui/dist/font/iconfontv1_ac5acee.ttf) format('truetype'),url(//tb2.bdstatic.com/tb/mobile/sglobal/lib/moui/dist/font/iconfontv1_aa278e0.woff) format('woff'),url(//tb2.bdstatic.com/tb/mobile/sglobal/lib/moui/dist/font/iconfontv1_5339d02.svg#iconfontv1?t=1476789635213) format('svg');font-weight:400;font-style:normal
 }[class^=iconfont-],[class*=" iconfont-"] {
 	font-family: iconfontv1!important;
@@ -549,7 +549,7 @@
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale
-}
+} */
 
 .iconfont-at:before {
 	content: "\e900"

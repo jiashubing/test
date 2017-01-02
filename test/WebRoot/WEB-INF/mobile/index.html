@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" content=""/>
-    <link rel="stylesheet" type="text/css" href="../mobile/css/common.css" th:href="@{/css/mobile/css/common.css}"/>
-    <link rel="stylesheet" type="text/css" href="../mobile/css/schoolm.css" th:href="@{/css/mobile/css/schoolm.css}"/>
-    <title>阿丙的私人定制</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  	<meta charset="utf-8" />
+  	<meta content="width=device-width,initial-scale=1,user-scalable=no" name="viewport" />
+  	<meta name="format-detection" content="telephone=no" />
+  	<title>阿丙的私人定制</title>
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+  	<meta name="mobile-web-app-capable" content="yes" />
+	
+	<link rel="stylesheet" href="./css/common.shubing.css" th:href="@{/css/mobile/css/common.shubing.css}"/> 
+  	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/css/resource.shubing.css}"/> 
 </head>
-<body>
+<body style="padding-bottom:0px;">
+  <div class="j_top_bar blue_kit">
+   <div class="blue_kit_left">
+    <a href="" class="j_back_btn blue_kit_btn"><span class="icon_tieba_logo blue_kit_btn_logo"></span><span class="blue_kit_text">阿丙的私人定制</span></a>
+   </div>
+   <div class="blue_kit_right"> 
+    <a href="" class="blue_kit_icon j_top_message index_icon top_message"> </a>
+    <a href="" class="blue_kit_icon index_icon top_search"></a> 
+   </div>
+  </div>
+  <div class="j_tab_index tab_index"> 
+	<div class="tab_head tab_index_head j_tab_index_head blue_kit light_tab_head tab_index_head_clone" style="display: -webkit-box; opacity: 1;"> 
+     	<a class="tab_head_item j_tab_discovery active" href="" th:href="@{/index}">首页</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/forum}">论坛</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/}">助眠</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/}">调查</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/login}">登录</a>
+    </div>
+ </div>
 
-<div class="xwlv_tab_wrap">
-    <span class="xwlv_tab_inner">
-        <a class="on" href="" th:href="@{/index}">首页</a>
-        <a href="" th:href="@{/forum}">论坛</a>
-        <a href="" th:href="@{/}">助眠</a>
-        <a href="" th:href="@{/}">调查</a>
-        <a href="" th:href="@{/}">登录</a>
-    </span>
-</div>
-<div style="height: 44px;"></div>
+  	<!--1-->
+<div th:attr="style='background:url('+@{/image/mobile/images/pc3.jpg}+')  center 0 no-repeat;background-size: 100%; padding-top:200px; min-height:280px; text-align:center; line-height:40px;'">
 
-
-<!--1-->
-<div>
-    <p><img src="../mobile/images/pc1.jpg" th:src="@{/image/mobile/images/pc1.jpg}" width="100%"/></p>
-
-    <p class="pcone"><span style="font-size:50px; color:white;">欢迎来到我的网站</span></p>
+    <span style="font-size:40px;">欢迎来到我的网站</span>
   
 </div>
 <!--1-->
@@ -41,13 +47,11 @@
 </div>
 <!--2-->
 <!--3-->
-<div style="background:url(../mobile/images/pc3.jpg) no-repeat;  background-size: 100%; padding-top:20px; min-height:600px" 
-th:attr="style='background:url('+@{/image/mobile/images/pc3.jpg}+')  center 0 no-repeat;background-size: 100%; padding-top:20px; min-height:600px;'" >
+<!-- <div style="background:url(../mobile/images/pc3.jpg) no-repeat;  background-size: 100%; padding-top:20px; min-height:200px" 
+	h:attr="style='background:url('+@{/image/mobile/images/pc1.jpg}+')  center 0 no-repeat;background-size: 100%; padding-top:20px; min-height:200px;'" >
     这里也不知道该添加点什么
-    <p style="height:20px; clear:both"></p>
-</div>
+</div> -->
 <!--3-->
-
-
-</body>
+   
+ </body>
 </html>

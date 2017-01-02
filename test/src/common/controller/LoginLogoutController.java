@@ -33,7 +33,11 @@ public class LoginLogoutController {
 			model.addAttribute("dbUser",dbUser);
 		}
 		model.put("loginFlag", 1);
-		return ValidatePcMobile.checkRequest(request, "/index");
+		if(ValidatePcMobile.checkRequest(request)){
+			return "/pc/index";
+		}else{
+			return "/mobile/login";
+		}
 	}
 
 	/**
