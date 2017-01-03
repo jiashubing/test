@@ -335,6 +335,48 @@ public class FileEcodeUtil {
 		return ans;
 	}
 	
+	public static String addBlankLine(File file){
+		String ans="";
+		InputStreamReader read = null;
+		BufferedReader bufferedReader = null;
+		try {
+			String encoding="UTF-8";
+			if(file.isFile() && file.exists()){ //判断文件是否存在
+				read = new InputStreamReader(new FileInputStream(file),encoding);//考虑到编码格式
+				bufferedReader = new BufferedReader(read);
+				String lineTxt = null;
+				//写入新文件
+//                FileWriter writer = new FileWriter("D:\\smc_menu123.unl", true);
+				while((lineTxt = bufferedReader.readLine()) != null){
+					ans += lineTxt+"\n\n";
+//                    writer.write(temp+'\n');        //写入新文件
+				}
+				read.close();
+				bufferedReader.close();
+//                writer.close();
+//                System.out.println("执行成功");
+			}else{
+//                System.out.println("找不到指定的文件");
+			}
+		} catch (Exception e) {
+//            System.out.println("读取文件内容出错");
+			e.printStackTrace();
+		}finally{
+			try {
+				if(read!=null){
+					read.close();
+				}
+				if(bufferedReader!=null){
+					bufferedReader.close();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return ans;
+	}
+	
 	//修改数据
 	public static String modifyLine(String x ,String a,String b){
 	    StringBuffer sb = new StringBuffer(x);

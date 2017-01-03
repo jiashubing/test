@@ -28,6 +28,29 @@
         }); 
       });
        
+       $("#insertLineBtn").click(function(){
+    	   var st = $("#startText").val();
+    	   if(st==""){
+    		   alert("原文本不能为空！");
+    		   return false;
+    	   }
+    	   $.ajax({
+    		   url:"insertLine",
+    		   type:"post",
+    		   dataType:"json",
+    		   data:{"startText":st},
+    		   success:function(result){
+    			   if(result.status==1){
+    				   var endTextAns = result.body; //角度 
+    				   $("#endText").val(endTextAns);
+    			   }
+    		   },
+    		   error: function () {
+    			   alert("请求失败！");
+    		   }
+    	   }); 
+       });
+       
        
       $("#loadFile").live("change",function(){
     	$("#loadFileFlag").val("0");
@@ -146,14 +169,11 @@
     	  }
        }); 
       
-      
       $("#downloadBtn").click(function(){
     	  var outName= $("#outName").val();
     	  console.log("outName = "+outName);
     	  $("#downloadHref").attr("href",$("#tempHref").attr("href")+"?outName="+outName);
     	  console.log($("#downloadHref").attr("href"));
       }); 
-      
-      
       
   });

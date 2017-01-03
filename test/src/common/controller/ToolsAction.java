@@ -290,5 +290,49 @@ public class ToolsAction {
         }
     }
 	
+	@RequestMapping("/tools/three")
+	public String loadToolThree(@AuthenticationPrincipal DbUser dbUser,@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
+		if(dbUser != null){
+			model.addAttribute("dbUser",dbUser);
+		}
+		if(showId == null){
+			showId = 3;
+		}
+		model.addAttribute("showId",showId); 
+		model.addAttribute("flag","tools.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/tools");
+	}
+	
+	/**
+	 * 每行文本的首尾增加相同字符工具
+	 * @param startText
+	 * @param startChar
+	 * @param endChar
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/tools/insertLine")
+    @ResponseBody
+    public Result insertLine(String startText,HttpServletRequest request) throws Exception {
+        Result result = new Result();
+        
+        String inName = DateUtil.getRadomStr();
+		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+inName+".txt";
+		File cin =  new File(inPath);
+		String ans = "";
+		boolean flag= FileEcodeUtil.writeStrToFile(startText, cin);
+		
+		if(flag){
+			ans = FileEcodeUtil.addBlankLine(cin);
+		}
+		FileEcodeUtil.deleteFile(inPath);
+        
+        result.setStatus(1);
+        result.setBody(ans);
+
+        return result;
+    }
+	
 	
 }
