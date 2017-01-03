@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>阿丙的私人订制</title>
+    <link rel="stylesheet" type="text/css" href="css/myregistsuccess.css" th:href="@{/css/pc/css/myregistsuccess.css}"/>
+    
+</head>
+<body style="background-color:#f0f0f0">
+    <p style="height:20px"></p>
+	<div class="shubing-welcom"  style=" height:100%; margin: 100px auto;" th:align="center">
+		<div style="padding-top: 150px;padding-bottom: 150px;">
+			<span style="font-size: 70px;"><strong>感谢您注册我的网站</strong></span>
+		</div>
+		<div class="msg">
+			<p>恭喜：注册成功！</p>
+			<p>正在进入首页...</p>
+			<script type="text/javascript">
+				setTimeout("location.href='index'", 3000);
+			</script>
+		</div>
+	</div>
+</body>
+</html>

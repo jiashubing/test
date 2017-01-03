@@ -13,31 +13,32 @@
 <body>
 <div id="pageWrapper" style="padding-bottom:50px;">
 	<header class="pass-header ">
-	<a class="pass-header-back" id="goBack" th:attr="style='background:url('+@{/image/mobile/images/goback.png}+') no-repeat 15px 13px;-webkit-background-size:1.2rem 2rem; padding:1.3rem 0 1.3rem 2.3rem; padding:13px 0 13px 15px; padding:1.3rem 0 1.3rem 2.3rem; width:36px; width:3.6rem; height:18px; height:1.8rem; position:absolute; left:0; top:0'"></a>
+	<a class="pass-header-back" id="goBack" href="#" onclick="javascript:history.back(-1)" 
+	th:attr="style='background:url('+@{/image/mobile/images/goback.png}+') no-repeat 15px 13px;-webkit-background-size:1.2rem 2rem; padding:1.3rem 0 1.3rem 2.3rem; padding:13px 0 13px 15px; padding:1.3rem 0 1.3rem 2.3rem; width:36px; width:3.6rem; height:18px; height:1.8rem; position:absolute; left:0; top:0'"></a>
 	<span class="pass-header-title">
         帐号注册        
 	</span>
 	</header>
 	<div class="mod-content">
-		<form autocomplete="off" method="POST" class="form-wrapper" id="reg-formWrapper">
-			<p class="error_area" id="error">
-			</p>
+		<form autocomplete="off" method="POST" class="form-wrapper" id="reg-formWrapper" th:action="@{/doRegist}" >
+			<span class="error_area" id="loginFailedInfo" th:text="${errInfo}">
+			</span>
 			<div class="img-div">
 				<div class="logo-dom" style="width:138px; height:46px; margin:0 auto; background:url('css/baidu.png') no-repeat; background-size:100% 100%" th:attr="style='background:url('+@{/image/pc/images/shubinglogo.png}+') no-repeat; background-size:100% 100%;'">
 				</div>
 			</div>
 			<p class="form-item form-input-wrapper form-item-username form-input-mobile">
-				<input name="username" class="text-input" maxlength="60" placeholder="用户名/昵称（必填）" id="login-username" type="text"/>
+				<input name="nickName" class="text-input" maxlength="20" placeholder="用户名/昵称（必填）" id="nickName" type="text"/>
 				<span class="input-clearValue"></span>
 				<span id="login-userlist" class="pass-input-aide pass-input-userlist"></span>
 			</p>
 			<p class="form-item form-input-wrapper form-item-username form-input-mobile">
-				<input name="username" class="text-input" maxlength="60" placeholder="真实姓名（只你与作者可见）" id="login-username" type="text"/>
+				<input name="trueName" class="text-input" maxlength="20" placeholder="真实姓名（只你与作者可见）" id="trueName" type="text"/>
 				<span class="input-clearValue"></span>
 				<span id="login-userlist" class="pass-input-aide pass-input-userlist"></span>
 			</p>
 			<p class="form-item form-input-wrapper form-item-username form-input-mobile">
-				<input name="username" class="text-input" maxlength="60" placeholder="邮箱（必填）" id="login-username" type="text"/>
+				<input name="email" class="text-input" maxlength="50" placeholder="邮箱（必填）" id="email" type="text"/>
 				<span class="input-clearValue"></span>
 				<span id="login-userlist" class="pass-input-aide pass-input-userlist"></span>
 			</p>
@@ -48,20 +49,18 @@
 			</select>
 			<p class="form-item form-input-verifycode m-t10" id="login-verifyWrapper">
 				<span class="form-input-wrapper form-input-mobile vcode-span vcode-input-span">
-				<input name="verifycode" class="text-input" placeholder="登录密码（必填）" autocomplete="off" maxlength="6" id="login-verifycode" type="password"/>
+				<input name="newPwd" class="text-input" placeholder="登录密码（必填）" autocomplete="off" maxlength="20" id="newPwd" type="password"/>
 				<span class="input-clearValue"></span>
 				</span>
-				<input id="login-vcodestr" name="vcodestr" value="" type="hidden"/>
 			</p>
 			<p class="form-item form-input-verifycode m-t10" id="login-verifyWrapper">
 				<span class="form-input-wrapper form-input-mobile vcode-span vcode-input-span">
-				<input name="verifycode" class="text-input" placeholder="确认密码（必填）" maxlength="6" id="login-verifycode" type="text"/>
+				<input name="confirmPwd" class="text-input" placeholder="确认密码（必填）" maxlength="20" id="confirmPwd" type="password"/>
 				<span class="input-clearValue"></span>
 				</span>
-				<input id="login-vcodestr" name="vcodestr" value="" type="hidden"/>
 			</p>
 			<p class="form-item form-item-btn">
-				<input value="注册" id="reg-verifyCodeSend" class="pass-button-full pass-button-full-disabled" type="button" disabled="disabled"/>
+				<input value="注册" id="registButton" class="pass-button-full pass-button-full-disabled" type="button"/>
 			</p>
 			<p class="f14 gray">
 				阅读&nbsp;
@@ -80,5 +79,7 @@
 		</p>
 	</div>
 </div>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/myregist.js" th:src="@{/js/mobile/js/myregist.js}" ></script>
 </body>
 </html>

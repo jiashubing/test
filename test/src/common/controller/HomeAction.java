@@ -145,9 +145,9 @@ public class HomeAction {
 		tmpDbUser.setPassword(newPwd);
 		tmpDbUser.setAccess(0);
 
-		if(sex==1){
+		if(sex!=null && sex==1){
 			tmpUser.setSex("男");
-		}else if(sex==0){
+		}else if(sex!=null && sex==0){
 			tmpUser.setSex("女");
 		}else{
 			tmpUser.setSex("未知");
@@ -264,6 +264,11 @@ public class HomeAction {
 	 @RequestMapping("/admin")
 	 public String getAdminPage(HttpServletRequest request){
 		return ValidatePcMobile.checkRequest(request, "/admin/main");
+	 }
+	 
+	 @RequestMapping("/registsu")
+	 public String registsu(HttpServletRequest request){
+		 return ValidatePcMobile.checkRequest(request, "/registsuccess");
 	 }
 	
 }

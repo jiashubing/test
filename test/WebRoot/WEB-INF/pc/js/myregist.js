@@ -191,7 +191,7 @@ function checkEmail() {
 				$("#emailMsg").text("");
 				$("#emailErr").text(result.message);
 			}else if(result.status==1) {
-				$("#emailMsg").text("该邮箱尚未注册");
+				$("#emailMsg").text("该邮箱可以使用");
 				$("#emailErr").text("");
 			}
 		},
