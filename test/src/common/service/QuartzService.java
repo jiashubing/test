@@ -65,7 +65,7 @@ public class QuartzService {
 	 */
 	@Scheduled(cron = "0 10 2 * * ?")//每天2：10触发
 	public void deleteTxtFiles() {  
-		String inPath = linuxUrl+ImgUtil.TOOLS_PATH;
+		String inPath = linuxUrl+ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT+'/';
 		FileEcodeUtil.deleteDirectoryChildren(inPath);
 	}  
 	

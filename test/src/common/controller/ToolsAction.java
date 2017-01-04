@@ -69,7 +69,7 @@ public class ToolsAction {
 		Result result = new Result();
 		
 		String inName = DateUtil.getRadomStr();
-		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+inName+".txt";
+		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+inName+".txt";
 		File cin =  new File(inPath);
 		loadFile.transferTo(cin);
 		String ans = FileEcodeUtil.readFileByLines(inPath);
@@ -105,9 +105,9 @@ public class ToolsAction {
 		}
 		
 		
-		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+inName+".txt";
+		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+inName+".txt";
 		String outName = DateUtil.getRadomStr();
-		String outPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+outName+".txt";
+		String outPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+outName+".txt";
 		File cin =  new File(inPath);
 		File cout =  new File(outPath);
 		boolean flag = FileEcodeUtil.fileEncrypt(cin,cout,(int)customKey);
@@ -145,7 +145,7 @@ public class ToolsAction {
 			result.setMessage("不存在待删除文件！");
 		}
 		
-		String outPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+outName+".txt";
+		String outPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+outName+".txt";
 		boolean flag = FileEcodeUtil.deleteFile(outPath);
 		if(flag){
 			result.setStatus(1);
@@ -224,7 +224,7 @@ public class ToolsAction {
         Result result = new Result();
         
         String inName = DateUtil.getRadomStr();
-		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+inName+".txt";
+		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+inName+".txt";
 		File cin =  new File(inPath);
 		String ans = "";
 		boolean flag= FileEcodeUtil.writeStrToFile(startText, cin);
@@ -247,7 +247,7 @@ public class ToolsAction {
 		Result result = new Result();
 		
 		String inName = DateUtil.getRadomStr();
-		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+inName+".txt";
+		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+inName+".txt";
 		File cin =  new File(inPath);
 		String ans = "";
 		boolean flag= FileEcodeUtil.writeStrToFile(startText, cin);
@@ -265,7 +265,7 @@ public class ToolsAction {
 	
 	@RequestMapping(value = "/tools/printContract")
     public void cell(HttpServletResponse response,HttpServletRequest request,String outName) {
-        String filePath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+outName+".txt";
+        String filePath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+outName+".txt";
         OutputStream out = null;
         try {
 			out = response.getOutputStream();
@@ -318,7 +318,7 @@ public class ToolsAction {
         Result result = new Result();
         
         String inName = DateUtil.getRadomStr();
-		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+"/"+inName+".txt";
+		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+inName+".txt";
 		File cin =  new File(inPath);
 		String ans = "";
 		boolean flag= FileEcodeUtil.writeStrToFile(startText, cin);

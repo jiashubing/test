@@ -13,6 +13,7 @@
   	<link rel="stylesheet" href="" th:href="@{/css/mobile/forum/css/details.shubing.css}"/> 
   	<link rel="stylesheet" href="" th:href="@{/css/mobile/forum/css/details1.shubing.css}"/> 
   	<link rel="stylesheet" href="" th:href="@{/css/mobile/forum/css/details2.shubing.css}"/> 
+  	<link rel="stylesheet" href="" th:href="@{/css/mobile/forum/css/reply.shubing.css}"/> 
   	
   	<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 </head>
@@ -166,6 +167,7 @@
                             </div>
                         </li>
                     </ul>
+                    <a name="pingluntop"></a>
                     <div id="list_pager">
                         <a href=""
                         class="j_pager_prev bottom_pager_btn pager_prev disabled">
@@ -189,457 +191,53 @@
                             赞
                         </span>
                     </a>-->
-                    <a href="" class="bottom-bar-button btn_reply j_btn_reply">
-                        <span class="btn_reply_text"
-                        th:attr="style='background:url('+@{/image/mobile/images/btn-huifu.png}+') no-repeat; background-size:30px;' ">
-                            
+                    <a id="pinglun" href="#pingluntop" class="bottom-bar-button btn_reply j_btn_reply">
+                        <span  class="btn_reply_text" th:attr="style='background:url('+@{/image/mobile/images/btn-huifu.png}+') no-repeat; background-size:30px;' ">
                            <span style="padding-left:10px">8</span>
                         </span>
                     </a>
                     <!-- <a href="" class="bottom-bar-button bottom-share-button" id="bottom-share-button">
                     </a> -->
                 </div>
+                	
+                
+                <div id="replydiv" class="replydiv">
+					<div class="post_title_embed">
+						发表评论
+					</div>
+					<textarea hidden="hidden"></textarea>
+					<div id="saytext" style="height:80px;width:100%;overflow-x:no;overflow-y:auto;" class="editor_input editor_content" contenteditable="true"></div>
+					<span class="emotion" th:attr="style='background:url('+@{/image/mobile/forum/images/biaoqing.png}+') no-repeat;background-size: 35px auto; display: inline-block; position: relative; height: 35px; width: 35px; margin-left: 15px; vertical-align: middle; '"></span>
+					<span style="align:right;">
+						<input type="button" class="reply_sub_btn" value="提交"/>
+					</span>
+				</div>
                 
                 <div class="j_pb_footer j_footer footer">
-                    <a class="footer_link" href="">
-                        反馈
-                    </a>
-                    <span class="separator">
-                        |
-                    </span>
-                    <a class="j_footer_toast footer_link" href="">
-                        登录
-                    </a>
-                    <span class="separator">
-                        |
-                    </span>
-                    <a class="footer_link" href="">
-                        注册
-                    </a>
-                    <br/>
-                </div>
-                <a href="#goTop"
-                class="client_ghost_icon j_client_ghost_icon"
-                th:attr="style='background-image:url('+@{/image/mobile/images/icon_tieba_new.png}+');'"
-                >
-                </a>
+					<a class="footer_link" href="">反馈</a>
+					<span class="separator">|</span>
+					<a class="j_footer_toast footer_link" href="">登录</a>
+					<span class="separator">|</span>
+					<a class="footer_link" href="">注册</a>
+					<br/>
+				</div>
+				<a href="#goTop" class="client_ghost_icon j_client_ghost_icon" th:attr="style='background-image:url('+@{/image/mobile/images/icon_tieba_new.png}+');'">
+				</a>
             </div>
         </div>
-        
-        <div class="j_ui_floatlayer ui_floatlayer ui_floatlayer_anim pb_poster_layer"
-        style="top: 0px; left: 100%;">
-            <div class="j_captcha_panel captcha_panel" style="top: 513px;">
-                <div class="old_vcode_wrapper" style="display:none;">
-                    <span class="captcha_text">
-                        请输入验证码:
-                    </span>
-                    <div>
-                        <input type="text" class="j_captcha_input captcha_input" />
-                        <a href="https://tieba.baidu.com/p/4914700095?lp=5028&amp;mo_device=1&amp;is_jingpost=0&amp;pn=0&amp;#">
-                            <img class="captcha_img j_captcha_img" src="about:blank" />
-                        </a>
-                    </div>
-                </div>
-                <div class="panel_topbar j_panel_topbar">
-                    输入验证码
-                    <a href="https://tieba.baidu.com/p/4914700095?lp=5028&amp;mo_device=1&amp;is_jingpost=0&amp;pn=0&amp;#"
-                    class="j_close_panel close_panel">
-                        <span class="btn_close">
-                        </span>
-                    </a>
-                </div>
-                <div class="vcode_panel_outer_wrapper vcode_panel_id5953">
-                    <div class="vcode_panel_inner_wrapper">
-                        <div class="vcode_error_tip">
-                        </div>
-                        <div class="vcode_panel_inner_upper">
-                            <div class="upper_id_wrapper">
-                                <div class="upper_id_inner_wrapper">
-                                    <div class="vcode_input_tip">
-                                        验证码:&nbsp;
-                                    </div>
-                                    <div class="upper_fake_input">
-                                        <div order="" class="upper_fake_placeholder vcode_baseImg_big">
-                                        </div>
-                                        <div order="" class="upper_fake_placeholder vcode_baseImg_big">
-                                        </div>
-                                        <div order="" class="upper_fake_placeholder vcode_baseImg_big">
-                                        </div>
-                                        <div order="" class="upper_fake_placeholder vcode_baseImg_big">
-                                        </div>
-                                    </div>
-                                    <a class="j_vcode_delete upper_delete">
-                                        <span class="upper_delete_img">
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="j_vcode_target_img upper_target_img vcode_baseImg_big">
-                            </div>
-                            <div class="j_vcode_tip upper_tip">
-                                点击框内文字输入图中
-                                <span class="PIN_red">
-                                    汉字或拼音
-                                </span>
-                                对应汉字
-                            </div>
-                            <!--div class="j_vcode_toggle_type toggle_type">返回旧版</div-->
-                            <input type="hidden" class="j_captcha_input captcha_input" />
-                        </div>
-                        <div class="vcode_panel_grids_wrapper">
-                            <div class="vcode_panel_input_tip">
-                                请点击以下按钮输入验证码
-                            </div>
-                            <div class="grids_line_wrapper">
-                                <a data="00000000" class="grid_button" order="0">
-                                    <span class="grid_img vcode_baseImg_big vbp_0">
-                                    </span>
-                                </a>
-                                <a data="00010000" class="grid_button" order="1">
-                                    <span class="grid_img vcode_baseImg_big vbp_1">
-                                    </span>
-                                </a>
-                                <a data="00020000" class="grid_button" order="2">
-                                    <span class="grid_img vcode_baseImg_big vbp_2">
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="grids_line_wrapper">
-                                <a data="00000001" class="grid_button" order="3">
-                                    <span class="grid_img vcode_baseImg_big vbp_3">
-                                    </span>
-                                </a>
-                                <a data="00010001" class="grid_button" order="4">
-                                    <span class="grid_img vcode_baseImg_big vbp_4">
-                                    </span>
-                                </a>
-                                <a data="00020001" class="grid_button" order="5">
-                                    <span class="grid_img vcode_baseImg_big vbp_5">
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="grids_line_wrapper">
-                                <a data="00000002" class="grid_button" order="6">
-                                    <span class="grid_img vcode_baseImg_big vbp_6">
-                                    </span>
-                                </a>
-                                <a data="00010002" class="grid_button" order="7">
-                                    <span class="grid_img vcode_baseImg_big vbp_7">
-                                    </span>
-                                </a>
-                                <a data="00020002" class="grid_button" order="8">
-                                    <span class="grid_img vcode_baseImg_big vbp_8">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="j_top_bar blue_kit j_postor_blue_head">
-                <div class="blue_kit_left">
-                    <a class="blue_kit_btn blue_kit_btn_back j_postor_blue_kit_btn_return"
-                    href="">
-                        <span class="icon_tieba_logo blue_kit_btn_logo">
-                        </span>
-                        <span class="blue_kit_text">
-                            发表回复
-                        </span>
-                    </a>
-                </div>
-                <div class="blue_kit_right">
-                    <a class="blue_kit_btn j_submit_btn" href="">
-                        发表
-                    </a>
-                </div>
-            </div>
-            <div id="j_main_editor_container" class="editor_panel overthrow">
-                <div class="j_pb_main_editor pb_main_editor">
-                    <div class="j_editor_title_panel editor_title_panel">
-                    </div>
-                    <div class="j_editor_content_panel editor_content_panel">
-                        <div class="j_savedraft_panel savedraft_panel">
-                        </div>
-                        <div class="lay_hide">
-                            <div class="j_lay_top lay_top">
-                            </div>
-                            <textarea placeholder="马上登录，马上回复" style="height:80px;width:100%" class="j_editor_content editor_input editor_content"
-                            disabled="disabled">
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="j_editor_bottom_panel editor_bottom_panel clearfix">
-                        <div class="editor_btn_list">
-                            <div class="j_media_bar media_bar">
-                                <div class="j_voice_btn_panel voice_btn_panel">
-                                </div>
-                                <div class="j_smile_btn_panel smile_btn_panel">
-                                    <a href="https://tieba.baidu.com/p/4914700095?lp=5028&amp;mo_device=1&amp;is_jingpost=0&amp;pn=0&amp;#"
-                                    class="j_smile_btn smile_btn smile_disable">
-                                        <span class="media_bar_btn_text">
-                                            表情
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="j_pic_btn_panel pic_btn_panel" style="display: inline-block;">
-                                    <a class="upload-block disable" href="">
-                                        <span class="media_bar_btn_text">
-                                            照片
-                                        </span>
-                                        <span class="upload-block-count">
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="j_recommend_btn_panel recommend_btn_panel">
-                                    <a class="recommend_btn recommend_btn_disabled" href="">
-                                        <span class="media_bar_btn_text">
-                                            热议
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="j_at_btn_panel at_btn_panel">
-                                    <a class="at_btn at_btn_disabled" href="">
-                                        <span class="media_bar_btn_text">
-                                            @好友
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="j_post_tip post_tip">
-                        </div>
-                        <div class="j_user_hide post_tip">
-                        </div>
-                        <div class="j_no_un_tip no_un_tip">
-                        </div>
-                        <div class="j_device_info device_info">
-                        </div>
-                        <div class="j_smile_box_panel smile_box_panel">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="j_ui_floatlayer ui_floatlayer ui_floatlayer_anim pb_lzl_poster_layer"
-        style="top: 0px; left: 100%;">
-            <div class="j_captcha_panel captcha_panel" style="top: 513px;">
-                <div class="old_vcode_wrapper" style="display:none;">
-                    <span class="captcha_text">
-                        请输入验证码:
-                    </span>
-                    <div>
-                        <input type="text" class="j_captcha_input captcha_input" />
-                        <a href="https://tieba.baidu.com/p/4914700095?lp=5028&amp;mo_device=1&amp;is_jingpost=0&amp;pn=0&amp;#">
-                            <img class="captcha_img j_captcha_img" src="about:blank" />
-                        </a>
-                    </div>
-                </div>
-                <div class="panel_topbar j_panel_topbar">
-                    输入验证码
-                    <a href="https://tieba.baidu.com/p/4914700095?lp=5028&amp;mo_device=1&amp;is_jingpost=0&amp;pn=0&amp;#"
-                    class="j_close_panel close_panel">
-                        <span class="btn_close">
-                        </span>
-                    </a>
-                </div>
-                <div class="vcode_panel_outer_wrapper vcode_panel_id7752">
-                    <div class="vcode_panel_inner_wrapper">
-                        <div class="vcode_error_tip">
-                        </div>
-                        <div class="vcode_panel_inner_upper">
-                            <div class="upper_id_wrapper">
-                                <div class="upper_id_inner_wrapper">
-                                    <div class="vcode_input_tip">
-                                        验证码:&nbsp;
-                                    </div>
-                                    <div class="upper_fake_input">
-                                        <div order="" class="upper_fake_placeholder vcode_baseImg_big">
-                                        </div>
-                                        <div order="" class="upper_fake_placeholder vcode_baseImg_big">
-                                        </div>
-                                        <div order="" class="upper_fake_placeholder vcode_baseImg_big">
-                                        </div>
-                                        <div order="" class="upper_fake_placeholder vcode_baseImg_big">
-                                        </div>
-                                    </div>
-                                    <a class="j_vcode_delete upper_delete">
-                                        <span class="upper_delete_img">
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="j_vcode_target_img upper_target_img vcode_baseImg_big">
-                            </div>
-                            <div class="j_vcode_tip upper_tip">
-                                点击框内文字输入图中
-                                <span class="PIN_red">
-                                    汉字或拼音
-                                </span>
-                                对应汉字
-                            </div>
-                            <!--div class="j_vcode_toggle_type toggle_type">返回旧版</div-->
-                            <input type="hidden" class="j_captcha_input captcha_input" />
-                        </div>
-                        <div class="vcode_panel_grids_wrapper">
-                            <div class="vcode_panel_input_tip">
-                                请点击以下按钮输入验证码
-                            </div>
-                            <div class="grids_line_wrapper">
-                                <a data="00000000" class="grid_button" order="0">
-                                    <span class="grid_img vcode_baseImg_big vbp_0">
-                                    </span>
-                                </a>
-                                <a data="00010000" class="grid_button" order="1">
-                                    <span class="grid_img vcode_baseImg_big vbp_1">
-                                    </span>
-                                </a>
-                                <a data="00020000" class="grid_button" order="2">
-                                    <span class="grid_img vcode_baseImg_big vbp_2">
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="grids_line_wrapper">
-                                <a data="00000001" class="grid_button" order="3">
-                                    <span class="grid_img vcode_baseImg_big vbp_3">
-                                    </span>
-                                </a>
-                                <a data="00010001" class="grid_button" order="4">
-                                    <span class="grid_img vcode_baseImg_big vbp_4">
-                                    </span>
-                                </a>
-                                <a data="00020001" class="grid_button" order="5">
-                                    <span class="grid_img vcode_baseImg_big vbp_5">
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="grids_line_wrapper">
-                                <a data="00000002" class="grid_button" order="6">
-                                    <span class="grid_img vcode_baseImg_big vbp_6">
-                                    </span>
-                                </a>
-                                <a data="00010002" class="grid_button" order="7">
-                                    <span class="grid_img vcode_baseImg_big vbp_7">
-                                    </span>
-                                </a>
-                                <a data="00020002" class="grid_button" order="8">
-                                    <span class="grid_img vcode_baseImg_big vbp_8">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="j_top_bar blue_kit j_postor_blue_head">
-                <div class="blue_kit_left">
-                    <a class="blue_kit_btn blue_kit_btn_back j_postor_blue_kit_btn_return"
-                    href="">
-                        <span class="icon_tieba_logo blue_kit_btn_logo">
-                        </span>
-                        <span class="blue_kit_text">
-                            发表回复
-                        </span>
-                    </a>
-                </div>
-                <div class="blue_kit_right">
-                    <a class="blue_kit_btn j_submit_btn" href="">
-                        发表
-                    </a>
-                </div>
-            </div>
-            <div id="j_lzl_editor_container" class="editor_panel overthrow">
-                <div class="j_pb_lzl_editor pb_lzl_editor">
-                    <div class="j_editor_title_panel editor_title_panel">
-                    </div>
-                    <div class="j_editor_content_panel editor_content_panel">
-                        <div class="j_savedraft_panel savedraft_panel">
-                        </div>
-                        <div class="lay_hide">
-                            <div class="j_lay_top lay_top">
-                            </div>
-                            <textarea placeholder="" style="height:80px;width:100%" class="j_editor_content editor_input editor_content"
-                            disabled="disabled">
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="j_editor_bottom_panel editor_bottom_panel clearfix">
-                        <div class="editor_btn_list">
-                            <div class="j_media_bar media_bar">
-                                <div class="j_voice_btn_panel voice_btn_panel">
-                                </div>
-                                <div class="j_smile_btn_panel smile_btn_panel">
-                                    <a href="https://tieba.baidu.com/p/4914700095?lp=5028&amp;mo_device=1&amp;is_jingpost=0&amp;pn=0&amp;#"
-                                    class="j_smile_btn smile_btn smile_disable">
-                                        <span class="media_bar_btn_text">
-                                            表情
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="j_pic_btn_panel pic_btn_panel">
-                                </div>
-                                <div class="j_recommend_btn_panel pic_recommend_panel">
-                                </div>
-                                <div class="j_at_btn_panel at_btn_panel">
-                                    <a class="at_btn at_btn_disabled" href="">
-                                        <span class="media_bar_btn_text">
-                                            @好友
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="j_post_tip post_tip">
-                        </div>
-                        <div class="j_user_hide post_tip">
-                        </div>
-                        <div class="j_no_un_tip no_un_tip">
-                        </div>
-                        <div class="j_device_info device_info">
-                        </div>
-                        <div class="j_smile_box_panel smile_box_panel">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-       
-        <div class="ui_slider_hybrid">
-            <div class="ui_image_header j_ui_image_header">
-                <div class="header_mask">
-                </div>
-                <a class="ui_button ui_back j_span_back" href="https://tieba.baidu.com/p/4914700095?lp=5028&amp;mo_device=1&amp;is_jingpost=0&amp;pn=0&amp;#">
-                </a>
-                <span class="img_order">
-                </span>
-                <a href="https://tieba.baidu.com/p/4914700095?lp=5028&amp;mo_device=1&amp;is_jingpost=0&amp;pn=0&amp;#"
-                class="j_download_image download_image">
-                </a>
-                <a href="https://tieba.baidu.com/p/4914700095?lp=5028&amp;mo_device=1&amp;is_jingpost=0&amp;pn=0&amp;#"
-                class="j_view_image view_image">
-                </a>
-                <a href="https://tieba.baidu.com/p/4914700095?lp=5028&amp;mo_device=1&amp;is_jingpost=0&amp;pn=0&amp;#"
-                class="j_view_album view_album">
-                </a>
-            </div>
-            <ul class="slide_frame">
-            </ul>
-            <div class="img_info_introduce">
-                <div class="abstract_mask">
-                </div>
-                <div class="introduce_header">
-                    <div class="img_title">
-                    </div>
-                    <a href="https://tieba.baidu.com/p/4914700095?lp=5028&amp;mo_device=1&amp;is_jingpost=0&amp;pn=0&amp;#"
-                    class="view_post  j_view_post">
-                        <span class="post_icon">
-                        </span>
-                        去原贴
-                    </a>
-                </div>
-                <div class="abstract_content">
-                </div>
-            </div>
-        </div>
+<script type="text/javascript" src="js/jquery.qqFace.js" th:src="@{/js/mobile/forum/js/jquery.qqFace.js}"></script>
+<script type="text/javascript" src="" th:src="@{/js/mobile/forum/js/myDetailJson.js}" ></script>
+<script type="text/javascript" th:inline="javascript">
+$(function(){
+ 	/*<![CDATA[*/
+ 	var path= /*[[@{/image/mobile/forum/images/arclist/}]]*/"arclist/";
+    /*]]>*/
+	$('.emotion').qqFace({
+		id : 'facebox', 
+		assign:'saytext', 
+		path:path	//表情存放的路径
+	});
+});
+</script>
     </body>
-
 </html>
