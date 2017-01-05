@@ -289,10 +289,14 @@
    function saveReply(){
 	/*<![CDATA[*/
  	var flag= /*[[${dbUser==null}]]*/true;
+ 	var loginhref= /*[[@{/login}]]*/"login/";
     /*]]>*/
     
-    if(flag){
-   	 	alert("请先登陆，再回帖！");
+ 	if(flag){
+		var con = confirm('回帖需要注册登录！\n您要现在登录吗？');
+		if (con) {
+			location.href=loginhref;
+		}
 		return false;
     }
     editor.sync();

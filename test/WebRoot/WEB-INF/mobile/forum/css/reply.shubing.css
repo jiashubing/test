@@ -1,5 +1,5 @@
 .reply_sub_btn {
-	position:relative; margin-right:0px;
+	position:absolute;right:10px; bottom:412px;
 	display: inline-block;
 	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
 	*display: inline;

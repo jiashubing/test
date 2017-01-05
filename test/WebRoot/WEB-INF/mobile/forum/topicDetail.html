@@ -67,12 +67,17 @@
 											</span>
                                         </div>
                                         <div class="list_item_top_name">
-                                            <span class="level level_16">
+                                           <!--  <span class="level level_16">
                                             LZ
+                                            </span> -->
+                                            
+                                            <span class="user_name red_name"
+                                            	th:attr="style='background:url('+@{/image/mobile/forum/images/lz.png}+') no-repeat; background-size:17.5px;' ">
                                             </span>
                                             <span class="user_name" th:unless="${topic==null||topic.user==null}" th:text="${topic.user.nickName }">
                                                  你是什么逗比啊
                                             </span>
+                                            
                                             <br/>
                                             <span class="list_item_floor_num">
                                                楼主
@@ -137,8 +142,11 @@
                                                 8
                                             </span> -->
                                             <br/>
-                                            <span th:if="${reply.user.id == topic.user.id}" class="level level_16">
+                                            <!-- <span th:if="${reply.user.id == topic.user.id}" class="level level_16">
                                             LZ
+                                            </span> -->
+                                            <span th:if="${reply.user.id == topic.user.id}" class="user_name red_name"
+                                            	th:attr="style='background:url('+@{/image/mobile/forum/images/lz.png}+') no-repeat; background-size:17.5px;' ">
                                             </span>
                                             <span class="list_item_floor_num">
                                                 <span th:text="${pageNo*10+replyStat.count }">1</span>楼
@@ -193,32 +201,35 @@
                     </a>-->
                     <a id="pinglun" href="#pingluntop" class="bottom-bar-button btn_reply j_btn_reply">
                         <span  class="btn_reply_text" th:attr="style='background:url('+@{/image/mobile/images/btn-huifu.png}+') no-repeat; background-size:30px;' ">
-                           <span style="padding-left:10px">8</span>
+                           <span style="padding-left:10px" th:text="${topic.replySum==0?'评论':topic.replySum}">8</span>
                         </span>
                     </a>
                     <!-- <a href="" class="bottom-bar-button bottom-share-button" id="bottom-share-button">
                     </a> -->
                 </div>
                 	
-                
+                <form id="fm" class="form-horizontal" style="margin-top: 10px;" method="post" th:action="@{/forum/replyAdd}">
                 <div id="replydiv" class="replydiv">
 					<div class="post_title_embed">
 						发表评论
 					</div>
-					<textarea hidden="hidden"></textarea>
+					<textarea name="replyContent" id="reallyContent" hidden="hidden"></textarea>
 					<div id="saytext" style="height:80px;width:100%;overflow-x:no;overflow-y:auto;" class="editor_input editor_content" contenteditable="true"></div>
-					<span class="emotion" th:attr="style='background:url('+@{/image/mobile/forum/images/biaoqing.png}+') no-repeat;background-size: 35px auto; display: inline-block; position: relative; height: 35px; width: 35px; margin-left: 15px; vertical-align: middle; '"></span>
-					<span style="align:right;">
-						<input type="button" class="reply_sub_btn" value="提交"/>
+					<span class="emotion" th:attr="style='background:url('+@{/image/mobile/forum/images/biaoqing.png}+') no-repeat;background-size: 35px auto; display: inline-block; position: relative; height: 35px; width: 35px; margin-left: 15px; vertical-align: middle; cursor:pointer;'"></span>
+					<span>
+						<input type="button" class="reply_sub_btn" value="提交" onclick="javascript:saveReply()"/>
 					</span>
 				</div>
+				<input id="replyTopicId" name="replyTopicId" th:value="${topic.id }" type="hidden"/>
+				<input id="pageNo" name="pageNo" th:value="${pageNo}" type="hidden"/>
+				</form>
                 
                 <div class="j_pb_footer j_footer footer">
 					<a class="footer_link" href="">反馈</a>
 					<span class="separator">|</span>
-					<a class="j_footer_toast footer_link" href="">登录</a>
+					<a class="j_footer_toast footer_link" th:href="@{/login}">登录</a>
 					<span class="separator">|</span>
-					<a class="footer_link" href="">注册</a>
+					<a class="footer_link" th:href="@{/regist}">注册</a>
 					<br/>
 				</div>
 				<a href="#goTop" class="client_ghost_icon j_client_ghost_icon" th:attr="style='background-image:url('+@{/image/mobile/images/icon_tieba_new.png}+');'">
@@ -238,6 +249,37 @@ $(function(){
 		path:path	//表情存放的路径
 	});
 });
+function saveReply(){
+	/*<![CDATA[*/
+ 	var flag= /*[[${dbUser==null}]]*/true;
+	var loginhref= /*[[@{/login}]]*/"login/";
+    /*]]>*/
+    
+    if(flag){
+		var con = confirm('回帖需要注册登录!\n您要现在登录吗?');
+		if (con) {
+			location.href=loginhref;
+		}
+		return false;
+    }
+    
+    var replyContent=$("#saytext").html();
+    var len = replyContent.length;
+    if (10 > len) {
+		alert("最少输入10个字符！");
+		return false;
+	}
+	
+	if (len > 10000) {
+		alert("最多输入10000个字符！");
+		return false;
+	}
+	
+	$("#reallyContent").val(replyContent);
+	$("#fm").submit();
+	alert("回复成功！");
+	$("#saytext").html("");
+}
 </script>
-    </body>
+</body>
 </html>

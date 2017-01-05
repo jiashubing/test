@@ -80,7 +80,7 @@
 	 <a href='' class="j_pager_next pager_btn pager_next" th:if="${pageNo}>0" th:href="@{/forum/topicList(sectionId=${section.id},pageNo=${pageNo}-1)}">点击加载上一页</a>
      <ul class="threads_list" id="frslistcontent">
       <li class="tl_gap"></li>
-      <li class="tl_top" th:each="top,Num:${zdTopicList}"><a href="" th:class="${Num.first}?'j_common ti_item no_border':'j_common ti_item'" >
+      <li class="tl_top" th:each="top,Num:${zdTopicList}"><a th:href="@{/forum/details(id=${top.id})}" th:class="${Num.first}?'j_common ti_item no_border':'j_common ti_item'" >
         <div class="ti_title"> 
          <span class="ti_title_icon ti_icon_zhiding">置顶</span> 
          <span th:text="${top.title}">S.U.N.女神「原创」【拜托了衣橱】我娜花式大征集</span>
