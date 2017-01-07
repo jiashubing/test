@@ -386,11 +386,11 @@ input[type=text]::-webkit-input-placeholder,input[type=password]::-webkit-input-
 	margin-left:20px
 }
 .input-clearValue {
-	width:22px;
-	
-	-webkit-background-size:18px 18px;
+	width:2.5rem;
+	background:url('//www.jiashubing.cn/image/mobile/images/clear.png') no-repeat center center;
+	-webkit-background-size:1.5rem 1.5rem;
 	cursor:pointer;
-	display:none
+	display:none;
 }
 .change-verifyCode {
 	display:block;

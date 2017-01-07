@@ -24,21 +24,21 @@
 			<span class="error_area" id="loginFailedInfo" th:text="${errInfo}">
 			</span>
 			<div class="img-div">
-				<div class="logo-dom" style="width:138px; height:46px; margin:0 auto; background:url('css/baidu.png') no-repeat; background-size:100% 100%" th:attr="style='background:url('+@{/image/pc/images/shubinglogo.png}+') no-repeat; background-size:100% 100%;'">
+				<div class="logo-dom" style="width:138px; height:46px; margin:0 auto; background-size:100% 100%" th:attr="style='background:url('+@{/image/pc/images/shubinglogo.png}+') no-repeat; background-size:100% 100%;'">
 				</div>
 			</div>
 			<p class="form-item form-input-wrapper form-item-username form-input-mobile">
 				<input name="nickName" class="text-input" maxlength="20" placeholder="用户名/昵称（必填）" id="nickName" type="text"/>
-				<span class="input-clearValue"></span>
+				<span class="input-clearValue" ></span>
 				<span id="login-userlist" class="pass-input-aide pass-input-userlist"></span>
 			</p>
 			<p class="form-item form-input-wrapper form-item-username form-input-mobile">
-				<input name="trueName" class="text-input" maxlength="20" placeholder="真实姓名（只你与站长可见）" id="trueName" type="text"/>
-				<span class="input-clearValue"></span>
+				<input name="trueName" class="text-input" maxlength="20" placeholder="真实姓名（只你与站长可见）" id="trueName" type="text" onkeyup="showClear(this)" onfocus="showClear(this)" />
+				<span class="input-clearValue" onclick="shubingClear(this)"></span>
 				<span id="login-userlist" class="pass-input-aide pass-input-userlist"></span>
 			</p>
 			<p class="form-item form-input-wrapper form-item-username form-input-mobile">
-				<input name="email" class="text-input" maxlength="50" placeholder="邮箱（必填）" id="email" type="text"/>
+				<input name="email" class="text-input" maxlength="50" placeholder="邮箱（必填，望填写真实邮箱）" id="email" type="text"/>
 				<span class="input-clearValue"></span>
 				<span id="login-userlist" class="pass-input-aide pass-input-userlist"></span>
 			</p>
@@ -49,14 +49,14 @@
 			</select>
 			<p class="form-item form-input-verifycode m-t10" id="login-verifyWrapper">
 				<span class="form-input-wrapper form-input-mobile vcode-span vcode-input-span">
-				<input name="newPwd" class="text-input" placeholder="登录密码（必填）" autocomplete="off" maxlength="20" id="newPwd" type="password"/>
-				<span class="input-clearValue"></span>
+				<input name="newPwd" class="text-input" placeholder="登录密码（必填）" autocomplete="off" maxlength="20" id="newPwd" type="password" onkeyup="showClear(this)" onfocus="showClear(this)" />
+				<span class="input-clearValue" onclick="shubingClear(this)"></span>
 				</span>
 			</p>
 			<p class="form-item form-input-verifycode m-t10" id="login-verifyWrapper">
 				<span class="form-input-wrapper form-input-mobile vcode-span vcode-input-span">
-				<input name="confirmPwd" class="text-input" placeholder="确认密码（必填）" maxlength="20" id="confirmPwd" type="password"/>
-				<span class="input-clearValue"></span>
+				<input name="confirmPwd" class="text-input" placeholder="确认密码（必填）" maxlength="20" id="confirmPwd" type="password" onkeyup="showClear(this)" onfocus="showClear(this)" />
+				<span class="input-clearValue" onclick="shubingClear(this)"></span>
 				</span>
 			</p>
 			<p class="form-item form-item-btn">
@@ -80,6 +80,7 @@
 	</div>
 </div>
 <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/shubing.base.js" th:src="@{/js/mobile/js/shubing.base.js}" ></script>
 <script type="text/javascript" src="js/myregist.js" th:src="@{/js/mobile/js/myregist.js}" ></script>
 </body>
 </html>
