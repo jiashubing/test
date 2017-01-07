@@ -24,39 +24,34 @@
   </div>
   <div class="j_tab_index tab_index"> 
 	<div class="tab_head tab_index_head j_tab_index_head blue_kit light_tab_head tab_index_head_clone" style="display: -webkit-box; opacity: 1;"> 
-     	<a class="tab_head_item j_tab_discovery active" href="" th:href="@{/index}">首页</a>
+     	<a class="tab_head_item j_tab_selected" href="" th:href="@{/index}">首页</a>
 		<a class="tab_head_item j_tab_selected" href="" th:href="@{/forum}">论坛</a>
 		<a class="tab_head_item j_tab_selected" href="" th:href="@{/}">助眠</a>
 		<a class="tab_head_item j_tab_selected" href="" th:href="@{/}">调查</a>
-		<a class="tab_head_item j_tab_selected" href="" th:href="@{/beforelogin}">个人</a>
+		<a class="tab_head_item j_tab_discovery active" href="" th:href="@{/beforelogin}">个人</a>
     </div>
 
-
-  	<!--1-->
-<div th:attr="style='background:url('+@{/image/mobile/images/pc3.jpg}+')  center 0 no-repeat;background-size: 100%; padding-top:200px; min-height:280px; text-align:center; line-height:40px;'">
-
-    <span style="font-size:40px;">欢迎来到我的网站</span>
-  
-</div>
-<!--1-->
-<!--2-->
-<div>
-    <div style="background-color:#ffb700; min-height:600px;">
-        这里应该写些什么东西啊。。。。
-    </div>
-</div>
-<!--2-->
-<!--3-->
-<!-- <div style="background:url(../mobile/images/pc3.jpg) no-repeat;  background-size: 100%; padding-top:20px; min-height:200px" 
-	h:attr="style='background:url('+@{/image/mobile/images/pc1.jpg}+')  center 0 no-repeat;background-size: 100%; padding-top:20px; min-height:200px;'" >
-    这里也不知道该添加点什么
-</div> -->
-<!--3-->
- </div>
- <div class="j_footer footer">
+	<div class="j_tab_content_item">
+		<div class="j_user user">
+			<div class="login_tip">
+				<img src="" th:src="@{/image/mobile/forum/images/banner.jpg}" alt="" class="login_tip_banner" />
+				<div class="login_tip_text">
+					<div class="login_tip_text_txt">
+						你还没有登录哦，赶快去登录吧！
+					</div>
+				</div>
+			</div>
+			
+			<a href="" th:href="@{/login}" class="index_press_area user_entrance_item index_icon user_tbean j_user_tbean">登录</a>
+			<a href="" class="index_press_area user_entrance_item index_icon user_feedback j_user_feedback">意见反馈</a>
+		</div>
+	</div>
+	<div class="j_footer footer">
 		<a class="footer_link" href="">反馈</a><span class="separator">|</span>
 		<a class="j_footer_toast footer_link" href="" th:href="@{/login}">登录</a><span class="separator">|</span>
-		<a class="footer_link" href="">注册</a><br/>
+		<a class="footer_link" href="" th:href="@{/regist}">注册</a><br/>
 	</div>
+	
+    </div>
  </body>
 </html>

@@ -36,8 +36,27 @@ public class LoginLogoutController {
 		if(ValidatePcMobile.checkRequest(request)){
 			return "/pc/index";
 		}else{
+			if(dbUser != null){
+				return "/mobile/person";
+			}
 			return "/mobile/login";
 		}
+	}
+	
+	/**
+	 * 手机端指向登录前界面
+	 * 
+	 * @param error
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/beforelogin")
+	public String getBeforeLoginPage(@AuthenticationPrincipal DbUser dbUser, ModelMap model,HttpServletRequest request) {
+		if(dbUser != null){
+			model.addAttribute("dbUser",dbUser);
+			return "/mobile/person";
+		}
+		return "/mobile/beforelogin";
 	}
 
 	/**

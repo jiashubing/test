@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  	<meta charset="utf-8" />
+  	<meta content="width=device-width,initial-scale=1,user-scalable=no" name="viewport" />
+  	<meta name="format-detection" content="telephone=no" />
+  	<title>阿丙的私人定制</title>
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+  	<meta name="mobile-web-app-capable" content="yes" />
+	
+	<link rel="stylesheet" href="./css/common.shubing.css" th:href="@{/css/mobile/css/common.shubing.css}"/> 
+  	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/css/resource.shubing.css}"/> 
+</head>
+<body style="padding-bottom:0px;">
+  <div class="j_top_bar blue_kit">
+   <div class="blue_kit_left">
+    <a href="" class="j_back_btn blue_kit_btn"><span class="icon_tieba_logo blue_kit_btn_logo"></span><span class="blue_kit_text">阿丙的私人定制</span></a>
+   </div>
+   <div class="blue_kit_right"> 
+    <!-- <a href="" class="blue_kit_icon j_top_message index_icon top_message"> </a>
+    <a href="" class="blue_kit_icon index_icon top_search"></a>  -->
+   </div>
+  </div>
+  <div class="j_tab_index tab_index"> 
+	<div class="tab_head tab_index_head j_tab_index_head blue_kit light_tab_head tab_index_head_clone" style="display: -webkit-box; opacity: 1;"> 
+     	<a class="tab_head_item j_tab_selected" href="" th:href="@{/index}">首页</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/forum}">论坛</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/}">助眠</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/}">调查</a>
+		<a class="tab_head_item j_tab_discovery active" href="" th:href="@{/beforelogin}">个人</a>
+    </div>
+
+
+  	<div class="j_tab_content tab_index_content">
+		<div class="j_tab_content_item">
+			<div class="j_user user">
+				<a href="" class="index_press_area user_info arrow arrow_line arrow_right">
+				<img class="user_info_portrait" th:if="${dbUser.user.face!=null  &amp;&amp; dbUser.user.face!=''}" src="images/toux.png" th:src="@{'/image/pc/forum/'+${dbUser.user.face}}" width="100%"/>
+				<span th:if="${dbUser.user.face==null || dbUser.user.face==''}">
+					<img class="user_info_portrait" th:if="${dbUser.user.sex==null || dbUser.user.sex=='未知' || dbUser.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" width="100%"/>
+					<img class="user_info_portrait" th:if="${dbUser.user.sex!=null &amp;&amp; dbUser.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" width="100%"/>
+					<img class="user_info_portrait" th:if="${dbUser.user.sex!=null &amp;&amp; dbUser.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" width="100%"/>
+				</span>
+				<div class="user_info_main">
+					<span class="user_info_name" th:if="${dbUser!=null}" th:text="${dbUser.username}">
+						老男孩就是要唱
+					</span>
+					<p class="user_info_intro">
+						<!-- 以后可以输入备注 -->
+					</p>
+				</div>
+				</a>
+				<a href="" class="index_press_area user_entrance_item index_icon user_collect">我的信息</a>
+				<!-- <a href="" class="index_press_area user_entrance_item index_icon user_tbean j_user_tbean">我的T豆</a> -->
+				<a href="" class="index_press_area user_entrance_item index_icon user_feedback j_user_feedback">意见反馈</a>
+				<a href="" class="index_press_area user_entrance_item index_icon user_safe_entrance j_user_safe_entrance">修改密码</a>
+				<a href="" th:href="@{/logout}" class="index_press_area user_entrance_item index_icon user_logout j_user_logout">退出登录</a>
+			</div>
+		</div>
+	</div>
+	<div class="j_footer footer">
+		<a class="footer_link" href="">反馈</a><span class="separator">|</span><a class="footer_link" href="" th:href="@{/logout}">注销</a><br/>
+	</div>
+	
+    </div>
+ </body>
+</html>
