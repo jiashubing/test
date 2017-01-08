@@ -1,0 +1,111 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>阿丙的私人订制</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
+    <link rel="stylesheet" href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
+    <link rel="stylesheet" type="text/css" href="css/feedback.css" th:href="@{/css/pc/css/feedback.css}"/>
+</head>
+<body>
+<div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
+    <ul class="navi">
+        <li><a href="yun-index.html">首页</a></li>
+        <li class="active"><a href="javascript:void(0)">论坛系统</a></li>
+        <li><a href="yun-baomin.html">自然之声</a></li>
+        <li><a href="javascript:void(0)">历史项目</a></li>
+        <li><a href="yun-jxspnewone.html">网页小游戏</a></li>
+        <li>
+            <a href="javascript:void(0)">我的视频</a>
+        </li>
+        <li><a href="#">在线工具</a></li>
+		<li><a href="#">作者亲密度调查</a></li>
+        <li id="loginLi" style="padding:0px 0px 0px 20px;"
+            th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
+            <a href="javascript:void(0)" id="showLoginForm">控制台</a>
+        </li>
+    </ul>
+</div>
+<p style="clear:both"></p>
+<div id="content" style="width: 1200px; margin: 0 auto;">
+		<div id="forum-header-wrapper">
+			<div id="forum-header" class="container">
+				<div id="forum-logo">
+					<h1>
+						<a href="#">意见反馈</a>
+					</h1>
+				</div>
+			</div>
+		</div>
+<div class="feedbackbody">
+    <div id="shubinghd">
+            <div class="feedbackwrap">
+                <div class="logo">
+                    <a href=""><img src="" th:src="@{/image/pc/images/feedbacklogo.png}" alt="意见反馈" title="意见反馈" /></a>
+                </div>
+                <div class="follow">
+                  <span>使用QQ邮箱反馈</span>
+                  <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=zaekrL6luK_ko6qNq6K1oKykoeOuoqA" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_12.png" style="margin-top:20px;"/></a>
+                </div>
+                <div class="clear"></div>
+            </div>
+    </div>
+    <div id="shubingbd">
+        <div class="feedbackwrap">
+            <p class="description">您的意见是们不断改进的动力，请留下您在使用过程中遇到的问题或提出宝贵建议</p>
+            <div id="feedback" class="feedback_form">
+                <form name="feedback" action="" method="POST">
+                    <div class="feedback_item">
+                        <label for="type">您的反馈是：</label>
+                    </div>
+                    <div class="feedback_item">
+                        <input value="1" name="type" type="radio" /><span>咨询</span>
+                        <input value="2" name="type" type="radio" /><span>建议</span>
+                        <input value="3" name="type" checked="checked" type="radio" /><span>其他</span>
+                    </div>
+                    <div class="feedback_item">
+                        <label for="content">您的反馈内容：</label>
+                    </div>
+                    <div class="feedback_item textarea">
+                        <textarea class="fixed_width comments" name="content" cols="65" rows="15"></textarea>
+                        <p>将您的描述控制在1000 字以内，如有更多内容请分多次提交。</p>
+                    </div>
+                    <div class="feedback_item">
+                        <label for="email">您的邮箱：</label>
+                    </div>
+
+                    <div class="feedback_item">
+                        <input class="text" name="email" type="text" />
+                        <p>选填</p>
+                    </div>
+                    <div class="submit-btn">
+                        <input class="btn blue-btn submit" value="提交反馈" type="submit" />
+                    </div>
+                </form>
+                <p>非常感谢您的反馈，相信您的反馈能让我的网站日趋完善。</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<p style="clear:both"></p>
+
+<div th:include="pc/loginPopup::footerDiv" class="footer">
+    <p>阿丙工作室</p>
+    <p>联系邮箱：jiashubing@foxmail.com</p>
+</div>
+
+<!--登录弹窗-->
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+</div>
+<!--登录弹窗end-->
+<div id="asaimsgbg" class="AsaiDivBG" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'"></div>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
+</body>
+</html>

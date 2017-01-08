@@ -1,0 +1,22 @@
+.feedbackbody{font:12px/1 '宋体',Arial,Helvetica,sans-serif;color:#999}
+.feedbackwrap{width:1000px;margin:0 auto;padding-left:40px}
+#shubinghd{height:68px;width:auto;margin-top:20px;}
+#shubinghd .logo{display:inline-block;width:75%;vertical-align:top}
+#shubinghd .follow{display:inline-block;height:68px}
+#shubinghd .follow span{margin-top:25px;display:inline-block;height:40px;vertical-align:top;font-family:"微软雅黑";font-size:14px;line-height:1.5;color:#909293}
+#shubinghd .follow img{margin:13px 4px 5px 14px}
+#shubingbd{background:#fefefe;min-height:500px;padding-bottom:85px;}
+#shubingbd .description{margin-top:30px}
+#shubingbd .feedback_item{margin:0 auto 10px}
+#shubingbd .feedback_item span{padding-right:20px}
+#shubingbd .feedback_item label{display:block;margin-top:25px;font-weight:700;color:#5a5a5a}
+#shubingbd .fixed_width{width:600px;height:150px;border:1px solid #d9d9d9;background-color:#fafafa;resize:none}
+#shubingbd .feedback_item p{margin:6px 0 0 10px;display:inline-block;vertical-align:top}
+#shubingbd .textarea p{margin-top:67px}
+#shubingbd .text{width:597px;height:30px;padding:0 2px;border:1px solid;border-color:#d9d9d9;background:#fafafa;outline:0;border-radius:2px;line-height:30px}
+#shubingbd .text:focus{border-color:#06c;background:#fff;box-shadow:0 0 3px #06c;background:-webkit-gradient(linear,0 0,0 10%,from(#e5e5e5),to(#fff));-webkit-box-shadow:0 0 3px #06c;background:-moz-linear-gradient(top,#e5e5e5,#fff 10%);-moz-box-shadow:0 0 3px #06c}
+#shubingbd .btn{display:inline-block;margin:25px auto 38px;padding:5px 10px;font-weight:700;text-align:center;text-decoration:none;font-family:"Microsoft YaHei","??????","Microsoft JhengHei","???????",STHeiti,sans-serif;cursor:pointer;color:#3A3A3A;background:#fff;border:1px solid #D2D2D2;text-shadow:1px 1px 0 #fff;border-radius:2px;box-shadow:1px 1px 0 #f5f5f5;background:-webkit-linear-gradient(top,#fff,#f5f5f5);background:-moz-linear-gradient(top,#fff,#f5f5f5 100%)}
+#shubingbd .middle{text-align:center;color:#5a5a5a;margin-top:5px}
+#shubingbd .bigTitle{margin:10px auto 10px;font-size:30px;font-family:"微软雅黑"}
+#shubingbd .blue-btn:hover{color:#fff;background:#009AE2;border-color:#148FD4;background:-webkit-linear-gradient(top,#00A3E5,#008EDD);background:-moz-linear-gradient(top,#00A3E5,#008EDD 100%)}
+#shubingbd .blue-btn{color:#fff;background:#29A7E5;border-color:#148FD4;text-shadow:1px 1px 0 #148FD4;background:-webkit-linear-gradient(top,#32ADE8,#249FE3);background:-moz-linear-gradient(top,#32ADE8,#249FE3 100%)}

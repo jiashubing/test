@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -243,11 +244,6 @@ public class HomeAction {
 		return result;
 	}
 	
-	@RequestMapping("/common")
-	 public  String getCommonPage(HttpServletRequest request){
-		 return ValidatePcMobile.checkRequest(request, "/commonpage");
-	 }
-	
 	 /**
 	  * 跳转到adminpage页面
 	  * @return
@@ -264,6 +260,21 @@ public class HomeAction {
 	 @RequestMapping("/admin")
 	 public String getAdminPage(HttpServletRequest request){
 		return ValidatePcMobile.checkRequest(request, "/admin/main");
+	 }
+	 
+	 /**
+	  * 跳转到意见反馈页面
+	  * @return
+	  */
+	 @RequestMapping("/feedback")
+	 public String getFeedback(@AuthenticationPrincipal DbUser dbUser,@RequestParam(required = false) String flag, ModelMap model, HttpServletRequest request){
+		 if(dbUser != null){
+			model.addAttribute("dbUser",dbUser);
+		 }
+		 if(flag != null){
+			 model.addAttribute("flag",flag);
+		 }
+		 return ValidatePcMobile.checkRequest(request, "/feedback");
 	 }
 	 
 	 @RequestMapping("/registsu")
