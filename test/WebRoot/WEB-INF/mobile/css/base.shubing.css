@@ -209,6 +209,7 @@ button {
 	background-color:#fff
 }
 .pass-header-back {
+	background:url('//www.jiashubing.cn/image/mobile/images/goback.png') no-repeat 15px 13px;
 	-webkit-background-size:1.2rem 2rem;
 	padding:1.3rem 0 1.3rem 2.3rem;
 	padding:13px 0 13px 15px;

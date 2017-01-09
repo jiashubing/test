@@ -46,7 +46,7 @@
 					<span class="user_info_name" th:if="${dbUser!=null}" th:text="${dbUser.username}">
 						老男孩就是要唱
 					</span>
-					<p class="user_info_intro">
+					<p class="user_info_intro" th:if="${dbUser!=null}" th:text="${dbUser.user.email}">
 						<!-- 以后可以输入备注 -->
 					</p>
 				</div>
@@ -60,7 +60,7 @@
 		</div>
 	</div>
 	<div class="j_footer footer">
-		<a class="footer_link" href="">反馈</a><span class="separator">|</span><a class="footer_link" href="" th:href="@{/logout}">注销</a><br/>
+		<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span><a class="footer_link" href="" th:href="@{/logout}">注销</a><br/>
 	</div>
 	
     </div>

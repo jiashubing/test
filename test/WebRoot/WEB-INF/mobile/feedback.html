@@ -1,0 +1,67 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" style="font-size: 66.67%;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<title>阿丙的私人定制</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="viewport" content="width=240, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no, email=no" />
+
+<link rel="stylesheet" href="./css/base.shubing.css" th:href="@{/css/mobile/css/base.shubing.css}" />
+<link rel="stylesheet" href="" th:href="@{/css/mobile/css/common.shubing.css}" />
+<link rel="stylesheet" href="" th:href="@{/css/mobile/css/feedback.shubing.css}" />
+</head>
+<body>
+
+<div id="pageWrapper" style="min-height:0%; padding-bottom:15px; background:#f0f1f2">
+	<header class="pass-header ">
+	<a class="pass-header-back" id="goBack" href="#" onclick="javascript:history.back(-1)"></a>
+	<span class="pass-header-title">
+       	意见反馈     
+	</span>
+	</header>
+</div>
+<div class="feedback-form">
+	<div class="bg-white">
+		<p class="question-title">
+			您的反馈是：
+		</p>
+		<div class="grid grid_2">
+			<div class="grid_container j-question-box">
+				<span class="grid_item">
+				<div class="grid_box">
+					<input class="ui_checkbox" name="question_type" type="checkbox" id="checkbox_1" value="帖子列表页"/>
+					<label class="grid-label" for="checkbox_1">咨询</label>
+				</div>
+				</span>
+				<span class="grid_item">
+				<div class="grid_box">
+					<input class="ui_checkbox" name="question_type" type="checkbox" id="checkbox_2" value="帖子详情页"/>
+					<label class="grid-label" for="checkbox_2">建议</label>
+				</div>
+				</span>
+				<span class="grid_item">
+				<div class="grid_box">
+					<input class="ui_checkbox" name="question_type" type="checkbox" id="checkbox_7" value="其他"/>
+					<label class="grid-label" for="checkbox_7">其他</label>
+				</div>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="textarea-container">
+		<textarea class="textarea" placeholder="请尽量详细您反馈的内容，感谢您提出的宝贵建议！" maxlength="1000" style="font-size:15.3677px;"></textarea>
+		<span class="textarea-info">1000字以内</span>
+	</div>
+	<div class="textarea-container">
+		<textarea class="textarea" placeholder="您的邮箱（选填）" maxlength="50" style="font-size:15.3677px;height:45px;"></textarea>
+	</div>
+	<div class="submit-box">
+		<button class="btn btn_default submit j-submit">提交</button>
+	</div>
+</div>
+
+</body>
+</html>
