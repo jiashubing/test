@@ -77,52 +77,52 @@
 				<table class="table table-bordered" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
 					<thead>
 						<tr>
-							<th style="text-align: center;vertical-align: middle; width: 150px;">
+							<th style="border-left: 1px solid #dddddd; width: 150px;">
 								状态
 							</th>
-							<th style="text-align: center;vertical-align: middle;">
+							<th >
 								帖子标题
 							</th>
-							<th style="text-align: center;vertical-align: middle; width: 100px;">
+							<th style="width: 100px;">
 								回复数 	
 							</th>
-							<th style="text-align: center;vertical-align: middle; width: 100px;">
+							<th style="width: 100px;">
 								发表者
 							</th>
-							<th style="text-align: center;vertical-align: middle; width: 200px;">
+							<th style="width: 200px;">
 								最后回复
 							</th>
-							<th th:unless="${session.dbUser==null}" style="text-align: center;vertical-align: middle; width: 150px;">
+							<th th:unless="${session.dbUser==null}" style="width: 150px;">
 								操作
 							</th>
 						</tr>
 					</thead>
 					<tbody th:remove="all-but-first">
-						<tr th:each="topic:${zdTopicList }" class="topictr">
-							<td style="text-align: center;vertical-align:middle;">
+						<tr th:each="topic,toNum:${zdTopicList }" class="topictr" th:style="${toNum.even}?'background-color:#ddd;'">
+							<td style="border-left: 1px solid #dddddd;">
 								<span th:if="${topic.good==0 }" style="color: blue;">【普通】</span>
 								<span th:unless="${topic.good==0 }" style="color: red;">【精华】</span>
 								<span th:if="${topic.top==1 }">【置顶】</span>
 							</td>
-							<td style="display:none">
+							<td style="display:none;">
 								<span style="visibility:hidden" class="topicid" th:text="${topic.id}"></span>
 								<span style="visibility:hidden" class="topictop" th:text="${topic.top}"></span>
 								<span style="visibility:hidden" class="topicgood" th:text="${topic.good}"></span>
 							</td>
-							<td style="text-align: center;vertical-align:middle;">
+							<td>
 								<a th:href="@{/forum/details(id=${topic.id})}"><span th:text="${topic.title }">帖子3</span></a>
 							</td>
-							<td style="text-align: center;vertical-align:middle;">
+							<td>
 								<span th:text="${topicReplyCount.get(topic) }">0</span>
 							</td>
-							<td style="text-align: center;vertical-align:middle;">
+							<td>
 								<span th:text="${topic.user.nickName }">刘备</span>
 							</td>
-							<td style="text-align: center;vertical-align:middle; width: 200px;">
+							<td>
 								<strong><span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).user.nickName }"></span></strong><br/>
 								<span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).publishTime }"></span>
 							</td>
-							<td th:unless="${session.dbUser==null}" style="text-align: center;vertical-align:middle;">
+							<td th:unless="${session.dbUser==null}">
 								<span th:if="${session.dbUser.access==1}">
 									<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 									<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
@@ -155,8 +155,8 @@
 			<td>
 				<table class="table table-bordered" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
 					<tbody th:remove="all-but-first">
-						<tr th:each="topic:${ptTopicList}" class="topictr">
-							<td style="text-align: center;vertical-align:middle;width: 150px;">
+						<tr th:each="topic,toNum:${ptTopicList}" class="topictr" th:style="${toNum.odd}?'background-color:#ddd;'">
+							<td style="border-left: 1px solid #dddddd; width: 150px;">
 								<span th:if="${topic.good==0 }" style="color: blue;">【普通】</span>
 								<span th:unless="${topic.good==0 }" style="color: red;">【精华】</span>
 								<span th:if="${topic.top==1 }">【置顶】</span>
@@ -166,20 +166,20 @@
 								<span style="visibility:hidden" class="topictop" th:text="${topic.top}"></span>
 								<span style="visibility:hidden" class="topicgood" th:text="${topic.good}"></span>
 							</td>
-							<td style="text-align: center;vertical-align:middle;">
+							<td>
 								<a th:href="@{/forum/details(id=${topic.id})}"><span th:text="${topic.title }">帖子3</span></a>
 							</td>
-							<td style="text-align: center;vertical-align:middle;width: 100px;">
+							<td style="width: 100px;">
 								<span th:text="${topicReplyCount.get(topic) }">0</span>
 							</td>
-							<td style="text-align: center;vertical-align:middle;width: 100px;">
+							<td style="width: 100px;">
 								<span th:text="${topic.user.nickName }">诸葛亮</span>
 							</td>
-							<td style="text-align: center;vertical-align:middle;width: 200px;">
+							<td style="width: 200px;">
 								<strong><span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).user.nickName }"></span></strong><br/>
 								<span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).publishTime }"></span>
 							</td>
-							<td th:unless="${session.dbUser==null}" style="text-align: center;vertical-align:middle;width: 150px;">
+							<td th:unless="${session.dbUser==null}" style="width: 150px;">
 								<span th:if="${session.dbUser.access==1}">
 									<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 									<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
