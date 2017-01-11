@@ -92,7 +92,7 @@
 							<th style="text-align: center;vertical-align: middle; width: 200px;">
 								最后回复
 							</th>
-							<th th:unless="${dbUser==null}" style="text-align: center;vertical-align: middle; width: 150px;">
+							<th th:unless="${session.dbUser==null}" style="text-align: center;vertical-align: middle; width: 150px;">
 								操作
 							</th>
 						</tr>
@@ -122,20 +122,20 @@
 								<strong><span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).user.nickName }"></span></strong><br/>
 								<span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).publishTime }"></span>
 							</td>
-							<td th:unless="${dbUser==null}" style="text-align: center;vertical-align:middle;">
-								<span th:if="${dbUser.access==1}">
+							<td th:unless="${session.dbUser==null}" style="text-align: center;vertical-align:middle;">
+								<span th:if="${session.dbUser.access==1}">
 									<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 									<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 								</span>
-								<span th:unless="${dbUser.access==1}">
-									<span th:if="${topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id==topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
+								<span th:unless="${session.dbUser.access==1}">
+									<span th:if="${topic.user!=null &amp;&amp; section.master!=null &amp;&amp; session.dbUser.user.id==topic.user.id &amp;&amp; session.dbUser.user.id != section.master.id }">
 										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 									</span>
-									<span  th:if="${section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
+									<span  th:if="${section.master!=null &amp;&amp; session.dbUser.user.id ==section.master.id }">
 										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 										<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 									</span>
-									<span th:if="${dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id!=topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
+									<span th:if="${session.dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; session.dbUser.user.id!=topic.user.id &amp;&amp; session.dbUser.user.id != section.master.id }">
 										<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg">查看</button></a>
 									</span>
 								</span>
@@ -179,20 +179,20 @@
 								<strong><span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).user.nickName }"></span></strong><br/>
 								<span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).publishTime }"></span>
 							</td>
-							<td th:unless="${dbUser==null}" style="text-align: center;vertical-align:middle;width: 150px;">
-								<span th:if="${dbUser.access==1}">
+							<td th:unless="${session.dbUser==null}" style="text-align: center;vertical-align:middle;width: 150px;">
+								<span th:if="${session.dbUser.access==1}">
 									<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 									<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 								</span>
-								<span th:unless="${dbUser.access==1}">
-									<span th:if="${topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id==topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
+								<span th:unless="${session.dbUser.access==1}">
+									<span th:if="${topic.user!=null &amp;&amp; section.master!=null &amp;&amp; session.dbUser.user.id==topic.user.id &amp;&amp; session.dbUser.user.id != section.master.id }">
 										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 									</span>
-									<span  th:if="${section.master!=null &amp;&amp; dbUser.user.id ==section.master.id }">
+									<span  th:if="${section.master!=null &amp;&amp; session.dbUser.user.id ==section.master.id }">
 										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
 										<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 									</span>
-									<span th:if="${dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; dbUser.user.id!=topic.user.id &amp;&amp; dbUser.user.id != section.master.id }">
+									<span th:if="${session.dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; session.dbUser.user.id!=topic.user.id &amp;&amp; session.dbUser.user.id != section.master.id }">
 										<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg">查看</button></a>
 									</span>
 								</span>
@@ -284,7 +284,7 @@
 <script th:inline="javascript">
 function checkUser(){
     /*<![CDATA[*/
- 	var flag= /*[[${dbUser!=null}]]*/true;
+ 	var flag= /*[[${session.dbUser!=null}]]*/true;
     /*]]>*/
     
     if(flag){

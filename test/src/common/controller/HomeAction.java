@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,9 +40,10 @@ public class HomeAction {
 	private UserService userService;
 	
 	@RequestMapping("/index")
-	public String loadIndex(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
+	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
+		HttpSession session = request.getSession();
+		if(session.getAttribute("dbUser") != null){
+			DbUser dbUser =(DbUser)session.getAttribute("dbUser");
 			//如果是我的管理员账号登陆，那就跳转到后台
 			if("myadmin".equals(dbUser.getUsername())){
 				return "redirect:/admin";
@@ -267,10 +269,7 @@ public class HomeAction {
 	  * @return
 	  */
 	 @RequestMapping("/feedback")
-	 public String getFeedback(@AuthenticationPrincipal DbUser dbUser,@RequestParam(required = false) String flag, ModelMap model, HttpServletRequest request){
-		 if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		 }
+	 public String getFeedback(@RequestParam(required = false) String flag, ModelMap model, HttpServletRequest request){
 		 if(flag != null){
 			 model.addAttribute("flag",flag);
 		 }

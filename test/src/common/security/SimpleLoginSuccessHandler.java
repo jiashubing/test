@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -92,6 +93,11 @@ public class SimpleLoginSuccessHandler implements AuthenticationSuccessHandler,I
 	public void saveLoginInfo(HttpServletRequest request,Authentication authentication){
 		String username =(authentication.getPrincipal() == null) ? "NONE_PROVIDED" : authentication.getName();
 		DbUser user = dbUserService.getByName(username);
+		if(user != null){
+			HttpSession session = request.getSession();
+			session.setAttribute("dbUser", user);
+		}
+		
 		try {
 			String ip = this.getIpAddress(request);
 			Date date = new Date();

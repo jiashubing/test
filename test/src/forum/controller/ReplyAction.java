@@ -79,7 +79,7 @@ public class ReplyAction {
 	}
 	
 	@RequestMapping("/forum/replyAdd")
-	public String addReply(@AuthenticationPrincipal DbUser dbUser,
+	public String addReply(
 			@RequestParam(required = false) Integer pageNo,
 			@RequestParam(required = false) Integer replyTopicId,
 			@RequestParam(required = false) String replyContent,
@@ -133,9 +133,6 @@ public class ReplyAction {
 			reply.setTopic(topic);
 		}
 		
-		if(dbUser != null){
-			reply.setUser(dbUser.getUser());
-		}
 		reply.setContent(buf.toString());
 		
 		replyService.saveReply(reply);

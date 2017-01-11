@@ -1,6 +1,7 @@
 package common.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -22,21 +23,19 @@ public class LoginLogoutController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login")
-	public String getLoginPage(@AuthenticationPrincipal DbUser dbUser,@RequestParam(value = "error", required = false) boolean error, ModelMap model,HttpServletRequest request) {
+	public String getLoginPage(@RequestParam(value = "error", required = false) boolean error, ModelMap model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		if (error == true) {
 			// Assign an error message
 			model.put("errInfo", "用户名或密码错误!");
 		} else {
 			model.put("errInfo", "");
 		}
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		}
 		model.put("loginFlag", 1);
 		if(ValidatePcMobile.checkRequest(request)){
 			return "/pc/index";
 		}else{
-			if(dbUser != null){
+			if(session.getAttribute("dbUser") != null){
 				return "/mobile/person";
 			}
 			return "/mobile/login";
@@ -51,9 +50,9 @@ public class LoginLogoutController {
 	 * @return
 	 */
 	@RequestMapping(value = "/beforelogin")
-	public String getBeforeLoginPage(@AuthenticationPrincipal DbUser dbUser, ModelMap model,HttpServletRequest request) {
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
+	public String getBeforeLoginPage( ModelMap model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("dbUser") != null){
 			return "/mobile/person";
 		}
 		return "/mobile/beforelogin";

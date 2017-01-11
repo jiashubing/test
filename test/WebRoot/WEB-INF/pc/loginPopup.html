@@ -37,7 +37,7 @@
 <!--头部header-->
 <div style="background-color:#fff;" th:fragment="headerDiv">
     <div class="headeri"><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/shubinglogo.png}" style="margin-top:0; width:161px;"/>
-        <ul class="navi" th:style="${dbUser==null}?'margin-right:0px':'margin-right:64px'">
+        <ul class="navi" th:style="${session.dbUser==null}?'margin-right:0px':'margin-right:64px'">
 			<li th:class="${flag=='index.html'}?'active'" class="active"><a href="index.html" th:href="@{/index}">首页</a></li>
 			<li th:class="${flag=='forum.html'}?'active'" ><a href="javascript:void(0)" th:href="@{/forum}">论坛系统</a></li>
 			<li><a href="" th:href="@{/index}">自然之声</a></li>
@@ -46,7 +46,7 @@
 			<li><a href="javascript:void(0)" th:href="@{/}">我的视频</a></li>
 			<li th:class="${flag=='tools.html'}?'active'"><a href="#" th:href="@{/tools}">在线工具</a></li>
 			<li><a href="#" th:href="@{/index}">亲密度</a></li>
- 			<li id="loginLi" th:style="${dbUser==null}?'':'display:none'" th:class="${flag=='regist.html'}?'active'">
+ 			<li id="loginLi" th:style="${session.dbUser==null}?'':'display:none'" th:class="${flag=='regist.html'}?'active'">
 				<a href="javascript:void(0)" id="showLoginForm">控制台</a>
 				<p style="display: none;" class="zhizheni" th:class="${flag!='regist.html'}?'zhizheni'"><img src="images/lodingj.png" th:src="@{/image/pc/images/lodingj.png}" width="18px" height="7px"/></p>
 				<p style="display: none;" class="lbpo" th:class="${flag!='regist.html'}?'lbpo'">
@@ -55,21 +55,21 @@
 				</p>
 			</li>
 			<li id="userLi" style="padding:0px;"
-				th:style="${dbUser==null}?'display:none;':'padding:0px 0px 0px 20px;'">
+				th:style="${session.dbUser==null}?'display:none;':'padding:0px 0px 0px 20px;'">
 				
-				<a th:if="${dbUser!=null &amp;&amp; dbUser.user!=null}" id="memberLi" href="#">
-					<img class="lodingimg" th:if="${dbUser.user.face!=null  &amp;&amp; dbUser.user.face!=''}" src="images/toux.png" th:src="@{'/image/pc/forum/'+${dbUser.user.face}}" width="100%"/>
-					<span th:if="${dbUser.user.face==null || dbUser.user.face==''}">
-						<img class="lodingimg" th:if="${dbUser.user.sex==null || dbUser.user.sex=='未知' || dbUser.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" width="100%"/>
-						<img class="lodingimg" th:if="${dbUser.user.sex!=null &amp;&amp; dbUser.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" width="100%"/>
-						<img class="lodingimg" th:if="${dbUser.user.sex!=null &amp;&amp; dbUser.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" width="100%"/>
+				<a th:if="${session.dbUser!=null &amp;&amp; session.dbUser.user!=null}" id="memberLi" href="#">
+					<img class="lodingimg" th:if="${session.dbUser.user.face!=null  &amp;&amp; session.dbUser.user.face!=''}" src="images/toux.png" th:src="@{'/image/pc/forum/'+${session.dbUser.user.face}}" width="100%"/>
+					<span th:if="${session.dbUser.user.face==null || session.dbUser.user.face==''}">
+						<img class="lodingimg" th:if="${session.dbUser.user.sex==null || session.dbUser.user.sex=='未知' || session.dbUser.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" width="100%"/>
+						<img class="lodingimg" th:if="${session.dbUser.user.sex!=null &amp;&amp; session.dbUser.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" width="100%"/>
+						<img class="lodingimg" th:if="${session.dbUser.user.sex!=null &amp;&amp; session.dbUser.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" width="100%"/>
 					</span>
 				</a>
 				
 				<p style="display: none" class="zhizheni"><img src="images/lodingj.png" th:src="@{/image/pc/images/lodingj.png}" width="18px" height="7px"/></p>
 	
 				<p style="display: none" class="lbpo">
-					<a href="#"><span th:if="${dbUser!=null}" th:text="${dbUser.username}"></span></a>
+					<a href="#"><span th:if="${session.dbUser!=null}" th:text="${session.dbUser.username}"></span></a>
 					<a href="#">个人中心</a>
 					<a href="#">修改密码</a>
 					<a href="#" th:href="@{/logout}">退出</a>
@@ -82,8 +82,8 @@
 
 <!--底部footer-->
 <div th:fragment="footerDiv" class="footer">
-    <p>阿丙工作室</p>
-    <p>联系邮箱：jiashubing@foxmail.com&nbsp;&nbsp;&nbsp;【<a th:href="@{/feedback(flag=${flag})}"><span style="color:white;">联系作者</span></a>】</p>
+     <p>Copyright&copy;2016-2017. 贾树丙, 冀ICP备16028291号</p>
+     <p>联系邮箱：jiashubing@foxmail.com&nbsp;&nbsp;&nbsp;【<a th:href="@{/feedback(flag=${flag})}"><span style="color:white;">意见反馈</span></a>】</p>
 </div>
 <!--底部footerEnd-->
 

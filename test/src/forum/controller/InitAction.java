@@ -27,10 +27,7 @@ public class InitAction {
 	private TopicService topicService;
 	
 	@RequestMapping("/forum")
-	public String loadIndex(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		}
+	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
 		List<Zone> zoneList=zoneService.findZoneList(null, 10,0);
 		
 		List<Topic> goodTopicList = topicService.findGoodTopicListDesc(7, 0);

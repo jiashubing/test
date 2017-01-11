@@ -34,10 +34,7 @@ public class ToolsAction {
 	private DbUserService dbUserService;
 	
 	@RequestMapping("/tools")
-	public String loadTools(@AuthenticationPrincipal DbUser dbUser,@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		}
+	public String loadTools(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
 		if(showId == null){
 			showId = 1;
 		}
@@ -47,10 +44,7 @@ public class ToolsAction {
 	}
 	
 	@RequestMapping("/tools/one")
-	public String loadToolOne(@AuthenticationPrincipal DbUser dbUser,@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		}
+	public String loadToolOne(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
 		if(showId == null){
 			showId = 1;
 		}
@@ -196,10 +190,7 @@ public class ToolsAction {
 	
 	
 	@RequestMapping("/tools/two")
-	public String loadToolTwo(@AuthenticationPrincipal DbUser dbUser,@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		}
+	public String loadToolTwo(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
 		if(showId == null){
 			showId = 2;
 		}
@@ -291,10 +282,7 @@ public class ToolsAction {
     }
 	
 	@RequestMapping("/tools/three")
-	public String loadToolThree(@AuthenticationPrincipal DbUser dbUser,@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		}
+	public String loadToolThree(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
 		if(showId == null){
 			showId = 3;
 		}

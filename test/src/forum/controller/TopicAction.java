@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -53,10 +54,7 @@ public class TopicAction {
 	private UserService userService;
 
 	@RequestMapping("/forum/topicList")
-	public String loadTopicList(@AuthenticationPrincipal DbUser dbUser,Integer sectionId,@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		}
+	public String loadTopicList(Integer sectionId,@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
 		
 		pageNo = PageUtil.initPageNo(pageNo);
 		
@@ -278,10 +276,7 @@ public class TopicAction {
 	}
 	
 	@RequestMapping("/forum/details")
-	public String loadDetails(@AuthenticationPrincipal DbUser dbUser,Integer id,Model model,@RequestParam(required = false) Integer pageNo,HttpServletRequest request)throws Exception{
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		}
+	public String loadDetails(Integer id,Model model,@RequestParam(required = false) Integer pageNo,HttpServletRequest request)throws Exception{
 		
 		Topic topic = topicService.findTopicById(id);
 		pageNo = PageUtil.initPageNo(pageNo);
@@ -298,10 +293,9 @@ public class TopicAction {
 	}
 	
 	@RequestMapping("/forum/preSave")
-	public String preSave(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
-		if(dbUser != null){
-			model.addAttribute("dbUser",dbUser);
-		}else{
+	public String preSave(Model model,HttpServletRequest request)throws Exception{
+		HttpSession session = request.getSession();
+		if(session.getAttribute("dbUser")==null){
 			return "redirect:/login";
 		}
 		
@@ -313,15 +307,16 @@ public class TopicAction {
 	}
 	
 	@RequestMapping("/forum/topicSave")
-	public String saveTopic(@AuthenticationPrincipal DbUser dbUser,
+	public String saveTopic(
 			@RequestParam(required = false) String topicTitle,
 			@RequestParam(required = false) String topicContent,
 			@RequestParam(required = false) Integer topicSectionId,
 			Model model,HttpServletRequest request)throws Exception{
 		Topic topic = new Topic();
-		if(dbUser != null){
+		HttpSession session = request.getSession();
+		if(session.getAttribute("dbUser")!=null){
+			DbUser dbUser = (DbUser)session.getAttribute("dbUser");
 			topic.setUser(dbUser.getUser());
-			model.addAttribute("dbUser",dbUser);
 		}else{
 			return "redirect:/login";
 		}
@@ -386,7 +381,7 @@ public class TopicAction {
 	}
 	
 	@RequestMapping("/forum/topicUpdate")
-	public String updateToipc(@AuthenticationPrincipal DbUser dbUser,
+	public String updateToipc(
 			@RequestParam(required = false) Integer pageNo,
 			@RequestParam(required = false) Integer topicId,
 			@RequestParam(required = false) Integer topicGood,
