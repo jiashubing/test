@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -276,7 +275,8 @@ public class TopicAction {
 	}
 	
 	@RequestMapping("/forum/details")
-	public String loadDetails(Integer id,Model model,@RequestParam(required = false) Integer pageNo,HttpServletRequest request)throws Exception{
+	public String loadDetails(Integer id,Model model,@RequestParam(required = false) Integer pageNo,@RequestParam(required = false) boolean errorFlag,
+			HttpServletRequest request)throws Exception{
 		
 		Topic topic = topicService.findTopicById(id);
 		pageNo = PageUtil.initPageNo(pageNo);
@@ -289,17 +289,29 @@ public class TopicAction {
 		model.addAttribute("topic",topic); 
 		model.addAttribute("replyList",replyList); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
+		
+		if(errorFlag){
+			//手机端抛出异常
+			model.addAttribute("errorFlag",errorFlag); 
+		}
 		return ValidatePcMobile.checkRequest(request, "/forum/topicDetail");
 	}
 	
 	@RequestMapping("/forum/preSave")
 	public String preSave(Model model,HttpServletRequest request)throws Exception{
-		HttpSession session = request.getSession();
-		if(session.getAttribute("dbUser")==null){
-			return "redirect:/login";
+		HttpSession session = request.getSession(false);
+		DbUser tmpUser = null;
+		if(session!=null){
+			tmpUser = (DbUser)session.getAttribute("dbUser");
+			if(tmpUser == null){
+				return "redirect:/login";
+			}
 		}
 		
 		List<Section> sectionList = sectionService.findSectionList(null, MaxPageSize, 0);
+		if(tmpUser!=null && tmpUser.getAccess()!=1){
+			sectionList.remove(0);
+		}
 		
 		model.addAttribute("sectionList",sectionList); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面

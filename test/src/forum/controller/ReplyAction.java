@@ -5,14 +5,12 @@ import java.util.Date;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import common.entity.Result;
-import forum.po.DbUser;
 import forum.po.Reply;
 import forum.po.Topic;
 import forum.service.ReplyService;
@@ -135,7 +133,12 @@ public class ReplyAction {
 		
 		reply.setContent(buf.toString());
 		
-		replyService.saveReply(reply);
+		try {
+			replyService.saveReply(reply);
+		} catch (Exception e) {
+//			e.printStackTrace();
+			return "redirect:/forum/details?id="+replyTopicId+"&pageNo="+pageNo+"&errorFlag=true";
+		}
 		
 		//重定向时传递参数
 		return "redirect:/forum/details?id="+replyTopicId+"&pageNo="+pageNo;

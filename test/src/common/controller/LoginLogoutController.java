@@ -100,7 +100,7 @@ public class LoginLogoutController {
     public Result getLoginReturnPage(String beforepath,String beforepar,HttpServletRequest request) {
 		//拼接登录前的路径
 		String loginPath ="";
-		if(beforepath != null){
+		if(beforepath != null && !"/login".equals(beforepath)){
 			loginPath += beforepath;
 			if(beforepar != null && !"".equals(beforepar)){
 				loginPath +='?'+beforepar;
@@ -124,7 +124,7 @@ public class LoginLogoutController {
 	public Result getLoginToolsReturnPage(String beforepath,String beforepar,HttpServletRequest request) {
 		//拼接登录前的路径
 		String loginPath ="";
-		if(beforepath != null){
+		if(beforepath != null && !"/login".equals(beforepath)){
 			loginPath += beforepath;
 			if(beforepar != null && !"".equals(beforepar)){
 				loginPath +='?'+beforepar;
@@ -148,7 +148,7 @@ public class LoginLogoutController {
 	public Result getLoginForumReturnPage(String beforepath,String beforepar,HttpServletRequest request) {
 		//拼接登录前的路径
 		String loginPath ="";
-		if(beforepath != null){
+		if(beforepath != null && !"/login".equals(beforepath)){
 			loginPath += beforepath;
 			if(beforepar != null && !"".equals(beforepar)){
 				loginPath +='?'+beforepar;
