@@ -26,7 +26,22 @@
     		return false;
     	}
     	$("#loginFailedInfo").text("");
-    	$("#login_form").submit();
+    	
+    	var beforepath = $("#beforeloginpath").val();
+    	var beforepar = $("#beforeloginpar").val();
+    	$.ajax({
+    		url:"mylogin",
+    		type:"post",
+    		data:{"beforepath":beforepath,"beforepar":beforepar},
+    		dataType:"json",
+    		success:function(result){
+    			$("#login_form").submit();
+    		},
+    		error: function () {
+    			$("#login_form").submit();
+    		}
+    	});
+    	
     });
     
     //鼠标悬停在登陆头像上

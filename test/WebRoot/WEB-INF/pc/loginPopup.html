@@ -31,6 +31,8 @@
             <span style="color:red" id="loginFailedInfo" th:text="${errInfo}"></span>
         </div>
     </div>
+    <input type="hidden" id="beforeloginpath"  th:value="${#httpServletRequest.getServletPath()}" />
+    <input type="hidden" id="beforeloginpar"  th:value="${#httpServletRequest.getQueryString()}" />
 </div>
 <!--登录弹窗end-->
 
@@ -72,7 +74,7 @@
 					<a href="#"><span th:if="${session.dbUser!=null}" th:text="${session.dbUser.username}"></span></a>
 					<a href="#">个人中心</a>
 					<a href="#">修改密码</a>
-					<a href="#" th:href="@{/logout}">退出</a>
+					<a href="#" th:href="@{/mylogout(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">退出</a>
 				</p>
 			</li>
     	</ul>

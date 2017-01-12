@@ -50,37 +50,28 @@ public class SimpleLoginSuccessHandler implements AuthenticationSuccessHandler,I
 		
 		this.saveLoginInfo(request, authentication);
 		
-		/*String turnPage = "pc/yun-index";
-        String errInfo = "用户或密码错误";
-        turnPage = "redirect:/pc/index";
-        String retUrl = request.getHeader("Referer");
-        if(retUrl != null){
-            String[] url = retUrl.split("/");
-            turnPage="redirect:";
-            for (int i = 0 ; i <url.length ; i++ ) {
-                if("test".equals(url[i]) || url[i].contains("www")){
-                    for(int j=i+1; j<url.length; j++){
-                        if(url[j].contains("?")) {
-                            turnPage += "/"+url[j].substring(0,url[j].indexOf("?"));
-                            break;
-                        }
-                        turnPage += "/" + url[j];
-                    }
-                    break;
-                }
-            }
-        }
-        System.out.println("turnPage = "+turnPage);*/
+		//登录成功以后，从session中获取保存的登录前路径，作为登陆成功后的返回路径
+		HttpSession session= request.getSession(false);
+		String targetUrl = "";
+		if(session != null && session.getAttribute("loginPath")!=null){
+			targetUrl = (String)session.getAttribute("loginPath");
+		}
+
+		//如果session中没有登录后的返回路径，那就使用默认路径
+		if(targetUrl==null || "".equals(targetUrl)){
+			targetUrl = this.defaultTargetUrl;
+		}
 		
+		if (session != null && session.getAttribute("loginPath")!=null) {
+			session.removeAttribute("loginPath");
+		}
 		
 		if(this.forwardToDestination){
-//			logger.info("Login success,Forwarding to "+this.defaultTargetUrl);
-			
+			logger.info("Login success,Forwarding to "+this.defaultTargetUrl);
 			request.getRequestDispatcher(this.defaultTargetUrl).forward(request, response);
 		}else{
-			logger.info("Login success,Redirecting to "+this.defaultTargetUrl);
-			
-			this.redirectStrategy.sendRedirect(request, response, this.defaultTargetUrl);
+			logger.info("Login success,Redirecting to "+targetUrl);
+			this.redirectStrategy.sendRedirect(request, response, targetUrl);
 		}
 	}
 	

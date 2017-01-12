@@ -11,7 +11,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import common.entity.Result;
 import config.ValidatePcMobile;
-import forum.po.DbUser;
 import forum.service.DbUserService;
 import forum.util.DateUtil;
 import forum.util.FileEcodeUtil;
