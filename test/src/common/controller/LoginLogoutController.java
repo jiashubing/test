@@ -24,8 +24,9 @@ public class LoginLogoutController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login")
-	public String getLoginPage(@RequestParam(required = false) boolean error, ModelMap model,HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public String getLoginPage(@RequestParam(required = false) boolean error,@RequestParam( required = false)String beforepath,
+			@RequestParam( required = false)String beforepar, ModelMap model,HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
 		if (error == true) {
 			model.put("errInfo", "用户名或密码错误!");
 		} else {
@@ -35,8 +36,20 @@ public class LoginLogoutController {
 		if(ValidatePcMobile.checkRequest(request)){
 			return "/pc/index";
 		}else{
-			if(session.getAttribute("dbUser") != null){
+			if(session!=null && session.getAttribute("dbUser") != null){
 				return "/mobile/person";
+			}
+			//拼接登录前的路径
+			String loginPath ="";
+			if(beforepath != null && !"/login".equals(beforepath)){
+				loginPath += beforepath;
+				if(beforepar != null && !"".equals(beforepar)){
+					loginPath +='?'+beforepar;
+				}
+			}
+			//保存到session
+			if(!"".equals(loginPath) && session != null){
+				session.setAttribute("loginPath", loginPath);
 			}
 			return "/mobile/login";
 		}
@@ -50,9 +63,9 @@ public class LoginLogoutController {
 	 * @return
 	 */
 	@RequestMapping(value = "/beforelogin")
-	public String getBeforeLoginPage( ModelMap model,HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("dbUser") != null){
+	public String getBeforeLoginPage(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if(session!=null && session.getAttribute("dbUser") != null){
 			return "/mobile/person";
 		}
 		return "/mobile/beforelogin";

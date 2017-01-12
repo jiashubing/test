@@ -49,6 +49,7 @@ public class ZoneServiceImpl implements ZoneService {
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
+		@SuppressWarnings("unchecked")
 		List<Zone> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
 		return result;
@@ -57,7 +58,6 @@ public class ZoneServiceImpl implements ZoneService {
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public Long getZoneCount(Zone s_zone) {
-		List<Object> param=new LinkedList<Object>();
 		StringBuffer hql=new StringBuffer("select count(*) from Zone");
 		if (s_zone!=null) {
 			if (StringUtil.isNotEmpty(s_zone.getName())) {
