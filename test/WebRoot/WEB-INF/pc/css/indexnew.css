@@ -370,7 +370,6 @@ h1 {
 }
 .lileft {
 	float: left;
-font-size:14px； float: left;
 	font-size: 13px;
 	line-height: 23px;
 	color: #5e6e7f;
@@ -384,7 +383,6 @@ font-size:14px； float: left;
 }
 .liright {
 	float: right;
-	;
 	font-size: 13px;
 	line-height: 23px;
 	color: #5e6e7f;
@@ -392,7 +390,6 @@ font-size:14px； float: left;
 }
 .lirightp {
 	float: right;
-	;
 	font-size: 13px;
 	line-height: 23px;
 	color: #5e6e7f;
@@ -410,6 +407,7 @@ font-size:14px； float: left;
 	margin-top: 36px;
 	margin-right: -98px;
 }
+.lileft p,.lirightp p{line-height:38px;}
 .bobox {
 	height: 63px;
 	width: 96%;

@@ -72,7 +72,7 @@
 	
 				<p style="display: none" class="lbpo">
 					<a href="#"><span th:if="${session.dbUser!=null}" th:text="${session.dbUser.username}"></span></a>
-					<a href="#">个人中心</a>
+					<a href="#" th:href="@{/basicinfo}">个人中心</a>
 					<a href="#">修改密码</a>
 					<a href="#" th:href="@{/mylogout(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">退出</a>
 				</p>

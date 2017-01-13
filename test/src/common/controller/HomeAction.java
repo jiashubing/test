@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Controller;
@@ -274,6 +273,14 @@ public class HomeAction {
 			 model.addAttribute("flag",flag);
 		 }
 		 return ValidatePcMobile.checkRequest(request, "/feedback");
+	 }
+	 
+	 /**
+	  * 跳转到基本信息页面
+	  */
+	 @RequestMapping("/basicinfo")
+	 public String basicinfo(HttpServletRequest request){
+		 return ValidatePcMobile.checkRequest(request, "/basicinfo");
 	 }
 	 
 	 @RequestMapping("/registsu")

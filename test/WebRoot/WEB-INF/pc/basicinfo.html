@@ -1,0 +1,100 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>阿丙的私人订制</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
+</head>
+<body>
+<div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
+    <ul class="navi">
+        <li class="active"><a href="index.html" >首页</a></li>
+        <li><a href="javascript:void(0)" >论坛系统</a></li>
+        <li><a href="yun-baomin.html" >自然之声</a></li>
+        <li><a href="javascript:void(0)" >历史项目</a></li>
+        <li><a href="yun-jxspnewone.html" >网页小游戏</a></li>
+        <li>
+            <a href="javascript:void(0)" >我的视频</a>
+        </li>
+        <li><a href="#">在线工具</a></li>
+		<li><a href="#">作者亲密度调查</a></li>
+        <li id="loginLi" style="padding:0px 0px 0px 20px;"
+            th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
+            <a href="javascript:void(0)" id="showLoginForm">控制台</a>
+        </li>
+    </ul>
+</div>
+
+<div th:attr="style='min-height:834px;background:url('+@{/image/pc/images/banner.jpg}+') center 0 no-repeat;background-size:cover;'">
+    <p style=" height:60px;"></p>
+    <p style="clear:both"></p>
+    <div class="ysoo" style="height:164px;">
+    	<img class="toux" th:if="${session.dbUser.user.face!=null  &amp;&amp; session.dbUser.user.face!=''}" src="images/toux.png" th:src="@{'/image/pc/forum/'+${session.dbUser.user.face}}" width="80px" height="80px"/>
+		<span th:if="${session.dbUser.user.face==null || session.dbUser.user.face==''}">
+			<img class="toux" th:if="${session.dbUser.user.sex==null || session.dbUser.user.sex=='未知' || session.dbUser.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" width="80px" height="80px"/>
+			<img class="toux" th:if="${session.dbUser.user.sex!=null &amp;&amp; session.dbUser.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" width="80px" height="80px"/>
+			<img class="toux" th:if="${session.dbUser.user.sex!=null &amp;&amp; session.dbUser.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" width="80px" height="80px"/>
+		</span>
+    	
+        <ul style="margin-left:115px;margin-top:-46px;">
+            <li style="float:left;">
+                <p style="font-size:16px"><b>昵称：<span th:text="${session.dbUser.user.nickName}">啦啦啦</span></b></p>
+            </li>
+            <li style="float:right; margin-top:-4px">
+                <p style="font-size:14px">
+                    <button id="btn_showCertificate" class="ysan">修改信息</button>
+                </p>
+                <p style="font-size:14px">
+                    <button id="btn_applyCertificate" class="ysan">修改密码</button>
+                </p>
+            </li>
+        </ul>
+        <p style="clear:both"></p>
+        <ul class="boboxs">
+            <li class="lileft">
+                <p>真实姓名：<span th:text="${session.dbUser.user.trueName}==null?'未设置':${session.dbUser.user.trueName}">你好</span></p>
+
+                <p>性别：<span th:text="${session.dbUser.user.sex==null || session.dbUser.user.sex=='未知' || session.dbUser.user.sex==''}?'未知':${session.dbUser.user.sex}">未知</span></p>
+
+                <p>邮箱：<span th:text="${session.dbUser.user.email}">131060@a.com</span></p>
+
+                <p>电话号码：<span th:text="${session.dbUser.user.mobile}==null?'未设置':${session.dbUser.user.mobile}">2105.01.01</span></p>
+
+            </li>
+            <li class="lirightp">
+			 	<br/>
+				<p>上次登录时间：<span th:text="${session.dbUser.lasttime}==null?'未登录':${#dates.format(session.dbUser.lasttime, 'yyyy-MM-dd HH:mm:ss')}">2105.01.01</span></p>
+                <p>上次登录IP：<span th:text="${session.dbUser.ipaddr}==null?'未登录':${session.dbUser.ipaddr}">啦啦啦</span></p>
+            </li>
+        </ul>
+    </div>
+    <div class="ystwo" style="background-color:#E8E8E8;">
+    <img style="margin-left:27px;" src="images/message.png" th:src="@{/image/pc/images/message.png}" width="30px" height="30px"/> <span
+            style="line-height:30px;font-size:14px;padding:5px;">消息通知</span></div>
+    <div class="ysthree">
+        <div class="main-wrap">
+            <div class="ystwolist ysys">
+                <p><span style="float:left;">待开发</span> <span style="float:right;">2017/01/14</span></p>
+            </div>
+			<div class="ystwolist ysys">
+                <p><span style="float:left;">待开发</span> <span style="float:right;">2017/01/14</span></p>
+            </div>
+        </div>
+    </div>
+	<p style="clear:both"></p>
+
+	<p style=" height:60px"></p>
+</div>
+
+<div th:include="pc/loginPopup::footerDiv" class="footer">
+    <p>阿丙工作室</p>
+    <p>联系邮箱：jiashubing@foxmail.com</p>
+</div>
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
+</body>
+
+</html>
