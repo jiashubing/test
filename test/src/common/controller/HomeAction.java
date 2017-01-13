@@ -167,17 +167,47 @@ public class HomeAction {
 
 		dbUserService.save(tmpDbUser);
 		DbUser dbUser = dbUserService.getByName(nickName);
-		model.addAttribute("dbUser", dbUser);
 		
 		//注册后直接登陆
         PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(dbUser, dbUser.getPassword(),dbUser.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+		HttpSession session = request.getSession(false);
+		if(session != null){
+			session.setAttribute("dbUser",dbUser);
+		} 
 		
 		model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/registsuccess");
 	}
 	
 
+	@RequestMapping("/changePassword")
+	@ResponseBody
+	public Result changePassword(HttpServletRequest request,String oldPwd,String newPwd) {
+		Result result = new Result();
+		HttpSession session = request.getSession(false);
+		if(session != null){
+			DbUser dbUser = (DbUser)session.getAttribute("dbUser");
+			User user = dbUser.getUser();
+			if(!oldPwd.equals(user.getPassword())){
+				result.setStatus(0);
+				result.setMessage("原密码错误！");
+				return result;
+			}
+			user.setPassword(newPwd);
+			newPwd = Md5Util.toMD5(newPwd);
+			dbUser.setPassword(newPwd);
+			dbUserService.merge(dbUser);
+			result.setStatus(1);
+			result.setMessage("修改密码成功！");
+		} else{
+			result.setStatus(0);
+			result.setMessage("修改密码失败！");
+		}
+		return result;
+	}
+	
 	@RequestMapping("/lottery")
     @ResponseBody
     public Result loadLottery() {

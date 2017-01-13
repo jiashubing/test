@@ -5,13 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import config.ValidatePcMobile;
-import forum.po.DbUser;
 import forum.po.Topic;
 import forum.po.Zone;
 import forum.service.TopicService;
