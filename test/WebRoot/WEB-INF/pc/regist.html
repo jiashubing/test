@@ -24,14 +24,13 @@
         <p class="ysxz">
         <b style="font-size:16px;">注册须知</b><br/>
         1、设置密码：个人网站，密码使用简单易记的就好。保存在数据库里的密码是加密的，也请放心；<br/>
-    2、设置邮箱：希望能够使用自己的、正确的邮箱，可用于找回密码。<br/>
-         
+    	2、设置邮箱：希望能够使用自己的、正确的邮箱，可用于找回密码；<br/>
+   	 	3、如果不设置头像，系统会根据性别使用默认头像。<br/>
         </p>
         </div>
         
         <div class="ys500 ystx">
             <form id="registFm" action="" th:action="@{/doRegist}" method="post" enctype="multipart/form-data">
-            <!-- <form action="" th:action="@{/doRegist}" method="post"> -->
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="nickName" name="nickName" placeholder="昵称（必填）"
                            maxlength="20" type="text" />
@@ -88,23 +87,14 @@
                 
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="newPwd" name="newPwd" placeholder="登录密码（必填）"
-                           maxlength="20" type="text" />
+                           maxlength="20" type="password" />
                 </p>
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="confirmPwd" name="confirmPwd" placeholder="确认密码（必填）"
-                           maxlength="20" type="text" />
+                           maxlength="20" type="password" />
                 </p>
 
                 <p>
-                    <!-- <select name="areaId" id="areaId" class="ysxlk" size="1">
-                        <option th:each="g:${agentList}" th:value="${g.areaId}" th:text="${g.area}" th:selected="${mbInfo}==null?false:${mbInfo.agent}!=null" >杭州市</option>
-                        <option value="000" style="display: none;"  th:selected="${mbInfo}==null?true:${mbInfo.agent}==null" selected="selected">请选择考点</option>
-                    </select>
-                    <select id="areaId2" class="ysxlk" size="1"
-                            th:style="${#authentication.name}=='anonymousUser'?'display:none':(${mbInfo.agent}==null?'display:none':'display:block')" disabled="disabled">
-                        <option th:each="g:${agentList}" th:value="${g.areaId}" th:text="${g.area}" th:selected="${mbInfo}==null?false:${mbInfo.agent}!=null" >杭州市</option>
-                        <option value="000" style="display: none;" th:selected="${mbInfo}==null?true:${mbInfo.agent}==null" selected="selected">请选择考点</option>
-                    </select> -->
 
                 </p>
                 <p style="text-align:center;">
@@ -112,11 +102,6 @@
                         注册
                     </button>
                 </p>
-<!--                 <p style="text-align:center;">
-                    <button class="ysw500 sign-in__button ys-form__button" id="baominSubmit" type="button">
-                        注册
-                    </button>
-                </p> -->
             </form>
             <div style="text-align: center;">
                 <span style="color:red" id="registErrInfo"></span>

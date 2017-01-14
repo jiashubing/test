@@ -23,7 +23,7 @@
 				<span style="font-size: 70px;"><strong>感谢您注册我的网站</strong></span>
 			</div>
 			<div class="msg">
-				<p>恭喜：注册成功！</p>
+				<p>恭喜：<span th:text="${updateFlag}==1?'信息修改':'注册'">注册</span>成功！</p>
 				<p>正在进入首页...</p>
 				<script type="text/javascript">
 					setTimeout("location.href='index'", 3000);

@@ -79,6 +79,8 @@ $("#shubing-toux-doc").live("change",function(){
 });
 
 $("#registButton").click(function() {
+	var regName=/^[a-zA-Z0-9\u4e00-\u9fa5]*$/;
+	var regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/; 
     var reg=/^(13|14|15|17|18)\d{9}$/;
     var nickName = $("#nickName").val();
     var trueName = $("#trueName").val();
@@ -94,10 +96,20 @@ $("#registButton").click(function() {
         $("#registErrInfo").text("昵称（用户名）不能为空");
         return;
     }
+    if(nickName!="" && !regName.test(nickName)){
+        $("#msgInfo").text("");
+        $("#registErrInfo").text("昵称（用户名）只能使用汉字、字母与数字");
+        return;
+    }
     if(email=="") {
     	$("#msgInfo").text("");
     	$("#registErrInfo").text("邮箱不能为空");
     	return;
+    }
+    if(email!=null && !regEmail.test(email)){
+        $("#msgInfo").text("");
+        $("#registErrInfo").text("请填入正确的邮箱");
+        return false;
     }
     if(newPwd=="") {
     	$("#msgInfo").text("");
@@ -141,9 +153,15 @@ $("#registButton").click(function() {
 $("#nickName").blur(checkNickName);
 function checkNickName() {
     var nickName = $("#nickName").val();
+    var regName=/^[a-zA-Z0-9\u4e00-\u9fa5]*$/;
     if(nickName=="") {
         $("#nickNameMsg").text("");
         $("#nickNameErr").text("昵称不能为空");
+        return false;
+    }
+    if(!regName.test(nickName)){
+        $("#nickNameMsg").text("");
+        $("#nickNameErr").text("昵称（用户名）只能使用汉字、字母与数字");
         return false;
     }
     $.ajax({

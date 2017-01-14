@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Controller;
@@ -112,10 +113,11 @@ public class HomeAction {
 		User tmpUser = new User();
 
 		//保存图片到本地，并且在数据库中赋值为路径
-		if (face!=null) {
+		if (face!=null && face.getSize()!=0) {
 			InputStream tmpStream = null;
 			try {
 				tmpStream = face.getInputStream();
+				if(ImageIO.read(tmpStream)==null){throw new Exception("上传文件不是图片！");}
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			} finally{
@@ -123,8 +125,6 @@ public class HomeAction {
 					tmpStream.close();
 				}
 			}
-			if(ImageIO.read(tmpStream)==null){throw new Exception("上传文件不是图片！");}
-			if(face.getSize()==0){throw new Exception("文件为空！");}
 			String realPath=request.getSession().getServletContext().getRealPath(ImgUtil.FORUM_PATH+ImgUtil.USER_FACE);
 			String imgName = DateUtil.getRadomStr();
 			String imgPath = "/"+imgName+ ".png";
@@ -149,13 +149,12 @@ public class HomeAction {
 
 		if(sex!=null && sex==1){
 			tmpUser.setSex("男");
-		}else if(sex!=null && sex==0){
+		}else if(sex!=null && sex==2){
 			tmpUser.setSex("女");
 		}else{
 			tmpUser.setSex("未知");
 		}
 		tmpUser.setNickName(nickName);
-		tmpUser.setTrueName(trueName);
 		tmpUser.setType(0);
 		tmpUser.setMobile(mobile);
 		tmpUser.setEmail(email);
@@ -178,6 +177,60 @@ public class HomeAction {
 		} 
 		
 		model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/registsuccess");
+	}
+	
+	@RequestMapping(value="/doUpdate")
+	public String doUpdate(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request,
+			@RequestParam(required = false) String trueName,
+			@RequestParam(required = false) String mobile,
+			@RequestParam(required = false) Integer sex,
+			@RequestParam(required = false) CommonsMultipartFile face)throws Exception{
+		
+		User tmpUser = dbUser.getUser();
+		
+		//保存图片到本地，并且在数据库中赋值为路径
+		if (face!=null && face.getSize()!=0) {
+			InputStream tmpStream = null;
+			try {
+				tmpStream = face.getInputStream();
+				if(ImageIO.read(tmpStream)==null){throw new Exception("上传文件不是图片！");}
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			} finally{
+				if(tmpStream != null){
+					tmpStream.close();
+				}
+			}
+			String realPath=request.getSession().getServletContext().getRealPath(ImgUtil.FORUM_PATH+ImgUtil.USER_FACE);
+			String imgName = DateUtil.getRadomStr();
+			String imgPath = "/"+imgName+ ".png";
+			File file = new File(realPath+imgPath);
+			try {
+				face.getFileItem().write(file);
+				tmpUser.setFace(ImgUtil.USER_FACE+imgPath);
+			} catch (Exception e) {
+				e.printStackTrace();
+				tmpUser.setFace("");
+			}
+		}
+		
+		if(sex!=null && sex==1){
+			tmpUser.setSex("男");
+		}else if(sex!=null && sex==2){
+			tmpUser.setSex("女");
+		}else{
+			tmpUser.setSex("未知");
+		}
+		tmpUser.setMobile(mobile);
+		tmpUser.setTrueName(trueName);
+		
+		dbUserService.merge(dbUser);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("dbUser", dbUser);
+		
+		model.addAttribute("updateFlag", 1);
 		return ValidatePcMobile.checkRequest(request, "/registsuccess");
 	}
 	
@@ -311,6 +364,15 @@ public class HomeAction {
 	 @RequestMapping("/basicinfo")
 	 public String basicinfo(HttpServletRequest request){
 		 return ValidatePcMobile.checkRequest(request, "/basicinfo");
+	 }
+	 
+	 /**
+	  * 跳转到修改基本信息页面
+	  */
+	 @RequestMapping("/updateinfo")
+	 public String updateinfo(@AuthenticationPrincipal DbUser dbUser,HttpServletRequest request,Model model){
+		 model.addAttribute("dbUser", dbUser);
+		 return ValidatePcMobile.checkRequest(request, "/updateinfo");
 	 }
 	 
 	 @RequestMapping("/registsu")

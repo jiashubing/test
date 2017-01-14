@@ -1,0 +1,140 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>阿丙的私人订制</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/myfile.css" th:href="@{/css/pc/css/myfile.css}"/>
+</head>
+<body style="background-color:#f0f0f0">
+<div style="min-height:834px">
+    <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;">
+    </div>
+
+    <p style="clear:both"></p>
+
+    <p style="height:20px"></p>
+
+    <div class="ysfour">
+    
+          <div class="dddys">
+        <p class="ysxz">
+        <b style="font-size:16px;">修改个人信息须知</b><br/>
+        1、昵称和邮箱不可更改；<br/>
+    	2、如果不设置头像，系统会根据性别使用默认头像。<br/>
+        </p>
+        </div>
+        
+        <div class="ys500 ystx">
+            <form id="registFm" action="" th:action="@{/doUpdate}" method="post" enctype="multipart/form-data">
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" placeholder="昵称（必填）"
+                           maxlength="20" type="text" th:value="${dbUser.user.nickName}" readonly="readonly"/>
+                </p>
+                <div style="text-align: center;">
+               		<span style="color: red;" id="nickNameErr"></span><span style="color: blue" id="nickNameMsg"></span>
+                </div>
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="trueName" name="trueName" placeholder="真实姓名（只你与站长可见）"
+                           maxlength="20" type="text" th:value="${dbUser.user.trueName}!=null?${dbUser.user.trueName}"/>
+                </p>
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" placeholder="邮箱（必填，望填写真实邮箱）" th:value="${dbUser.user.email}"
+                           maxlength="50" type="text" readonly="readonly"/>
+                </p>
+                <div style="text-align: center;">
+                	<span style="color: red;" id="emailErr"></span><span style="color: blue" id="emailMsg"></span>
+                </div>
+                <p>
+                    <input class="ysw500 sign-in__field ys-form__field" id="mobile" name="mobile" placeholder="联系电话"
+                           maxlength="20" type="text" th:value="${dbUser.user.mobile}!=null?${dbUser.user.mobile}"/>
+                </p>
+                
+                <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
+                    <input name="sex" value="1" type="radio" th:checked="${dbUser.user.sex}==null?false:${dbUser.user.sex}=='男'"/>
+                    &nbsp;男&nbsp;&nbsp;
+                    <input name="sex" value="2" type="radio" th:checked="${dbUser.user.sex}==null?false:${dbUser.user.sex}=='女'"/>
+                    &nbsp;女&nbsp;&nbsp;
+                </p>
+                <table style="width:100%; boredr:0; cellspacing:0; cellpadding:0">
+					<tbody>
+						<tr>
+							<td th:align="center">
+								<div id="localImag">
+										
+									<img id="shubing-toux-preview" th:if="${dbUser.user.face!=null  &amp;&amp; dbUser.user.face!=''}" src="images/toux.png" th:src="@{'/image/pc/forum/'+${dbUser.user.face}}" style="display: block; width: 150px; height: 180px;"/>
+									<span th:if="${dbUser.user.face==null || dbUser.user.face==''}">
+										<img id="shubing-toux-preview" th:if="${dbUser.user.sex==null || dbUser.user.sex=='未知' || dbUser.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" style="display: block; width: 150px; height: 180px;"/>
+										<img id="shubing-toux-preview" th:if="${dbUser.user.sex!=null &amp;&amp; dbUser.user.sex=='男'}" th:src="@{/image/pc/forum/images/user/male.png}" style="display: block; width: 150px; height: 180px;"/>
+										<img id="shubing-toux-preview" th:if="${dbUser.user.sex!=null &amp;&amp; dbUser.user.sex=='女'}" th:src="@{/image/pc/forum/images/user/female.png}" style="display: block; width: 150px; height: 180px;"/>
+									</span>		
+								
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td th:align="center" style="padding-top:10px;">
+								<a href="" class="shubing-file">上传头像
+			   						<input type="file" name="face" id="shubing-toux-doc" style="cursor:pointer"/>
+								</a>
+							</td>
+						</tr>
+						<tr><td th:align="center"><span id="fileSize">&nbsp;</span></td></tr>
+					</tbody>
+				</table>
+                
+
+                <p>
+
+                </p>
+                <p style="text-align:center;">
+                    <button class="ysw500 sign-in__button ys-form__button" id="registButton" type="button">
+                       提交
+                    </button>
+                </p>
+            </form>
+            <div style="text-align: center;">
+                <span style="color:red" id="registErrInfo"></span>
+                <span style="color:blue" id="msgInfo"></span>
+            </div>
+        </div>
+        <p class="yszhuyi"><i style="color:#FFBE00"></i><br/>
+            <i style="color:#FFBE00">*</i>登陆用户名使用昵称，可用于论坛模块发表帖子和在线游戏中分享战绩<br/>
+        </p>
+        
+        
+    </div>
+</div>
+<p style="clear:both"></p>
+
+<div th:include="pc/loginPopup::footerDiv" class="footer">
+    <p>阿丙工作室</p>
+    <p>联系邮箱：jiashubing@foxmail.com</p>
+</div>
+
+<!--登录弹窗-->
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+</div>
+<!--登录弹窗end-->
+<div id="asaimsgbg" class="AsaiDivBG" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+ 	var loginFlag = /*[[${loginFlag}]]*/true;
+    /*]]>*/
+    if(loginFlag==1){
+	    document.getElementById('asaimsg').style.display='block';
+	    document.getElementById('asaimsgbg').style.display='block';
+    }
+</script>
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/myregist.js" th:src="@{/js/pc/js/myregist.js}" ></script>
+<script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
+</body>
+</html>
