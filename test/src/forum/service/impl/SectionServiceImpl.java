@@ -55,6 +55,18 @@ public class SectionServiceImpl implements SectionService {
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
+		@SuppressWarnings("unchecked")
+		List<Section> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
+		em.clear();
+		return result;
+	}
+	
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
+	@Override
+	public List<Section> findSectionListByZoneId(int zoneId,int pageSize,int pageNo) {
+		StringBuffer hql=new StringBuffer("from Section where zoneId = "+zoneId);
+		Query query = em.createQuery(hql.toString());
+		@SuppressWarnings("unchecked")
 		List<Section> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
 		return result;

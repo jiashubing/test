@@ -389,6 +389,15 @@ public class HomeAction {
 		 return ValidatePcMobile.checkRequest(request, "/updateinfo");
 	 }
 	 
+	 /**
+	  * 跳转到修改面膜页面
+	  */
+	 @RequestMapping("/updatepassword")
+	 public String updatepassword(@AuthenticationPrincipal DbUser dbUser,HttpServletRequest request,Model model){
+		 model.addAttribute("dbUser", dbUser);
+		 return ValidatePcMobile.checkRequest(request, "/updatepassword");
+	 }
+	 
 	 @RequestMapping("/registsu")
 	 public String registsu(Model model,HttpServletRequest request){
 		 model.addAttribute("msgInfo","感谢您的注册");
