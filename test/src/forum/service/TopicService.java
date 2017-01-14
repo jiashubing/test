@@ -80,4 +80,10 @@ public interface TopicService {
 	 * @return
 	 */
 	public Long getTotalTopicCount(int sectionId);
+	
+	/**
+	 * 搜索帖子总数
+	 * @return
+	 */
+	public Long getAllTopicCount();
 }

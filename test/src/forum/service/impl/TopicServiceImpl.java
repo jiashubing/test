@@ -207,6 +207,14 @@ public class TopicServiceImpl implements TopicService {
 	
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
+	public Long getAllTopicCount() {
+		StringBuffer hql=new StringBuffer("select count(*) from Topic t");
+		Query query = em.createQuery(hql.toString());
+		return (Long)query.getSingleResult();
+	}
+	
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
+	@Override
 	public Long getTotalTopicCount(int sectionId) {
 		StringBuffer hql=new StringBuffer("select count(*) from Topic where sectionId="+sectionId);
 		Query query = em.createQuery(hql.toString());

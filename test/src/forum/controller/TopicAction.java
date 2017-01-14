@@ -98,6 +98,22 @@ public class TopicAction {
 	}
 	
 	/**
+	 * 最新的帖子
+	 */
+	@RequestMapping("/forum/newsTopicList")
+	public String loadNewsTopicList(@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
+		pageNo = PageUtil.initPageNo(pageNo);
+		List<Topic> newTopicList = topicService.findNewTopicListDesc(PageSize, pageNo);
+		long totalNum=topicService.getAllTopicCount();
+		int totalPages = PageUtil.getTotalPages(totalNum, PageSize);
+		
+		model.addAttribute("pageNo",pageNo); 
+		model.addAttribute("totalPages",totalPages); 
+		model.addAttribute("newTopicList",newTopicList); 
+		return ValidatePcMobile.checkRequest(request, "/forum/newsTopicList");
+	}
+	
+	/**
 	 * 后台加载帖子列表
 	 */
 	@RequestMapping("/admin/topicList")
