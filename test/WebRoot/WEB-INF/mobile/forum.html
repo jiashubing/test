@@ -56,7 +56,7 @@
        </header>
        <ul class="module_list"> 
         <li th:each="topic:${goodTopicList}"><a href="" th:href="@{/forum/details(id=${topic.id})}" ><label th:text="${#strings.abbreviate(topic.title,12)}">范冰冰大秀长腿</label></a></li>
-        <li><a href="" class="more">更多热议 &gt;</a></li>
+        <li><a th:href="@{/forum/tuijian}" class="more">更多推荐 &gt;</a></li>
        </ul>
       </section>
       <section class="module">

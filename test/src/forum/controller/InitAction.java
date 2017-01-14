@@ -38,4 +38,13 @@ public class InitAction {
 		return ValidatePcMobile.checkRequest(request, "/forum");
 	}
 	
+	@RequestMapping("/forum/tuijian")
+	public String loadTuijian(Model model,HttpServletRequest request)throws Exception{
+		
+		List<Topic> goodTopicList = topicService.findGoodTopicListDesc(30, 0);
+		model.addAttribute("goodTopicList",goodTopicList);
+		
+		return ValidatePcMobile.checkRequest(request, "/forum/tuijian");
+	}
+	
 }

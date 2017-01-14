@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="font-size: 36px;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  	<meta charset="utf-8" />
+  	<meta content="width=device-width,initial-scale=1,user-scalable=no" name="viewport" />
+  	<meta name="format-detection" content="telephone=no" />
+  	<title>阿丙的私人定制</title>
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+  	<meta name="mobile-web-app-capable" content="yes" />
+	<style>
+        body {
+            margin: 0;
+        }
+    </style> 
+  	<link rel="stylesheet" href="./css/daoliu.shubing.css" th:href="@{/css/mobile/forum/css/aio.shubing.css}"/> 
+</head>
+<body style="padding-top: 45px; font-size: 12px;">
+  
+  <div id="react-dom">
+   <div style="background:#fafbfc;" >
+    <div class="client-blue_bar">
+     <div class="blue-kit-left">
+      <a class="blue-kit-btn" href="#" onclick="javascript:history.back(-1)"><span class="icon-tieba-logo blue-kit-btn-logo" ></span><span class="blue-kit-text">版主推荐</span></a>
+     </div>
+    </div>
+    <div class="client-list">
+     <div class="header">
+      <span class="header">推荐榜单</span>
+      <span class="tip">(被列为精华的帖子)</span>
+      <div class="rule">
+       <span>评论数</span>
+      </div>
+     </div>
+     <div class="content">
+      <div class="scrolling">
+       <div class="wrap clearfix">
+       <div th:each="topic,toNum:${goodTopicList}">
+        <a class="block">
+         <div class="wrap-content">
+          <div class="rank">
+           <img th:if="${toNum.count==1}" class="rank-img" src="1.png" th:src="@{/image/mobile/forum/images/1.png}"/>
+           <img th:if="${toNum.count==2}" class="rank-img" src="1.png" th:src="@{/image/mobile/forum/images/2.png}"/>
+           <img th:if="${toNum.count==3}" class="rank-img" src="1.png" th:src="@{/image/mobile/forum/images/3.png}"/>
+           <span th:unless="${toNum.count==0 || toNum.count==1 || toNum.count==2}" th:text="${toNum.count}"></span>
+          </div>
+          <div class="title">
+           <span class="word" th:text="${topic.title}">钟汉良杨颖抠像演戏</span>
+           <span th:if="${topic.replySum>2}" class="icon hot"><img th:src="@{/image/mobile/forum/images/icon_hottopic.png}"/></span>
+          </div>
+          <div class="num" th:text="${topic.replySum}">
+           298195
+          </div>
+         </div></a>
+        </div> 
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div> 
+ </body>
+</html>
