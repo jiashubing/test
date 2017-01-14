@@ -99,7 +99,7 @@ public class LoginLogoutController {
 		}
 		//保存到session
 		HttpSession session= request.getSession(false);
-		if(!"".equals(logoutPath) && session != null){
+		if(!"".equals(logoutPath) &&!"/login".equals(logoutPath) &&!"/doRegist".equals(logoutPath) && session != null){
 			session.setAttribute("logoutPath", logoutPath);
 		}
 		return "redirect:/logout";
@@ -121,7 +121,7 @@ public class LoginLogoutController {
 		}
 		//保存到session
 		HttpSession session= request.getSession(false);
-		if(!"".equals(loginPath) && session != null){
+		if(!"".equals(loginPath) &&!"/login".equals(loginPath) &&!"/doRegist".equals(loginPath) && session != null){
 			session.setAttribute("loginPath", loginPath);
 		}
 		Result result = new Result();

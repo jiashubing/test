@@ -41,14 +41,14 @@ public class HomeAction {
 	
 	@RequestMapping("/index")
 	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
-		HttpSession session = request.getSession();
+		/*HttpSession session = request.getSession();
 		if(session.getAttribute("dbUser") != null){
 			DbUser dbUser =(DbUser)session.getAttribute("dbUser");
 			//如果是我的管理员账号登陆，那就跳转到后台
 			if("myadmin".equals(dbUser.getUsername())){
 				return "redirect:/admin";
 			}
-		}
+		}*/
 		model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/index");
 	}
@@ -108,6 +108,15 @@ public class HomeAction {
 			@RequestParam(required = false) Integer sex,
 			@RequestParam(required = false) CommonsMultipartFile face,
 			@RequestParam String newPwd )throws Exception{
+		if(!userService.checkEmail(email)){
+			if(ValidatePcMobile.checkRequest(request)){
+				model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
+				return "/pc/registsuccess";
+			}else{
+				model.addAttribute("msgInfo","您已经注册了");
+				return "/mobile/person";
+			}
+		}
 		
 	    DbUser tmpDbUser = new DbUser();
 		User tmpUser = new User();
@@ -176,8 +185,13 @@ public class HomeAction {
 			session.setAttribute("dbUser",dbUser);
 		} 
 		
-		model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
-		return ValidatePcMobile.checkRequest(request, "/registsuccess");
+		if(ValidatePcMobile.checkRequest(request)){
+			model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
+			return "/pc/registsuccess";
+		}else{
+			model.addAttribute("msgInfo","感谢您的注册");
+			return "/mobile/person";
+		}
 	}
 	
 	@RequestMapping(value="/doUpdate")
@@ -376,8 +390,9 @@ public class HomeAction {
 	 }
 	 
 	 @RequestMapping("/registsu")
-	 public String registsu(HttpServletRequest request){
-		 return ValidatePcMobile.checkRequest(request, "/registsuccess");
+	 public String registsu(Model model,HttpServletRequest request){
+		 model.addAttribute("msgInfo","感谢您的注册");
+		 return ValidatePcMobile.checkRequest(request, "/person");
 	 }
 	
 }

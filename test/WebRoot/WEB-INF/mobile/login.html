@@ -69,8 +69,7 @@
     /*<![CDATA[*/
  	var errInfo = /*[[${errInfo}]]*/"";
     /*]]>*/
-    console.log(errInfo);
-    if(errInfo!=""){
+    if(errInfo!=null &amp;&amp; errInfo!=""){
     	$("#loginFailedInfo").text(errInfo);
 		$("#loginFailedInfo").fadeIn( 200 );
 		setTimeout("shubingDelTime()", 3000);

@@ -40,6 +40,9 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
+	/**
+	 * fasle：邮箱不可以用   true：邮箱可以使用
+	 */
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public boolean checkEmail(String email) {
