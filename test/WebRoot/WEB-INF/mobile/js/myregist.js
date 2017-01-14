@@ -138,3 +138,11 @@ function checkEmail() {
 		}
 	});
 }
+function showShuoming(){
+	var x = $("#shuoming").css("display");
+	if(x=="block"){
+		$("#shuoming").css("display","none");
+	}else{
+		$("#shuoming").css("display","block");
+	}
+}

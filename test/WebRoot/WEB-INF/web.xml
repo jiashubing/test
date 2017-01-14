@@ -30,6 +30,7 @@
     	/WEB-INF/classes/resources/spring.xml
     	/WEB-INF/classes/resources/spring-security.xml
     	/WEB-INF/classes/resources/spring-quartz.xml
+    	/WEB-INF/classes/resources/spring-mail.xml
     </param-value>
   </context-param>
   <listener>

@@ -61,10 +61,15 @@
 			<p class="form-item form-item-btn">
 				<input value="注册" id="registButton" class="pass-button-full pass-button-full-disabled" type="button"/>
 			</p>
-			<p class="f14 gray">
+			<p class="f14 gray" style="line-height:25px;">
 				阅读&nbsp;
-				<a class="agreement-a" href="">说明</a>
+				<a class="agreement-a" onclick="showShuoming()">说明</a>
 			</p>
+			<div class="f14 gray" id="shuoming" style="display:none;">
+				<p style="text-indent:2em;line-height:25px;">1、设置密码：个人网站，密码使用简单易记的就好。保存在数据库里的密码是加密的，也请放心；</p>
+				<p style="text-indent:2em;line-height:25px;">2、设置邮箱：希望能够使用自己的、正确的邮箱，可用于找回密码；</p>
+				<p style="text-indent:2em;line-height:25px;">3、手机端不能设置头像，只能使用默认头像，可以注册以后在PC端重新设置头像。</p>
+			</div>
 			<!-- <p class="pass-mod-loadingWrap" id="reg-loading">
 				<span class="pass-mod-loadingImg"></span>
 正在加载...

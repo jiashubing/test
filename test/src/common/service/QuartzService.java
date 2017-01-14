@@ -10,7 +10,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import forum.po.Section;
-import forum.po.Topic;
 import forum.po.Zone;
 import forum.service.SectionService;
 import forum.service.TopicService;
