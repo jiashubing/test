@@ -59,15 +59,6 @@
         <li><a th:href="@{/forum/tuijian}" class="more">更多推荐 &gt;</a></li>
        </ul>
       </section>
-      <section class="module">
-       <header class="module_head">
-        <h1>最新更新</h1>
-       </header>
-       <ul class="module_list"> 
-        <li th:each="topic:${newTopicList}"><a href="" th:href="@{/forum/details(id=${topic.id})}" ><label th:text="${#strings.abbreviate(topic.title,12)}">谢霆锋演唱会遭痛批</label></a></li>
-        <li><a href="" class="more">更多热议 &gt;</a></li>
-       </ul>
-      </section>
       
       <section class="module forum_list">
        <header class="module_head">
@@ -86,6 +77,25 @@
           </div>
          </div>
         </div>
+       </div>
+      </section>
+      
+      <section class="module new_feed">
+       <header class="module_head" style="padding-top:0px;">
+        <h1>最新动态</h1>
+       </header>
+       <div class="module_body"> 
+        <a th:href="@{/forum/details(id=${newTopic.id})}" class="j_post_item post_item index_press_area">
+        <p class="post_item_title" th:text="${#strings.abbreviate(newTopic.title,24)}">谢霆锋演唱会遭痛批</p>
+        <p class="post_item_abstract" style="text-indent: 2em;" th:text="${newTopic.remark}">哈哈哈</p>
+         <div class="post_item_area clearfix">
+          <div class="post_item_zan_reply">
+          <!--  <span class="post_item_btn global_icon post_item_zan_btn">1</span> -->
+           <span class="post_item_btn index_icon post_item_reply_btn" th:text="${newTopic.replySum}">145</span>
+          </div>
+          <span class="post_item_forum_name" th:text="${newTopic.section.name}">海贼王吧</span>
+         </div></a>
+        <a href="" class="index_press_area new_feed_all">查看全部</a>
        </div>
       </section>
       

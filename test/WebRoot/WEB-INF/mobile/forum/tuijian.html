@@ -36,7 +36,7 @@
       <div class="scrolling">
        <div class="wrap clearfix">
        <div th:each="topic,toNum:${goodTopicList}">
-        <a class="block">
+        <a class="block" th:href="@{/forum/details(id=${topic.id})}">
          <div class="wrap-content">
           <div class="rank">
            <img th:if="${toNum.count==1}" class="rank-img" src="1.png" th:src="@{/image/mobile/forum/images/1.png}"/>
@@ -45,7 +45,7 @@
            <span th:unless="${toNum.count==0 || toNum.count==1 || toNum.count==2}" th:text="${toNum.count}"></span>
           </div>
           <div class="title">
-           <span class="word" th:text="${topic.title}">钟汉良杨颖抠像演戏</span>
+           <span class="word" th:text="${#strings.abbreviate(topic.title,24)}">钟汉良杨颖抠像演戏</span>
            <span th:if="${topic.replySum>2}" class="icon hot"><img th:src="@{/image/mobile/forum/images/icon_hottopic.png}"/></span>
           </div>
           <div class="num" th:text="${topic.replySum}">

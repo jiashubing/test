@@ -29,11 +29,14 @@ public class InitAction {
 		List<Zone> zoneList=zoneService.findZoneList(null, 10,0);
 		
 		List<Topic> goodTopicList = topicService.findGoodTopicListDesc(7, 0);
-		List<Topic> newTopicList = topicService.findNewTopicListDesc(7, 0);
+		List<Topic> newTopicList = topicService.findNewTopicListDesc(1, 0);
+		
+		Topic newTopic = newTopicList.get(0);
 		
 		model.addAttribute("zoneList",zoneList);
 		model.addAttribute("goodTopicList",goodTopicList);
 		model.addAttribute("newTopicList",newTopicList);
+		model.addAttribute("newTopic",newTopic);
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/forum");
 	}
