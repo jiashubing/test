@@ -62,8 +62,9 @@ public class HomeAction {
 	
 	@RequestMapping("/history")
 	public String loadHistory(Model model,HttpServletRequest request)throws Exception{
-		model.addAttribute("flag","history.html");  //此属性用来给前台确定当前是哪个页面
-		return ValidatePcMobile.checkRequest(request, "/history");
+//		model.addAttribute("flag","history.html");  //此属性用来给前台确定当前是哪个页面
+//		return ValidatePcMobile.checkRequest(request, "/history");
+		return "redirect:/index";
 	}
 	
 	@RequestMapping("/regist")

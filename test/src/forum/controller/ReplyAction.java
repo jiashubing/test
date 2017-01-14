@@ -5,12 +5,14 @@ import java.util.Date;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import common.entity.Result;
+import forum.po.DbUser;
 import forum.po.Reply;
 import forum.po.Topic;
 import forum.service.ReplyService;
@@ -78,6 +80,7 @@ public class ReplyAction {
 	
 	@RequestMapping("/forum/replyAdd")
 	public String addReply(
+			@AuthenticationPrincipal DbUser dbUser,
 			@RequestParam(required = false) Integer pageNo,
 			@RequestParam(required = false) Integer replyTopicId,
 			@RequestParam(required = false) String replyContent,
@@ -132,6 +135,7 @@ public class ReplyAction {
 		}
 		
 		reply.setContent(buf.toString());
+		reply.setUser(dbUser.getUser());
 		
 		try {
 			replyService.saveReply(reply);

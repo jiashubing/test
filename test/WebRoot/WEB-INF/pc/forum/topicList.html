@@ -136,7 +136,7 @@
 										<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 									</span>
 									<span th:if="${session.dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; session.dbUser.user.id!=topic.user.id &amp;&amp; session.dbUser.user.id != section.master.id }">
-										<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg">查看</button></a>
+										<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info">查看</button></a>
 									</span>
 								</span>
 							</td>
@@ -193,7 +193,7 @@
 										<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
 									</span>
 									<span th:if="${session.dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; session.dbUser.user.id!=topic.user.id &amp;&amp; session.dbUser.user.id != section.master.id }">
-										<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg">查看</button></a>
+										<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info">查看</button></a>
 									</span>
 								</span>
 							</td>

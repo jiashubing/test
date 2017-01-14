@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,user-scalable=no" name="viewport"/>
+<meta name="format-detection" content="telephone=no"/>
+<title>阿丙的私人定制</title>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<link rel="stylesheet" href="" th:href="@{/css/mobile/css/common.shubing.css}"/>
+<link rel="stylesheet" href="" th:href="@{/css/mobile/forum/css/details1.shubing.css}"/>
+<link rel="stylesheet" href="" th:href="@{/css/mobile/forum/css/details2.shubing.css}"/>
+<link rel="stylesheet" href="" th:href="@{/css/mobile/forum/css/reply.shubing.css}"/>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}"></script>
+</head>
+<body class="ue_revision portrait">
+	<div id="i_head" class="blue_kit blue_kit_top ">
+		<div class="blue_kit_left">
+			<a href="#" onclick="history.go(-1)" class="j_back_btn blue_kit_btn blue_kit_btn_back"><!-- <span class="icon_tieba_logo blue_kit_btn_logo"></span> -->
+			<span style="display: inline-block;width: 10px;"></span>
+			</a>
+			<span class="post_title_text" style="padding-left:10px;">发表主题</span>
+		</div>
+		<div class="blue_kit_right">
+			<a class="blue_kit_btn j_submit_btn" href="javascript:;">发贴</a>
+		</div>
+	</div>
+	<div id="main" class="main">
+		<form id="fm" class="form-horizontal" style="margin-top: 10px;" method="post" th:action="@{/forum/replyAdd}">
+			<div id="replydiv" class="replydiv" style="display:block;">
+				<div class="j_editor_title_panel editor_title_panel">
+					<input type="text" value="" placeholder="标题（必填）" class="j_editor_input editor_input editor_title" style="width: 100%;"/>
+					<div class="recommend_title_panels" placeholder="标题（必填）">
+					</div>
+				</div>
+				<div class="j_editor_title_panel editor_title_panel">
+					<select id="section" name="topicSectionId" class="j_editor_input editor_input editor_title" style="width: 100%;">
+						<option value="0">请选择板块...</option>
+						<option th:each="section:${sectionList}" th:value="${section.id}" th:text="${section.name}">123</option>
+					</select>
+				</div>
+				<textarea name="replyContent" id="reallyContent" hidden="hidden"></textarea>
+				<div id="saytext" style="height:80px;width:100%;overflow-x:no;overflow-y:auto;" class="editor_input editor_content" contenteditable="true"></div>
+				<span class="emotion" th:attr="style='background:url('+@{/image/mobile/forum/images/biaoqing.png}+') no-repeat;background-size: 35px auto; display: inline-block; position: relative; height: 35px; width: 35px; margin-left: 15px; vertical-align: middle; cursor:pointer;'"></span>
+				<span>
+				<input type="button" class="reply_sub_btn" style="bottom:365px;" value="提交" onclick="javascript:saveReply()"/>
+				</span>
+				<p style="text-indent:2em;line-height:25px;">
+					请不要使用手机自带的表情，传到数据库以后全是乱码，还不清楚该如何处理。可以使是特殊字符组成的表情!
+				</p>
+				<p style="text-indent:2em;line-height:25px;">
+					体验更多表情，请登录PC端网站!
+				</p>
+			</div>
+			<input id="replyTopicId" name="replyTopicId" type="hidden"/>
+		</form>
+		<div th:if="${session.dbUser==null}" class="j_footer footer">
+			<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
+			<a class="footer_link" href="" th:href="@{/login(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">登录</a><span class="separator">|</span>
+			<a class="footer_link" href="" th:href="@{/regist}">注册</a><br/>
+		</div>
+		<div th:unless="${session.dbUser==null}" class="j_footer footer">
+			<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
+			<a class="footer_link" href="" th:href="@{/mylogout(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">注销</a><br/>
+		</div>
+	</div>
+<script type="text/javascript" src="js/jquery.qqFace.js" th:src="@{/js/mobile/forum/js/jquery.qqFace.js}"></script>
+<script type="text/javascript" src="" th:src="@{/js/mobile/forum/js/myDetailJson.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+$(function(){
+ 	/*<![CDATA[*/
+ 	var path= /*[[@{/image/mobile/forum/images/arclist/}]]*/"arclist/";
+ 	var errorFlag= /*[[${errorFlag}]]*/"false";
+    /*]]>*/
+	$('.emotion').qqFace({
+		id : 'facebox', 
+		assign:'saytext', 
+		path:path	//表情存放的路径
+	});
+    if(errorFlag){
+    	alert("sorry，请不要使用手机自带的表情字符等，俺水平不太高，这个识别不出来。");
+    }
+});
+function saveReply(){
+	/*<![CDATA[*/
+ 	var flag= /*[[${session.dbUser==null}]]*/true;
+	var loginhref= /*[[@{/login(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}]]*/"login/";
+    /*]]>*/
+    if(flag){
+		var con = confirm('回帖需要注册登录!\n您要现在登录吗?');
+		if (con) {
+			location.href=loginhref;
+		}
+		return false;
+    }
+    var replyContent=$("#saytext").html();
+    var len = replyContent.length;
+    if (10 > len) {
+		alert("最少输入10个字符！");
+		return false;
+	}
+	if (len > 10000) {
+		alert("最多输入10000个字符！");
+		return false;
+	}
+	$("#reallyContent").val(replyContent);
+	$("#fm").submit();
+	alert("回复成功！");
+	$("#saytext").html("");
+}
+</script>
+</body>
+</html>

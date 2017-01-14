@@ -173,8 +173,10 @@
 						<td valign="bottom">
 							<div class="control">
 								<div class="fr">
-									<a href="" rel="nofollow">回复</a> | 
-									<a href="" rel="nofollow" onclick="javascript:deleteReply(this)"><span style="color:red">删除</span> </a>
+									<a rel="nofollow">回复</a>
+									<span th:unless="${session==null || session.dbUser==null || session.dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; topic.section.master!=null &amp;&amp; session.dbUser.user.id!=topic.user.id &amp;&amp; session.dbUser.user.id != topic.section.master.id }"> | 
+									<a rel="nofollow" onclick="javascript:deleteReply(this)"><span style="color:red">删除</span> </a>
+									</span>
 								</div>
 							</div>
 							<input class="replyid" th:value="${reply.id }" type="hidden"/>
