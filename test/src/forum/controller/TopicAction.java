@@ -338,11 +338,16 @@ public class TopicAction {
 		String[] url = topicContent.split("/");
         String imgName;
         StringBuffer buf = new StringBuffer();
+        boolean tmpFlag = true; //判断是否有一张图片，只取第一张图片
         int i = 0;
         for (i = 0 ; i <url.length ; i++ ) {
             if(url[i].contains(".png")){
                 imgName = url[i].substring(0,40);
                 //System.out.println("imgName = "+imgName);
+                if(tmpFlag){
+                	topic.setFirstimg(imgName);
+                	tmpFlag = false;
+                }
                 String realInPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/tmpImg");
                 String realOutPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/reaImg");
                 String inName=realInPath + '/' + imgName;

@@ -13,7 +13,6 @@
   	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/forum/css/topic.shubing.css}"/> 
   	<link rel="stylesheet" href="./css/daoliu.shubing.css" th:href="@{/css/mobile/forum/css/daoliu.shubing.css}"/> 
   	
-  	<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 </head>
 <body class="ue_revision">
   <div class="container j_container">
@@ -98,17 +97,13 @@
          <span th:unless="${topic.good==0 }" class="ti_title_icon ti_icon_jing">精</span> 
          <span th:text="${topic.title}">S.U.N.女神「原创」太阳☀女神-谢娜</span>
         </div>
-        <!-- <div class="medias_wrap clearfix">
+        <div class="medias_wrap clearfix">
          <div class="medias_item "> 
-          <img class="j_media_thumb medias_img_r" th:src="@{/image/mobile/images/123.jpg}" style="opacity: 1;" /> 
+          <img th:if="${topic.firstimg!=null}" class="j_media_thumb medias_img_r" th:src="@{'/image/images/reaImg/'+${topic.firstimg }}"
+          style="opacity: 1;" /> 
          </div> 
-        </div>  -->
-		<p class="ti_abs"><span class="topiccontent">哈哈哈，我也爱</span></p>
-		<script th:inline="javascript">
-			/*<![CDATA[*/
-			$(".topiccontent:last").text(/*[[${topic.remark}]]*/); 
-			/*]]>*/
-		</script>
+        </div> 
+		<p class="ti_abs" style="text-indent:2em;"><span class="topiccontent" th:text="${topic.remark}">哈哈哈，我也爱</span></p>
         <div class="ti_infos clearfix">
          <div class="ti_author_time"> 
           <span class="ti_author"  th:text="${topic.user.nickName }"> 离开待long</span>

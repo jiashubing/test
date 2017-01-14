@@ -36,6 +36,7 @@ public class Topic {
 	private String remark;				//摘要
 	private Date publishTime;			//发表时间
 	private Date modifyTime;			//最新时间
+	private String firstimg;			//摘要图片
 	private int good=0;					//是否精华
 	private int top=0;					//是否置顶
 	private long replySum=0;					//回复总数
@@ -134,6 +135,15 @@ public class Topic {
 	public void setTop(int top) {
 		this.top = top;
 	}
+	
+	@Column(length=40)
+	public String getFirstimg() {
+		return firstimg;
+	}
+	public void setFirstimg(String firstimg) {
+		this.firstimg = firstimg;
+	}
+	
 	
 	
 }
