@@ -54,7 +54,7 @@
 		<div class="j_tab_content_item">
 			<div class="j_user user">
 				<a class="index_press_area user_info arrow arrow_line arrow_right">
-				<span th:if="${session!=null  &amp;&amp; session.dbUser!=''}">
+				<span th:if="${session!=null &amp;&amp; session.dbUser!=null &amp;&amp; session.dbUser.user!=null}">
 				<img class="user_info_portrait" th:if="${session.dbUser.user.face!=null  &amp;&amp; session.dbUser.user.face!=''}" src="images/toux.png" th:src="@{'/image/pc/forum/'+${session.dbUser.user.face}}" width="100%"/>
 				<span th:if="${session.dbUser.user.face==null || session.dbUser.user.face==''}">
 					<img class="user_info_portrait" th:if="${session.dbUser.user.sex==null || session.dbUser.user.sex=='未知' || session.dbUser.user.sex==''}" th:src="@{/image/pc/forum/images/user/toux.png}" width="100%"/>
@@ -91,7 +91,7 @@
 	    /*<![CDATA[*/
 	 	var msgInfo = /*[[${msgInfo}]]*/"";
 	    /*]]>*/
-	    if(msgInfo!=null &amp;&amp; msgInfo!=""){
+	    if(msgInfo!=null){
 	    	$("#msgInfo").text(msgInfo);
 			$("#msgInfo").fadeIn( 200 );
 			setTimeout("shubingDelTime()", 3000);

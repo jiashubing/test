@@ -184,13 +184,17 @@ public class HomeAction {
 		tmpUser.setDbUser(tmpDbUser);
 
 		dbUserService.save(tmpDbUser);
-		DbUser dbUser = dbUserService.getByName(nickName);
+		
+//		DbUser dbUser = dbUserService.getByName(nickName);
+		DbUser dbUser = tmpDbUser;
+		
 		
 		//注册后直接登陆
         PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(dbUser, dbUser.getPassword(),dbUser.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		if(session != null){
+			session.removeAttribute("dbUser");
 			session.setAttribute("dbUser",dbUser);
 		} 
 		
