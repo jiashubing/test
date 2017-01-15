@@ -81,7 +81,7 @@
 							data-username="imfree2010" data-floor="">
 							<div class="data">
 								<span> 发表于：
-								<span th:text="${#calendars.format(topic.publishTime,'yyyy-MM-dd hh:mm:ss')}">2016-11-11</span></span>
+								<span th:text="${#calendars.format(topic.publishTime,'yyyy-MM-dd HH:mm:ss')}">2016-11-11</span></span>
 								<strong class="fr"> 楼主 </strong> 
 							</div>
 							<div class="post_body">
@@ -153,7 +153,7 @@
 							data-floor="1">
 							<div class="data">
 								<span class="fr"> #<span th:text="${pageNo*10+replyStat.count }">1</span></span> 
-								<span> 回复于： <span th:text="${#calendars.format(reply.publishTime,'yyyy-MM-dd hh:mm:ss')}">2016-11-11</span> </span>
+								<span> 回复于： <span th:text="${#calendars.format(reply.publishTime,'yyyy-MM-dd HH:mm:ss')}">2016-11-11</span> </span>
 								<input class="replyid" th:value="${reply.id }" type="hidden"/>
 							</div>
 							<div class="post_body">

@@ -91,7 +91,7 @@
                                             <span class="list_item_floor_num">
                                                楼主
                                             </span>
-                                            <span class="list_item_time" th:text="${#calendars.format(topic.publishTime,'yyyy-MM-dd hh:mm:ss')}">
+                                            <span class="list_item_time" th:text="${#calendars.format(topic.publishTime,'yyyy-MM-dd HH:mm:ss')}">
                                                 12-26 10:47
                                             </span>
                                         </div>
@@ -154,13 +154,16 @@
                                             <!-- <span th:if="${reply.user.id == topic.user.id}" class="level level_16">
                                             LZ
                                             </span> -->
+                                            <span th:if="${reply.user.id == topic.user.id}" class="user_name red_name"
+                                            	th:attr="style='background:url('+@{/image/mobile/forum/images/lz.png}+') no-repeat; background-size:17.5px;' ">
+                                            </span>
                                             <span th:if="${reply.user == topic.user}" class="user_name red_name"
                                             	th:attr="style='background:url('+@{/image/mobile/forum/images/lz.png}+') no-repeat; background-size:17.5px;' ">
                                             </span>
                                             <span class="list_item_floor_num">
                                                 <span th:text="${pageNo*10+replyStat.count }">1</span>楼
                                             </span>
-                                            <span class="list_item_time" th:text="${#calendars.format(reply.publishTime,'yyyy-MM-dd hh:mm:ss')}">
+                                            <span class="list_item_time" th:text="${#calendars.format(reply.publishTime,'yyyy-MM-dd HH:mm:ss')}">
                                                 2016-11-11
                                             </span>
                                         </div>
@@ -191,7 +194,7 @@
                             上一页
                         </a>
                         <span class="bottom_pager_btn">
-                            <input class="j_pager_input" type="text" pattern="[0-9]*" value="1/1" />
+                            <input class="j_pager_input" type="text" pattern="[0-9]*" value="1/1" readonly="readonly"/>
                         </span>
                         <a href=""
                         class="j_pager_next bottom_pager_btn pager_next disabled" id="next">

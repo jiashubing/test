@@ -109,8 +109,8 @@ function deleteTopics(){
 										<span th:if="${topic.user!=null}" th:text="${topic.user.nickName }"></span>
 									</td>
 									<td style="text-align: center;vertical-align: middle;"><span th:if="${topic.section != null}" th:text="${topic.section.name }"></span></td>
-									<td style="text-align: center;vertical-align: middle;"><span th:text="${#calendars.format(topic.publishTime,'yyyy-MM-dd hh:mm:ss')}"></span></td>
-									<td style="text-align: center;vertical-align: middle;"><span th:text="${#calendars.format(topic.modifyTime,'yyyy-MM-dd hh:mm:ss')}"></span></td>
+									<td style="text-align: center;vertical-align: middle;"><span th:text="${#calendars.format(topic.publishTime,'yyyy-MM-dd HH:mm:ss')}"></span></td>
+									<td style="text-align: center;vertical-align: middle;"><span th:text="${#calendars.format(topic.modifyTime,'yyyy-MM-dd HH:mm:ss')}"></span></td>
 									<td style="text-align: center;vertical-align: middle;">
 										<span th:if="${topic.top==1 }" th:text="置顶" style="color: red;"></span>
 										<span th:unless="${topic.top==1 }" th:text="非置顶"></span>

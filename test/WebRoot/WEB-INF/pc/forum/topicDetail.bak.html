@@ -176,7 +176,7 @@
 									</c:otherwise>
 								</c:choose>-->
 								<button class="shubing-btn shubing-btn-danger" onClick="javascript:deleteReply(this)">删除</button>
-								回复时间:『<span tth:text="${#calendars.format(reply.publishTime,'yyyy-MM-dd hh:mm:ss')}">2016-11-11</span>』
+								回复时间:『<span tth:text="${#calendars.format(reply.publishTime,'yyyy-MM-dd HH:mm:ss')}">2016-11-11</span>』
 							</td>
 							<td>
 								<input class="replyid" th:value="${reply.id }" type="hidden"/>
