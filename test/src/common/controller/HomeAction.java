@@ -61,7 +61,10 @@ public class HomeAction {
 	}
 	
 	@RequestMapping("/regist")
-	public String loadRegist(Model model,HttpServletRequest request)throws Exception{
+	public String loadRegist(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
+		if(dbUser != null){
+			return "redirect:/index";
+		}
 		model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/regist");
 	}
@@ -109,6 +112,12 @@ public class HomeAction {
 			@RequestParam(required = false) Integer sex,
 			@RequestParam(required = false) CommonsMultipartFile face,
 			@RequestParam String newPwd )throws Exception{
+		
+		HttpSession session = request.getSession(false);
+		if(session != null && session.getAttribute("dbUser")!=null){
+			return "redirect:/index";
+		}
+		
 		if(!userService.checkEmail(email)){
 			if(ValidatePcMobile.checkRequest(request)){
 				model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
@@ -181,14 +190,13 @@ public class HomeAction {
         PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(dbUser, dbUser.getPassword(),dbUser.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
-		HttpSession session = request.getSession(false);
 		if(session != null){
 			session.setAttribute("dbUser",dbUser);
 		} 
 		
 		//发送邮件
-		SendMailThread ss = new SendMailThread(nickName,email);
-		ss.start();
+//		SendMailThread ss = new SendMailThread(nickName,email);
+//		ss.start();
 		
 		if(ValidatePcMobile.checkRequest(request)){
 			model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
