@@ -61,5 +61,11 @@
     	$(".zhizheni").fadeOut("fast");
     });
     
+    $("input[id=password]").keypress(function(e){
+        var eCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+        if (eCode == 13){
+        	$("#btn_login").click();
+        }
+    });
     
 });
