@@ -2,12 +2,10 @@ package common.controller;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import common.entity.EmailVo;
 import common.entity.Result;
-import common.service.EmailNotifyService;
 import config.ValidatePcMobile;
 import forum.po.DbUser;
 import forum.po.User;
@@ -42,9 +38,6 @@ public class HomeAction {
 	
 	@Resource(name="userServiceImpl")
 	private UserService userService;
-	
-	@Resource(name="emailNotifyServiceImpl")
-	private EmailNotifyService emailNotifyService;
 	
 	@RequestMapping("/index")
 	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
@@ -194,7 +187,8 @@ public class HomeAction {
 		} 
 		
 		//发送邮件
-		sendmail(nickName,email);
+		SendMailThread ss = new SendMailThread(nickName,email);
+		ss.start();
 		
 		if(ValidatePcMobile.checkRequest(request)){
 			model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
@@ -203,29 +197,6 @@ public class HomeAction {
 			model.addAttribute("msgInfo","感谢您的注册");
 			return "/mobile/person";
 		}
-	}
-	
-	public void sendmail(String nickName,String email){
-		EmailVo emailVo = new EmailVo();
-		emailVo.setReceivers(new String[]{email});
-		emailVo.setCc(new String[]{});
-		emailVo.setBcc(new String[]{});
-		emailVo.setSubject("感谢您的注册");
-		emailVo.setSender("jiashubingweb@sina.com");
-		java.text.DateFormat format1 = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-	    String tmpDate = format1.format(new Date());
-		emailVo.setEmailContent("<html><body><p><strong>亲爱的&nbsp;<span style='color:red;'>"+nickName+"</span>：</strong></p><p style='text-indent:2em;'>感谢您注册我的网站（http://www.jiashubing.cn），非常欢迎您能来这里发表帖子和评论，使用在线小工具等功能。网站将会持续更新，感谢您的关注。</p><p style='text-indent:2em;'>如果您没有注册，请忽略此邮件。	 如有打扰之处，万分抱歉。</p><p style='text-indent:2em;'>----------------------------------------------</p><p style='text-indent:2em;'>"+tmpDate+"</p><p style='text-indent:2em;'>（本邮件由系统自动发出，请勿回复。）</p><p>来自贾树丙的个人网站</p></body></html>");
-
-//		File [] f = new File[]{new File("E:/test11111.txt"), new File("E:/test2.txt")};
-//		emailVo.setAttachFile(f);
-
-		try {
-			emailNotifyService.sendEmailMessageOfHtmlText(emailVo, new Date());
-		} catch (MessagingException e) {
-			System.out.println("发送邮件失败");
-		}
-		
-//		emailNotifyService.sendEmailMessageOfAttachedFileAndSimpleText(emailVo, null, true);
 	}
 	
 	@RequestMapping(value="/doUpdate")
