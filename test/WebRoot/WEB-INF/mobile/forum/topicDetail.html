@@ -26,9 +26,15 @@
             <a id="top"></a>
             <div id="i_head" class="blue_kit blue_kit_top ">
                 <div class="blue_kit_left">
-					<a href="#" onclick="history.go(-1)" class="j_back_btn blue_kit_btn blue_kit_btn_back"><!-- <span class="icon_tieba_logo blue_kit_btn_logo"></span> -->
-       					<span style="display: inline-block;width: 10px;"></span>
-      				</a>
+                
+      				<a th:if="${addTopicFlag!=null &amp;&amp; addTopicFlag==1 &amp;&amp; topic!=null}" th:href="@{/forum/topicList(sectionId=${topic.section.id})}" class="j_back_btn blue_kit_btn blue_kit_btn_back">
+						<span style="display: inline-block;width: 10px;"></span>
+					</a>
+					<a th:unless="${addTopicFlag!=null &amp;&amp; addTopicFlag==1 &amp;&amp; topic!=null}" href="#" onclick="history.go(-1)" class="j_back_btn blue_kit_btn blue_kit_btn_back">
+						<!-- <span class="icon_tieba_logo blue_kit_btn_logo"></span> -->
+						<span style="display: inline-block;width: 10px;"></span>
+					</a>
+      				
 					<span class="post_title_text" style="padding-left:10px;">主题贴</span>
                 </div>
             <div class="blue_kit_right" style="padding-right:10px">

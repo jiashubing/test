@@ -292,7 +292,7 @@ public class TopicAction {
 	
 	@RequestMapping("/forum/details")
 	public String loadDetails(Integer id,Model model,@RequestParam(required = false) Integer pageNo,@RequestParam(required = false) boolean errorFlag,
-			HttpServletRequest request)throws Exception{
+			@RequestParam(required = false) Integer addTopicFlag,HttpServletRequest request)throws Exception{
 		
 		Topic topic = topicService.findTopicById(id);
 		pageNo = PageUtil.initPageNo(pageNo);
@@ -305,6 +305,9 @@ public class TopicAction {
 		model.addAttribute("topic",topic); 
 		model.addAttribute("replyList",replyList); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
+		
+		//手机端发表帖子后返回到帖子详情，帖子详情的“返回上一页”按钮不能返回到发帖页面
+		model.addAttribute("addTopicFlag",addTopicFlag);
 		
 		if(errorFlag){
 			//手机端抛出异常
@@ -341,14 +344,16 @@ public class TopicAction {
 			@RequestParam(required = false) Integer topicSectionId,
 			Model model,HttpServletRequest request)throws Exception{
 		Topic topic = new Topic();
+		DbUser dbUser = null;
 		HttpSession session = request.getSession();
 		if(session.getAttribute("dbUser")!=null){
-			DbUser dbUser = (DbUser)session.getAttribute("dbUser");
+			dbUser = (DbUser)session.getAttribute("dbUser");
 			topic.setUser(dbUser.getUser());
 		}else{
 			return "redirect:/login";
 		}
 		
+		try{
 		//System.out.println("before : "+topicContent);		//首先检测上传内容中的图片
 		//提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
 		String[] url = topicContent.split("/");
@@ -410,7 +415,20 @@ public class TopicAction {
 		section.setNoReplyCount(noReplyCount);
 		sectionService.saveSection(section);
 		
-		return "redirect:/forum/details?id="+topic.getId();
+		return "redirect:/forum/details?id="+topic.getId()+"&addTopicFlag=1";
+		}catch(Exception e){
+			//TODO
+			List<Section> sectionList = sectionService.findSectionList(null, MaxPageSize, 0);
+			if(dbUser!=null && dbUser.getAccess()!=1){
+				sectionList.remove(0);
+			}
+			model.addAttribute("sectionList",sectionList); 
+			model.addAttribute("errorFlag",1);
+			model.addAttribute("topicTitle",topicTitle);
+			model.addAttribute("topicContent",topicContent);
+			model.addAttribute("topicSectionId",topicSectionId);
+			return ValidatePcMobile.checkRequest(request, "/forum/topicAdd");
+		}
 	}
 	
 	@RequestMapping("/forum/topicUpdate")

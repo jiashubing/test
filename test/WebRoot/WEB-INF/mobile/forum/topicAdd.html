@@ -12,61 +12,75 @@
 <link rel="stylesheet" href="" th:href="@{/css/mobile/forum/css/details1.shubing.css}"/>
 <link rel="stylesheet" href="" th:href="@{/css/mobile/forum/css/details2.shubing.css}"/>
 <link rel="stylesheet" href="" th:href="@{/css/mobile/forum/css/reply.shubing.css}"/>
-<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}"></script>
+<style type="text/css">
+.error_area {
+    background: rgba(0,0,0,.7);
+    text-align: center;
+    line-height: 2rem;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-border-radius: 2px;
+    z-index: 9999;
+    display: none;
+    padding: 15px 17px;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    font-size: 1rem;
+    font-family: Helvetica,sans-serif;
+}
+</style>
 </head>
 <body class="ue_revision portrait">
 	<div id="i_head" class="blue_kit blue_kit_top ">
 		<div class="blue_kit_left">
 			<a href="#" onclick="history.go(-1)" class="j_back_btn blue_kit_btn blue_kit_btn_back"><!-- <span class="icon_tieba_logo blue_kit_btn_logo"></span> -->
-			<span style="display: inline-block;width: 10px;"></span>
-			</a>
+   				<span style="display: inline-block;width: 10px;"></span>
+  			</a>
 			<span class="post_title_text" style="padding-left:10px;">发表主题</span>
 		</div>
-		<div class="blue_kit_right">
-			<a class="blue_kit_btn j_submit_btn" href="javascript:;">发贴</a>
-		</div>
 	</div>
-	<div id="main" class="main">
-		<form id="fm" class="form-horizontal" style="margin-top: 10px;" method="post" th:action="@{/forum/replyAdd}">
-			<div id="replydiv" class="replydiv" style="display:block;">
-				<div class="j_editor_title_panel editor_title_panel">
-					<input type="text" value="" placeholder="标题（必填）" class="j_editor_input editor_input editor_title" style="width: 100%;"/>
-					<div class="recommend_title_panels" placeholder="标题（必填）">
-					</div>
-				</div>
-				<div class="j_editor_title_panel editor_title_panel">
-					<select id="section" name="topicSectionId" class="j_editor_input editor_input editor_title" style="width: 100%;">
-						<option value="0">请选择板块...</option>
-						<option th:each="section:${sectionList}" th:value="${section.id}" th:text="${section.name}">123</option>
-					</select>
-				</div>
-				<textarea name="replyContent" id="reallyContent" hidden="hidden"></textarea>
-				<div id="saytext" style="height:80px;width:100%;overflow-x:no;overflow-y:auto;" class="editor_input editor_content" contenteditable="true"></div>
-				<span class="emotion" th:attr="style='background:url('+@{/image/mobile/forum/images/biaoqing.png}+') no-repeat;background-size: 35px auto; display: inline-block; position: relative; height: 35px; width: 35px; margin-left: 15px; vertical-align: middle; cursor:pointer;'"></span>
-				<span>
-				<input type="button" class="reply_sub_btn" style="bottom:365px;" value="提交" onclick="javascript:saveReply()"/>
-				</span>
-				<p style="text-indent:2em;line-height:25px;">
-					请不要使用手机自带的表情，传到数据库以后全是乱码，还不清楚该如何处理。可以使是特殊字符组成的表情!
-				</p>
-				<p style="text-indent:2em;line-height:25px;">
-					体验更多表情，请登录PC端网站!
-				</p>
+	<form id="fm" class="form-horizontal" style="margin-top: 10px;" method="post" th:action="@{/forum/topicSave}">
+		<div id="replydiv" class="replydiv" style="display:block;">
+			<div class="j_editor_title_panel editor_title_panel">
+				<input type="text" id="title" name="topicTitle" th:value="${topicTitle}" placeholder="标题（必填）" class="j_editor_input editor_input editor_title" maxlength="100" style="width: 100%;"/>
 			</div>
-			<input id="replyTopicId" name="replyTopicId" type="hidden"/>
-		</form>
-		<div th:if="${session.dbUser==null}" class="j_footer footer">
-			<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
-			<a class="footer_link" href="" th:href="@{/login(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">登录</a><span class="separator">|</span>
-			<a class="footer_link" href="" th:href="@{/regist}">注册</a><br/>
+			<div class="j_editor_title_panel editor_title_panel">
+				<select id="section" name="topicSectionId" class="j_editor_input editor_input editor_title" style="width: 100%;">
+					<option value="0">请选择板块...</option>
+					<option th:each="section:${sectionList}" th:value="${section.id}" th:text="${section.name}" 
+					th:selected="${section.id}==${topicSectionId}?true:false">123</option>
+				</select>
+			</div>
+			<textarea name="topicContent" id="topicContent" hidden="hidden"></textarea>
+			<div id="saytext" style="height:80px;width:100%;overflow-x:no;overflow-y:auto;" class="editor_input editor_content" contenteditable="true"></div>
+			<span class="emotion" th:attr="style='background:url('+@{/image/mobile/forum/images/biaoqing.png}+') no-repeat;background-size: 35px auto; display: inline-block; position: relative; height: 35px; width: 35px; margin-left: 15px; vertical-align: middle; cursor:pointer;'"></span>
+			<span>
+				<input type="button" class="reply_sub_btn" style="bottom:367px;" value="提交" onclick="javascript:saveTopic()"/>
+			</span>
+			<p style="text-indent:2em;line-height:25px;">
+				请不要使用手机自带的表情，传到数据库以后全是乱码，还不清楚该如何处理。可以使是特殊字符组成的表情!
+			</p>
+			<p style="text-indent:2em;line-height:25px;">
+				体验更多表情，请登录PC端网站!
+			</p>
 		</div>
-		<div th:unless="${session.dbUser==null}" class="j_footer footer">
-			<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
-			<a class="footer_link" href="" th:href="@{/mylogout(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">注销</a><br/>
-		</div>
+	</form>
+	<span class="error_area" id="msgInfo" th:text="${errInfo}">
+		阿斯蒂芬
+	</span>
+	<div th:if="${session.dbUser==null}" class="j_footer footer">
+		<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
+		<a class="footer_link" href="" th:href="@{/login(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">登录</a><span class="separator">|</span>
+		<a class="footer_link" href="" th:href="@{/regist}">注册</a><br/>
 	</div>
+	<div th:unless="${session.dbUser==null}" class="j_footer footer">
+		<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
+		<a class="footer_link" href="" th:href="@{/mylogout(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">注销</a><br/>
+	</div>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}"></script>
 <script type="text/javascript" src="js/jquery.qqFace.js" th:src="@{/js/mobile/forum/js/jquery.qqFace.js}"></script>
-<script type="text/javascript" src="" th:src="@{/js/mobile/forum/js/myDetailJson.js}"></script>
 <script type="text/javascript" th:inline="javascript">
 $(function(){
  	/*<![CDATA[*/
@@ -78,11 +92,16 @@ $(function(){
 		assign:'saytext', 
 		path:path	//表情存放的路径
 	});
-    if(errorFlag){
-    	alert("sorry，请不要使用手机自带的表情字符等，俺水平不太高，这个识别不出来。");
+    if(errorFlag==1){
+    	$("#msgInfo").text("sorry，请不要使用手机自带的表情字符等，俺水平不太高，这个识别不出来。");
+		$("#msgInfo").fadeIn( 200 );
+		setTimeout("shubingDelTime()", 3000);
     }
 });
-function saveReply(){
+function shubingDelTime(){
+	$("#msgInfo").fadeOut( 200 );
+}
+function saveTopic(){
 	/*<![CDATA[*/
  	var flag= /*[[${session.dbUser==null}]]*/true;
 	var loginhref= /*[[@{/login(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}]]*/"login/";
@@ -94,19 +113,35 @@ function saveReply(){
 		}
 		return false;
     }
+    if ($("#title").val() == "" || $("#title").val() == null) {
+    	$("#msgInfo").text("请填写帖子主题！");
+		$("#msgInfo").fadeIn( 200 );
+		setTimeout("shubingDelTime()", 3000);
+		return false;
+	}
+	if ($("#section").val() == 0 || $("#section").val() == null) {
+    	$("#msgInfo").text("请选择板块！");
+		$("#msgInfo").fadeIn( 200 );
+		setTimeout("shubingDelTime()", 3000);
+		return false;
+	}
     var replyContent=$("#saytext").html();
     var len = replyContent.length;
     if (10 > len) {
-		alert("最少输入10个字符！");
+		$("#msgInfo").text("最少输入10个字符！");
+		$("#msgInfo").fadeIn( 200 );
+		setTimeout("shubingDelTime()", 3000);
 		return false;
 	}
-	if (len > 10000) {
-		alert("最多输入10000个字符！");
+	if (len > 50000) {
+		alert("最多输入50000个字符！");
+		$("#msgInfo").text("最多输入50000个字符！");
+		$("#msgInfo").fadeIn( 200 );
+		setTimeout("shubingDelTime()", 3000);
 		return false;
 	}
-	$("#reallyContent").val(replyContent);
+	$("#topicContent").val(replyContent);
 	$("#fm").submit();
-	alert("回复成功！");
 	$("#saytext").html("");
 }
 </script>
