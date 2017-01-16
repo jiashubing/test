@@ -48,7 +48,7 @@ public class LoginLogoutController {
 				}
 			}
 			//保存到session
-			if(!"".equals(loginPath) && session != null){
+			if(!"".equals(loginPath) && !loginPath.startsWith("/do") && session != null){
 				session.setAttribute("loginPath", loginPath);
 			}
 			return "/mobile/login";
@@ -99,7 +99,7 @@ public class LoginLogoutController {
 		}
 		//保存到session
 		HttpSession session= request.getSession(false);
-		if(!"".equals(logoutPath) &&!"/login".equals(logoutPath) &&!"/doRegist".equals(logoutPath) && session != null){
+		if(!"".equals(logoutPath) &&!"/login".equals(logoutPath) && !logoutPath.startsWith("/do") && session != null){
 			session.setAttribute("logoutPath", logoutPath);
 		}
 		return "redirect:/logout";
@@ -121,7 +121,7 @@ public class LoginLogoutController {
 		}
 		//保存到session
 		HttpSession session= request.getSession(false);
-		if(!"".equals(loginPath) &&!"/login".equals(loginPath) &&!"/doRegist".equals(loginPath) && session != null){
+		if(!"".equals(loginPath) &&!"/login".equals(loginPath) && !loginPath.startsWith("/do") && session != null){
 			session.setAttribute("loginPath", loginPath);
 		}
 		Result result = new Result();
@@ -145,7 +145,7 @@ public class LoginLogoutController {
 		}
 		//保存到session
 		HttpSession session= request.getSession(false);
-		if(!"".equals(loginPath) && session != null){
+		if(!"".equals(loginPath) && !loginPath.startsWith("/do") && session != null){
 			session.setAttribute("loginPath", loginPath);
 		}
 		Result result = new Result();
@@ -169,7 +169,7 @@ public class LoginLogoutController {
 		}
 		//保存到session
 		HttpSession session= request.getSession(false);
-		if(!"".equals(loginPath) && session != null){
+		if(!"".equals(loginPath) && !loginPath.startsWith("/do") && session != null){
 			session.setAttribute("loginPath", loginPath);
 		}
 		Result result = new Result();

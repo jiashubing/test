@@ -1,6 +1,5 @@
 package forum.service.impl;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;

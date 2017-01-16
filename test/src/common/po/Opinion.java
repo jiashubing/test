@@ -1,0 +1,65 @@
+package common.po;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+/**
+ * 意见反馈
+ * @author JiaShubing
+ *
+ */
+@Entity
+@Table(name="db_opinion")
+public class Opinion {
+
+	private int id;
+	/**
+	 * 1、咨询  2、建议  3、其他
+	 */
+	private Integer type;
+	private String content;
+	private String email;
+	
+	@Id
+	@GeneratedValue(generator="_native")
+	@GenericGenerator(name="_native",strategy="native")
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	@Column(length=1000)
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	@Column(length=50)
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+}

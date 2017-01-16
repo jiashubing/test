@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import common.entity.Result;
+import common.po.Opinion;
+import common.service.OpinionService;
 import config.ValidatePcMobile;
 import forum.po.DbUser;
 import forum.po.User;
@@ -38,6 +40,9 @@ public class HomeAction {
 	
 	@Resource(name="userServiceImpl")
 	private UserService userService;
+	
+	@Resource(name="opinionServiceImpl")
+	private OpinionService opinionService;
 	
 	@RequestMapping("/index")
 	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
@@ -204,6 +209,7 @@ public class HomeAction {
 		
 		if(ValidatePcMobile.checkRequest(request)){
 			model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
+			model.addAttribute("successFlag", 0);
 			return "/pc/registsuccess";
 		}else{
 			model.addAttribute("msgInfo","感谢您的注册");
@@ -261,7 +267,7 @@ public class HomeAction {
 		HttpSession session = request.getSession();
 		session.setAttribute("dbUser", dbUser);
 		
-		model.addAttribute("updateFlag", 1);
+		model.addAttribute("successFlag", 1);
 		return ValidatePcMobile.checkRequest(request, "/registsuccess");
 	}
 	
@@ -382,11 +388,37 @@ public class HomeAction {
 	  * @return
 	  */
 	 @RequestMapping("/feedback")
-	 public String getFeedback(@RequestParam(required = false) String flag, ModelMap model, HttpServletRequest request){
-		 if(flag != null){
-			 model.addAttribute("flag",flag);
-		 }
+	 public String getFeedback(ModelMap model, HttpServletRequest request){
 		 return ValidatePcMobile.checkRequest(request, "/feedback");
+	 }
+	 
+	 /**
+	  * 增加意见反馈页面
+	  * @return
+	  */
+	 @RequestMapping("/doFeedback")
+	 public String doFeedback(@AuthenticationPrincipal DbUser dbUser,@RequestParam Integer type,
+			 @RequestParam String content,
+			 @RequestParam(required = false) String email, ModelMap model, HttpServletRequest request){
+		 
+		 Opinion opinion = new Opinion();
+		 opinion.setType(type);
+		 opinion.setContent(content);
+		 opinion.setEmail(email);
+		 opinionService.saveOpinion(opinion);
+		 
+		 if(ValidatePcMobile.checkRequest(request)){
+			model.addAttribute("successFlag", 2);
+			return "/pc/registsuccess";
+		}else{
+			model.addAttribute("msgInfo","感谢您的反馈");
+			if(dbUser != null){
+				return "/mobile/person";
+			}else{
+				return "/mobile/beforelogin";
+			}
+		}
+		 
 	 }
 	 
 	 /**

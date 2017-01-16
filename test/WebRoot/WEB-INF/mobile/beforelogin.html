@@ -12,6 +12,25 @@
 	
 	<link rel="stylesheet" href="./css/common.shubing.css" th:href="@{/css/mobile/css/common.shubing.css}"/> 
   	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/css/resource.shubing.css}"/> 
+  	<style type="text/css">
+.error_area {
+    background: rgba(0,0,0,.7);
+    text-align: center;
+    line-height: 2rem;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-border-radius: 2px;
+    z-index: 9999;
+    display: none;
+    padding: 15px 17px;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    font-family: Helvetica,sans-serif;
+}
+  	</style>
 </head>
 <body style="padding-bottom:0px;">
   <div class="j_top_bar blue_kit">
@@ -52,8 +71,24 @@
 		<a class="j_footer_toast footer_link" href="" th:href="@{/login(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">登录</a><span class="separator">|</span>
 		<a class="footer_link" href="" th:href="@{/regist}">注册</a><br/>
 	</div>
-	
+	<span class="error_area" id="msgInfo" th:text="${errInfo}">
+		阿斯蒂芬
+	</span>
     </div>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+	<script th:inline="javascript">
+	    /*<![CDATA[*/
+	 	var msgInfo = /*[[${msgInfo}]]*/"";
+	    /*]]>*/
+	    if(msgInfo!=null){
+	    	$("#msgInfo").text(msgInfo);
+			$("#msgInfo").fadeIn( 200 );
+			setTimeout("shubingDelTime()", 3000);
+	    }
+	    function shubingDelTime(){
+			$("#msgInfo").fadeOut( 200 );
+	    }
+	</script>
     <script>
 var _hmt = _hmt || [];
 (function() {

@@ -21,10 +21,13 @@
     
 		<div class="shubing-welcom"  style="width: 900px; margin: 100px auto;" th:align="center">
 			<div style="padding-top: 150px;padding-bottom: 150px;">
-				<span style="font-size: 70px;"><strong>感谢您注册我的网站</strong></span>
+				<span th:if="${successFlag==0 || successFlag==1}" style="font-size: 70px;"><strong>感谢您注册我的网站</strong></span>
+				<span th:if="${successFlag==2}" style="font-size: 70px;"><strong>感谢您的反馈</strong></span>
 			</div>
 			<div class="msg">
-				<p>恭喜：<span th:text="${updateFlag}==1?'信息修改':'注册'">注册</span>成功！</p>
+				<p th:if="${successFlag==0}">恭喜：注册成功！</p>
+				<p th:if="${successFlag==1}">恭喜：信息修改成功！</p>
+				<p th:if="${successFlag==2}">感谢您的反馈！</p>
 				<p>正在进入首页...</p>
 				<script type="text/javascript">
 					setTimeout("location.href='index'", 3000);

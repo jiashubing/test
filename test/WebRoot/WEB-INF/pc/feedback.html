@@ -45,7 +45,7 @@
     <div id="shubinghd">
             <div class="feedbackwrap">
                 <div class="logo">
-                    <a href=""><img src="" th:src="@{/image/pc/images/feedbacklogo.png}" alt="意见反馈" title="意见反馈" /></a>
+                    <img src="" th:src="@{/image/pc/images/feedbacklogo.png}" alt="意见反馈" title="意见反馈" />
                 </div>
                 <div class="follow">
                   <span>使用QQ邮箱反馈</span>
@@ -58,7 +58,7 @@
         <div class="feedbackwrap">
             <p class="description">您的意见是我不断改进的动力，请留下您在使用过程中遇到的问题或提出宝贵建议</p>
             <div id="feedback" class="feedback_form">
-                <form name="feedback" action="" method="POST">
+                <form id="feedbackFm" th:action="@{/doFeedback}" method="POST">
                     <div class="feedback_item">
                         <label for="type">您的反馈是：</label>
                     </div>
@@ -71,7 +71,7 @@
                         <label for="content">您的反馈内容：</label>
                     </div>
                     <div class="feedback_item textarea">
-                        <textarea class="fixed_width comments" name="content" cols="65" rows="15"></textarea>
+                        <textarea class="fixed_width comments" id="feedbackContent" name="content" cols="65" rows="15"></textarea>
                         <p>将您的描述控制在1000 字以内，如有更多内容请分多次提交。</p>
                     </div>
                     <div class="feedback_item">
@@ -79,11 +79,11 @@
                     </div>
 
                     <div class="feedback_item">
-                        <input class="text" name="email" type="text" />
+                        <input class="text" id="feedbackEmail" name="email" type="text" maxlength="50"/>
                         <p>选填</p>
                     </div>
                     <div class="submit-btn">
-                        <input class="btn blue-btn submit" value="提交反馈" type="submit" />
+                        <input class="btn blue-btn submit" value="提交反馈" id="feedbackBtn" type="button" />
                     </div>
                 </form>
                 <p>非常感谢您的反馈，相信您的反馈能让我的网站日趋完善。</p>
@@ -108,5 +108,6 @@
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
 <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 <script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
+<script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myfeedback.js}" ></script>
 </body>
 </html>

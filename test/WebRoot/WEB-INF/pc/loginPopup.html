@@ -54,6 +54,7 @@
 				<p style="display: none;" class="lbpo" th:class="${flag!='regist.html'}?'lbpo'">
 					<a href="javascript:void(0)" id="showLoginForm2">登录</a>
 					<a th:href="@{/regist}">注册</a>
+					<a th:href="@{/feedback}">意见反馈</a>
 				</p>
 			</li>
 			<li id="userLi" style="padding:0px;"
@@ -73,6 +74,7 @@
 				<p style="display: none" class="lbpo">
 					<a href="#"><span th:if="${session.dbUser!=null}" th:text="${session.dbUser.username}"></span></a>
 					<a href="#" th:href="@{/basicinfo}">个人中心</a>
+					<a th:href="@{/feedback}">意见反馈</a>
 					<a href="#" th:href="@{/mylogout(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">退出</a>
 				</p>
 			</li>
@@ -84,7 +86,7 @@
 <!--底部footer-->
 <div th:fragment="footerDiv" class="footer">
      <p>Copyright&copy;2016-2017. 贾树丙, 冀ICP备16028291号</p>
-     <p>联系邮箱：jiashubing@foxmail.com&nbsp;&nbsp;&nbsp;【<a th:href="@{/feedback(flag=${flag})}"><span style="color:white;">意见反馈</span></a>】</p>
+     <p>联系邮箱：jiashubing@foxmail.com&nbsp;&nbsp;&nbsp;【<a th:href="@{/feedback}"><span style="color:white;">意见反馈</span></a>】</p>
 <script>
 var _hmt = _hmt || [];
 (function() {

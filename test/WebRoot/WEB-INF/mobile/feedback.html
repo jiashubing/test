@@ -13,6 +13,25 @@
 <link rel="stylesheet" href="./css/base.shubing.css" th:href="@{/css/mobile/css/base.shubing.css}" />
 <link rel="stylesheet" href="" th:href="@{/css/mobile/css/common.shubing.css}" />
 <link rel="stylesheet" href="" th:href="@{/css/mobile/css/feedback.shubing.css}" />
+<style type="text/css">
+.error_area {
+    background: rgba(0,0,0,.7);
+    text-align: center;
+    line-height: 2rem;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-border-radius: 2px;
+    z-index: 9999;
+    display: none;
+    padding: 15px 17px;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    font-size: 1.3rem;
+    font-family: Helvetica,sans-serif;
+}
+  	</style>
 </head>
 <body>
 
@@ -28,6 +47,7 @@
 	</header>
 </div>
 <div class="feedback-form">
+	<form id="feedbackFm" th:action="@{/doFeedback}" method="POST">
 	<div class="bg-white">
 		<p class="question-title">
 			您的反馈是：
@@ -36,19 +56,19 @@
 			<div class="grid_container j-question-box">
 				<span class="grid_item">
 				<div class="grid_box">
-					<input class="ui_checkbox" name="question_type" type="checkbox" id="checkbox_1" value="帖子列表页"/>
+					<input class="ui_checkbox" name="type" type="radio" value="1" id="checkbox_1"/>
 					<label class="grid-label" for="checkbox_1">咨询</label>
 				</div>
 				</span>
 				<span class="grid_item">
 				<div class="grid_box">
-					<input class="ui_checkbox" name="question_type" type="checkbox" id="checkbox_2" value="帖子详情页"/>
+					<input class="ui_checkbox" name="type" type="radio" value="2" id="checkbox_2"/>
 					<label class="grid-label" for="checkbox_2">建议</label>
 				</div>
 				</span>
 				<span class="grid_item">
 				<div class="grid_box">
-					<input class="ui_checkbox" name="question_type" type="checkbox" id="checkbox_7" value="其他"/>
+					<input class="ui_checkbox" name="type" type="radio" value="3" id="checkbox_7" checked="checked"/>
 					<label class="grid-label" for="checkbox_7">其他</label>
 				</div>
 				</span>
@@ -56,16 +76,22 @@
 		</div>
 	</div>
 	<div class="textarea-container">
-		<textarea class="textarea" placeholder="请尽量详细您反馈的内容，感谢您提出的宝贵建议！" maxlength="1000" style="font-size:15.3677px;"></textarea>
+		<textarea class="textarea" id="feedbackContent" name="content" placeholder="请尽量详细您反馈的内容，感谢您提出的宝贵建议！" maxlength="1000" style="font-size:15.3677px;"></textarea>
 		<span class="textarea-info">1000字以内</span>
 	</div>
 	<div class="textarea-container">
-		<textarea class="textarea" placeholder="您的邮箱（选填）" maxlength="50" style="font-size:15.3677px;height:45px;"></textarea>
+		<textarea class="textarea" id="feedbackEmail" name="email" placeholder="您的邮箱（选填）" maxlength="50" style="font-size:15.3677px;height:45px;"></textarea>
 	</div>
 	<div class="submit-box">
-		<button class="btn btn_default submit j-submit">提交</button>
+		<button class="btn btn_default submit j-submit" id="feedbackBtn">提交</button>
 	</div>
+	</form>
+	<span class="error_area" id="feedbackMsgInfo" th:text="${errInfo}">
+		阿斯蒂芬
+	</span>
 </div>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="" th:src="@{/js/mobile/js/myfeedback.js}" ></script>
 <script>
 var _hmt = _hmt || [];
 (function() {
