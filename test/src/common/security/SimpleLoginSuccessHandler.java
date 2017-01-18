@@ -55,6 +55,10 @@ public class SimpleLoginSuccessHandler implements AuthenticationSuccessHandler,I
 		String targetUrl = "";
 		if(session != null && session.getAttribute("loginPath")!=null){
 			targetUrl = (String)session.getAttribute("loginPath");
+			session.removeAttribute("loginPath");
+		}else if(session != null && session.getAttribute("addTopicFlag")!=null){
+			//如果是通过发帖时跳转到登陆页，则返回发帖页面
+			targetUrl = "/forum/preSave";
 		}
 
 		//如果session中没有登录后的返回路径，那就使用默认路径
@@ -62,8 +66,8 @@ public class SimpleLoginSuccessHandler implements AuthenticationSuccessHandler,I
 			targetUrl = this.defaultTargetUrl;
 		}
 		
-		if (session != null && session.getAttribute("loginPath")!=null) {
-			session.removeAttribute("loginPath");
+		if (session != null && session.getAttribute("addTopicFlag")!=null) {
+			session.removeAttribute("addTopicFlag");
 		}
 		
 		if(this.forwardToDestination){

@@ -68,4 +68,18 @@ public class ValidatePcMobile {
 			return "/pc" +returnPath;
 		}
 	}
+	
+	/**
+	 * 返回上一页
+	 * http://www.jiashuibing/forum/detail 返回http://www.jiashuibing/forum  
+	 * http://www.jiashuibing/login 返回http://www.jiashuibing
+	 * @param request
+	 * @return
+	 */
+	public static String getDefaultPrePage(HttpServletRequest request){
+		String ans = "http://"+request.getHeader("Host")+request.getRequestURI();
+		int x = ans.lastIndexOf('/');
+		ans = ans.substring(0, x);
+		return ans;
+	}
 }

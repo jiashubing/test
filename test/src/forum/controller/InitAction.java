@@ -47,6 +47,10 @@ public class InitAction {
 		List<Topic> goodTopicList = topicService.findGoodTopicListDesc(30, 0);
 		model.addAttribute("goodTopicList",goodTopicList);
 		
+		//返回上一页的路径，赋值到页面中
+		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+		model.addAttribute("prePage", tmpPage);
+		
 		return ValidatePcMobile.checkRequest(request, "/forum/tuijian");
 	}
 	

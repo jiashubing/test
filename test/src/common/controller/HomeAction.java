@@ -70,6 +70,16 @@ public class HomeAction {
 		if(dbUser != null){
 			return "redirect:/index";
 		}
+		
+		//返回上一页的路径，赋值到页面中
+		String prePage = request.getHeader("Referer");
+		if(prePage != null && !"".equals(prePage) && !prePage.contains("/do")){
+			model.addAttribute("prePage", prePage);
+		}else{
+			String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+			model.addAttribute("prePage", tmpPage);
+		}
+		
 		model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/regist");
 	}
@@ -389,6 +399,14 @@ public class HomeAction {
 	  */
 	 @RequestMapping("/feedback")
 	 public String getFeedback(ModelMap model, HttpServletRequest request){
+		//返回上一页的路径，赋值到页面中
+		String prePage = request.getHeader("Referer");
+		if(prePage != null && !"".equals(prePage) && !prePage.contains("/do")){
+			model.addAttribute("prePage", prePage);
+		}else{
+			String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+			model.addAttribute("prePage", tmpPage);
+		}
 		 return ValidatePcMobile.checkRequest(request, "/feedback");
 	 }
 	 
@@ -444,6 +462,11 @@ public class HomeAction {
 	 @RequestMapping("/updatepassword")
 	 public String updatepassword(@AuthenticationPrincipal DbUser dbUser,HttpServletRequest request,Model model){
 		 model.addAttribute("dbUser", dbUser);
+		 
+		//返回上一页的路径，赋值到页面中
+		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+		model.addAttribute("prePage", tmpPage);
+		 
 		 return ValidatePcMobile.checkRequest(request, "/updatepassword");
 	 }
 	 

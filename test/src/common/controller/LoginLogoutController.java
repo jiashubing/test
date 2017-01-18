@@ -47,6 +47,14 @@ public class LoginLogoutController {
 					loginPath +='?'+beforepar;
 				}
 			}
+			//返回上一页的路径，赋值到页面中
+			String prePage = request.getHeader("Referer");
+			if(prePage != null && !"".equals(prePage) && !prePage.contains("/do") && !prePage.contains("/regist")){
+				model.addAttribute("prePage", prePage);
+			}else{
+				String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+				model.addAttribute("prePage", tmpPage);
+			}
 			//保存到session
 			if(!"".equals(loginPath) && !loginPath.startsWith("/do") && session != null){
 				session.setAttribute("loginPath", loginPath);

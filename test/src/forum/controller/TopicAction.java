@@ -94,6 +94,11 @@ public class TopicAction {
 		model.addAttribute("topicLastReply",topicLastReply); 
 		model.addAttribute("topicReplyCount",topicReplyCount); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
+		
+		//返回上一页的路径，赋值到页面中
+		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+		model.addAttribute("prePage", tmpPage);
+				
 		return ValidatePcMobile.checkRequest(request, "/forum/topicList");
 	}
 	
@@ -110,6 +115,11 @@ public class TopicAction {
 		model.addAttribute("pageNo",pageNo); 
 		model.addAttribute("totalPages",totalPages); 
 		model.addAttribute("newTopicList",newTopicList); 
+		
+		//返回上一页的路径，赋值到页面中
+		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+		model.addAttribute("prePage", tmpPage);
+		
 		return ValidatePcMobile.checkRequest(request, "/forum/newsTopicList");
 	}
 	
@@ -309,6 +319,11 @@ public class TopicAction {
 		//手机端发表帖子后返回到帖子详情，帖子详情的“返回上一页”按钮不能返回到发帖页面
 		model.addAttribute("addTopicFlag",addTopicFlag);
 		
+		//返回上一页的路径，赋值到页面中
+		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+		tmpPage += "/topicList?sectionId="+topic.getSection().getId();
+		model.addAttribute("prePage", tmpPage);
+		
 		if(errorFlag){
 			//手机端抛出异常
 			model.addAttribute("errorFlag",errorFlag); 
@@ -318,11 +333,13 @@ public class TopicAction {
 	
 	@RequestMapping("/forum/preSave")
 	public String preSave(Model model,HttpServletRequest request)throws Exception{
+		//这个路径不使用安全登陆框架了，手动添加跳转
 		HttpSession session = request.getSession(false);
 		DbUser tmpUser = null;
 		if(session!=null){
 			tmpUser = (DbUser)session.getAttribute("dbUser");
 			if(tmpUser == null){
+				session.setAttribute("addTopicFlag", true);
 				return "redirect:/login";
 			}
 		}
@@ -334,6 +351,11 @@ public class TopicAction {
 		
 		model.addAttribute("sectionList",sectionList); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
+		
+		//返回上一页的路径，赋值到页面中
+		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+		model.addAttribute("prePage", tmpPage);
+		
 		return ValidatePcMobile.checkRequest(request, "/forum/topicAdd");
 	}
 	
