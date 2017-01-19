@@ -1,5 +1,6 @@
 package forum.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,8 +16,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="t_reply")
-public class Reply {
+public class Reply implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4004727124500298705L;
 	private int id;				//
 	private Topic topic;		//
 	private User user;			//

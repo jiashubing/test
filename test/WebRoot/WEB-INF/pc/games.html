@@ -1,0 +1,69 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="baidu-site-verification" content="3uYjxVgfa1" />
+    <title>阿丙的私人订制</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
+    <link rel="stylesheet" href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
+    <link rel="stylesheet" href="onlinetools/css/mytools.css" th:href="@{/css/pc/onlinetools/css/mytools.css}"/>
+    <link rel="stylesheet" href="onlinetools/css/bootstrap.shubing.css" th:href="@{/css/pc/onlinetools/css/bootstrap.shubing.css}"/>
+    <link rel="stylesheet" href="" th:href="@{/css/pc/onlinegames/css/shubingsudoku.css}" />
+</head>
+<body>
+<div style="min-height:834px">
+    <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;">
+    </div>
+	<div id="content" style="width: 1200px; margin: 0 auto;">
+		<div id="forum-header-wrapper">
+			<div id="forum-header" class="container">
+				<div id="forum-logo">
+					<h1>
+						<a href="#">在线小游戏</a>
+					</h1>
+				</div>
+			</div>
+		</div>
+		
+		<p style="clear:both"></p>
+
+   	 	<p style="height:20px"></p>
+   	 	
+   	 	<div th:if="${showId==1}">
+			<div th:replace="pc/onlinegames/sudoku::sudokuDiv"></div>
+		</div>
+   	 	
+	</div>
+</div>
+   	 	
+<p style="clear:both"></p>
+
+<div th:include="pc/loginPopup::footerDiv" class="footer">
+    <p>阿丙工作室</p>
+    <p>联系邮箱：jiashubing@foxmail.com</p>
+</div>
+
+<!--登录弹窗-->
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+</div>
+<!--登录弹窗end-->
+<div id="asaimsgbg" class="AsaiDivBG" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+ 	var loginFlag = /*[[${loginFlag}]]*/true;
+    /*]]>*/
+    if(loginFlag==1){
+	    document.getElementById('asaimsg').style.display='block';
+	    document.getElementById('asaimsgbg').style.display='block';
+    }
+</script>
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
+</body>
+</html>

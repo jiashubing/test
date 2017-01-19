@@ -41,12 +41,12 @@
     <div class="headeri"><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/shubinglogo.png}" style="margin-top:0; width:161px;"/>
         <ul class="navi" th:style="${session.dbUser==null}?'margin-right:0px':'margin-right:64px'">
 			<li th:class="${flag=='index.html'}?'active'" class="active"><a href="index.html" th:href="@{/index}">首页</a></li>
-			<li th:class="${flag=='forum.html'}?'active'" ><a href="javascript:void(0)" th:href="@{/forum}">论坛系统</a></li>
+			<li th:class="${flag=='forum.html'}?'active'" ><a th:href="@{/forum}">论坛系统</a></li>
 			<li><a href="" th:href="@{/index}">自然之声</a></li>
 			<li th:class="${flag=='history.html'}?'active'" ><a href="javascript:void(0)" th:href="@{/index}">历史项目</a></li>
-			<li><a href="" th:href="@{/index}">在线游戏</a></li>
+			<li th:class="${flag=='games.html'}?'active'"><a th:href="@{/games}">在线游戏</a></li>
 			<li><a href="javascript:void(0)" th:href="@{/}">我的视频</a></li>
-			<li th:class="${flag=='tools.html'}?'active'"><a href="#" th:href="@{/tools}">在线工具</a></li>
+			<li th:class="${flag=='tools.html'}?'active'"><a th:href="@{/tools}">在线工具</a></li>
 			<li><a href="#" th:href="@{/index}">亲密度</a></li>
  			<li id="loginLi" th:style="${session.dbUser==null}?'':'display:none'" th:class="${flag=='regist.html'}?'active'">
 				<a href="javascript:void(0)" id="showLoginForm">控制台</a>
@@ -88,7 +88,7 @@
      <p>Copyright&copy;2016-2017. 贾树丙, 冀ICP备16028291号</p>
      <p>联系邮箱：jiashubing@foxmail.com&nbsp;&nbsp;&nbsp;【<a th:href="@{/feedback}"><span style="color:white;">意见反馈</span></a>】</p>
 <script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "https://hm.baidu.com/hm.js?18e0f33db7609c8e4d02a81149c37a31";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"1","bdPos":"left","bdTop":"123.5"},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>    
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","sqq","tsina","qzone","tqq","tieba","youdao","ty","evernotecn","fbook","copy","print"],"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"1","bdPos":"left","bdTop":"100"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>    
 </div>
 <!--底部footerEnd-->
 

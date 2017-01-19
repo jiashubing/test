@@ -1,5 +1,6 @@
 package forum.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,8 +26,12 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name="t_topic")
-public class Topic {
+public class Topic implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6734394733551567366L;
 	/**帖子表的id*/
 	private int id;						//
 	private Section section;			//

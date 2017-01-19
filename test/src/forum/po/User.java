@@ -1,5 +1,6 @@
 package forum.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,8 +21,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="t_user")
-public class User {
+public class User implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5669788973183715241L;
 	private int id;        		//
 	private String nickName;	//
 	private String trueName;	//

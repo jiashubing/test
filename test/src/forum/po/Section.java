@@ -1,5 +1,6 @@
 package forum.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,12 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name="t_section")
-public class Section {
+public class Section implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2041979783711373439L;
 	private int id;				//
 	private String name;		//
 	private User master;		//

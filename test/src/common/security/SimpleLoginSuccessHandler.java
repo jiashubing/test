@@ -55,7 +55,9 @@ public class SimpleLoginSuccessHandler implements AuthenticationSuccessHandler,I
 		String targetUrl = "";
 		if(session != null && session.getAttribute("loginPath")!=null){
 			targetUrl = (String)session.getAttribute("loginPath");
-			session.removeAttribute("loginPath");
+			if(!targetUrl.equals("/security_check")){
+				session.removeAttribute("loginPath");
+			}
 		}else if(session != null && session.getAttribute("addTopicFlag")!=null){
 			//如果是通过发帖时跳转到登陆页，则返回发帖页面
 			targetUrl = "/forum/preSave";
