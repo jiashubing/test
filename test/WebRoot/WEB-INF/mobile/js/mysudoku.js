@@ -229,20 +229,6 @@ $("#newgame").click(function(){
 	    		$($(".wo")[i]).css("border","2px solid transparent");
 	    	}
 	    });
-	}else if(base=="^"){
-		var con = confirm("你确定要丢失当前进度，并且重新开始吗？");
-		if (con) {
-			$(".zb").each(function(i){
-				$($(".zb")[i]).text("");
-			});
-			$(".wo").each(function(i){
-			    $($(".wo")[i]).css("background","transparent");
-			    $($(".wo")[i]).css("border","2px solid transparent");
-			});
-			time_fun();
-		} else {
-			return false;
-		}
 	}else{
 		var nflag=true;
 	 	$(".zb").each(function(i){
@@ -266,7 +252,6 @@ $("#newgame").click(function(){
 		autoCheck();
 	}
  });
- 
  function two_char(n) {
      return n >= 10 ? n : "0" + n;
  }
@@ -277,6 +262,6 @@ $("#newgame").click(function(){
          var date = new Date(0, 0)
          date.setSeconds(sec);
          var m = date.getMinutes(), s = date.getSeconds();
-         document.getElementById("y2").innerText =two_char(m) + ":" + two_char(s);
+         document.getElementById("y2").innerText =  two_char(m) + ":" + two_char(s);
      }, 1000);
  }

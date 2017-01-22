@@ -1,100 +1,41 @@
-
-#x1 {
-	margin: 0 auto;
-	width: 1224px;
-	background: transparent
-}
-
-#x2 {
-	text-align: center;
-	color: #325ecd;
-	padding-top: 20px;
-	padding-bottom: 20px
-}
-
-#x2 h1 {
-	margin: 0
-}
-
-#x3 {
-	display: block
-}
-
-#x4 {
-	display: inline;
-	float: left;
-	width: 170px;
-	margin: 0 66px 0 0;
-	text-align: center;
-	background: transparent
-}
-
-#x5 {
-	display: inline;
-	float: left;
-	width: 640px;
-	padding: 2px 0;
-	margin: 0 12px 0 12px;
-	background: #eeeeee
-}
-
-#x8 {
-	display: inline;
-	float: left;
-	width: 170px;
-	margin: 0 0 0 66px;
-	text-align: center;
-	background: transparent
-}
-
-#x7 {
-	float: left;
-	width: auto;
-	padding: 2px;
-	margin: 40px 0 20px 0;
-	text-align: center;
-	background: #ffffff
-}
-
-#x9 {
-	clear: left;
-	margin: 0;
-	background: transparent;
-	text-align: right;
-	padding: 2px;
-	text-align: center;
-	height: 1%
-}
-
-/* p {
-	text-align: left
-} */
-
 .w1 {
 	position: relative;
-	margin: auto;
-	width: 600px;
-	height: 560px;
-	background-color: #eeeeee;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 4%;
+	width: 910px;
+	height: 1300px;
 	text-align: center;
-	font-family: Arial
+	font-family: 'Times' serif
 }
 
 .w2 {
 	position: absolute;
-	top: 0%;
+	text-align: left;
+	top: 0;
 	height: 5%;
 	left: 0;
 	right: 0;
-	background-color: transparent
+	background-color: transparent;
+	font-size: 200%
 }
 
 .w3 {
 	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: -2px;
-	width: 22%;
+	display: inline;
+	bottom: 6%;
+	right: 0;
+	left: 0;
+	width: auto;
+	background-color: transparent
+}
+
+.w4 {
+	position: absolute;
+	display: none;
+	bottom: -8%;
+	left: 0%;
+	width: 100%;
 	background-color: transparent;
 	border: 2px solid transparent
 }
@@ -102,10 +43,9 @@
 .w5 {
 	position: absolute;
 	top: 6%;
-	bottom: 13%;
 	right: 0;
-	width: 75%;
-	border: 1px solid #000088
+	width: 100%;
+	height: 64%
 }
 
 .w51 {
@@ -284,79 +224,80 @@
 
 .wo {
 	position: absolute;
-	height: 84%;
-	width: 84%;
-	top: 2%;
-	left: 2%;
-	border: 2px solid transparent;
-	vertical-align: middle;
+	top: 3px;
+	left: 3px;
+	right: 3px;
+	bottom: 3px;
+	border: 3px solid transparent;
 	text-align: center;
-	font-size: 200%
-}
-
-.wo:hover {
-	background: #eeeedd
+	font-size: 300%
 }
 
 .w1_e {
 	position: absolute;
-	bottom: 7%;
-	height: 5%;
-	left: 23%;
+	bottom: 25%;
+	height: 4%;
+	margin-top: 1%;
+	left: 0;
 	right: 0;
+	background-color: transparent;
+	font-size: 210%
 }
 
-.wq {
+.wr {
 	position: absolute;
-	bottom: 1%;
-	height: 5%;
-	left: 23%;
-	right: 0
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: -15%;
+	background-color: #ddeedd;
+	font-size: 200%;
+	visibility: hidden;
+	border-radius: 5%
 }
 
-.ws {
-	position: relative;
-	top: 25%;
-	left: -10%;
+/*.ws {
+	position: absolute;
+	top: 5%;
+	left: 14%;
 	font-size: 110%
 }
 
 .wt {
-	position: relative;
-	top: 25%;
-	left: -10%;
+	position: absolute;
+	top: 5%;
+	left: 34%;
 	font-size: 110%
-}
+}*/
 
 .wu {
-	position: relative;
-	top: 25%;
-	left: 10%;
-	font-size: 110%
+	position: absolute;
+	top: 0;
+	left:40%;
+	font-size: 150%
 }
 
 .wv {
-	position: relative;
-	top: 25%;
-	left: 10%;
-	font-size: 110%;
-	color: #dd3322
+	position: absolute;
+	top: 0;
+	left: 53%;
+	font-size: 150%;
+	color: #325ecd
 }
 
 .ww {
-	position: absolute;
-	top: 12%;
-	left: 4%;
-	height: auto;
-	font-size: 14px;
+	position: relative;
+	left: 0;
+	right: 0;
 	color: #0000FF;
-	border: 1px #0000FF solid
+	border: 2px #0000FF solid;
+	font-size: 250%
 }
 
 .wx {
 	position: absolute;
 	top: 50%;
-	left: 4%;
+	left: 5%;
 	height: auto;
 	width: 70%;
 	font-size: 14px;
@@ -366,13 +307,145 @@
 
 .wy {
 	color: #000099;
-	font-size: 110%;
-	margin: 2px;
-	padding: 1px
+	font-size: 150%
 }
 
-.wz {
-	cursor: pointer
+.w1_ads {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -12%;
+	width: 600px
+}
+
+.w1_p {
+	position: absolute;
+	top: 6%;
+	right: 0;
+	width: 100%;
+	height: 64%;
+	opacity: 1.0;
+	background-color: #ffffee;
+	font-size: 800%;
+	visibility: hidden;
+	color: #0000aa
+}
+
+.ha1 {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 25%;
+	background-color: transparent;
+	border: 1px solid #0000dd;
+	font-size: 40%;
+	font-style: italic
+}
+
+.ha2 {
+	position: absolute;
+	top: 25%;
+	width: 100%;
+	height: 25%;
+	background-color: transparent
+}
+
+.ha3 {
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	height: 25%;
+	background-color: transparent
+}
+
+.ha4 {
+	position: absolute;
+	top: 75%;
+	width: 100%;
+	height: 25%;
+	background-color: transparent
+}
+
+.hb1 {
+	position: absolute;
+	left: 0;
+	width: 25%;
+	height: 100%;
+	display: inline;
+	border: 2px #0000dd solid
+}
+
+.hb2 {
+	position: absolute;
+	left: 25%;
+	width: 25%;
+	height: 100%;
+	display: inline;
+	border: 2px #0000dd solid
+}
+
+.hb3 {
+	position: absolute;
+	left: 50%;
+	width: 25%;
+	height: 100%;
+	display: inline;
+	border: 2px #0000dd solid
+}
+
+.hb4 {
+	position: absolute;
+	left: 75%;
+	width: 25%;
+	height: 100%;
+	display: inline;
+	border: 2px #0000dd solid
+}
+
+.hc {
+	position: absolute;
+	left: 25%;
+	width: 50%;
+	height: 100%;
+	display: inline;
+	border: 2px #0000dd solid;
+	font-size: 70%
+}
+
+.hd {
+	position: absolute;
+	height: 90%;
+	width: 100%;
+	left: 0;
+	top: 5%;
+	background-color: transparent
+}
+
+.he {
+	position: absolute;
+	height: 90%;
+	width: 100%;
+	left: 0;
+	top: 40%;
+	color: #445566
+}
+
+.hf {
+	position: absolute;
+	height: 90%;
+	width: 100%;
+	left: 0;
+	top: 20%
+}
+
+.hg {
+	position: absolute;
+	height: 90%;
+	width: 100%;
+	left: 0;
+	top: 65%;
+	background-color: transparent;
+	font-size: 40%
 }
 
 .s1 {
@@ -385,98 +458,28 @@
 
 .zb {
 	color: #00bb00;
-	font-style: italic;
-	font-family: Arial
+	font-style: normal
 }
 
-.xa {
-	display: inline-block;
-	border-radius: 50%;
-	width: 4.5%;
-	margin: 1%;
-	color: #fff;
-	padding: 3px;
-	cursor: pointer;
-	font-size: 130%;
-	text-align: center;
-	box-shadow: inset 0px 1px 0px rgba(255,255,255,.3);
-	-webkit-box-shadow: inset 0px 1px 0px rgba(255,255,255,.5);
-	-moz-box-shadow: inset 0px 1px 0px rgba(255,255,255,.5);
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
-}
-
-.xa:hover {
-	opacity: .85;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
-	transition: opacity 100ms ease-in-out;
-	-moz-transition: opacity 100ms ease-in-out;
-	-webkit-transition: opacity 100ms ease-in-out;
-	box-shadow: 0px 0px 3px 3px rgba(0,0,0,.2);
-	-moz-box-shadow: 0px 0px 3px 3px rgba(0,0,0,.2);
-	-webkit-shadow: 0px 0px 3px 3px rgba(0,0,0,.2);
-}
-
-.xa.grey {
-	background: #828282;
-	background-image: linear-gradient(bottom, rgb(118,118,118) 0%, rgb(180,180,180) 100%);
-	background-image: -o-linear-gradient(bottom, rgb(118,118,118) 0%, rgb(180,180,180) 100%);
-	background-image: -moz-linear-gradient(bottom, rgb(118,118,118) 0%, rgb(180,180,180) 100%);
-	background-image: -webkit-linear-gradient(bottom, rgb(118,118,118) 0%, rgb(180,180,180) 100%);
-	background-image: -ms-linear-gradient(bottom, rgb(118,118,118) 0%, rgb(180,180,180) 100%);
-	background-image: -webkit-gradient(linear,left bottom,left top, color-stop(0, rgb(118,118,118)), color-stop(1, rgb(180,180,180)));
-	border: 1px solid #555555;
-}
-
-.xa.hlight {
-	background: #eb6a43;
-	background-image: linear-gradient(bottom, rgb(218,118,98) 0%, rgb(240,180,80) 100%);
-	background-image: -o-linear-gradient(bottom, rgb(218,118,98) 0%, rgb(240,180,80) 100%);
-	background-image: -moz-linear-gradient(bottom, rgb(218,118,98) 0%, rgb(240,180,80) 100%);
-	background-image: -webkit-linear-gradient(bottom, rgb(218,118,98) 0%, rgb(240,80,180) 100%);
-	background-image: -ms-linear-gradient(bottom, rgb(218,118,98) 0%, rgb(240,180,80) 100%);
-	background-image: -webkit-gradient(linear,left bottom,left top, color-stop(0, rgb(218,118,98)), color-stop(1, rgb(180,180,180)));
-	border: 1px solid #eb6a43;
-}
-
-.xa.blue {
-	background: #325ecd;
-	background-image: linear-gradient(bottom, rgb(34,65,201) 0%, rgb(78,145,212) 100%);
-	background-image: -o-linear-gradient(bottom, rgb(34,65,201) 0%, rgb(78,145,212) 100%);
-	background-image: -moz-linear-gradient(bottom, rgb(34,65,201) 0%, rgb(78,145,212) 100%);
-	background-image: -webkit-linear-gradient(bottom, rgb(34,65,201) 0%, rgb(78,145,212) 100%);
-	background-image: -ms-linear-gradient(bottom, rgb(34,65,201) 0%, rgb(78,145,212) 100%);
-	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, rgb(34,65,201)),color-stop(1, rgb(78,145,212)));
-	border: 1px solid #0028aa;
-}
-
-.xb {
+.zf {
 	display: inline-block;
 	border-radius: 10px;
-	width: 84%;
+	width: 97px;
 	border: 0;
 	color: #fff;
-	margin: 5px;
-	padding: 5px;
+	margin-left: 14px;
+	margin-right: 14px;
+	padding: 4px;
 	cursor: pointer;
-	font-size: 100%;
+	font-size: 120%;
 	box-shadow: inset 0px 1px 0px rgba(255,255,255,.3);
 	-webkit-box-shadow: inset 0px 1px 0px rgba(255,255,255,.5);
 	-moz-box-shadow: inset 0px 1px 0px rgba(255,255,255,.5);
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
+	line-height: 60px;
 }
 
-.xb:hover {
-	opacity: .85;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
-	transition: opacity 100ms ease-in-out;
-	-moz-transition: opacity 100ms ease-in-out;
-	-webkit-transition: opacity 100ms ease-in-out;
-	box-shadow: 0px 0px 3px 1px rgba(0,0,0,.2);
-	-moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,.2);
-	-webkit-shadow: 0px 0px 3px 1px rgba(0,0,0,.2);
-}
-
-.xb.green {
+.zf.green {
 	background: #32ad5e;
 	background-image: linear-gradient(bottom, rgb(34,171,65) 0%, rgb(78,202,145) 100%);
 	background-image: -o-linear-gradient(bottom, rgb(34,171,65) 0%, rgb(78,202,145) 100%);
@@ -488,7 +491,7 @@
 	border-radius: 10px;
 }
 
-.xb.blue {
+.zf.blue {
 	background: #325ecd;
 	background-image: linear-gradient(bottom, rgb(34,65,201) 0%, rgb(78,145,212) 100%);
 	background-image: -o-linear-gradient(bottom, rgb(34,65,201) 0%, rgb(78,145,212) 100%);
@@ -500,7 +503,7 @@
 	border-radius: 10px;
 }
 
-.xb.purple {
+.zf.purple {
 	background: #ad5ead;
 	background-image: linear-gradient(bottom, rgb(171,34,171) 0%, rgb(202,78,202) 100%);
 	background-image: -o-linear-gradient(bottom, rgb(171,34,171) 0%, rgb(202,78,202) 100%);
@@ -512,7 +515,7 @@
 	border-radius: 10px;
 }
 
-.xb.red {
+.zf.red {
 	background: #ad5e5e;
 	background-image: linear-gradient(bottom, rgb(171,34,34) 0%, rgb(202,78,78) 100%);
 	background-image: -o-linear-gradient(bottom, rgb(171,34,34) 0%, rgb(202,78,78) 100%);
@@ -524,7 +527,7 @@
 	border-radius: 10px;
 }
 
-.hh_table {
+.xx {
 	position: absolute;
 	left: 47%;
 	top: 29%;
@@ -534,7 +537,7 @@
 	margin: 80px auto
 }
 
-.hh_table .hh {
+.xx .hh {
 	width: 33%;
 	height: 33%;
 	background-color: #777;
@@ -543,47 +546,47 @@
 	animation: hhGridScaleDelay 1.3s infinite ease-in-out;
 }
 
-.hh_table .hh1 {
+.xx .hh1 {
 	-webkit-animation-delay: 0.18s;
 	animation-delay: 0.18s
 }
 
-.hh_table .hh2 {
+.xx .hh2 {
 	-webkit-animation-delay: 0.28s;
 	animation-delay: 0.28s
 }
 
-.hh_table .hh3 {
+.xx .hh3 {
 	-webkit-animation-delay: 0.38s;
 	animation-delay: 0.38s
 }
 
-.hh_table .hh4 {
+.xx .hh4 {
 	-webkit-animation-delay: 0.11s;
 	animation-delay: 0.11s
 }
 
-.hh_table .hh5 {
+.xx .hh5 {
 	-webkit-animation-delay: 0.21s;
 	animation-delay: 0.21s
 }
 
-.hh_table .hh6 {
+.xx .hh6 {
 	-webkit-animation-delay: 0.31s;
 	animation-delay: 0.31s
 }
 
-.hh_table .hh7 {
+.xx .hh7 {
 	-webkit-animation-delay: 0.01s;
 	animation-delay: 0.01s
 }
 
-.hh_table .hh8 {
+.xx .hh8 {
 	-webkit-animation-delay: 0.11s;
 	animation-delay: 0.11s
 }
 
-.hh_table .hh9 {
+.xx .hh9 {
 	-webkit-animation-delay: 0.21s;
 	animation-delay: 0.21s
 }
@@ -610,19 +613,4 @@
 		-webkit-transform: scale3D(0, 0, 1);
 		transform: scale3D(0, 0, 1);
 	}
-}
-
-.cls_base_fw {
-	position: relative;
-	width: 400px;
-	height: 600px;
-	margin: auto;
-	background: #eeeeee
-}
-
-.gz {
-	position: absolute;
-	font-size: 110%;
-	font-weight: bold;
-	color: red
 }

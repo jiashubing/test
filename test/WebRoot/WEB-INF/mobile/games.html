@@ -1,0 +1,430 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" style="font-size: 66.67%;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  	<meta charset="utf-8" />
+  	<meta name="baidu-site-verification" content="3uYjxVgfa1" />
+  	<meta name="viewport" content="user-scalable=no" />
+  	<title>阿丙的私人定制</title>
+	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/css/sudoku.shubing.css}"/> 
+</head>
+<body onload="time_fun()">
+  
+<div>
+	<div class="pass-header " style="background:#fff; border-bottom:1px solid #d6d6d6; height:88px; height:8.8rem; width:100%; padding:0; position:relative; display:block; text-align:center">
+	<a class="pass-header-back" style="background:url('//www.jiashubing.cn/image/mobile/images/goback.png') no-repeat 15px 13px; -webkit-background-size:2.4rem 4rem; padding:2.6rem 0 2.6rem 4.6rem; padding:26px 0 26px 30px; padding:2.6rem 0 2.6rem 4.6rem; width:72px; width:7.2rem; height:36px; height:3.6rem; position:absolute; left:0; top:10px" id="goBack" th:href="@{/index}"></a>
+	<span class="pass-header-title" style="line-height:88px; line-height:8.8rem; font-size:40px; font-size:4rem; text-align:center; width:100%; display:block">
+        	在线数独        
+	</span>
+</div>
+	<div class="w1">
+	<div class="w2" id="y1">
+		<label class="wu">秒表: </label><label class="wv" id="y2">00:00</label>
+	</div>
+
+	<div id="y6" class="w5" style="cursor: default;font-size:16px;line-height:normal;">
+		<div id="y7" class="w51">
+			<div id="c_0_0" class="wf">
+				<div th:if="${puzzle[0][0].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[0][0].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[0][0].value}"></div>
+			</div>
+			<div id="c_1_0" class="wg">
+				<div th:if="${puzzle[0][1].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[0][1].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[0][1].value}"></div>
+			</div>
+			<div id="c_2_0" class="wh">
+				<div th:if="${puzzle[0][2].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[0][2].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[0][2].value}"></div>
+			</div>
+			<div id="c_0_1" class="wi">
+				<div th:if="${puzzle[0][3].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[0][3].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[0][3].value}"></div>
+			</div>
+			<div id="c_1_1" class="wj">
+				<div th:if="${puzzle[0][4].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[0][4].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[0][4].value}"></div>
+			</div>
+			<div id="c_2_1" class="wk">
+				<div th:if="${puzzle[0][5].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[0][5].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[0][5].value}"></div>
+			</div>
+			<div id="c_0_2" class="wl">
+				<div th:if="${puzzle[0][6].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[0][6].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[0][6].value}"></div>
+			</div>
+			<div id="c_1_2" class="wm">
+				<div th:if="${puzzle[0][7].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[0][7].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[0][7].value}"></div>
+			</div>
+			<div id="c_2_2" class="wn">
+				<div th:if="${puzzle[0][8].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[0][8].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[0][8].value}"></div>
+			</div>
+		</div>
+		<div id="xn" class="w52">
+			<div id="c_3_0" class="wf">
+				<div th:if="${puzzle[1][0].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[1][0].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[1][0].value}"></div>
+			</div>
+			<div id="c_4_0" class="wg">
+				<div th:if="${puzzle[1][1].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[1][1].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[1][1].value}"></div>
+			</div>
+			<div id="c_5_0" class="wh">
+				<div th:if="${puzzle[1][2].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[1][2].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[1][2].value}"></div>
+			</div>
+			<div id="c_3_1" class="wi">
+				<div th:if="${puzzle[1][3].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[1][3].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[1][3].value}"></div>
+			</div>
+			<div id="c_4_1" class="wj">
+				<div th:if="${puzzle[1][4].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[1][4].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[1][4].value}"></div>
+			</div>
+			<div id="c_5_1" class="wk">
+				<div th:if="${puzzle[1][5].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[1][5].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[1][5].value}"></div>
+			</div>
+			<div id="c_3_2" class="wl">
+				<div th:if="${puzzle[1][6].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[1][6].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[1][6].value}"></div>
+			</div>
+			<div id="c_4_2" class="wm">
+				<div th:if="${puzzle[1][7].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[1][7].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[1][7].value}"></div>
+			</div>
+			<div id="c_5_2" class="wn">
+				<div th:if="${puzzle[1][8].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[1][8].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[1][8].value}"></div>
+			</div>
+		</div>
+		<div id="xo" class="w53">
+			<div id="c_6_0" class="wf">
+				<div th:if="${puzzle[2][0].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[2][0].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[2][0].value}"></div>
+			</div>
+			<div id="c_7_0" class="wg">
+				<div th:if="${puzzle[2][1].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[2][1].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[2][1].value}"></div>
+			</div>
+			<div id="c_8_0" class="wh">
+				<div th:if="${puzzle[2][2].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[2][2].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[2][2].value}"></div>
+			</div>
+			<div id="c_6_1" class="wi">
+				<div th:if="${puzzle[2][3].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[2][3].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[2][3].value}"></div>
+			</div>
+			<div id="c_7_1" class="wj">
+				<div th:if="${puzzle[2][4].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[2][4].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[2][4].value}"></div>
+			</div>
+			<div id="c_8_1" class="wk">
+				<div th:if="${puzzle[2][5].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[2][5].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[2][5].value}"></div>
+			</div>
+			<div id="c_6_2" class="wl">
+				<div th:if="${puzzle[2][6].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[2][6].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[2][6].value}"></div>
+			</div>
+			<div id="c_7_2" class="wm">
+				<div th:if="${puzzle[2][7].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[2][7].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[2][7].value}"></div>
+			</div>
+			<div id="c_8_2" class="wn">
+				<div th:if="${puzzle[2][8].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[2][8].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[2][8].value}"></div>
+			</div>
+		</div>
+		<div id="xp" class="w54">
+			<div id="c_0_3" class="wf">
+				<div th:if="${puzzle[3][0].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[3][0].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[3][0].value}"></div>
+			</div>
+			<div id="c_1_3" class="wg">
+				<div th:if="${puzzle[3][1].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[3][1].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[3][1].value}"></div>
+			</div>
+			<div id="c_2_3" class="wh">
+				<div th:if="${puzzle[3][2].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[3][2].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[3][2].value}"></div>
+			</div>
+			<div id="c_0_4" class="wi">
+				<div th:if="${puzzle[3][3].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[3][3].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[3][3].value}"></div>
+			</div>
+			<div id="c_1_4" class="wj">
+				<div th:if="${puzzle[3][4].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[3][4].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[3][4].value}"></div>
+			</div>
+			<div id="c_2_4" class="wk">
+				<div th:if="${puzzle[3][5].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[3][5].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[3][5].value}"></div>
+			</div>
+			<div id="c_0_5" class="wl">
+				<div th:if="${puzzle[3][6].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[3][6].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[3][6].value}"></div>
+			</div>
+			<div id="c_1_5" class="wm">
+				<div th:if="${puzzle[3][7].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[3][7].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[3][7].value}"></div>
+			</div>
+			<div id="c_2_5" class="wn">
+				<div th:if="${puzzle[3][8].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[3][8].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[3][8].value}"></div>
+			</div>
+		</div>
+		<div id="xq" class="w55">
+			<div id="c_3_3" class="wf">
+				<div th:if="${puzzle[4][0].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[4][0].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[4][0].value}"></div>
+			</div>
+			<div id="c_4_3" class="wg">
+				<div th:if="${puzzle[4][1].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[4][1].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[4][1].value}"></div>
+			</div>
+			<div id="c_5_3" class="wh">
+				<div th:if="${puzzle[4][2].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[4][2].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[4][2].value}"></div>
+			</div>
+			<div id="c_3_4" class="wi">
+				<div th:if="${puzzle[4][3].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[4][3].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[4][3].value}"></div>
+			</div>
+			<div id="c_4_4" class="wj">
+				<div th:if="${puzzle[4][4].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[4][4].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[4][4].value}"></div>
+			</div>
+			<div id="c_5_4" class="wk">
+				<div th:if="${puzzle[4][5].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[4][5].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[4][5].value}"></div>
+			</div>
+			<div id="c_3_5" class="wl">
+				<div th:if="${puzzle[4][6].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[4][6].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[4][6].value}"></div>
+			</div>
+			<div id="c_4_5" class="wm">
+				<div th:if="${puzzle[4][7].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[4][7].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[4][7].value}"></div>
+			</div>
+			<div id="c_5_5" class="wn">
+				<div th:if="${puzzle[4][8].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[4][8].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[4][8].value}"></div>
+			</div>
+		</div>
+		<div id="xr" class="w56">
+			<div id="c_6_3" class="wf">
+				<div th:if="${puzzle[5][0].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[5][0].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[5][0].value}"></div>
+			</div>
+			<div id="c_7_3" class="wg">
+				<div th:if="${puzzle[5][1].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[5][1].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[5][1].value}"></div>
+			</div>
+			<div id="c_8_3" class="wh">
+				<div th:if="${puzzle[5][2].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[5][2].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[5][2].value}"></div>
+			</div>
+			<div id="c_6_4" class="wi">
+				<div th:if="${puzzle[5][3].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[5][3].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[5][3].value}"></div>
+			</div>
+			<div id="c_7_4" class="wj">
+				<div th:if="${puzzle[5][4].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[5][4].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[5][4].value}"></div>
+			</div>
+			<div id="c_8_4" class="wk">
+				<div th:if="${puzzle[5][5].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[5][5].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[5][5].value}"></div>
+			</div>
+			<div id="c_6_5" class="wl">
+				<div th:if="${puzzle[5][6].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[5][6].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[5][6].value}"></div>
+			</div>
+			<div id="c_7_5" class="wm">
+				<div th:if="${puzzle[5][7].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[5][7].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[5][7].value}"></div>
+			</div>
+			<div id="c_8_5" class="wn">
+				<div th:if="${puzzle[5][8].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[5][8].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[5][8].value}"></div>
+			</div>
+		</div>
+		<div id="xs" class="w57">
+			<div id="c_0_6" class="wf">
+				<div th:if="${puzzle[6][0].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[6][0].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[6][0].value}"></div>
+			</div>
+			<div id="c_1_6" class="wg">
+				<div th:if="${puzzle[6][1].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[6][1].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[6][1].value}"></div>
+			</div>
+			<div id="c_2_6" class="wh">
+				<div th:if="${puzzle[6][2].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[6][2].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[6][2].value}"></div>
+			</div>
+			<div id="c_0_7" class="wi">
+				<div th:if="${puzzle[6][3].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[6][3].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[6][3].value}"></div>
+			</div>
+			<div id="c_1_7" class="wj">
+				<div th:if="${puzzle[6][4].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[6][4].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[6][4].value}"></div>
+			</div>
+			<div id="c_2_7" class="wk">
+				<div th:if="${puzzle[6][5].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[6][5].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[6][5].value}"></div>
+			</div>
+			<div id="c_0_8" class="wl">
+				<div th:if="${puzzle[6][6].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[6][6].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[6][6].value}"></div>
+			</div>
+			<div id="c_1_8" class="wm">
+				<div th:if="${puzzle[6][7].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[6][7].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[6][7].value}"></div>
+			</div>
+			<div id="c_2_8" class="wn">
+				<div th:if="${puzzle[6][8].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[6][8].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[6][8].value}"></div>
+			</div>
+		</div>
+		<div id="xt" class="w58">
+			<div id="c_3_6" class="wf">
+				<div th:if="${puzzle[7][0].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[7][0].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[7][0].value}"></div>
+			</div>
+			<div id="c_4_6" class="wg">
+				<div th:if="${puzzle[7][1].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[7][1].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[7][1].value}"></div>
+			</div>
+			<div id="c_5_6" class="wh">
+				<div th:if="${puzzle[7][2].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[7][2].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[7][2].value}"></div>
+			</div>
+			<div id="c_3_7" class="wi">
+				<div th:if="${puzzle[7][3].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[7][3].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[7][3].value}"></div>
+			</div>
+			<div id="c_4_7" class="wj">
+				<div th:if="${puzzle[7][4].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[7][4].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[7][4].value}"></div>
+			</div>
+			<div id="c_5_7" class="wk">
+				<div th:if="${puzzle[7][5].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[7][5].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[7][5].value}"></div>
+			</div>
+			<div id="c_3_8" class="wl">
+				<div th:if="${puzzle[7][6].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[7][6].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[7][6].value}"></div>
+			</div>
+			<div id="c_4_8" class="wm">
+				<div th:if="${puzzle[7][7].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[7][7].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[7][7].value}"></div>
+			</div>
+			<div id="c_5_8" class="wn">
+				<div th:if="${puzzle[7][8].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[7][8].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[7][8].value}"></div>
+			</div>
+		</div>
+		<div id="xu" class="w59">
+			<div id="c_6_6" class="wf">
+				<div th:if="${puzzle[8][0].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[8][0].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[8][0].value}"></div>
+			</div>
+			<div id="c_7_6" class="wg">
+				<div th:if="${puzzle[8][1].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[8][1].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[8][1].value}"></div>
+			</div>
+			<div id="c_8_6" class="wh">
+				<div th:if="${puzzle[8][2].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[8][2].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[8][2].value}"></div>
+			</div>
+			<div id="c_6_7" class="wi">
+				<div th:if="${puzzle[8][3].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[8][3].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[8][3].value}"></div>
+			</div>
+			<div id="c_7_7" class="wj">
+				<div th:if="${puzzle[8][4].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[8][4].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[8][4].value}"></div>
+			</div>
+			<div id="c_8_7" class="wk">
+				<div th:if="${puzzle[8][5].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[8][5].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[8][5].value}"></div>
+			</div>
+			<div id="c_6_8" class="wl">
+				<div th:if="${puzzle[8][6].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[8][6].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[8][6].value}"></div>
+			</div>
+			<div id="c_7_8" class="wm">
+				<div th:if="${puzzle[8][7].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[8][7].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[8][7].value}"></div>
+			</div>
+			<div id="c_8_8" class="wn">
+				<div th:if="${puzzle[8][8].value==0}" class="wo zb" style="border: 2px solid transparent;"></div>
+				<div th:unless="${puzzle[8][8].value==0}" class="wo"  style="border: 2px solid transparent;background: transparent;" th:text="${puzzle[8][8].value}"></div>
+			</div>
+		</div>
+		<div id="hh_n7" class="hh_table" style="visibility: hidden;">
+			<div class="hh hh1">
+			</div>
+			<div class="hh hh2">
+			</div>
+			<div class="hh hh3">
+			</div>
+			<div class="hh hh4">
+			</div>
+			<div class="hh hh5">
+			</div>
+			<div class="hh hh6">
+			</div>
+			<div class="hh hh7">
+			</div>
+			<div class="hh hh8">
+			</div>
+			<div class="hh hh9">
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="id_container_e" class="w1_e">
+		<div id="k6" class="wy">
+			点击一个空白单元格，选择号码。
+		</div>
+	</div>
+	<div id="y4" class="w3">
+		<fieldset class="ww">
+			<legend>操作</legend>
+			<div id="fuyuan" class="zf red">C</div>
+			<div class="xa zf blue">1</div>
+			<div class="xa zf blue">2</div>
+			<div class="xa zf blue">3</div>
+			<div class="xa zf blue">4</div>
+			<div class="xa zf blue">5</div>
+			
+			<div id="tijiao" class="zf red" style="margin-top:20px;">Val</div>
+			<div class="xa zf blue">6</div>
+			<div class="xa zf blue">7</div>
+			<div class="xa zf blue">8</div>
+			<div class="xa zf blue">9</div>
+			<div class="xa zf red">X</div>
+		</fieldset>
+	</div>
+</div> 
+	
+	
+</div>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/myjson.js" th:src="@{/js/mobile/js/mysudoku.js}" ></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?18e0f33db7609c8e4d02a81149c37a31";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+ </body>
+</html>
