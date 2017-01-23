@@ -277,6 +277,14 @@
 	font-size: 150%
 }
 
+.wuw {
+	position: absolute;
+	top: 0;
+	left:85%;
+	font-size: 150%
+}
+
+
 .wv {
 	position: absolute;
 	top: 0;
@@ -457,7 +465,7 @@
 }
 
 .zb {
-	color: #00bb00;
+	color: #0000ff;
 	font-style: normal
 }
 

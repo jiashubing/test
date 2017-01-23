@@ -25,7 +25,7 @@ $("#tijiao").click(function(){
 		dataType:"json",
 		success:function(result){
 			if(result.status==1){
-				var con = confirm("恭喜你完成了数独，你真厉害！" + "\n还要再来一次吗？");
+				var con = confirm("恭喜你完成了数独，真厉害！" + "\n还要再来一次吗？");
 				if (con) {
 					window.location.href = window.location.href;
 				} else {
@@ -66,7 +66,7 @@ function autoCheck(){
 		dataType:"json",
 		success:function(result){
 			if(result.status==1){
-				var con = confirm("恭喜你完成了数独，你真厉害！" + "\n还要再来一次吗？");
+				var con = confirm("恭喜你完成了数独，真厉害！" + "\n还要再来一次吗？");
 				if (con) {
 					window.location.href = window.location.href;
 				} else {
@@ -94,6 +94,7 @@ function autoCheck(){
 			    $($(".wo")[i]).css("background","transparent");
 			    $($(".wo")[i]).css("border","2px solid transparent");
 		});
+		time_stop();
 		time_fun();
 	 } else {
 		 return false;
@@ -229,7 +230,7 @@ $("#newgame").click(function(){
 	    		$($(".wo")[i]).css("border","2px solid transparent");
 	    	}
 	    });
-	}else if(base=="^"){
+	}else if(base=="C"){
 		var con = confirm("你确定要丢失当前进度，并且重新开始吗？");
 		if (con) {
 			$(".zb").each(function(i){
@@ -239,6 +240,7 @@ $("#newgame").click(function(){
 			    $($(".wo")[i]).css("background","transparent");
 			    $($(".wo")[i]).css("border","2px solid transparent");
 			});
+			time_stop();
 			time_fun();
 		} else {
 			return false;
@@ -267,12 +269,14 @@ $("#newgame").click(function(){
 	}
  });
  
+ var timer;
  function two_char(n) {
      return n >= 10 ? n : "0" + n;
  }
  function time_fun() {
      var sec=0;
-     setInterval(function () {
+     clearInterval(timer);
+     timer = setInterval(function () {
          sec++;
          var date = new Date(0, 0)
          date.setSeconds(sec);
@@ -280,3 +284,7 @@ $("#newgame").click(function(){
          document.getElementById("y2").innerText =two_char(m) + ":" + two_char(s);
      }, 1000);
  }
+ function time_stop(){
+	clearInterval(timer);
+	document.getElementById("y2").innerText = "00:00";
+}

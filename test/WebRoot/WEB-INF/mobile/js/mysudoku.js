@@ -8,8 +8,6 @@ $("#tijiao").click(function(){
 			alert("您必须填完所有的空格，才可以验证数独是否正确。");
 			flag=false;
 			return false;
-			/* tmp = "0";
-    		ans += tmp; */
 		}else{
 			ans += tmp;
 		}
@@ -25,9 +23,9 @@ $("#tijiao").click(function(){
 		dataType:"json",
 		success:function(result){
 			if(result.status==1){
-				var con = confirm("恭喜你完成了数独，你真厉害！" + "\n还要再来一次吗？");
+				var con = confirm("恭喜你完成了数独，真厉害！" + "\n还要再来一次吗？");
 				if (con) {
-					window.location.href = window.location.href;
+					turnFlush();
 				} else {
 					return false;
 				}				
@@ -66,9 +64,9 @@ function autoCheck(){
 		dataType:"json",
 		success:function(result){
 			if(result.status==1){
-				var con = confirm("恭喜你完成了数独，你真厉害！" + "\n还要再来一次吗？");
+				var con = confirm("恭喜你完成了数独，真厉害！" + "\n还要再来一次吗？");
 				if (con) {
-					window.location.href = window.location.href;
+					turnFlush();
 				} else {
 					return false;
 				}				
@@ -91,9 +89,10 @@ function autoCheck(){
 			 $($(".zb")[i]).text("");
 		 });
 		 $(".wo").each(function(i){
-			    $($(".wo")[i]).css("background","transparent");
-			    $($(".wo")[i]).css("border","2px solid transparent");
+			 $($(".wo")[i]).css("background","transparent");
+			 $($(".wo")[i]).css("border","2px solid transparent");
 		});
+		time_stop();
 		time_fun();
 	 } else {
 		 return false;
@@ -103,7 +102,7 @@ function autoCheck(){
 $("#newgame").click(function(){
 	var con = confirm("你确定要开始一局新游戏吗？");
 	if (con) {
-		window.location.href = window.location.href;
+		turnFlush();
 	} else {
 		return false;
 	}
@@ -111,59 +110,60 @@ $("#newgame").click(function(){
  
  $(".wo").on("click",function(){
 	$(".wo").each(function(i){
-	    $($(".wo")[i]).css("background","transparent");
+		$($(".wo")[i]).css("background","transparent");
 	    $($(".wo")[i]).css("border","2px solid transparent");
 	});
  	var base = $(this).text();
  	if(base==""){
-	   $(this).css("background","rgb(221, 221, 0)");
-	   //同一列的边框
-	   var num = $(".wo").index(this);
-	   var x = Math.floor(num/27);
-	   var y = num%27;
-	   var z = Math.floor((num%9)/3);
-	   if(x>1){
-		   changeRow(x-2,y,z);
-		   changeRow(x-1,y,z);
-		   changeRow(x,y,z);
-	   }else if(x>0){
-		   changeRow(x-1,y,z);
-		   changeRow(x,y,z);
-		   changeRow(x+1,y,z);
-	   }else{
-		   changeRow(x,y,z);
-		   changeRow(x+1,y,z);
-		   changeRow(x+2,y,z);
-	   }
-	   
-	   //同一行的边框
-	   x = num%27;
-	   y = Math.floor(num/27);
-	   z = (num%9)%3;
-	   
-	   if(x>17){
-		   changeCol(x-18,y,z);
-		   changeCol(x-9,y,z);
-		   changeCol(x,y,z);
-	   }
-	   else if(x>8){
-		   changeCol(x-9,y,z);
-		   changeCol(x,y,z);
-		   changeCol(x+9,y,z);
-	   }
-	   else{
-		   changeCol(x,y,z);
-		   changeCol(x+9,y,z);
-		   changeCol(x+18,y,z);
-	   }
+ 		$(this).css("background","rgb(221, 221, 0)");
+ 		//同一列的边框
+ 	    var num = $(".wo").index(this);
+ 	   var x = Math.floor(num/27);
+ 		 var y = num%27;
+ 		 var z = Math.floor((num%9)/3);
+ 		 if(x>1){
+ 			 changeRow(x-2,y,z);
+ 			 changeRow(x-1,y,z);
+ 			 changeRow(x,y,z);
+ 		 }else if(x>0){
+ 			 changeRow(x-1,y,z);
+ 			 changeRow(x,y,z);
+ 			 changeRow(x+1,y,z);
+ 		 }else{
+ 			 changeRow(x,y,z);
+ 			 changeRow(x+1,y,z);
+ 			 changeRow(x+2,y,z);
+ 		 }
+
+ 		 //同一行的边框
+ 		 x = num%27;
+ 		 y = Math.floor(num/27);
+ 		 z = (num%9)%3;
+
+ 		 if(x>17){
+ 			 changeCol(x-18,y,z);
+ 			 changeCol(x-9,y,z);
+ 			 changeCol(x,y,z);
+ 		 }
+ 		 else if(x>8){
+ 			 changeCol(x-9,y,z);
+ 			 changeCol(x,y,z);
+ 			 changeCol(x+9,y,z);
+ 		 }
+ 		 else{
+ 			 changeCol(x,y,z);
+ 			 changeCol(x+9,y,z);
+ 			 changeCol(x+18,y,z);
+ 		 }
  	}
  	else{
 	 	$(".wo").each(function(i){
 	    	tmp = $($(".wo")[i]).text();
 	    	if(tmp==base){
-	    		$($(".wo")[i]).css("border","2px solid rgb(255, 0, 0)");
+	    		$($(".wo")[i]).css("border","4px solid rgb(255, 0, 0)");
 	    	}else{
 	    		$($(".wo")[i]).css("border","2px solid transparent");
+	    		
 	    	}
 	    });
  	}
@@ -224,9 +224,10 @@ $("#newgame").click(function(){
 		$(".wo").each(function(i){
 	    	tmp = $($(".wo")[i]).text();
 	    	if(tmp==base){
-	    		$($(".wo")[i]).css("border","2px solid rgb(255, 0, 0)");
+	    		$($(".wo")[i]).css("border","4px solid rgb(255, 0, 0)");
 	    	}else{
 	    		$($(".wo")[i]).css("border","2px solid transparent");
+	    		
 	    	}
 	    });
 	}else{
@@ -244,24 +245,33 @@ $("#newgame").click(function(){
 		$(".wo").each(function(i){
 	    	tmp = $($(".wo")[i]).text();
 	    	if(tmp==base){
-	    		$($(".wo")[i]).css("border","2px solid rgb(255, 0, 0)");
+	    		$($(".wo")[i]).css("border","4px solid rgb(255, 0, 0)");
 	    	}else{
+	    		
 	    		$($(".wo")[i]).css("border","2px solid transparent");
 	    	}
 	    });
 		autoCheck();
 	}
  });
+ 
+ 
+ var timer;
  function two_char(n) {
      return n >= 10 ? n : "0" + n;
  }
  function time_fun() {
      var sec=0;
-     setInterval(function () {
+     clearInterval(timer);
+     timer = setInterval(function () {
          sec++;
          var date = new Date(0, 0)
          date.setSeconds(sec);
          var m = date.getMinutes(), s = date.getSeconds();
-         document.getElementById("y2").innerText =  two_char(m) + ":" + two_char(s);
+         document.getElementById("y2").innerText =two_char(m) + ":" + two_char(s);
      }, 1000);
  }
+ function time_stop(){
+	clearInterval(timer);
+	document.getElementById("y2").innerText = "00:00";
+}
