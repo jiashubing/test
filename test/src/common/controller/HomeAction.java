@@ -59,10 +59,13 @@ public class HomeAction {
 	}
 	
 	@RequestMapping("/history")
-	public String loadHistory(Model model,HttpServletRequest request)throws Exception{
-//		model.addAttribute("flag","history.html");  //此属性用来给前台确定当前是哪个页面
-//		return ValidatePcMobile.checkRequest(request, "/history");
-		return "redirect:/index";
+	public String loadHistory(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
+		model.addAttribute("flag","history.html");  //此属性用来给前台确定当前是哪个页面
+		if(showId == null){
+			showId = 1;
+		}
+		model.addAttribute("showId",showId); 
+		return ValidatePcMobile.checkRequest(request, "/history");
 	}
 	
 	@RequestMapping("/regist")

@@ -266,7 +266,7 @@ public class ToolsAction {
 	        out.flush();
 	        out.close();
         } catch (IOException e) {
-        	e.printStackTrace();
+//        	e.printStackTrace();
         }finally{
 	        try {
 	        	if(out != null){
@@ -274,7 +274,7 @@ public class ToolsAction {
 	        		out.close();
 	        	}
 			} catch (IOException e) {
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
         }
     }

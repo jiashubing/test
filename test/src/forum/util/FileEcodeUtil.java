@@ -266,7 +266,18 @@ public class FileEcodeUtil {
             os.close();
             fos.close();
             flag = true;
-        } catch (FileNotFoundException e) {  
+        } catch (FileNotFoundException e) {
+        	try {
+    			if(os!=null) {
+    				os.flush();
+    				os.close();
+    			}
+    			if(fos!=null) {
+    				fos.close();
+    			}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
             e.printStackTrace();  
         } catch (IOException e) {
     		try {
@@ -318,6 +329,16 @@ public class FileEcodeUtil {
             }
         } catch (Exception e) {
 //            System.out.println("读取文件内容出错");
+        	try {
+				if(read!=null){
+					read.close();
+				}
+				if(bufferedReader!=null){
+					bufferedReader.close();
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
             e.printStackTrace();
         }finally{
         	try {
@@ -328,7 +349,6 @@ public class FileEcodeUtil {
 					bufferedReader.close();
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }
@@ -360,6 +380,16 @@ public class FileEcodeUtil {
 			}
 		} catch (Exception e) {
 //            System.out.println("读取文件内容出错");
+			try {
+				if(read!=null){
+					read.close();
+				}
+				if(bufferedReader!=null){
+					bufferedReader.close();
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}finally{
 			try {
@@ -370,7 +400,6 @@ public class FileEcodeUtil {
 					bufferedReader.close();
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -410,6 +439,16 @@ public class FileEcodeUtil {
             reader.close();
             inputFileReader.close();
         } catch (IOException e) {
+        	try {
+            	if (reader != null) {
+            		reader.close();
+            	}
+            	if (inputFileReader != null) {
+            		inputFileReader.close();
+            	}
+            } catch (IOException e1) {
+            	e1.printStackTrace();
+            }
             e.printStackTrace();
             return null;
         } finally {
@@ -421,6 +460,7 @@ public class FileEcodeUtil {
             		inputFileReader.close();
             	}
             } catch (IOException e1) {
+            	e1.printStackTrace();
             }
         }
         return content;
@@ -451,12 +491,30 @@ public class FileEcodeUtil {
 			bos.close();  
 			buffer = bos.toByteArray();  
 		}  
-		catch (FileNotFoundException e)  
-		{  
+		catch (FileNotFoundException e){  
+			try {
+				if(fis!=null){
+					fis.close();
+				}
+				if(bos != null){
+					bos.close();
+				}
+			} catch (IOException e1){
+				e1.printStackTrace();
+			}
 			e.printStackTrace();  
 		}  
-		catch (IOException e)  
-		{  
+		catch (IOException e){  
+			try {
+				if(fis!=null){
+					fis.close();
+				}
+				if(bos != null){
+					bos.close();
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();  
 		}  
 		finally{
@@ -493,6 +551,16 @@ public class FileEcodeUtil {
 				os.write(buffer, 0, bytesRead);
 			}
 		} catch (IOException e) {
+			try {
+				if(os!=null){
+					os.close();
+				}
+				if(ins!=null){
+					ins.close();
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}finally{
 			try {

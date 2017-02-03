@@ -68,7 +68,7 @@ public class FileUploadController {
 			//System.out.println("returnUri = "+returnUri);
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		} finally{
 			//关闭流，要关闭两个，虽然它们都取自同一个文件
 			try {
@@ -79,7 +79,7 @@ public class FileUploadController {
 					outStream.close();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		}
         

@@ -7,17 +7,35 @@
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
-    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
+    <link rel="stylesheet" href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
+    <link rel="stylesheet" href="onlinetools/css/mytools.css" th:href="@{/css/pc/onlinetools/css/mytools.css}"/>
+    <link rel="stylesheet" href="onlinetools/css/bootstrap.shubing.css" th:href="@{/css/pc/onlinetools/css/bootstrap.shubing.css}"/>
 </head>
 <body>
-<div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
+<div style="min-height:834px">
+    <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;">
+    </div>
+	<div id="content" style="width: 1200px; margin: 0 auto;">
+		<div id="forum-header-wrapper">
+			<div id="forum-header" class="container">
+				<div id="forum-logo">
+					<h1>
+						<a href="#">在线小游戏</a>
+					</h1>
+				</div>
+			</div>
+		</div>
+		<p style="clear:both"></p>
+   	 	<p style="height:20px"></p>
+   	 	<div th:if="${showId==1}">
+			<div th:replace="pc/historyproject/one::oneDiv"></div>
+		</div>
+   	 	<div th:if="${showId==2}">
+			<div th:replace="pc/historyproject/two::twoDiv"></div>
+		</div>
+	</div>
 </div>
-
 <p style="clear:both"></p>
-
-<a href="http://127.0.0.1:8080/company" target="_blank">Jquery控件</a>
-学习jquery控件的时候，搭建了这样的一个样例，包括了滚动条控件，日期控件
-
 <div th:include="pc/loginPopup::footerDiv" class="footer">
     <p>阿丙工作室</p>
     <p>联系邮箱：jiashubing@foxmail.com</p>
