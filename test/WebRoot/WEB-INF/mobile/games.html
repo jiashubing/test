@@ -5,7 +5,8 @@
   	<meta charset="utf-8" />
   	<meta name="baidu-site-verification" content="3uYjxVgfa1" />
   	<meta name="viewport" content="user-scalable=no" />
-  	<title>阿丙的私人定制</title>
+  	<title>在线游戏 - 阿丙的私人定制</title>
+  	<link rel="shortcut icon" href="favicon.ico" th:href="@{/image/favicon.ico}" />
 	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/css/sudoku.shubing.css}"/> 
 </head>
 <body onload="time_fun()">
@@ -19,7 +20,7 @@
 </div>
 	<div class="w1">
 	<div class="w2" id="y1">
-		<label class="wu">秒表: </label><label class="wv" id="y2">00:00</label> <a th:href="@{/games}">123</a><label id="newgame" class="wuw">新游戏</label>
+		<label class="wu">秒表: </label><label class="wv" id="y2">00:00</label><label id="newgame" class="wuw">新游戏</label>
 	</div>
 	<div id="y6" class="w5" style="cursor: default;font-size:16px;line-height:normal;">
 		<div id="y7" class="w51">
@@ -411,12 +412,13 @@
 		</fieldset>
 	</div>
 </div> 
-	
 </div>
-<p style="font-size:30px;text-indent:2em;"><b >数独 - 游戏规则</b></p>
-<p style="font-size:30px;text-indent:2em;">1、玩家需要根据9×9盘面上的已知数字，推理出所有剩余空格的数字，并满足每一行、每一列、每一个粗线宫内的数字均含1-9，不重复。</p>
-<p style="font-size:30px;text-indent:2em;">2、每一道合格的数独谜题都有且仅有唯一答案，推理方法也以此为基础，任何无解或多解的题目都是不合格的。</p>
-<p style="font-size:30px;text-indent:2em;">3、 试着每天解决一些难题，让您的大脑在良好的状态！</p>
+<div style="font-size:25px;">
+	<p style="text-indent:2em;"><b >数独 - 游戏规则</b></p>
+	<p style="text-indent:2em;">1、玩家需要根据9×9盘面上的已知数字，推理出所有剩余空格的数字，并满足每一行、每一列、每一个粗线宫内的数字均含1-9，不重复。</p>
+	<p style="text-indent:2em;">2、每一道合格的数独谜题都有且仅有唯一答案，推理方法也以此为基础，任何无解或多解的题目都是不合格的。</p>
+	<p style="text-indent:2em;">3、 试着每天解决一些难题，让您的大脑在良好的状态！</p>
+</div>
 <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 <script type="text/javascript" src="js/myjson.js" th:src="@{/js/mobile/js/mysudoku.js}" ></script>
 <script type="text/javascript" th:inline="javascript">
