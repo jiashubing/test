@@ -11,7 +11,8 @@
   	<meta name="mobile-web-app-capable" content="yes" />
 	<link rel="shortcut icon" href="favicon.ico" th:href="@{/image/favicon.ico}" />
 	<link rel="stylesheet" href="./css/common.shubing.css" th:href="@{/css/mobile/css/common.shubing.css}"/> 
-  	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/css/resource.shubing.css}"/> 
+  	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/css/resource.shubing.css}"/>
+  	<link rel="stylesheet" href="./css/heart.shubing.css" th:href="@{/css/mobile/css/heart.shubing.css}"/>
 </head>
 <body style="padding-bottom:0px;">
   <div class="j_top_bar blue_kit">
@@ -33,7 +34,11 @@
 		<a class="tab_head_item j_tab_selected" href="" th:href="@{/beforelogin}">个人</a>
     </div>
   	<!--1-->
-	<p style="line-height:50%;"><img src="../mobile/images/pc1.jpg" th:src="@{/image/mobile/images/pc4.jpg}" width="100%"/></p>
+    <div style="width:100%;background-color:#eee;" th:attr="style='width:100%; background:url('+@{/image/mobile/images/bc.jpg}+') repeat;'">
+    <p style="line-height:50%; padding-top:50px; padding-bottom:20px;"><img src="../mobile/images/welcome.png" th:src="@{/image/mobile/images/welcome.png}" width="100%"/></p>
+	<div class="heartcontainer"><div class="hometown"><div class="heart"></div></div></div> 
+    <p style="line-height:50%; padding-bottom:50px;"><img src="../mobile/images/heart.png" th:src="@{/image/mobile/images/heart.png}" width="100%"/></p>
+    </div>
 	<!--1-->
 	<!--2-->
 	<p style="line-height:50%;"><img width="100%" src="../mobile/images/zhanzhangjiyu.png" th:src="@{/image/mobile/images/zhanzhangjiyu.png}"/></p>
