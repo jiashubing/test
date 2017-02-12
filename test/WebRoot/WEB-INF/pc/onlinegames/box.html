@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div th:fragment="boxDiv">
+	
+	<div id="bootstrap-shubing">
+		<div class="shubing-tool-wrapper">
+			<div class="shubing-toolName">幸运大转盘（套路版）</div>
+			<div class="shubing-toolUsing shubing-clearfix">
+				<ul class="shubing-nav shubing-nav-tabs">
+					<li><a th:href="@{/games(showId=1)}">数独简易版</a></li>
+					<li><a th:href="@{/games(showId=2)}">幸运大转盘</a></li>
+					<li class="active"><a th:href="@{/games(showId=3)}">推箱子</a></li>
+					<li><a>待开发</a></li>
+				</ul>
+			</div>
+
+			<div style="width:560px; margin:5px auto;">
+				<canvas id="canvas" width="560" height="560"></canvas>
+				<div id="msg"></div>
+				<input type="button" value="上一关" onClick="NextLevel(-1)"/>
+				<input type="button" value="下一关" onClick="NextLevel(1)"/>
+				<input type="button" value="重玩本关" onClick="NextLevel(0)"/>
+			</div>	
+					
+		</div>
+		<div class="dddys" style="margin-top:10px; margin-bottom:25px; margin-left:250px;">
+	        <p class="ysxz">
+	        <b style="font-size:16px;">推箱子 - 游戏规则</b><br/>
+	    		用键盘上的上、下、左、右键移动小人，把箱子全部推到小球的位置即可过关。箱子只可向前推，不能往后拉，并且小人一次只能推动一个箱子。<br/>
+	     	</p>
+	    </div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+		<script th:inline="javascript">
+		     /*<![CDATA[*/
+		     var httppath= /*[[@{/image/pc/boxgame/images/}]]*/"";
+		    /*]]>*/
+		</script>
+		<script type="text/javascript" th:src="@{/js/pc/boxgame/js/mapdata100.js}"></script>
+		<script type="text/javascript" th:src="@{/js/pc/boxgame/js/boxgame.js}"></script>
+		<script type="text/javascript">
+		$(document).keydown(function(event){
+		 doKeyDown(event)
+		});
+		</script>
+	</div>
+</body>
+</html>

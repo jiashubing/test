@@ -1,0 +1,44 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div th:fragment="discDiv">
+	
+	<div id="bootstrap-shubing">
+		<div class="shubing-tool-wrapper">
+			<div class="shubing-toolName">幸运大转盘（套路版）</div>
+			<div class="shubing-toolUsing shubing-clearfix">
+				<ul class="shubing-nav shubing-nav-tabs">
+					<li><a th:href="@{/games(showId=1)}">数独简易版</a></li>
+					<li class="active"><a th:href="@{/games(showId=2)}">幸运大转盘</a></li>
+					<li><a th:href="@{/games(showId=3)}">推箱子</a></li>
+					<li><a>待开发</a></li>
+				</ul>
+			</div>
+
+			<div id="disc-main">
+				<div id="outer-cont">
+					<div id="outer">
+						<img src="disc/disc-1.png" th:src="@{/image/pc/disc/disc-1.png}"/>
+					</div>
+				</div>
+				<div id="inner-cont">
+					<div id="inner"><img src="disc/disc-2.png" th:src="@{/image/pc/disc/disc-2.png}"/></div>
+				</div>
+			</div>
+		</div>
+		<div class="dddys" style="margin-top:10px; margin-bottom:25px; margin-left:250px;">
+	        <p class="ysxz">
+	        <b style="font-size:16px;">大转盘 - 写在前面的话</b><br/>
+	    		之所以写这个转盘，那是因为以前充钱玩游戏的时候，只是为了点一下转盘，那个转盘总是充满了魔力，诱惑我不断陷进去，却总也抽不中奖。<br/>
+	    		实际上做这转盘的人真的很套路的，小奖概率很高，但是大奖概率就为0了，不信的话可以试试，抽中大奖算我服你。<br/>
+	     	</p>
+	    </div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="@{/js/pc/js/jquery.SuperSlide.2.1.1.js}" ></script>
+		<script type="text/javascript" src="disc/myjson.js" th:src="@{/js/pc/disc/myjson.js}" ></script>
+		<script type="text/javascript" src="disc/jQueryRotate.2.2.js" th:src="@{/js/pc/disc/jQueryRotate.2.2.js}" ></script>
+	</div>
+</body>
+</html>

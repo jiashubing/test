@@ -9,9 +9,9 @@
 			<div class="shubing-toolName">数独游戏超简易版（随机生成）</div>
 			<div class="shubing-toolUsing shubing-clearfix">
 				<ul class="shubing-nav shubing-nav-tabs">
-					<li class="active"><a th:href="@{/games}">数独简易版</a></li>
-					<li><a>待开发</a></li>
-					<li><a>待开发</a></li>
+					<li class="active"><a th:href="@{/games(showId=1)}">数独简易版</a></li>
+					<li><a th:href="@{/games(showId=2)}">幸运大转盘</a></li>
+					<li><a th:href="@{/games(showId=3)}">推箱子</a></li>
 					<li><a>待开发</a></li>
 				</ul>
 			</div>
@@ -428,6 +428,14 @@
 	     	</p>
 	    </div>
 		</div>
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+		<script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
+		<script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/onlinegames/js/mysudoku.js}" ></script>
+		<script type="text/javascript">
+		$(function(){ 
+			time_fun();
+		}); 
+		</script>
 	</div>
 </body>
 </html>

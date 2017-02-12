@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="onlinetools/css/mytools.css" th:href="@{/css/pc/onlinetools/css/mytools.css}"/>
     <link rel="stylesheet" href="onlinetools/css/bootstrap.shubing.css" th:href="@{/css/pc/onlinetools/css/bootstrap.shubing.css}"/>
     <link rel="stylesheet" href="" th:href="@{/css/pc/onlinegames/css/shubingsudoku.css}" />
+    <link rel="stylesheet" type="text/css" href="disc/disc-style.css" th:href="@{/css/pc/disc/disc-style.css}"/>
 </head>
-<body onload="time_fun()">
+<body>
 <div style="min-height:834px">
     <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;">
     </div>
@@ -34,6 +35,12 @@
    	 	
    	 	<div th:if="${showId==1}">
 			<div th:replace="pc/onlinegames/sudoku::sudokuDiv"></div>
+		</div>
+   	 	<div th:if="${showId==2}">
+			<div th:replace="pc/onlinegames/disc::discDiv"></div>
+		</div>
+   	 	<div th:if="${showId==3}">
+			<div th:replace="pc/onlinegames/box::boxDiv"></div>
 		</div>
    	 	
 	</div>
@@ -64,8 +71,5 @@
     }
 </script>
 
-<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
-<script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
-<script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/onlinegames/js/mysudoku.js}" ></script>
 </body>
 </html>

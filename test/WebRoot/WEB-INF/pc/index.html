@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
-	<link rel="stylesheet" type="text/css" href="disc/disc-style.css" th:href="@{/css/pc/disc/disc-style.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/taiji.css" th:href="@{/css/pc/css/taiji.css}"/>
 </head>
 <body>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
@@ -99,25 +99,25 @@
 <img src="images/bottonone.png" width="100%" th:src="@{/image/pc/images/bottonone.png}"/>
 
 <div class="kf">
-	<div style="text-align:center;" >
-		<span style="font-size:16px; color:blue; display:block; margin-bottom:10px;">幸运大转盘</span>
-		<hr style="width:60px; height:1px;border:none;border-top:1px solid #CCCCCC;"/>
-		<span style="font-size:13px; color:grey; display:block; margin-top:10px;">这个转盘的中奖概率看起来很高吧，实际上你最多只能抽中三等奖或者一毛钱</span>
-	</div>
-    <p style="clear:both; height:30px"></p>
-    
-    <div class="kfimg">
-		<div id="disc-main">
-			<div id="outer-cont">
-				<div id="outer">
-					<img src="disc/disc-1.png" th:src="@{/image/pc/disc/disc-1.png}"/>
-				</div>
-			</div>
-			<div id="inner-cont">
-				<div id="inner"><img src="disc/disc-2.png" th:src="@{/image/pc/disc/disc-2.png}"/></div>
+    <p>我的更多链接：</p>
+    <p>我的博客园：<a href="http://www.cnblogs.com/acm-bingzi/">http://www.cnblogs.com/acm-bingzi/</a>(凌乱的心)</p>
+    <p style="clear:both; height:100px">首页有所调整，大转盘被拿到了“在线游戏板块”，这里的<span style="color:red;">样式待调整</span></p>
+</div>
+
+<img src="images/topone.png" width="100%" th:src="@{/image/pc/images/topone.png}"/>
+<div class="listone">
+	<div class="square">
+		<div class="rect rect_one">
+			<div class="inner_circle rect_one_one">
+				<div class="dot rect_one_two"></div>
 			</div>
 		</div>
-    </div>
+		<div class="rect rect_two">
+			<div class="inner_circle rect_two_one">
+				<div class="dot rect_two_two"></div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div th:include="pc/loginPopup::footerDiv" class="footer">
@@ -133,10 +133,7 @@
 <div id="asaimsgbg" class="AsaiDivBG" style="display: none"
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
 <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
-<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="@{/js/pc/js/jquery.SuperSlide.2.1.1.js}" ></script>
 <script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
-<script type="text/javascript" src="disc/myjson.js" th:src="@{/js/pc/disc/myjson.js}" ></script>
-<script type="text/javascript" src="disc/jQueryRotate.2.2.js" th:src="@{/js/pc/disc/jQueryRotate.2.2.js}" ></script>
 <script type="text/javascript">
     jQuery(".fullSlide").slide({
         titCell: ".hd ul",
