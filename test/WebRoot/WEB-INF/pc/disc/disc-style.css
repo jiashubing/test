@@ -1,4 +1,4 @@
-#disc-main{background: url(disc-bg.png) no-repeat top center;margin-top:50px;height:560px;}
+#disc-main{background: url(disc-bg.png) no-repeat top center;height:530px;}
 #outer-cont {position: relative;width: 100%;top: 20px;margin-bottom: 20px;height: 480px;margin: 0 auto;}
 #inner-cont {position: relative;width: 100%;top: -300px;margin: 0 auto;}
 #outer {width : 480px;max-width: 480px;height: 480px;margin: 0 auto;}
