@@ -270,7 +270,6 @@ public class ToolsAction {
         }finally{
 	        try {
 	        	if(out != null){
-	        		out.flush();
 	        		out.close();
 	        	}
 			} catch (IOException e) {

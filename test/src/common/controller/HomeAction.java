@@ -460,7 +460,7 @@ public class HomeAction {
 	 }
 	 
 	 /**
-	  * 跳转到修改面膜页面
+	  * 跳转到修改密码页面
 	  */
 	 @RequestMapping("/updatepassword")
 	 public String updatepassword(@AuthenticationPrincipal DbUser dbUser,HttpServletRequest request,Model model){
@@ -477,6 +477,14 @@ public class HomeAction {
 	 public String registsu(Model model,HttpServletRequest request){
 		 model.addAttribute("msgInfo","感谢您的注册");
 		 return ValidatePcMobile.checkRequest(request, "/person");
+	 }
+	 
+	 /**
+	  * 跳转到简历页面
+	  */
+	 @RequestMapping("/resume")
+	 public String resume(HttpServletRequest request){
+		 return ValidatePcMobile.checkRequest(request, "/resume");
 	 }
 	
 }

@@ -269,7 +269,6 @@ public class FileEcodeUtil {
         } catch (FileNotFoundException e) {
         	try {
     			if(os!=null) {
-    				os.flush();
     				os.close();
     			}
     			if(fos!=null) {
@@ -282,7 +281,6 @@ public class FileEcodeUtil {
         } catch (IOException e) {
     		try {
     			if(os!=null) {
-    				os.flush();
     				os.close();
     			}
     			if(fos!=null) {
