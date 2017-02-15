@@ -1,0 +1,59 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div th:fragment="fourDiv">
+		<div id="bootstrap-shubing">
+			<div id="mainContent" class="shubing-tool-wrapper">
+				<div class="shubing-toolName">删除行首到指定字符工具</div>
+				<div class="shubing-toolUsing shubing-clearfix">
+					<ul class="shubing-nav shubing-nav-tabs">
+						<li><a th:href="@{/tools/one}">Insert String</a></li>
+						<li><a th:href="@{/tools/two}">Custom Encryption</a></li>
+						<li><a th:href="@{/tools/three}">Blank Line</a></li>
+						<li class="active"><a th:href="@{/tools/four}">Delete String</a></li>
+					</ul>
+					<div class="shubing-leftBar">
+						<div class="title">原文本:</div>
+						<textarea id="startText" name="startText" th:text="${startText}">这是一个例子,this is a example</textarea>
+					</div>
+
+					<div class="shubing-operateLR">
+						<div class="OptDetail Button">
+							<p>行首删除到指定字符文本：</p>
+							<input type="text" name="startChar" id="startChar" th:value="${startChar}" style="height:20px;width:80%"/>
+							<br/><br/>
+							<input type="button" id="deleteStringBtn" class="shubing-btn shubing-btn-primary" value="提交"/>
+							<br/>
+						</div>
+					</div>
+
+					<div class="shubing-rightBar">
+						<div class="title">修改后:</div>
+						<textarea name="endText" id="endText" class="text_source" readonly="readonly"></textarea>
+					</div>
+				</div>
+				 <div class="dddys" style="margin-top:10px; margin-bottom:25px;">
+			        <p class="ysxz">
+			        <b style="font-size:16px;">使用须知</b><br/>
+			        	1、设计初衷：从网上拷贝代码的时候，经常会把前面的行号1.2.3.4.拷贝下来，然后还得一个一个得删除，实在是很麻烦。如果有要给快捷的方法删除掉这个行号就好了<br/>
+			    		2、使用说明：在左边文本框输入初始文本，中间的框中输入要删除到指定位置的字符，最后点击【提交】，就会在右侧生成目标文本。<br/>
+			    		3、输入的字符说明：比如：<br/>
+			    		&nbsp;&nbsp;&nbsp;&nbsp;1.aaa<br/>
+			    		&nbsp;&nbsp;&nbsp;&nbsp;2.asdf<br/>
+			    		输入 <strong>“.”</strong> 就得到<br/>
+			    		&nbsp;&nbsp;&nbsp;&nbsp;aaa<br/>
+			    		&nbsp;&nbsp;&nbsp;&nbsp;asdf<br/>
+			    		再比如：<br/>
+			    		&nbsp;&nbsp;&nbsp;&nbsp;aaa//你好<br/>
+			    		&nbsp;&nbsp;&nbsp;&nbsp;bbb//世界<br/>
+			    		输入 <strong>“//”</strong> 就得到<br/>
+			    		&nbsp;&nbsp;&nbsp;&nbsp;你好<br/>
+			    		&nbsp;&nbsp;&nbsp;&nbsp;世界<br/>
+        			</p>
+       			 </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

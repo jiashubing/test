@@ -275,9 +275,9 @@ public class FileEcodeUtil {
     				fos.close();
     			}
 			} catch (IOException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			}
-            e.printStackTrace();  
+//            e.printStackTrace();  
         } catch (IOException e) {
     		try {
     			if(os!=null) {
@@ -287,9 +287,9 @@ public class FileEcodeUtil {
     				fos.close();
     			}
 			} catch (IOException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			}
-            e.printStackTrace();  
+//            e.printStackTrace();  
         } 
         return flag;
 	}
@@ -335,9 +335,9 @@ public class FileEcodeUtil {
 					bufferedReader.close();
 				}
 			} catch (IOException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			}
-            e.printStackTrace();
+//            e.printStackTrace();
         }finally{
         	try {
 				if(read!=null){
@@ -347,9 +347,61 @@ public class FileEcodeUtil {
 					bufferedReader.close();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
         }
+		return ans;
+	}
+	
+	public static String deleteString(File file,String startChar){
+		String ans="";
+		InputStreamReader read = null;
+		BufferedReader bufferedReader = null;
+		try {
+			String encoding="UTF-8";
+			if(file.isFile() && file.exists()){ //判断文件是否存在
+				read = new InputStreamReader(new FileInputStream(file),encoding);//考虑到编码格式
+				bufferedReader = new BufferedReader(read);
+				String lineTxt = null;
+				//写入新文件
+//                FileWriter writer = new FileWriter("D:\\smc_menu123.unl", true);
+				while((lineTxt = bufferedReader.readLine()) != null){
+					String temp = modifyLineDelete(lineTxt,startChar);        //修改每一行
+					ans += temp+'\n';
+//                    writer.write(temp+'\n');        //写入新文件
+				}
+				read.close();
+				bufferedReader.close();
+//                writer.close();
+//                System.out.println("执行成功");
+			}else{
+//                System.out.println("找不到指定的文件");
+			}
+		} catch (Exception e) {
+//            System.out.println("读取文件内容出错");
+			try {
+				if(read!=null){
+					read.close();
+				}
+				if(bufferedReader!=null){
+					bufferedReader.close();
+				}
+			} catch (IOException e1) {
+//				e1.printStackTrace();
+			}
+//            e.printStackTrace();
+		}finally{
+			try {
+				if(read!=null){
+					read.close();
+				}
+				if(bufferedReader!=null){
+					bufferedReader.close();
+				}
+			} catch (IOException e) {
+//				e.printStackTrace();
+			}
+		}
 		return ans;
 	}
 	
@@ -411,6 +463,18 @@ public class FileEcodeUtil {
 	    sb.append(b);
 	    x= sb.toString();
 	    return x;
+	}
+	
+	//删除数据
+	public static String modifyLineDelete(String x ,String a){
+		String y = "";
+		int tmp = x.indexOf(a);
+		if(tmp!=-1){
+			y = x.substring(tmp+a.length(),x.length());
+		}else{
+			y = x;
+		}
+		return y;
 	}
 	
 	/**
@@ -557,9 +621,9 @@ public class FileEcodeUtil {
 					ins.close();
 				}
 			} catch (IOException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			}
-			e.printStackTrace();
+//			e.printStackTrace();
 		}finally{
 			try {
 				if(os!=null){
@@ -569,7 +633,7 @@ public class FileEcodeUtil {
 					ins.close();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		}
 	}
@@ -586,7 +650,7 @@ public class FileEcodeUtil {
             File afile = new File(inName);  
             flag = afile.renameTo(new File(outName));
         } catch (Exception e) {  
-            e.printStackTrace();  
+//            e.printStackTrace();  
         }  
         return flag;
     }  

@@ -43,9 +43,7 @@ public class ToolsAction {
 	
 	@RequestMapping("/tools/one")
 	public String loadToolOne(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
-		if(showId == null){
-			showId = 1;
-		}
+		showId = 1;
 		model.addAttribute("showId",showId); 
 		model.addAttribute("flag","tools.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/tools");
@@ -189,9 +187,7 @@ public class ToolsAction {
 	
 	@RequestMapping("/tools/two")
 	public String loadToolTwo(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
-		if(showId == null){
-			showId = 2;
-		}
+		showId = 2;
 		model.addAttribute("showId",showId); 
 		model.addAttribute("flag","tools.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/tools");
@@ -280,9 +276,15 @@ public class ToolsAction {
 	
 	@RequestMapping("/tools/three")
 	public String loadToolThree(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
-		if(showId == null){
-			showId = 3;
-		}
+		showId = 3;
+		model.addAttribute("showId",showId); 
+		model.addAttribute("flag","tools.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/tools");
+	}
+	
+	@RequestMapping("/tools/four")
+	public String loadToolFour(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
+		showId = 4;
 		model.addAttribute("showId",showId); 
 		model.addAttribute("flag","tools.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/tools");
@@ -318,6 +320,29 @@ public class ToolsAction {
 
         return result;
     }
+	
+	@RequestMapping("/tools/deleteString")
+	@ResponseBody
+	public Result deleteString(String startText,String startChar,
+			HttpServletRequest request) throws Exception {
+		Result result = new Result();
+		
+		String inName = DateUtil.getRadomStr();
+		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+inName+".txt";
+		File cin =  new File(inPath);
+		String ans = "";
+		boolean flag= FileEcodeUtil.writeStrToFile(startText, cin);
+		
+		if(flag){
+			ans = FileEcodeUtil.deleteString(cin,startChar);
+		}
+		FileEcodeUtil.deleteFile(inPath);
+		
+		result.setStatus(1);
+		result.setBody(ans);
+		
+		return result;
+	}
 	
 	
 }
