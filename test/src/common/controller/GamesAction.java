@@ -20,12 +20,14 @@ import config.ValidatePcMobile;
 public class GamesAction {
 	
 	@RequestMapping("/games")
-	public String loadTools(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
+	public String loadGames(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
 		if(showId == null){
 			showId = 1;
 		}
-		GenerationAlgorithm generationAlgorithm = new GenerationAlgorithm();
-		model.addAttribute("puzzle", generationAlgorithm.getPuzzle());
+		if(showId==1){
+			GenerationAlgorithm generationAlgorithm = new GenerationAlgorithm();
+			model.addAttribute("puzzle", generationAlgorithm.getPuzzle());
+		}
 		model.addAttribute("showId",showId); 
 		model.addAttribute("flag","games.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/games");
@@ -45,5 +47,22 @@ public class GamesAction {
 		}
         return result;
     }
+	
+	@RequestMapping("/mobilegames")
+	public String loadMobileGames(Model model,HttpServletRequest request)throws Exception{
+		return ValidatePcMobile.checkRequest(request, "/games");
+	}
+	
+	@RequestMapping("/mobilegames/sudoku")
+	public String loadMobileSudokuGame(Model model,HttpServletRequest request)throws Exception{
+		GenerationAlgorithm generationAlgorithm = new GenerationAlgorithm();
+		model.addAttribute("puzzle", generationAlgorithm.getPuzzle());
+		return ValidatePcMobile.checkRequest(request, "/games/sudoku");
+	}
+	
+	@RequestMapping("/mobilegames/flappy")
+	public String loadMobileFlappyGame(HttpServletRequest request)throws Exception{
+		return ValidatePcMobile.checkRequest(request, "/games/flappy");
+	}
 	
 }

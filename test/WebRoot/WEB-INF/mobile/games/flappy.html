@@ -1,0 +1,43 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" style="font-size: 66.67%;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  	<meta charset="utf-8" />
+  	<meta name="baidu-site-verification" content="3uYjxVgfa1" />
+  	<meta name="viewport" content="user-scalable=no" />
+  	<title>在线游戏 - 阿丙的私人定制</title>
+  	<link rel="shortcut icon" href="favicon.ico" th:href="@{/image/favicon.ico}" />
+	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/css/sudoku.shubing.css}"/> 
+	<link rel="stylesheet" type="text/css" href="" th:href="@{/css/mobile/games/flappy/css/style.css}"/>
+</head>
+<body>
+  
+<div>
+	<div class="pass-header " style="background:#fff; border-bottom:1px solid #d6d6d6; height:88px; height:8.8rem; width:100%; padding:0; position:relative; display:block; text-align:center">
+		<a class="pass-header-back" style="background:url('//www.jiashubing.cn/image/mobile/images/goback.png') no-repeat 30px 26px; -webkit-background-size:2.4rem 4rem; padding:2.6rem 0 2.6rem 4.6rem; padding:26px 0 26px 30px; padding:2.6rem 0 2.6rem 4.6rem; width:72px; width:7.2rem; height:36px; height:3.6rem; position:absolute; left:0; top:0" id="goBack" th:href="@{/mobilegames}"></a>
+		<span class="pass-header-title" style="line-height:88px; line-height:8.8rem; font-size:40px; font-size:4rem; text-align:center; width:100%; display:block">
+	        奇葩版Flappy Bird        
+		</span>
+	</div>
+	<div style="width:900px; height:1100px; margin:0px auto; overflow: hidden;">
+		<div id="canvasContainer"></div>
+		<span id="textInputSpan"></span>
+	</div>	
+</div>
+<div style="font-size:25px;">
+	<p style="text-indent:2em;"><b >Flappy Bird - 游戏规则</b></p>
+	<p style="text-indent:2em;">1、通过点击屏幕，控制跳跃。</p>
+	<p style="text-indent:2em;">2、不要撞到柱子。</p>
+</div>
+<script type="text/javascript" th:src="@{/js/mobile/games/flappy/js/index.js}" src="js/index.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?18e0f33db7609c8e4d02a81149c37a31";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+ </body>
+</html>
