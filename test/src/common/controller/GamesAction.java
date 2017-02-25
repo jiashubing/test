@@ -33,9 +33,10 @@ public class GamesAction {
 		return ValidatePcMobile.checkRequest(request, "/games");
 	}
 	
-	@RequestMapping("/checkSudoku")
-    @ResponseBody
-    public Result checkSudoku(String sudokuList) {
+	
+	@RequestMapping("/mobilegames/checkSudoku")
+	@ResponseBody
+	public Result checkMobilegamesSudoku(String sudokuList) {
 		SolutionAlgorithm solution = new SolutionAlgorithm();
 		List<Square> ansList = solution.convertStringToSquareList(sudokuList);
 		boolean flag = solution.isValid(ansList);
@@ -45,8 +46,23 @@ public class GamesAction {
 		}else{
 			result.setStatus(0);
 		}
-        return result;
-    }
+		return result;
+	}
+	
+	@RequestMapping("/checkSudoku")
+	@ResponseBody
+	public Result ceckSudoku(String sudokuList) {
+		SolutionAlgorithm solution = new SolutionAlgorithm();
+		List<Square> ansList = solution.convertStringToSquareList(sudokuList);
+		boolean flag = solution.isValid(ansList);
+		Result result = new Result();
+		if(flag){
+			result.setStatus(1);
+		}else{
+			result.setStatus(0);
+		}
+		return result;
+	}
 	
 	@RequestMapping("/mobilegames")
 	public String loadMobileGames(Model model,HttpServletRequest request)throws Exception{
