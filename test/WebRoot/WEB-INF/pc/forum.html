@@ -38,11 +38,51 @@
 	</div>
 	<div id="content" style="width: 1200px; margin: 0 auto;">
 		<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
-			 <tbody th:remove="all-but-first">
+			 <tbody>
+			 	<tr height="30px">
+					<td style="text-indent:5;" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'"><b><span style="color:white">■ 版主推荐</span></b></td>
+				</tr>
+				<tr>
+					<td>
+						<table class="table table-bordered" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
+							<thead>
+								<tr>
+									<th style="border-left: 1px solid #dddddd; width: 150px;">
+										状态
+									</th>
+									<th >
+										帖子标题
+									</th>
+									<th style="width: 150px;">
+										发表者
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="topic,toNum:${goodTopicList}" class="topictr" th:style="${toNum.odd}?'background-color:#ddd;'">
+									<td style="border-left: 1px solid #dddddd;">
+										<span th:if="${topic.good==0 }" style="color: blue;">【普通】</span>
+										<span th:unless="${topic.good==0 }" style="color: red;">【精华】</span>
+										<span th:if="${topic.top==1 }">【置顶】</span>
+									</td>
+									<td>
+										<a th:href="@{/forum/details(id=${topic.id})}"><span th:text="${topic.title }">帖子3</span></a>
+									</td>
+									<td>
+										<span th:text="${topic.user.nickName }">诸葛亮</span>
+									</td>
+								</tr>
+								<!-- <tr style="background-color:#ddd;"><td colspan="3" style="border-left: 1px solid #dddddd;">
+								<a th:href="@{/forum/tuijian}"><span style="color:blue;"><strong>更多推荐</strong></span></a></td></tr> -->
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr height="15px"></tr>
 				<tr th:each="zone:${zoneList}">
 					<td>
 						<table style="width: 1200px;" align="center">
-							<tr height="30">
+							<tr height="30px">
 								<td style="text-indent:5;" background="forum/images/index/classT.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'">
 									<b><span style="color:white" th:text="'■ '+${zone.name }">网站建设</span></b>
 								</td>
@@ -90,47 +130,59 @@
 									</ul>
 								</td>
 							</tr>
-							<tr height="25">
+							<tr height="25px">
 								<td>
 									<span th:text="${zone.description }" style="color:orange;">论坛介绍：感谢您能为我的网站建设出一份力</span>
 								</td>
 							</tr>
-							<tr height="25px">
-							</tr>
+							<tr height="25px"></tr>
 						</table>
 					</td>
+				</tr>
+				<tr height="30px">
+					<td style="text-indent:5;" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'"><b><span style="color:white">■ 最新动态</span></b></td>
 				</tr>
 				<tr>
 					<td>
-						<table style="width: 1200px;" align="center">
-							<tr height="30"><td style="text-indent:5;" background="forum/images/index/classT.jpg" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'"><b><font color="white">■ 文艺苑区</font></b></td></tr>
-							<tr>
-								<td>
-									<ul class="unstyled inline" >
-										<li style="width: 394px; margin-left: 0px;padding: 0px;">
-											<div align="center" style="margin-top: 20px;">
-												<div><a href="# }">
-												<img style="width: 100px;" alt="" src="forum/images/logo/20150319072419.jpg" th:src="@{/image/pc/forum/images/logo/20150319072419..jpg}" /></a></div>
-												<div style="margin: 10px auto;"> <a href="# }">
-													<span style="font-size: 30px;font-weight: bold;" th:text="${section.name }">作者公告</span></a></div>
-												<span style="font-size: 12px;" th:text="'帖子总数：'+${section.totalCount}">帖子总数：3</span>
-												<span style="font-size: 12px;" th:text="'精华帖子0：'+${section.goodCount}">精华帖子：3</span>
-												<span style="font-size: 12px;" th:text="'未回复：'+${section.noReplyCount}">未回复：3</span>
-												<span style="font-size: 12px;" th:text="'版主：'+${section.master.nickName }">版主：Shubing</span>
-											</div>
-										</li>
-									</ul>
-								</td>
-							</tr>
-							<tr height="25">
-								<td>
-									<span style="color:orange;">论坛介绍：分享那感动过我们的文章</span>
-								</td>
-							</tr>
+						<table class="table table-bordered" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
+							<thead>
+								<tr>
+									<th style="border-left: 1px solid #dddddd; width: 150px;">
+										帖子标题
+									</th>
+									<th >
+										内容概览
+									</th>
+									<th style="width: 100px;">
+										所属板块
+									</th>
+									<th style="width: 100px;">
+										回复数
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="topictr">
+									<td style="border-left: 1px solid #dddddd;">
+										<a th:href="@{/forum/details(id=${newTopic.id})}"><span th:text="${#strings.abbreviate(newTopic.title,24)}">hhh</span></a>
+									</td>
+									<td>
+										<a th:href="@{/forum/details(id=${newTopic.id})}"><span th:text="${newTopic.remark}">hhh</span></a>
+									</td>
+									<td>
+										<a th:href="@{/forum/topicList(sectionId=${newTopic.section.id})}"><span th:text="${newTopic.section.name}">帖子3</span></a>
+									</td>
+									<td>
+										<span th:text="${newTopic.replySum}">123</span>
+									</td>
+								</tr>
+								<!-- <tr><td colspan="4" style="border-left: 1px solid #dddddd;">
+								<a th:href="@{/forum/newsTopicList}"><span style="color:blue;"><strong>查看全部</strong></span></a></td></tr> -->
+							</tbody>
 						</table>
 					</td>
 				</tr>
-			<!--</c:forEach>-->
+				<tr height="25px"></tr>
 			</tbody>
 		</table>
 	</div>
