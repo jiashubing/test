@@ -1,0 +1,71 @@
+.bing-progress {
+  margin-top: 20px;
+  overflow: hidden;
+}
+.bing-progress .pross {
+  position: relative;
+  background: #ddd;
+  float: left;
+  width: 179px;
+  height: 35px;
+  line-height: 35px;
+  color: #666;
+  font-size: 16px;
+  padding-left: 10px;
+}
+.bing-progress .pross .bing-index {
+  background: #999;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  border-radius: 18px;
+  color: #fff;
+  text-align: center;
+  margin-right: 10px;
+}
+.bing-progress .pross .pross-dir {
+  background: #ddd;
+  position: absolute;
+  top: -17px;
+  right: -10px;
+}
+.bing-progress .pross a {
+  coloe: #fff;
+}
+.bing-progress .pross .pross-dir .bing-outside,
+.bing-progress .pross .pross-dir .bing-inside {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 35px 19px;
+}
+.bing-progress .pross .pross-dir .bing-outside {
+  border-color: transparent transparent transparent #f8f8f8;
+}
+.bing-progress .pross .pross-dir .bing-inside {
+  border-color: transparent transparent transparent #ddd;
+  margin-left: -47px;
+}
+.bing-progress .pross-ok {
+  background: #0074c7;
+  color: #fff;
+}
+.bing-progress .pross-ok .bing-index {
+  background: #fff;
+  color: #0074c7;
+}
+.bing-progress .pross-ok .pross-dir {
+  background: #0074c7;
+}
+.bing-progress .pross-ok .pross-dir .bing-outside {
+  border-color: transparent transparent transparent #f8f8f8;
+}
+.bing-progress .pross-ok .pross-dir .bing-inside {
+  border-color: transparent transparent transparent #0074c7;
+}
+.bing-progress .pross-ok .pross-dir-bg {
+  background: transparent;
+  z-index: 100;
+}

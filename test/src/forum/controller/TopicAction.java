@@ -94,10 +94,13 @@ public class TopicAction {
 		model.addAttribute("topicLastReply",topicLastReply); 
 		model.addAttribute("topicReplyCount",topicReplyCount); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
+		model.addAttribute("progressFlag",2); //导航条显示标志
 		
-		//返回上一页的路径，赋值到页面中
-		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
-		model.addAttribute("prePage", tmpPage);
+		if(!ValidatePcMobile.checkRequest(request)){
+			//返回上一页的路径，赋值到页面中
+			String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+			model.addAttribute("prePage", tmpPage);
+		}
 				
 		return ValidatePcMobile.checkRequest(request, "/forum/topicList");
 	}
@@ -116,9 +119,36 @@ public class TopicAction {
 		model.addAttribute("totalPages",totalPages); 
 		model.addAttribute("newTopicList",newTopicList); 
 		
-		//返回上一页的路径，赋值到页面中
-		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
-		model.addAttribute("prePage", tmpPage);
+		if(!ValidatePcMobile.checkRequest(request)){
+			//手机端 返回上一页的路径，赋值到页面中
+			String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+			model.addAttribute("prePage", tmpPage);
+		}else{
+			Map<Topic, Reply> topicLastReply=new HashMap<Topic, Reply>(0);
+			Map<Topic, Long> topicReplyCount=new HashMap<Topic, Long>(0);
+			for(int i=0;i<newTopicList.size();i++){
+				Topic topic = newTopicList.get(i);
+				Reply reply=replyService.findLastReplyByTopicId(topic.getId());
+				Long replyCount=replyService.getReplyCountByTopicId(topic.getId());
+				if (reply!=null) {
+					topicLastReply.put(topic, reply);
+				}
+				topicReplyCount.put(topic, replyCount);
+			}
+			
+			for(int i=0;i<newTopicList.size();i++){
+				Topic topic = newTopicList.get(i);
+				Reply reply=replyService.findLastReplyByTopicId(topic.getId());
+				Long replyCount=replyService.getReplyCountByTopicId(topic.getId());
+				if (reply!=null) {
+					topicLastReply.put(topic, reply);
+				}
+				topicReplyCount.put(topic, replyCount);
+			}
+			model.addAttribute("topicLastReply",topicLastReply); 
+			model.addAttribute("topicReplyCount",topicReplyCount); 
+			model.addAttribute("progressFlag",3); //导航条显示标志
+		}
 		
 		return ValidatePcMobile.checkRequest(request, "/forum/newsTopicList");
 	}
@@ -315,14 +345,17 @@ public class TopicAction {
 		model.addAttribute("topic",topic); 
 		model.addAttribute("replyList",replyList); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
+		model.addAttribute("progressFlag",5); //导航条显示标志
 		
 		//手机端发表帖子后返回到帖子详情，帖子详情的“返回上一页”按钮不能返回到发帖页面
 		model.addAttribute("addTopicFlag",addTopicFlag);
 		
-		//返回上一页的路径，赋值到页面中
-		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
-		tmpPage += "/topicList?sectionId="+topic.getSection().getId();
-		model.addAttribute("prePage", tmpPage);
+		if(!ValidatePcMobile.checkRequest(request)){
+			//返回上一页的路径，赋值到页面中
+			String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+			tmpPage += "/topicList?sectionId="+topic.getSection().getId();
+			model.addAttribute("prePage", tmpPage);
+		}
 		
 		if(errorFlag){
 			//手机端抛出异常
@@ -351,10 +384,13 @@ public class TopicAction {
 		
 		model.addAttribute("sectionList",sectionList); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
+		model.addAttribute("progressFlag",4); //导航条显示标志
 		
-		//返回上一页的路径，赋值到页面中
-		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
-		model.addAttribute("prePage", tmpPage);
+		if(!ValidatePcMobile.checkRequest(request)){
+			//返回上一页的路径，赋值到页面中
+			String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
+			model.addAttribute("prePage", tmpPage);
+		}
 		
 		return ValidatePcMobile.checkRequest(request, "/forum/topicAdd");
 	}
@@ -459,7 +495,8 @@ public class TopicAction {
 			@RequestParam(required = false) Integer topicId,
 			@RequestParam(required = false) Integer topicGood,
 			@RequestParam(required = false) Integer topicTop,
-			@RequestParam(required = false) Integer sectionId
+			@RequestParam(required = false) Integer sectionId,
+			@RequestParam(required = false) Integer newTopicFlag
 			)throws Exception{
 		
 		Topic topic = new Topic();
@@ -483,7 +520,14 @@ public class TopicAction {
 		sectionService.saveSection(section);
 		
 		//重定向时传递参数
-		return "redirect:/forum/topicList?sectionId="+sectionId+"&pageNo="+pageNo;
+		if(newTopicFlag != null){
+			return "redirect:/forum/newsTopicList?pageNo="+pageNo;
+		}
+		if(sectionId != null){
+			return "redirect:/forum/topicList?sectionId="+sectionId+"&pageNo="+pageNo;
+		}
+		return "redirect:/forum/topicList?pageNo="+pageNo;
+		
 	}
 	
 	

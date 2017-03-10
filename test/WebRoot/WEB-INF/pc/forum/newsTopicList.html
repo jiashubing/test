@@ -1,0 +1,244 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="baidu-site-verification" content="3uYjxVgfa1" />
+    <title>最新动态  - 论坛系统 - 阿丙的私人订制</title>
+    <link rel="shortcut icon" href="favicon.ico" th:href="@{/image/favicon.ico}" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
+	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
+	<link rel="stylesheet"  href="forum/css/bootstrap.css" th:href="@{/css/pc/forum/css/bootstrap.css}"/>
+	<link rel="stylesheet" type="text/css" href="css/bing-progress.css" th:href="@{/css/pc/css/bing-progress.css}" />
+</head>
+<body>
+<div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
+</div>
+
+<p style="clear:both"></p>
+<div class="forum" style="min-height:1000px;">
+	<div th:replace="pc/forum/common/top::top" id="content" style="width: 1200px; margin: 0 auto;">
+		<div id="forum-header-wrapper">
+			<div id="forum-header" class="container">
+				<div id="forum-logo">
+					<h1><a href="#">冰山一角论坛</a></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div style="width: 1200px; margin: 0 auto 30px;">
+	<h1 align="center">欢迎进入论坛最新动态版面！</h1>
+</div>
+<div style="width: 1200px; margin: 0 auto; min-height:100px;">
+	<div style="margin-bottom: 10px;">
+		<form id="preSaveForm" th:action="@{/forum/preSave}"></form>
+		<a onclick="checkUser()"><img alt="发帖" src="images/post.jpg"  th:src="@{/image/pc/forum/images/post.jpg}"/></a>
+		<div class="pagination alternate pull-right" th:align="center" style="margin: 0px;">
+			<span th:if="${totalPages}==0"  th:text="该版面没有发表任何帖子">该版面没有发表任何帖子</span>
+			<span th:unless="${totalPages}==0" >
+				<ul class="clearfix">
+					<li th:class="${pageNo}==0?'disabled':''" ><a th:if="${pageNo}==0">首页</a>
+						<a th:unless="${pageNo}==0" href='' th:href="@{/forum/newsTopicList(pageNo=0)}">首页</a></li>
+					<li th:class="${pageNo}>0?'':'disabled'"><a th:unless="${pageNo}>0">上一页</a>
+						<a href='' th:if="${pageNo}>0" th:href="@{/forum/newsTopicList(pageNo=${pageNo}-1)}">上一页</a></li>
+					<li th:style="${pageNo}-3>0?'':'display: none'"><a th:unless="${pageNo}-3>0"><span th:text="${pageNo}-3"></span></a>
+						<a th:if="${pageNo}-3>0" href='' th:href="@{/forum/newsTopicList(pageNo=${pageNo}-4)}"><span th:text="${pageNo}-3"></span></a></li>
+					<li th:style="${pageNo}-2>0?'':'display: none'"><a th:unless="${pageNo}-2>0"><span th:text="${pageNo}-2"></span></a>
+						<a th:if="${pageNo}-2>0" href='' th:href="@{/forum/newsTopicList(pageNo=${pageNo}-3)}"><span th:text="${pageNo}-2"></span></a></li>
+					<li th:style="${pageNo}-1>0?'':'display: none'"><a th:unless="${pageNo}-1>0"><span th:text="${pageNo}-1"></span></a>
+						<a th:if="${pageNo}-1>0" href='' th:href="@{/forum/newsTopicList(pageNo=${pageNo}-2)}"><span th:text="${pageNo}-1"></span></a></li>
+					<li th:style="${pageNo}>0?'':'display: none'"><a th:unless="${pageNo}>0"><span th:text="${pageNo}"></span></a>
+						<a th:if="${pageNo}>0" href='' th:href="@{/forum/newsTopicList(pageNo=${pageNo}-1)}"><span th:text="${pageNo}"></span></a></li>
+					<li th:class="active"><a><span th:text="${pageNo}+1"></span></a></li>
+					<li th:style="${totalPages}-1>${pageNo}?'':'display: none'"><a th:unless="${totalPages}-1>${pageNo}"><span th:text="${pageNo}+2"></span></a>
+						<a th:if="${totalPages}-1>${pageNo}" href='' th:href="@{/forum/newsTopicList(pageNo=${pageNo}+1)}"><span th:text="${pageNo}+2"></span></a></li>
+					<li th:style="${totalPages}-2>${pageNo}?'':'display: none'"><a th:unless="${totalPages}-2>${pageNo}"><span th:text="${pageNo}+3"></span></a>
+						<a th:if="${totalPages}-2>${pageNo}" href='' th:href="@{/forum/newsTopicList(pageNo=${pageNo}+2)}"><span th:text="${pageNo}+3"></span></a></li>
+					<li th:style="${totalPages}-3>${pageNo}?'':'display: none'"><a th:unless="${totalPages}-3>${pageNo}"><span th:text="${pageNo}+4"></span></a>
+						<a th:if="${totalPages}-3>${pageNo}" href='' th:href="@{/forum/newsTopicList(pageNo=${pageNo}+3)}"><span th:text="${pageNo}+4"></span></a></li>
+					<li th:style="${totalPages}-4>${pageNo}?'':'display: none'"><a th:unless="${totalPages}-4>${pageNo}"><span th:text="${pageNo}+5"></span></a>
+						<a th:if="${totalPages}-4>${pageNo}" href='' th:href="@{/forum/newsTopicList(pageNo=${pageNo}+4)}"><span th:text="${pageNo}+5"></span></a></li>
+					<li  th:class="${totalPages}-1>${pageNo}?'':'disabled'" ><a th:unless="${totalPages}-1>${pageNo}">下一页</a>
+						<a href='' th:if="${totalPages}-1>${pageNo}" th:href="@{/forum/newsTopicList(pageNo=${pageNo}+1)}">下一页</a></li>
+					<li th:class="${totalPages}-1==${pageNo}?'disabled':''" ><a th:if="${totalPages}-1==${pageNo}">末页</a>
+						<a th:unless="${totalPages}-1==${pageNo}" href='' th:href="@{/forum/newsTopicList(pageNo=${totalPages}-1)}">末页</a></li>
+				</ul>
+			</span>
+		</div>
+	</div>
+	<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
+		<tr height="30px">
+			<td style="text-indent:5;" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'"><b><span style="color:white">■ 所有帖子</span></b></td>
+		</tr>
+		<tr>
+			<td>
+				<table class="table table-bordered" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
+					<thead>
+						<tr>
+							<th style="border-left: 1px solid #dddddd; width: 150px;">
+								状态
+							</th>
+							<th >
+								帖子标题
+							</th>
+							<th style="width: 100px;">
+								回复数 	
+							</th>
+							<th style="width: 100px;">
+								发表者
+							</th>
+							<th style="width: 200px;">
+								最后回复
+							</th>
+							<th th:unless="${session.dbUser==null}" style="width: 150px;">
+								操作
+							</th>
+						</tr>
+					</thead>
+					<tbody th:remove="all-but-first">
+						<tr th:each="topic,toNum:${newTopicList }" class="topictr" th:style="${toNum.even}?'background-color:#ddd;'">
+							<td style="border-left: 1px solid #dddddd;">
+								<span th:if="${topic.good==0 }" style="color: blue;">【普通】</span>
+								<span th:unless="${topic.good==0 }" style="color: red;">【精华】</span>
+								<span th:if="${topic.top==1 }">【置顶】</span>
+							</td>
+							<td style="display:none;">
+								<span style="visibility:hidden" class="topicid" th:text="${topic.id}"></span>
+								<span style="visibility:hidden" class="topictop" th:text="${topic.top}"></span>
+								<span style="visibility:hidden" class="topicgood" th:text="${topic.good}"></span>
+							</td>
+							<td>
+								<a th:href="@{/forum/details(id=${topic.id})}"><span th:text="${topic.title }">帖子3</span></a>
+							</td>
+							<td>
+								<span th:text="${topicReplyCount.get(topic) }">0</span>
+							</td>
+							<td>
+								<span th:text="${topic.user.nickName }">刘备</span>
+							</td>
+							<td>
+								<strong><span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).user.nickName }"></span></strong><br/>
+								<span th:unless="${topicLastReply.get(topic)==null}" th:text="${topicLastReply.get(topic).publishTime }"></span>
+							</td>
+							<td th:unless="${session.dbUser==null}">
+								<span th:if="${session.dbUser.access==1}">
+									<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
+									<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
+								</span>
+								<span th:unless="${session.dbUser.access==1}">
+									<span th:if="${topic.user!=null &amp;&amp; section.master!=null &amp;&amp; session.dbUser.user.id==topic.user.id &amp;&amp; session.dbUser.user.id != section.master.id }">
+										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
+									</span>
+									<span  th:if="${section.master!=null &amp;&amp; session.dbUser.user.id ==section.master.id }">
+										<button class="shubing-btn shubing-btn-info"  data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="modifyTopic(this)">修改</button>
+										<button class="shubing-btn shubing-btn-danger" onclick="deleteTopic(this)">删除</button>
+									</span>
+									<span th:if="${session.dbUser.access==0 &amp;&amp; topic.user!=null &amp;&amp; section.master!=null &amp;&amp; session.dbUser.user.id!=topic.user.id &amp;&amp; session.dbUser.user.id != section.master.id }">
+										<a th:href="@{/forum/details(id=${topic.id})}"><button class="shubing-btn shubing-btn-info">查看</button></a>
+									</span>
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="dlg" class="modal hide fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" onclick="resetValue()">×</button>
+				<h3 id="myModalLabel">修改主题</h3>
+			</div>
+			<div class="modal-body">
+				<form id="fm" th:action="@{/forum/topicUpdate(newTopicFlag=1,pageNo=${pageNo})}" method="post">
+					<table>
+						<tr>
+							<td>
+								<label class="control-label" for="top">置顶：</label>
+							</td>
+							<td>
+								<select id="topicTop" name="topicTop">
+									<option value="0">非置顶</option>
+									<option value="1">置顶</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label" for="good">精华：</label>
+							</td>
+							<td>
+								<select id="topicGood" name="topicGood">
+									<option value="0">非精华</option>
+									<option value="1">精华</option>
+								</select>
+							</td>
+						</tr>
+						<!-- <tr>
+							<td>
+								<label class="control-label" for="zone">请选择所属大板块：</label>
+							</td>
+							<td>
+								<select id="section" name="topic.section.id"><option value="">请选择...</option>
+									<c:forEach var="section" items="${section.List }">
+										<option value="${section.id }" ${curSection.id==section.id?'selected':'' }>${section.name }</option>
+									</c:forEach>
+								</select>
+							</td>
+						</tr> -->
+					</table>
+					<input id="topicId" name="topicId" type="hidden"/>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<span id="error" style="color: red;"></span>
+				<button class="shubing-btn" data-dismiss="modal" aria-hidden="true"
+					onclick="resetValue()">关闭</button>
+				<button class="shubing-btn shubing-btn-primary" onclick="saveTopic()">保存</button>
+			</div>
+		</div>
+</div>
+
+
+<div th:include="pc/loginPopup::footerDiv" class="footer">
+    <p>阿丙工作室</p>
+    <p>联系邮箱：jiashubing@foxmail.com</p>
+</div>
+
+<!--登录弹窗-->
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
+</div>
+<!--登录弹窗end-->
+<div id="asaimsgbg" class="AsaiDivBG" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'"></div>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
+<script type="text/javascript" src="js/jquery.ui.custom.js" th:src="@{/js/pc/admin/js/jquery.ui.custom.js}" ></script>
+<script type="text/javascript" src="js/bootstrap.js" th:src="@{/js/pc/admin/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js" th:src="@{/js/pc/admin/js/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" src="js/unicorn.tables.js" th:src="@{/js/pc/admin/js/unicorn.tables.js}"></script>
+<script type="text/javascript" src="js/uploadPreview.min.js" th:src="@{/js/pc/admin/js/uploadPreview.min.js}"></script>
+<script type="text/javascript" src="/js/myjson.js" th:src="@{/js/pc/forum/js/myListJson.js}" ></script>
+<script th:inline="javascript">
+function checkUser(){
+    /*<![CDATA[*/
+ 	var flag= /*[[${session.dbUser!=null}]]*/true;
+    /*]]>*/
+    
+    if(flag){
+   	 	$("#preSaveForm").submit();
+    }else{
+    	$("#loginFailedInfo").text("");
+        $("#asaimsg").show();
+        $("#asaimsgbg").show();
+    }
+}
+</script>
+</body>
+</html>

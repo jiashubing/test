@@ -5,11 +5,35 @@
 	    <div id="content" style="width: 1200px; margin: 0 auto 25px auto;">
 	    	<div id="forum-header-wrapper">
 				<div id="forum-header" class="container">
-					<div id="forum-logo">
-						<h1>冰山一角论坛</h1>
+					<div id="forum-logo" style="font-size:12px;">
+						<h1><a href="#">冰山一角论坛</a></h1>
 					</div>
 				</div>
 			</div>
+			
+			<div class="bing-progress">
+	          <div class="pross pross-ok"><span class="bing-index">1</span><a th:href="@{/forum}" style="color:#fff;">论坛首页</a>
+	            <div class="pross-dir"><span class="bing-outside"></span><span class="bing-inside"></span></div>
+	          </div>
+	          <div class="pross pross-ok" th:unless="${progressFlag==null}"><span class="bing-index">2</span>
+	            <a th:if="${progressFlag==1}" th:href="@{/forum/tuijian}" style="color:#fff;">版主推荐</a>
+	            <a th:if="${progressFlag==2}" th:href="@{/forum/topicList(sectionId=${section.id})}" style="color:#fff;"><span th:text="${section.name }">作者公告</span></a>
+	            <a th:if="${progressFlag==3}" th:href="@{/forum/newsTopicList}" style="color:#fff;">最新动态</a>
+	            <a th:if="${progressFlag==4}" th:href="@{/forum/preSave}" style="color:#fff;">发表帖子</a>
+	            <a th:if="${progressFlag==5}" th:href="@{/forum/topicList(sectionId=${topic.section.id})}" style="color:#fff;"><span th:text="${topic.section.name }">作者公告</span></a>
+	            <div class="pross-dir"><span class="bing-outside"></span><span class="bing-inside"></span></div>
+	          </div>
+	          <div th:unless="${progressFlag==null || progressFlag!=5}" class="pross pross-ok"><span class="bing-index">3</span>
+	            <a th:if="${progressFlag==5}" th:href="@{/forum/details(id=${topic.id})}" style="color:#fff;"><span th:text="${topic.title}">作者公告</span></a>
+	            <div class="pross-dir"><span class="bing-outside"></span><span class="bing-inside"></span></div>
+	          </div>
+	          <!-- <div class="pross"><span class="bing-index">4</span>绑定手机
+	            <div class="pross-dir"><span class="bing-outside"></span><span class="bing-inside"></span></div>
+	          </div>
+	          <div class="pross"><span class="bing-index">5</span>注册成功
+	          </div> -->
+	        </div>
+	        
 	    </div>
     </div>
 </body>

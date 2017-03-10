@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
 	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
 	<link rel="stylesheet"  href="forum/css/bootstrap.css" th:href="@{/css/pc/forum/css/bootstrap.css}"/>
+	<link rel="stylesheet" type="text/css" href="css/bing-progress.css" th:href="@{/css/pc/css/bing-progress.css}" />
 </head>
 <body>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
@@ -18,7 +19,7 @@
 
 <p style="clear:both"></p>
 <div class="forum" style="min-height:1000px;">
-	<div id="content" style="width: 1200px; margin: 0 auto;">
+	<div th:replace="pc/forum/common/top::top" id="content" style="width: 1200px; margin: 0 auto;">
 		<div id="forum-header-wrapper">
 			<div id="forum-header" class="container">
 				<div id="forum-logo">

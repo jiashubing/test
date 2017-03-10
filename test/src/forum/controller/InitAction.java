@@ -51,6 +51,8 @@ public class InitAction {
 		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
 		model.addAttribute("prePage", tmpPage);
 		
+		model.addAttribute("progressFlag",1); //导航条显示标志
+		
 		return ValidatePcMobile.checkRequest(request, "/forum/tuijian");
 	}
 	

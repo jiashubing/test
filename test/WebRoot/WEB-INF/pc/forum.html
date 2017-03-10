@@ -9,8 +9,9 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
-	<link rel="stylesheet"  href="forum/css/bootstrap.css" th:href="@{/css/pc/forum/css/bootstrap.css}"/>
-	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
+	<link rel="stylesheet" type="text/css" href="forum/css/bootstrap.css" th:href="@{/css/pc/forum/css/bootstrap.css}"/>
+	<link rel="stylesheet" type="text/css" href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
+	<link rel="stylesheet" type="text/css" href="css/bing-progress.css" th:href="@{/css/pc/css/bing-progress.css}" />
 </head>
 <body>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
@@ -34,7 +35,7 @@
 
 <p style="clear:both"></p>
 <div class="forum" >
-	<div th:replace="pc/forum/common/top::top"  id="content" style="width: 1200px; margin: 0 auto;">
+	<div th:replace="pc/forum/common/top::top" id="content" style="width: 1200px; margin: 0 auto;">
 	</div>
 	<div id="content" style="width: 1200px; margin: 0 auto;">
 		<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
@@ -54,7 +55,7 @@
 										帖子标题
 									</th>
 									<th style="width: 150px;">
-										发表者
+										所属板块
 									</th>
 								</tr>
 							</thead>
@@ -69,11 +70,11 @@
 										<a th:href="@{/forum/details(id=${topic.id})}"><span th:text="${topic.title }">帖子3</span></a>
 									</td>
 									<td>
-										<span th:text="${topic.user.nickName }">诸葛亮</span>
+										<span th:text="${topic.section.name }">作者公告</span>
 									</td>
 								</tr>
-								<!-- <tr style="background-color:#ddd;"><td colspan="3" style="border-left: 1px solid #dddddd;">
-								<a th:href="@{/forum/tuijian}"><span style="color:blue;"><strong>更多推荐</strong></span></a></td></tr> -->
+								<tr style="background-color:#ddd;"><td colspan="3" style="border-left: 1px solid #dddddd;">
+								<a th:href="@{/forum/tuijian}"><span style="color:blue;"><strong>更多推荐</strong></span></a></td></tr>
 							</tbody>
 						</table>
 					</td>
@@ -167,7 +168,7 @@
 										<a th:href="@{/forum/details(id=${newTopic.id})}"><span th:text="${#strings.abbreviate(newTopic.title,24)}">hhh</span></a>
 									</td>
 									<td>
-										<a th:href="@{/forum/details(id=${newTopic.id})}"><span th:text="${newTopic.remark}">hhh</span></a>
+										<a th:href="@{/forum/details(id=${newTopic.id})}"><span style="text-indent: 2em;align:left;" th:text="${newTopic.remark}">hhh</span></a>
 									</td>
 									<td>
 										<a th:href="@{/forum/topicList(sectionId=${newTopic.section.id})}"><span th:text="${newTopic.section.name}">帖子3</span></a>
@@ -176,8 +177,8 @@
 										<span th:text="${newTopic.replySum}">123</span>
 									</td>
 								</tr>
-								<!-- <tr><td colspan="4" style="border-left: 1px solid #dddddd;">
-								<a th:href="@{/forum/newsTopicList}"><span style="color:blue;"><strong>查看全部</strong></span></a></td></tr> -->
+								<tr><td colspan="4" style="border-left: 1px solid #ddd;">
+								<a th:href="@{/forum/newsTopicList}"><span style="color:blue;"><strong>查看全部</strong></span></a></td></tr>
 							</tbody>
 						</table>
 					</td>

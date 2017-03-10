@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
 	<link rel="stylesheet"  href="forum/css/bootstrap.css" th:href="@{/css/pc/forum/css/bootstrap.css}"/>
 	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
+	<link rel="stylesheet" type="text/css" href="css/bing-progress.css" th:href="@{/css/pc/css/bing-progress.css}" />
 </head>
 <body>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
@@ -18,7 +19,7 @@
 
 <p style="clear:both"></p>
 <div class="forum" >
-	<div id="content" style="width: 1200px; margin: 0 auto; padding-bottom:100px;">
+	<div th:replace="pc/forum/common/top::top" id="content" style="width: 1200px; margin: 0 auto; padding-bottom:100px;">
 		<div id="forum-header-wrapper">
 			<div id="forum-header" class="container">
 				<div id="forum-logo">
@@ -26,67 +27,67 @@
 				</div>
 			</div>
 		</div>
-</div>
+	</div>
 
-<div style="width: 1200px; margin: 0 auto">
-	<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;width: 1400px;" align="center">
-		<tr height="30" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'">
-			<td style="text-indent:5;">
-				<b><span style="color:white">■ 发表帖子</span></b>
-			</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td style="width: 220px;" valign="top">
-				<table style="margin-top: 10;margin-left: 20px;" class="">
-					<tr>
-						<td valign="top" width="99%" style="line-height:20px;">发帖许可：<br/><br/>
-							<ul class="unstyled">
-								<li>*请不要发表危害祖国的非法信息！</li><br/><br/>
-								<li>*请不要发表侵犯个人名誉的信息！</li><br/><br/>
-								<li>*请不要发表不文明内容！</li>
-							</ul>
-						</td>
-					</tr>
-					<tr height="40">
-						<td align="center">违反以上规则所发生的后果自负！</td>
-					</tr>
-				</table>
-			</td>
-			<td>
-				<form id="fm" class="form-horizontal" style="margin-top: 10px;" th:action="@{/forum/topicSave}" method="post">
-					<div class="control-group">
-						<label class="control-label" for="title">【主题】</label>
-						<div class="controls">
-							<input type="text" id="title" name="topicTitle" maxlength="100" style="height:30px; width: 800px; padding:4px 6px;"/>
+	<div style="width: 1200px; margin: 0 auto">
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;width: 1400px;" align="center">
+			<tr height="30" th:attr="style='background:url('+@{/image/pc/forum/images/index/classT.jpg}+')  center 0 no-repeat;'">
+				<td style="text-indent:5;">
+					<b><span style="color:white">■ 发表帖子</span></b>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td style="width: 220px;" valign="top">
+					<table style="margin-top: 10;margin-left: 20px;">
+						<tr>
+							<td valign="top" width="99%" style="line-height:20px;"><br/><br/><strong>发帖许可：</strong><br/><br/><br/>
+								<ul class="unstyled">
+									<li>* 请不要发表危害祖国的非法信息！</li><br/><br/>
+									<li>* 请不要发表侵犯个人名誉的信息！</li><br/><br/>
+									<li>* 请不要发表不文明内容！</li>
+								</ul>
+							</td>
+						</tr>
+						<tr height="40">
+							<td align="center">违反以上规则所发生的后果自负！</td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<form id="fm" class="form-horizontal" style="margin-top: 10px;" th:action="@{/forum/topicSave}" method="post">
+						<div class="control-group">
+							<label class="control-label" for="title">【主题】</label>
+							<div class="controls">
+								<input type="text" id="title" name="topicTitle" maxlength="100" style="height:30px; width: 800px; padding:4px 6px;"/>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="section">【板块】</label>
-						<div class="controls">
-							<select id="section" name="topicSectionId" style="width: 400px;">
-								<option value="0">请选择板块...</option>
-								<option th:each="section:${sectionList}" th:value="${section.id}" th:text="${section.name}"></option>
-							</select>
+						<div class="control-group">
+							<label class="control-label" for="section">【板块】</label>
+							<div class="controls">
+								<select id="section" name="topicSectionId" style="width: 400px;">
+									<option value="0">请选择板块...</option>
+									<option th:each="section:${sectionList}" th:value="${section.id}" th:text="${section.name}"></option>
+								</select>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="kindcontent">【内容】</label>
-						<div class="controls">
-							<textarea name="topicContent" id="kindcontent" class="ckeditor" style="height:500px;width: 800px;" ></textarea>
+						<div class="control-group">
+							<label class="control-label" for="kindcontent">【内容】</label>
+							<div class="controls">
+								<textarea name="topicContent" id="kindcontent" class="ckeditor" style="height:500px;width: 800px;" ></textarea>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<Button class="shubing-btn shubing-btn-primary " data-dismiss="modal" aria-hidden="true" type="button" onclick="checkForm()">提交</Button>
-							<span id="error"></span>
+						<div class="control-group">
+							<div class="controls">
+								<Button class="shubing-btn shubing-btn-primary " data-dismiss="modal" aria-hidden="true" type="button" onclick="checkForm()">提交</Button>
+								<span id="error"></span>
+							</div>
 						</div>
-					</div>
-				</form>
-			</td>
-		</tr>
-	</table>
-</div>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
 </div>
 
 

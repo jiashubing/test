@@ -13,14 +13,15 @@
 	<link rel="stylesheet"  href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
 	<link rel="stylesheet" href="forum/css/shubingcsdn.css" th:href="@{/css/pc/forum/css/shubingbbs.css}" />
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+	<link rel="stylesheet" type="text/css" href="css/bing-progress.css" th:href="@{/css/pc/css/bing-progress.css}" />
 </head>
 <body>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
 </div>
 
 <p style="clear:both"></p>
-<div class="forum" >
-	<div id="content" style="width: 1200px; margin: 0 auto;">
+<div class="forum">
+	<div th:replace="pc/forum/common/top::top" id="content" style="width: 1200px; margin: 0 auto;">
 		<div id="forum-header-wrapper">
 			<div id="forum-header" class="container">
 				<div id="forum-logo">
