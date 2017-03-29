@@ -68,6 +68,30 @@ public class HomeAction {
 		return ValidatePcMobile.checkRequest(request, "/history");
 	}
 	
+	@RequestMapping("/happy")
+	public String loadHappy(Model model,HttpServletRequest request)throws Exception{
+		model.addAttribute("flag","happy.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/happy");
+	}
+	
+	@RequestMapping("/happy/hahaha")
+	public String loadHahaha(Model model,HttpServletRequest request)throws Exception{
+		model.addAttribute("flag","happy.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/happys/hahaha");
+	}
+	
+	@RequestMapping("/video")
+	public String loadVedio(Model model,HttpServletRequest request)throws Exception{
+		model.addAttribute("flag","video.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/video");
+	}
+	
+	@RequestMapping("/music")
+	public String loadMusic(Model model,HttpServletRequest request)throws Exception{
+		model.addAttribute("flag","music.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/music");
+	}
+	
 	@RequestMapping("/regist")
 	public String loadRegist(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
 		if(dbUser != null){

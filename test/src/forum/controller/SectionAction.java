@@ -153,6 +153,10 @@ public class SectionAction {
 		}else{
 			section.setLogo("");
 		}
+		section.setGoodCount((long)0);
+		section.setNoReplyCount((long)0);
+		section.setTotalCount((long)0);
+		
 		sectionService.saveSection(section);
 		//重定向时传递参数
 		return "redirect:/admin/sectionList?pageNo="+pageNo;
