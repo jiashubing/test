@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  	<meta charset="utf-8" />
+  	<meta name="baidu-site-verification" content="3uYjxVgfa1" />
+  	<meta content="width=device-width,initial-scale=1,user-scalable=no" name="viewport" />
+  	<meta name="format-detection" content="telephone=no" />
+  	<title>阿丙的私人定制</title>
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+  	<meta name="mobile-web-app-capable" content="yes" />
+	<link rel="shortcut icon" href="favicon.ico" th:href="@{/image/favicon.ico}" />
+	<link rel="stylesheet" href="./css/common.shubing.css" th:href="@{/css/mobile/css/common.shubing.css}"/> 
+  	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/css/resource.shubing.css}"/>
+  	<link rel="stylesheet" href="./css/heart.shubing.css" th:href="@{/css/mobile/css/heart.shubing.css}"/>
+</head>
+<body style="padding-bottom:0px;">
+  <div class="j_top_bar blue_kit">
+   <div class="blue_kit_left">
+    <a href="" class="j_back_btn blue_kit_btn"><span class="icon_tieba_logo blue_kit_btn_logo"></span><span class="blue_kit_text">阿丙的私人定制</span></a>
+   </div>
+   <div class="blue_kit_right"> 
+    <!-- <a href="" class="blue_kit_icon j_top_message index_icon top_message"> </a>
+    <a href="" class="blue_kit_icon index_icon top_search"></a>  -->
+   </div>
+  </div>
+  <div class="j_tab_index tab_index"> 
+	<div class="tab_head tab_index_head j_tab_index_head blue_kit light_tab_head tab_index_head_clone" style="display: -webkit-box; opacity: 1;"> 
+     	<a class="tab_head_item j_tab_discovery active" href="" th:href="@{/index}">首页</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/forum}">论坛</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/mobilegames}">游戏</a>
+		<!-- <a class="tab_head_item j_tab_selected" href="" th:href="@{/}">助眠</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/}">调查</a> -->
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/beforelogin}">个人</a>
+    </div>
+	<p style="line-height:50%;"><img width="100%" src="../mobile/images/zhifu.png" th:src="@{/image/mobile/images/zhifu.png}"/></p>
+	<p style="text-indent:2em;"><span style="color:orange;">唉，悲催啊，申请了一个收钱码，却无用武之地。放到网站上来吧，万一有人看见了，想要打赏我呢，哈哈哈！只要打赏我一分钱，我就很知足啦！</span></p>
+	<p style="text-indent:2em;">一般情况下，手指长按上面的图片，就会有“识别图中二维码”的选项，会自动跳转到支付宝。</p>
+	<p style="text-indent:2em;">如果这个办法不行，就只能绕个弯了。具体方法是：把上边的图片保存到本地，然后打开支付宝，【朋友】板块，自己给自己发条消息，消息的内容呢就是这张图片了。然后就可以长按图片，识别二维码了。</p>
+	<p style="text-indent:2em;">注意是<span style="color:orange;">付款</span>，不是<span style="color:orange;">转账</span>哟！</p>
+</div>
+ 	<div th:if="${session.dbUser==null}" class="j_footer footer">
+		<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
+		<a class="footer_link" href="" th:href="@{/login(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">登录</a><span class="separator">|</span>
+		<a class="footer_link" href="" th:href="@{/regist}">注册</a><br/>
+	</div>
+ 	<div th:unless="${session.dbUser==null}" class="j_footer footer">
+		<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
+		<a class="footer_link" href="" th:href="@{/mylogout(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">注销</a><br/>
+	</div>
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?18e0f33db7609c8e4d02a81149c37a31";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+ </body>
+</html>

@@ -1,0 +1,12 @@
+.client_ghost_icon {
+	margin: 10px;
+	position: fixed;
+	z-index: 198;
+	bottom: 40px;
+	right: 0;
+	width: 42px;
+	height: 42px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: block
+}

@@ -6,12 +6,20 @@
 		<div id="bootstrap-shubing">
 			<div id="mainContent" class="shubing-tool-wrapper">
 				<div class="shubing-toolName">学习程序</div>
-				<div class="shubing-toolUsing shubing-clearfix">
+				<div class="shubing-toolUsing shubing-clearfix" style="padding-bottom:50px;">
 					<ul class="shubing-nav shubing-nav-tabs">
 						<li><a th:href="@{/history(showId=1)}">Web项目</a></li>
 						<li class="active"><a th:href="@{/history(showId=2)}">学习程序</a></li>
 					</ul>
-					
+					<ul class="shubinghistorylist">
+						<li>
+							<span style="color: #2d64b3;font-size:16px;"><strong>查找Jar包小工具</strong></span>
+							<p style="text-indent:2em;">在本地的项目中，有时想根据引入的类，查找所在的jar包。这个时候如果每个jar包都去找，那明显不是程序员的风格。于是我就写了一个小工具，运行后效果如下图，可以很方便得根据类名查找。</p>
+							<p style="text-indent:2em;"><img src="../images/findjar.png" th:src="@{/image/pc/images/findjar.png}" style="width:500px;"/></p>
+							<p style="text-indent:2em;">使用方法：在安装了jre环境的电脑中，进入控制台，然后输入命令：java -jar findjar.jar</p>
+							<p style="text-indent:2em;"><span class="historyhref">资源下载：<a href="http://pan.baidu.com/s/1kVt5sj1">http://pan.baidu.com/s/1kVt5sj1</a>&nbsp;&nbsp;&nbsp;&nbsp;密码：<span style="color:green">367d</span></span></p>
+						</li>
+					</ul>
 				</div>
 				<!--  <div class="dddys" style="margin-top:10px; margin-bottom:25px;">
 			        <p class="ysxz">

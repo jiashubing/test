@@ -510,5 +510,13 @@ public class HomeAction {
 	 public String resume(HttpServletRequest request){
 		 return ValidatePcMobile.checkRequest(request, "/resume");
 	 }
+	 
+	 /**
+	  * 跳转到打赏页面
+	  */
+	 @RequestMapping("/shang")
+	 public String shang(HttpServletRequest request){
+		 return ValidatePcMobile.checkRequest(request, "/shang");
+	 }
 	
 }
