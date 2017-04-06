@@ -1,14 +1,4 @@
-.square{
-	width:400px;height:400px;position:relative; 
-	
-	transform:rotate(45deg); 
-	-webkit-transform:rotate(45deg); 
-	-moz-transform:rotate(45deg); 
-	
-	animation:rotate infinite linear 5s;margin:10% auto;
-	-webkit-animation:rotate infinite linear 5s;margin:10% auto;
-	-moz-animation:rotate infinite linear 5s;margin:10% auto;
-}
+.square{width:400px;height:400px;position:relative;transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);animation:rotate infinite linear 5s;margin:10% auto;-webkit-animation:rotate infinite linear 5s;margin:10% auto;-moz-animation:rotate infinite linear 5s;margin:10% auto;}
 .rect{width:400px;height:200px;position:relative;border:1px #d2d2d2 solid;border-bottom:none;}
 .inner_circle{width:200px;height:200px;border-radius:200px;position:absolute;z-index:1;}
 .dot{width:50px;height:50px;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;border-radius:50%;}
@@ -18,21 +8,12 @@
 .rect_two{border-radius:0 0 200px 200px;background:black;}
 .rect_two_one{bottom:100px;right:0;background:white;}
 .rect_two_two{background:black;}
-@keyframes rotate{
-	from{
-	transform:rotate(0deg);
-	-webkit-transform:rotate(0deg);
-	}to{
-	transform:rotate(360deg);
-	-webkit-transform:rotate(360deg);
-}}
-
+@keyframes rotate{from{transform:rotate(0deg);-webkit-transform:rotate(0deg);}to{transform:rotate(360deg);-webkit-transform:rotate(360deg);}}
 .shubingspan1{font-size:16px; color:blue; display:block; margin-bottom:10px;}
 .shubinghr{width:60px; height:1px;border:none;border-top:1px solid #CCCCCC;}
 .shubingspan2{font-size:13px; color:grey; display:block; margin-top:10px;}
-
 .shubingxinxi{font-size:15px; color:grey; line-height:25px; min-height:400px;}
-.shubingxinxi a:link{text-decoration: none;  /* 指正常的未被访问过的链接*/}
+.shubingxinxi a:link{text-decoration: none; /* 指正常的未被访问过的链接*/}
 .shubingxinxi a:visited{text-decoration:none;color: green; /*指已经访问过的链接*/}
-.shubingxinxi a:hover{ text-decoration:underline; font-size:18px;color:blue/*指鼠标在链接*/}
-.shubingxinxi a:active{text-decoration:none;/* 指正在点的链接*/ }
+.shubingxinxi a:hover{text-decoration:underline; font-size:18px;color:blue/*指鼠标在链接*/}
+.shubingxinxi a:active{text-decoration:none;/* 指正在点的链接*/}

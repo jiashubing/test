@@ -1,9 +1,5 @@
-.mythymeleaf{
-font:14px/1.5 '微软雅黑';word-wrap:break-word;word-break:break-all;-webkit-text-size-adjust:none;background:#fff;color:#333;
-}
+.mythymeleaf{font:14px/1.5 '微软雅黑';word-wrap:break-word;word-break:break-all;-webkit-text-size-adjust:none;background:#fff;color:#333;}
 .mythymeleaf a{color:#428bca;text-decoration:none;outline:0}
 .mythymeleaf a:hover,a:active{color:#2a6496;text-decoration:none;}
 .mythymeleaf a:focus{outline:0;}
-.mythymeleaf a:link, a:visited {
-    color: #333;
-}
+.mythymeleaf a:link, a:visited {color: #333;}

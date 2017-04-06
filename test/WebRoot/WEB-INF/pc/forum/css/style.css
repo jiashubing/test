@@ -1,55 +1,8 @@
-.forum {
-	margin: 0px;
-	padding: 0px;
-	background: rgba(0,0,0,.04);
-	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 16px;
-	font-weight: 300;
-	color: #363636;
-}
-
-#forum-header {
-	position: relative;
-	overflow: hidden;
-	text-align: center;
-}
-
-#forum-header-wrapper
-{
-	overflow: hidden;
-	background: #0074c7;
-}
-
-#forum-logo {
-	width: 500px;
-	margin: 0 auto;
-	padding: 2em 0em;
-	text-transform: uppercase;
-}
-
-#forum-logo h1 {
-	font: normal 400% 'Jenna Sue', arial, sans-serif;
-	letter-spacing: 0.10em;
-	/* font-size: 3em; */
-	margin:0;
-	color: #FFF;
-}
-
-#forum-logo p {
-	letter-spacing: 0.10em;
-	color: #FFF;
-}
-
-#forum-logo a {
-	text-decoration: none;
-	color: #FFF;
-}
-
-
-
-.postBtn{
-	background:url(../images/post.jpg) no-repeat 0 0;
-	width: 80px;
-	height: 33px;
-	padding: 0px;
-}
+.forum{margin: 0px;padding: 0px;background: rgba(0,0,0,.04);font-family: 'Source Sans Pro', sans-serif;font-size: 16px;font-weight: 300;color: #363636;}
+#forum-header{position: relative;overflow: hidden;text-align: center;}
+#forum-header-wrapper{overflow: hidden;background: #0074c7;}
+#forum-logo{width: 500px;margin: 0 auto;padding: 2em 0em;text-transform: uppercase;}
+#forum-logo h1{font: normal 400% 'Jenna Sue', arial, sans-serif;letter-spacing: 0.10em;/* font-size: 3em; */margin:0;color: #FFF;}
+#forum-logo p{letter-spacing: 0.10em;color: #FFF;}
+#forum-logo a{text-decoration: none;color: #FFF;}
+.postBtn{background:url(../images/post.jpg) no-repeat 0 0;width: 80px;height: 33px;padding: 0px;}

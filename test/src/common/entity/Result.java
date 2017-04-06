@@ -1,13 +1,13 @@
 package common.entity;
 
 import java.io.Serializable;
-import java.util.Hashtable;
-import java.util.List;
+//import java.util.Hashtable;
+//import java.util.List;
 
 /**
- * Created by shiliting on 2015/6/25.
  * 该类是结果对象
- * @author shiliting
+ * @author jiashubing
+ *
  */
 public class Result implements Serializable {
 
@@ -21,7 +21,7 @@ public class Result implements Serializable {
     private String current_dir_path;
     private String current_url;
     private int total_count;
-    private List<Hashtable> file_list;
+//    private List<Hashtable> file_list;
 
     public Result() {
 
@@ -64,13 +64,13 @@ public class Result implements Serializable {
         this.total_count = total_count;
     }
 
-    public List<Hashtable> getFile_list() {
+    /*public List<Hashtable> getFile_list() {
         return file_list;
     }
 
     public void setFile_list(List<Hashtable> file_list) {
         this.file_list = file_list;
-    }
+    }*/
 
     public int getError() {
         return error;

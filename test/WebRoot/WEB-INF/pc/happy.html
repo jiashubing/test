@@ -9,42 +9,136 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
     <link rel="stylesheet" href="forum/css/style.css" th:href="@{/css/pc/forum/css/style.css}" />
-    <link rel="stylesheet" href="onlinetools/css/mytools.css" th:href="@{/css/pc/onlinetools/css/mytools.css}"/>
-    <link rel="stylesheet" href="onlinetools/css/bootstrap.shubing.css" th:href="@{/css/pc/onlinetools/css/bootstrap.shubing.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/taiji.css" th:href="@{/css/pc/css/taiji.css}"/>
+<!--     <link rel="stylesheet" href="onlinetools/css/mytools.css" th:href="@{/css/pc/onlinetools/css/mytools.css}"/>
+ -->    <link rel="stylesheet" href="onlinetools/css/bootstrap.shubing.css" th:href="@{/css/pc/onlinetools/css/bootstrap.shubing.css}"/>
 </head>
 <body>
 <div style="min-height:834px">
     <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;">
     </div>
-	<div id="content" style="width: 1200px; margin: 0 auto;">
-		<div id="forum-header-wrapper">
-			<div id="forum-header" class="container">
-				<div id="forum-logo">
-					<h1>
-						<a href="#">亲密度调查</a>
-					</h1>
-				</div>
+   	 <p style="clear:both"></p>
+
+<div class="fullSlide">
+
+   <div class="bd">
+       <ul>
+           <li style="background:url(images/sky-bg.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/sky-bg.jpg}+')  center 0 no-repeat;'"></li>
+           <li style="background:url(images/sky-bg2.jpg)  center 0 no-repeat;" th:attr="style='background:url('+@{/image/pc/images/sky-bg2.jpg}+')  center 0 no-repeat;'"></li>
+        </ul>
+    </div>
+
+    <div class="hd">
+        <ul></ul>
+    </div>
+</div>
+
+
+<p style="clear:both"></p>
+
+<p style="height:20px"></p>
+<div style="text-align:center;" >
+	<span class="shubingspan1">四个板块</span>
+	<hr class="shubinghr"/>
+	<span class="shubingspan2">论坛系统的后台功能最为完善，也是网站的主要交互功能；在线工具则是为了解决实际遇到的问题而设计</span>
+</div>
+<div class="hx">
+    <p style="clear:both; height:50px"></p>
+
+    <div class="hximg">
+        <ul>
+            <li class="pone">
+                <p class="ystitle">论坛系统</p>
+                <p class="poneimg"></p>
+                <p class=" ysmf">分享点滴爱好与兴趣</p>
+                <p class=" yssz">吾之所知<br/>犹如冰山一角</p>
+            </li>
+            <li class="ptwo">
+                <p class="ystitle">在线工具</p>
+                <p class="pthreeimg"></p>
+                <p class="ysmf">我的小小创意</p>
+                <p class="yssz">吾之所想<br/>技术改善生活</p>
+            </li>
+            <li class="pthree">
+                <p class="pthree ystitle">历史项目</p>
+                <p class="ptwoimg"></p>
+                <p class="ysmf">程序路上是bug</p>
+                <p class="yssz">吾之所学<br/>今生永不停息</p>
+            </li>
+			
+			<li class="pfour">
+                <p class="pfour ystitle">作者亲密度调查</p>
+                <p class="pfourimg"></p>
+                <p class="ysmf">厚脸皮是怎样炼成的</p>
+				<p class="yssz">大哥大姐<br/>烦请多多支持啊</p>
+           </li>
+        </ul>
+    </div>
+</div>
+<img src="images/topone.png" width="100%" th:src="@{/image/pc/images/topone.png}"/>
+
+<div class="listone listhx">
+    <div style="width: 960px; margin: 0 auto;">
+		<img src="images/zuozhejiyu.png" width="100%" th:src="@{/image/pc/images/zhanzhangjiyu.png}"/>
+    </div>
+</div>
+<img src="images/bottonone.png" width="100%" th:src="@{/image/pc/images/bottonone.png}"/>
+
+<div class="kf">
+	<div style="text-align:center;margin-bottom:50px;">
+		<span class="shubingspan1">我的信息</span>
+		<hr class="shubinghr"/>
+		<span class="shubingspan2">大学有一点很好，它给予我的荣耀放到了网上，毕业以后也可以看到，在此展示下自己的才华哈</span>
+	</div>
+	<div class="shubingxinxi">
+    <p><span style="color:orange">我的博客园</span>：<a href="http://www.cnblogs.com/acm-bingzi" target="_blank">http://www.cnblogs.com/acm-bingzi</a>(凌乱的心)</p>
+    <p><span style="color:orange">我的微博</span>：<a href="http://weibo.com/jiashubing" target="_blank">http://weibo.com/jiashubing </a>(贾树丙)</p>
+    <p><span style="color:orange">我的ACM</span>：<a href="http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=2272&amp;archive=0" target="_blank">http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=2272&amp;archive=0</a></p>
+    <p style="text-indent:4em;"><a href="http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=2186" target="_blank">http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=2186</a></p>
+    <p style="text-indent:4em;"><a href="http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=2588" target="_blank">http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=2588</a></p>
+    <p style="text-indent:4em;"><a href="http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=3274" target="_blank">http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=3274</a></p>
+    <p style="text-indent:4em;"><a href="http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=3020" target="_blank">http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=3020</a></p>
+    <p style="text-indent:4em;"><a href="http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbnewsid=2478&amp;wbtreeid=1074" target="_blank">http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbnewsid=2478&amp;wbtreeid=1074</a></p>
+    <p style="text-indent:4em;"><a href="http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=3285" target="_blank">http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=3285</a></p>
+    <p style="text-indent:4em;"><a href="http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=3325" target="_blank">http://info.zufe.edu.cn/xx_nry.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1074&amp;wbnewsid=3325</a></p>
+    <p><br/><span style="color:orange">我的简历</span>：<a th:href="@{/resume}" target="_blank">http://www.jiashubing.cn/resume</a></p>
+    </div>
+</div>
+
+<img src="images/topone.png" width="100%" th:src="@{/image/pc/images/topone.png}"/>
+<div class="listone">
+<div style="text-align:center;">
+		<span class="shubingspan1">修行</span>
+		<hr class="shubinghr"/>
+		<span class="shubingspan2">学拳六七年，功夫到中成。招熟求懂劲，融汇能贯通</span>
+	</div>
+	<div class="square">
+		<div class="rect rect_one">
+			<div class="inner_circle rect_one_one">
+				<div class="dot rect_one_two"></div>
 			</div>
 		</div>
-		<p style="clear:both"></p>
-   	 	<p style="height:400px;"></p>
-   	 	<p style="text-align:center;color:red;font-size:50px;"><strong>内容待定</strong></p>
-   	 	<p style="height:400px;"></p>
-   	 	
-   	 	<div id="ad1" style="z-index: 5; position: absolute; left: 978.182px; top: 1039.49px;">
-		    <!--漂浮开始-->
-		    <!--这个链接可以恶搞下-->
-		    <a href="#"><img src="images/aixin.png" th:src="@{/image/pc/images/aixin.png}"/></a>
-		    <!--漂浮结束-->
+		<div class="rect rect_two">
+			<div class="inner_circle rect_two_one">
+				<div class="dot rect_two_two"></div>
+			</div>
 		</div>
-		
-		<div style="width: 126px; height: 189px; position: fixed; top:250px; right: 20px; display: block; z-index: 100;">
-		    <div style="display: block; width: 126px;"><img src="images/erweima.png" th:src="@{/image/pc/images/erweima.png}" style="width: 126px;"/></div>
-		    <div style="background-color: #f1f1f1; text-align: center; font-size: 16px; color: #666; height: 30px; line-height: 30px; display: block;">
-		    	 <!--这个链接可以恶搞下-->
-		        <a href="#" th:href="@{/happy/hahaha}" style="color: #333; font-size: 14px;" target="_blank">见证友谊的时刻到了</a></div>
-		    <img src="images/guli.png" th:src="@{/image/pc/images/guli.png}" style="width:126px; height:65px;"/></div>
-		</div>
+	</div>
+</div>
+ 	 	<div id="ad1" style="z-index: 5; position: absolute; left: 978.182px; top: 1039.49px;">
+    <!--漂浮开始-->
+    <!--这个链接可以恶搞下-->
+    <a href="#"><img src="images/aixin.png" th:src="@{/image/pc/images/aixin.png}"/></a>
+    <!--漂浮结束-->
+</div>
+
+<div style="width: 126px; height: 189px; position: fixed; top:250px; right: 20px; display: block; z-index: 100;">
+    <div style="display: block; width: 126px;"><img src="images/erweima.png" th:src="@{/image/pc/images/erweima.png}" style="width: 126px;"/></div>
+    <div style="background-color: #f1f1f1; text-align: center; font-size: 16px; color: #666; height: 30px; line-height: 30px; display: block;">
+    	 <!--这个链接可以恶搞下-->
+        <a href="#" th:href="@{/happy/hahaha}" style="color: #333; font-size: 14px;" target="_blank">见证友谊的时刻到了</a></div>
+    <img src="images/guli.png" th:src="@{/image/pc/images/guli.png}" style="width:126px; height:65px;"/></div>
 </div>
 <p style="clear:both"></p>
 <div th:include="pc/loginPopup::footerDiv" class="footer">
@@ -226,9 +320,26 @@
 	/*]]>*/
 	</script>
 <script type="text/javascript">
+	jQuery(".fullSlide").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click"
+    });
     //漂浮开始
     var ad1 = new AdMove("ad1");
     ad1.Run();
+</script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+ 	var loginFlag = /*[[${loginFlag}]]*/true;
+    /*]]>*/
+    if(loginFlag==1){
+	   $("#asaimsg").show();
+       $("#asaimsgbg").show();
+    }
 </script>
 </body>
 </html>
