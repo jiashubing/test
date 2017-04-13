@@ -290,12 +290,17 @@ public class ToolsAction {
 		return ValidatePcMobile.checkRequest(request, "/tools");
 	}
 	
+	@RequestMapping("/tools/five")
+	public String loadToolFive(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
+		showId = 5;
+		model.addAttribute("showId",showId); 
+		model.addAttribute("flag","tools.html");  //此属性用来给前台确定当前是哪个页面
+		return ValidatePcMobile.checkRequest(request, "/tools");
+	}
+	
 	/**
-	 * 每行文本的首尾增加相同字符工具
+	 * 每个段落后增加空白行工具
 	 * @param startText
-	 * @param startChar
-	 * @param endChar
-	 * @param request
 	 * @return
 	 * @throws Exception
 	 */
@@ -321,6 +326,14 @@ public class ToolsAction {
         return result;
     }
 	
+	/**
+	 * 删除行首到指定字符工具
+	 * @param startText
+	 * @param startChar
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/tools/deleteString")
 	@ResponseBody
 	public Result deleteString(String startText,String startChar,
@@ -335,6 +348,35 @@ public class ToolsAction {
 		
 		if(flag){
 			ans = FileEcodeUtil.deleteString(cin,startChar);
+		}
+		FileEcodeUtil.deleteFile(inPath);
+		
+		result.setStatus(1);
+		result.setBody(ans);
+		
+		return result;
+	}
+	
+	/**
+	 * 删除所有空白行工具
+	 * @param startText
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/tools/deleteLine")
+	@ResponseBody
+	public Result deleteLine(String startText,HttpServletRequest request) throws Exception {
+		Result result = new Result();
+		
+		String inName = DateUtil.getRadomStr();
+		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+inName+".txt";
+		File cin =  new File(inPath);
+		String ans = "";
+		boolean flag= FileEcodeUtil.writeStrToFile(startText, cin);
+		
+		if(flag){
+			ans = FileEcodeUtil.deleteBlankLine(cin);
 		}
 		FileEcodeUtil.deleteFile(inPath);
 		

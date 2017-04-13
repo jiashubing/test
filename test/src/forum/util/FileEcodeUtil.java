@@ -456,6 +456,52 @@ public class FileEcodeUtil {
 		return ans;
 	}
 	
+	public static String deleteBlankLine(File file){
+		String ans="";
+		InputStreamReader read = null;
+		BufferedReader bufferedReader = null;
+		try {
+			String encoding="UTF-8";
+			if(file.isFile() && file.exists()){ //判断文件是否存在
+				read = new InputStreamReader(new FileInputStream(file),encoding);//考虑到编码格式
+				bufferedReader = new BufferedReader(read);
+				String lineTxt = null;
+				//写入新文件
+				while((lineTxt = bufferedReader.readLine()) != null){
+					lineTxt += "\n";
+					ans += lineTxt.replaceAll("((\r\n)|\n)[\\s\t ]*(\\1)+", "$1").replaceAll("^((\r\n)|\n)", "");
+				}
+				read.close();
+				bufferedReader.close();
+			}else{
+			}
+		} catch (Exception e) {
+			try {
+				if(read!=null){
+					read.close();
+				}
+				if(bufferedReader!=null){
+					bufferedReader.close();
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally{
+			try {
+				if(read!=null){
+					read.close();
+				}
+				if(bufferedReader!=null){
+					bufferedReader.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return ans;
+	}
+	
 	//修改数据
 	public static String modifyLine(String x ,String a,String b){
 	    StringBuffer sb = new StringBuffer(x);

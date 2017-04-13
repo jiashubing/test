@@ -38,6 +38,8 @@
 	<div th:replace="pc/forum/common/top::top" id="content" style="width: 1200px; margin: 0 auto;">
 	</div>
 	<div id="content" style="width: 1200px; margin: 0 auto;">
+		<form id="preSaveForm" th:action="@{/forum/preSave}"></form>
+		<a onclick="checkUser()"><img alt="发帖" src="images/post.jpg"  th:src="@{/image/pc/forum/images/post.jpg}" style="margin-bottom:10px;"/></a>
 		<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;">
 			 <tbody>
 			 	<tr height="30px">
@@ -204,5 +206,20 @@
      th:style="${errInfo}==null?'display: none':'display: block'"></div>
 <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 <script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
+<script th:inline="javascript">
+function checkUser(){
+    /*<![CDATA[*/
+ 	var flag= /*[[${session.dbUser!=null}]]*/true;
+    /*]]>*/
+    
+    if(flag){
+   	 	$("#preSaveForm").submit();
+    }else{
+    	$("#loginFailedInfo").text("");
+        $("#asaimsg").show();
+        $("#asaimsgbg").show();
+    }
+}
+</script>
 </body>
 </html>

@@ -2,18 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-	<div th:fragment="threeDiv">
+	<div th:fragment="fiveDiv">
 		<div id="bootstrap-shubing">
 			<div id="mainContent" class="shubing-tool-wrapper">
-				<div class="shubing-toolName">每个段落后增加空行工具</div>
+				<div class="shubing-toolName">删除空行工具</div>
 				<div class="shubing-toolUsing shubing-clearfix">
 					<ul class="shubing-nav shubing-nav-tabs">
 						<li><a th:href="@{/tools/one}">Insert String</a></li>
 						<li><a th:href="@{/tools/two}">Custom Encryption</a></li>
-						<li class="active"><a th:href="@{/tools/three}">Add Blank Line</a></li>
+						<li><a th:href="@{/tools/three}">Add Blank Line</a></li>
 						<li><a th:href="@{/tools/four}">Delete String</a></li>
-						<li><a th:href="@{/tools/five}">Delete Blank Line</a></li>
+						<li class="active"><a th:href="@{/tools/five}">Delete Blank Line</a></li>
 					</ul>
+					
 					<div class="shubing-leftBar">
 						<div class="title">原文本:</div>
 						<textarea id="startText" name="startText" th:text="${startText}">这是一个例子,this is a example</textarea>
@@ -21,7 +22,7 @@
 
 					<div class="shubing-operateLR">
 						<div class="OptDetail Button">
-							<input type="button" id="insertLineBtn" class="shubing-btn shubing-btn-primary" value="提交"/>
+							<input type="button" id="deleteLineBtn" class="shubing-btn shubing-btn-primary" value="提交"/>
 							<br/>
 						</div>
 					</div>
@@ -30,11 +31,12 @@
 						<div class="title">修改后:</div>
 						<textarea name="endText" id="endText" class="text_source" readonly="readonly"></textarea>
 					</div>
+					
 				</div>
 				 <div class="dddys" style="margin-top:10px; margin-bottom:25px;">
 			        <p class="ysxz">
 			        <b style="font-size:16px;">使用须知</b><br/>
-			        	1、设计初衷：从网上拷贝的文章，都是不换行的，但是想放到论坛里不换行的话太紧凑了。这个实现原理与【每行文本的首尾增加相同字符工具】是一样的。<br/>
+			        	1、设计初衷：有时候html上的文字，拷贝到txt文档里会平白多出很多空行，这里提供快速删除的方法。<br/>
 			    		2、使用说明：在左边文本框输入初始文本，点击【提交】，就会在右侧生成目标文本。<br/>
 			    		3、注意要点：原文本不能为空，空行也被算作是文本。<br/>
         			</p>
