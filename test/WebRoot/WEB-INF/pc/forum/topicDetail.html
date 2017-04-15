@@ -93,7 +93,7 @@
 									<span id="topiccontent">祖国我爱你</span>
 									<script th:inline="javascript">
 										/*<![CDATA[*/
-										$("#topiccontent").html(/*[[${topic.content}]]*/);
+										$("#topiccontent").html(/*[[${topicContentValue}]]*/);
 	   									 /*]]>*/
 									</script>
 								</div>
@@ -164,7 +164,7 @@
 									<span class="replycontent">哈哈哈，我也爱</span>
 									<script th:inline="javascript">
 										/*<![CDATA[*/
-										$(".replycontent:last").html(/*[[${reply.content}]]*/);
+										$(".replycontent:last").html(/*[[${replyContentList[replyStat.count-1].content}]]*/);
 	   									 /*]]>*/
 									</script>
 								</div>

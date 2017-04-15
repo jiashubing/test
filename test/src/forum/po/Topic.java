@@ -37,7 +37,6 @@ public class Topic implements Serializable{
 	private Section section;			//
 	private User user;					//
 	private String title;				//标题
-	private String content;				//内容
 	private String remark;				//摘要
 	private Date publishTime;			//发表时间
 	private Date modifyTime;			//最新时间
@@ -81,15 +80,6 @@ public class Topic implements Serializable{
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	
-	@Lob
-	@Column(columnDefinition="TEXT")
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
 	}
 	
 	@Column(length=200)

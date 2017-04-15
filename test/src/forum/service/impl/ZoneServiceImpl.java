@@ -44,7 +44,7 @@ public class ZoneServiceImpl implements ZoneService {
 		StringBuffer hql=new StringBuffer("from Zone");
 		if (s_zone!=null) {
 			if (StringUtil.isNotEmpty(s_zone.getName())) {
-				hql.append(" and name like '%"+s_zone.getName()+"%'");
+				hql.append(" and name like '%").append(s_zone.getName()).append("%'");
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
@@ -60,7 +60,7 @@ public class ZoneServiceImpl implements ZoneService {
 		StringBuffer hql=new StringBuffer("select count(*) from Zone");
 		if (s_zone!=null) {
 			if (StringUtil.isNotEmpty(s_zone.getName())) {
-				hql.append(" and name like '%"+s_zone.getName()+"%'");
+				hql.append(" and name like '%").append(s_zone.getName()).append("%'");
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));

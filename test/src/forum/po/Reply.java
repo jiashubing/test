@@ -26,7 +26,6 @@ public class Reply implements Serializable{
 	private Topic topic;		//
 	private User user;			//
 	private String title;		//
-	private String content;	//
 	private Date publishTime;	//
 	private Date modifyTime;	//
 	
@@ -78,14 +77,5 @@ public class Reply implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	@Lob
-	@Column(columnDefinition="TEXT")
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	
 	
 }

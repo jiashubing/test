@@ -35,7 +35,7 @@ public class Section implements Serializable{
 	private String logo;		//
 	private List<Topic> topicList=new ArrayList<Topic>();
 	private Zone zone;			//
-	private Long totalCount;	//帖子松鼠
+	private Long totalCount;	//帖子总数
 	private Long goodCount;		//精华总数
 	private Long noReplyCount;	//未回复总数
 	/*private Section parent;*/		//

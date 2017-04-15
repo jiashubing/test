@@ -73,10 +73,10 @@ public class UserServiceImpl implements UserService {
 		StringBuffer hql=new StringBuffer("from User");
 		if (s_user!=null) {
 			if (StringUtil.isNotEmpty(s_user.getNickName())) {
-				hql.append(" and nickName like '%"+s_user.getNickName()+"%'");
+				hql.append(" and nickName like '%").append(s_user.getNickName()).append("%'");
 			}
 			if (s_user.getType()>0) {
-				hql.append(" and type = "+s_user.getType());
+				hql.append(" and type = ").append(s_user.getType());
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
@@ -91,10 +91,10 @@ public class UserServiceImpl implements UserService {
 		StringBuffer hql=new StringBuffer("select count(*) from User");
 		if (s_user!=null) {
 			if (StringUtil.isNotEmpty(s_user.getNickName())) {
-				hql.append(" and nickName like '%"+s_user.getNickName()+"%'");
+				hql.append(" and nickName like '%").append(s_user.getNickName()).append("%'");
 			}
 			if (s_user.getType()>0) {
-				hql.append(" and type = "+s_user.getType());
+				hql.append(" and type = ").append(s_user.getType());
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
@@ -118,9 +118,9 @@ public class UserServiceImpl implements UserService {
 	public User getUserByNickName(String nickName) {
 		StringBuffer hql=new StringBuffer("from User");
 		if (StringUtil.isNotEmpty(nickName)) {
-			hql.append(" and nickName = '"+nickName+"'");
+			hql.append(" where nickName = '").append(nickName+"'");
 		}
-		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
+		Query query = em.createQuery(hql.toString());
 		
 		Object obj;
 		try {

@@ -45,13 +45,13 @@ public class SectionServiceImpl implements SectionService {
 		StringBuffer hql=new StringBuffer("from Section");
 		if (s_section!=null) {
 			if (StringUtil.isNotEmpty(s_section.getName())) {
-				hql.append(" and name like '%"+s_section.getName()+"%'");
+				hql.append(" and name like '%").append(s_section.getName()).append("%'");
 			}
 			if (s_section.getZone()!=null&&s_section.getZone().getId()>0) {
-				hql.append(" and zoneId = "+s_section.getZone().getId());
+				hql.append(" and zoneId = ").append(s_section.getZone().getId());
 			}
 			if (s_section.getMaster()!=null&&s_section.getMaster().getId()>0) {
-				hql.append(" and masterId = "+s_section.getMaster().getId());
+				hql.append(" and masterId = ").append(s_section.getMaster().getId());
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
@@ -64,8 +64,8 @@ public class SectionServiceImpl implements SectionService {
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public List<Section> findSectionListByZoneId(int zoneId,int pageSize,int pageNo) {
-		StringBuffer hql=new StringBuffer("from Section where zoneId = "+zoneId);
-		Query query = em.createQuery(hql.toString());
+		String hql="from Section where zoneId = "+zoneId;
+		Query query = em.createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<Section> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
@@ -78,13 +78,13 @@ public class SectionServiceImpl implements SectionService {
 		StringBuffer hql=new StringBuffer("select count(*) from Section");
 		if (s_section!=null) {
 			if (StringUtil.isNotEmpty(s_section.getName())) {
-				hql.append(" and name like '%"+s_section.getName()+"%'");
+				hql.append(" and name like '%").append(s_section.getName()).append("%'");
 			}
 			if (s_section.getZone()!=null&&s_section.getZone().getId()>0) {
-				hql.append(" and zoneId = "+s_section.getZone().getId());
+				hql.append(" and zoneId = ").append(s_section.getZone().getId());
 			}
 			if (s_section.getMaster()!=null&&s_section.getMaster().getId()>0) {
-				hql.append(" and masterId = "+s_section.getMaster().getId());
+				hql.append(" and masterId = ").append(s_section.getMaster().getId());
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));

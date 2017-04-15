@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import forum.po.Topic;
+import forum.po.TopicContent;
 import forum.service.ReplyService;
 import forum.service.TopicService;
 import forum.util.StringUtil;
@@ -40,14 +41,18 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public void deleteTopic(Topic topic) {
 		replyService.deleteReplyByTopicId(topic.getId());
-		Query query=em.createQuery("delete from Topic where id= "+topic.getId());
+		Query query=em.createQuery("delete from TopicContent where topicId= "+topic.getId());
+		query.executeUpdate();
+		query=em.createQuery("delete from Topic where id= "+topic.getId());
 		query.executeUpdate();
 	}
 	
 	@Override
 	public void deleteTopicById(Integer topicId) {
 		replyService.deleteReplyByTopicId(topicId);
-		Query query=em.createQuery("delete from Topic where id= "+topicId);
+		Query query = em.createQuery("delete from TopicContent where topicId= "+topicId);
+		query.executeUpdate();
+		query=em.createQuery("delete from Topic where id= "+topicId);
 		query.executeUpdate();
 	}
 
@@ -57,36 +62,32 @@ public class TopicServiceImpl implements TopicService {
 		StringBuffer hql=new StringBuffer("from Topic t");
 		if (s_topic!=null) {
 			if (StringUtil.isNotEmpty(s_topic.getTitle())) {
-				hql.append(" and t.title like '%"+s_topic.getTitle()+"%'");
+				hql.append(" and t.title like '%").append(s_topic.getTitle()).append("%'");
 			}
 			if (s_topic.getUser()!=null) {
 				if (StringUtil.isNotEmpty(s_topic.getUser().getNickName())) {
-					hql.append(" and t.user.nickName like '%"+s_topic.getUser().getNickName()+"%'");
+					hql.append(" and t.user.nickName like '%").append(s_topic.getUser().getNickName()).append("%'");
 				}
 			}
-			if (StringUtil.isNotEmpty(s_topic.getContent())) {
-				hql.append(" and t.content like '%"+s_topic.getContent()+"%'");
-			}
 			if (s_topic.getPublishTime()!=null) {
-				hql.append(" and t.publishTime="+s_topic.getPublishTime());
+				hql.append(" and t.publishTime=").append(s_topic.getPublishTime());
 			}
 			if (s_topic.getModifyTime()!=null) {
-				hql.append(" and t.modifyTime="+s_topic.getModifyTime());
+				hql.append(" and t.modifyTime=").append(s_topic.getModifyTime());
 			}
 			if (s_topic.getSection()!=null) {
 				if (s_topic.getSection().getId()>0) {
-					hql.append(" and t.section.id="+s_topic.getSection().getId());
+					hql.append(" and t.section.id=").append(s_topic.getSection().getId());
 				}
 			}
 			if (s_topic.getTop()!=2) {
-				hql.append(" and t.top="+s_topic.getTop());
+				hql.append(" and t.top=").append(s_topic.getTop());
 			}
 			if (s_topic.getGood()!=2) {
-				hql.append(" and t.good="+s_topic.getGood());
+				hql.append(" and t.good=").append(s_topic.getGood());
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
-//		query.setParameter(1, s_topic.getTitle());
 		@SuppressWarnings("unchecked")
 		List<Topic> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
@@ -96,8 +97,8 @@ public class TopicServiceImpl implements TopicService {
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public List<Topic> findGoodTopicListDesc(int pageSize,int pageNo){
-		StringBuffer hql=new StringBuffer("from Topic t where t.good=1 order by t.publishTime desc");
-		Query query = em.createQuery(hql.toString());
+		String hql="from Topic t where t.good=1 order by t.publishTime desc";
+		Query query = em.createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<Topic> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
@@ -107,8 +108,8 @@ public class TopicServiceImpl implements TopicService {
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public List<Topic> findNewTopicListDesc(int pageSize,int pageNo){
-		StringBuffer hql=new StringBuffer("from Topic t order by t.modifyTime desc");
-		Query query = em.createQuery(hql.toString());
+		String hql="from Topic t order by t.modifyTime desc";
+		Query query = em.createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List<Topic> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
@@ -122,32 +123,29 @@ public class TopicServiceImpl implements TopicService {
 		StringBuffer hql=new StringBuffer("select count(*) from Topic t");
 		if (s_topic!=null) {
 			if (StringUtil.isNotEmpty(s_topic.getTitle())) {
-				hql.append(" and t.title like '%"+s_topic.getTitle()+"%'");
+				hql.append(" and t.title like '%").append(s_topic.getTitle()).append("%'");
 			}
 			if (s_topic.getUser()!=null) {
 				if (StringUtil.isNotEmpty(s_topic.getUser().getNickName())) {
-					hql.append(" and t.user.nickName like '%"+s_topic.getUser().getNickName()+"%'");
+					hql.append(" and t.user.nickName like '%").append(s_topic.getUser().getNickName()).append("%'");
 				}
 			}
-			if (StringUtil.isNotEmpty(s_topic.getContent())) {
-				hql.append(" and t.content like '%"+s_topic.getContent()+"%'");
-			}
 			if (s_topic.getPublishTime()!=null) {
-				hql.append(" and t.publishTime="+s_topic.getPublishTime());
+				hql.append(" and t.publishTime=").append(s_topic.getPublishTime());
 			}
 			if (s_topic.getModifyTime()!=null) {
-				hql.append(" and t.modifyTime="+s_topic.getModifyTime());
+				hql.append(" and t.modifyTime=").append(s_topic.getModifyTime());
 			}
 			if (s_topic.getSection()!=null) {
 				if (s_topic.getSection().getId()>0) {
-					hql.append(" and t.section.id="+s_topic.getSection().getId());
+					hql.append(" and t.section.id=").append(s_topic.getSection().getId());
 				}
 			}
 			if (s_topic.getTop()!=2) {
-				hql.append(" and t.top="+s_topic.getTop());
+				hql.append(" and t.top=").append(s_topic.getTop());
 			}
 			if (s_topic.getGood()!=2) {
-				hql.append(" and t.good="+s_topic.getGood());
+				hql.append(" and t.good=").append(s_topic.getGood());
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
@@ -165,7 +163,7 @@ public class TopicServiceImpl implements TopicService {
 	public List<Topic> findZdTopicListBySectionId(int sectionId,int pageSize,int pageNo) {
 		StringBuffer hql=new StringBuffer("from Topic where top=1");
 		if (sectionId>0) {
-			hql.append(" and sectionId="+sectionId);
+			hql.append(" and sectionId=").append(sectionId);
 		}
 		Query query = em.createQuery(hql.toString());
 		@SuppressWarnings("unchecked")
@@ -179,7 +177,7 @@ public class TopicServiceImpl implements TopicService {
 	public List<Topic> findPtTopicListBySectionId(int sectionId,int pageSize,int pageNo) {
 		StringBuffer hql=new StringBuffer("from Topic");
 		if (sectionId>0) {
-			hql.append(" and sectionId="+sectionId);
+			hql.append(" and sectionId=").append(sectionId);
 		}
 		hql.append(" and top=0 order by modifyTime desc");
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
@@ -192,32 +190,32 @@ public class TopicServiceImpl implements TopicService {
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public Long getNoReplyTopicCount(int sectionId) {
-		StringBuffer hql=new StringBuffer("select count(*) from Topic where replySum=0 and sectionId="+sectionId);
-		Query query = em.createQuery(hql.toString());
+		String hql="select count(*) from Topic where replySum=0 and sectionId="+sectionId;
+		Query query = em.createQuery(hql);
 		return (Long)query.getSingleResult();
 	}
 	
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public Long getGoodTopicCount(int sectionId) {
-		StringBuffer hql=new StringBuffer("select count(*) from Topic where good=1 and sectionId="+sectionId);
-		Query query = em.createQuery(hql.toString());
+		String hql="select count(*) from Topic where good=1 and sectionId="+sectionId;
+		Query query = em.createQuery(hql);
 		return (Long)query.getSingleResult();
 	}
 	
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public Long getAllTopicCount() {
-		StringBuffer hql=new StringBuffer("select count(*) from Topic t");
-		Query query = em.createQuery(hql.toString());
+		String hql="select count(*) from Topic t";
+		Query query = em.createQuery(hql);
 		return (Long)query.getSingleResult();
 	}
 	
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public Long getTotalTopicCount(int sectionId) {
-		StringBuffer hql=new StringBuffer("select count(*) from Topic where sectionId="+sectionId);
-		Query query = em.createQuery(hql.toString());
+		String hql="select count(*) from Topic where sectionId="+sectionId;
+		Query query = em.createQuery(hql);
 		return (Long)query.getSingleResult();
 	}
 
@@ -227,7 +225,7 @@ public class TopicServiceImpl implements TopicService {
 			int pageSize,int pageNo) {
 		StringBuffer hql=new StringBuffer("from Topic where good=1");
 		if (sectionId>0) {
-			hql.append(" and sectionId="+sectionId);
+			hql.append(" and sectionId=").append(sectionId);
 		}
 		Query query = em.createQuery(hql.toString());
 		@SuppressWarnings("unchecked")
@@ -242,7 +240,7 @@ public class TopicServiceImpl implements TopicService {
 			int pageSize,int pageNo) {
 		StringBuffer hql=new StringBuffer("from Topic where good=0");
 		if (sectionId>0) {
-			hql.append(" and sectionId="+sectionId);
+			hql.append(" and sectionId=").append(sectionId);
 		}
 		Query query = em.createQuery(hql.toString());
 		@SuppressWarnings("unchecked")
@@ -254,8 +252,38 @@ public class TopicServiceImpl implements TopicService {
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public Long getPtTopicCountBySectionId(int sectionId) {
-		StringBuffer hql=new StringBuffer("select count(*) from Topic where top=0 and sectionId="+sectionId);
-		Query query = em.createQuery(hql.toString());
+		String hql="select count(*) from Topic where top=0 and sectionId="+sectionId;
+		Query query = em.createQuery(hql);
 		return (Long)query.getSingleResult();
+	}
+
+	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
+	@Override
+	public TopicContent getTopicContent(int topicId) {
+		String hql="from TopicContent t where t.topicId="+topicId;
+		Query query = em.createQuery(hql);
+		TopicContent result = (TopicContent) query.getSingleResult();
+		em.clear();
+		return result;
+//		Map<String, Integer> map = new HashMap<String,Integer>(1);
+//		map.put("topicId", topicId);
+//		return em.find(TopicContent.class, map);
+		
+	}
+
+	@Override
+	public TopicContent saveTopicContent(TopicContent topicContent) {
+		topicContent = em.merge(topicContent);
+		return topicContent;
+	}
+
+	@Override
+	public TopicContent findTopicContentByTopicId(int topicId) {
+		String hql="from TopicContent where topicId = "+topicId;
+		Query query = em.createQuery(hql.toString());
+		TopicContent result = null;
+		result = (TopicContent)query.getSingleResult();
+		em.clear();
+		return result;
 	}
 }

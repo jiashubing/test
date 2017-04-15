@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import common.entity.Result;
 import forum.po.DbUser;
 import forum.po.Reply;
+import forum.po.ReplyContent;
 import forum.po.Topic;
 import forum.service.ReplyService;
 import forum.service.TopicService;
@@ -43,13 +44,12 @@ public class ReplyAction {
 	public Result deleteReply(Integer replyId,HttpServletRequest request) {
 		Result result = new Result();
 		
-		Reply reply = replyService.findReplyById(replyId);
-		Topic topic = reply.getTopic();
-		
+		ReplyContent replyContent = replyService.findReplyContentByReplyId(replyId);
+		Topic topic = topicService.findTopicById(replyContent.getTopicId());
 		
 		//删除数据之前，也要删除图片
 		//提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
-		String[] url = reply.getContent().split("/");
+		String[] url = replyContent.getContent().split("/");
         String imgName;
         int i = 0;
         for (i = 0 ; i <url.length ; i++ ) {
@@ -61,7 +61,6 @@ public class ReplyAction {
                 FileEcodeUtil.deleteFile(outName);
             }
         }
-		
 		
 		replyService.deleteReplyById(replyId);
 		
@@ -134,13 +133,16 @@ public class ReplyAction {
 			reply.setTopic(topic);
 		}
 		
-		reply.setContent(buf.toString());
 		reply.setUser(dbUser.getUser());
 		
 		try {
-			replyService.saveReply(reply);
+			reply = replyService.saveReply(reply);
+			ReplyContent replyContentEmpty = new ReplyContent();
+			replyContentEmpty.setTopicId(reply.getTopic().getId());
+			replyContentEmpty.setContent(buf.toString());
+			replyContentEmpty.setReplyId(reply.getId());
+			replyService.saveReplyContent(replyContentEmpty);
 		} catch (Exception e) {
-//			e.printStackTrace();
 			return "redirect:/forum/details?id="+replyTopicId+"&pageNo="+pageNo+"&errorFlag=true";
 		}
 		

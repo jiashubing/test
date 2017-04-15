@@ -3,16 +3,25 @@ package forum.service;
 import java.util.List;
 
 import forum.po.Reply;
+import forum.po.ReplyContent;
 
 public interface ReplyService {
 
 	public Reply findLastReplyByTopicId(int topicId);
 	
+	public ReplyContent findReplyContentByReplyId(int replyId);
+	
+	public List<ReplyContent> findReplyContentListByTopicId(int topicId,  int pageSize,int pageNo);
+	
 	public Long getReplyCountByTopicId(int topicId);
 	
 	public List<Reply> findReplyListByTopicId(int topicId,  int pageSize,int pageNo);
 	
-	public void saveReply(Reply reply);
+	public List<ReplyContent> getReplyContentListByTopicId(int topicId,  int pageSize,int pageNo);
+	
+	public Reply saveReply(Reply reply);
+	
+	public ReplyContent saveReplyContent(ReplyContent replyContent);
 	
 	public void deleteReply(Reply reply);
 	

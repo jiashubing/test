@@ -3,11 +3,13 @@ package forum.service;
 import java.util.List;
 
 import forum.po.Topic;
+import forum.po.TopicContent;
 
 public interface TopicService {
 
 	public void saveTopic(Topic topic);
 	public Topic saveTopic2(Topic topic);
+	public TopicContent saveTopicContent(TopicContent topicContent);
 	
 	public void deleteTopic(Topic topic);
 	public void deleteTopicById(Integer topicId);
@@ -17,6 +19,8 @@ public interface TopicService {
 	public Long getTopicCount(Topic s_topic);
 	
 	public Topic findTopicById(int topicId);	
+	
+	public TopicContent findTopicContentByTopicId(int topicId);	
 	
 	/**
 	 * 搜索置顶的帖子
@@ -86,4 +90,10 @@ public interface TopicService {
 	 * @return
 	 */
 	public Long getAllTopicCount();
+	
+	/**
+	 *获取帖子内容
+	 * @return
+	 */
+	public TopicContent getTopicContent(int topicId);
 }

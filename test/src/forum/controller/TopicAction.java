@@ -19,8 +19,10 @@ import common.entity.Result;
 import config.ValidatePcMobile;
 import forum.po.DbUser;
 import forum.po.Reply;
+import forum.po.ReplyContent;
 import forum.po.Section;
 import forum.po.Topic;
+import forum.po.TopicContent;
 import forum.po.User;
 import forum.service.ReplyService;
 import forum.service.SectionService;
@@ -221,14 +223,15 @@ public class TopicAction {
         //更新小版块对应的数目
         Topic tmp = topicService.findTopicById(topicId);
         Section section = tmp.getSection();
+        TopicContent topicContent = topicService.findTopicContentByTopicId(topicId);
         
         //先删除和帖子一起的回复的对应的图片
-        List<Reply> list = replyService.findReplyListByTopicId(topicId, MaxPageSize, 0);
+        List<ReplyContent> list = replyService.findReplyContentListByTopicId(topicId, MaxPageSize, 0);
         for(int k =0; k<list.size(); k++){
-        	Reply reply = list.get(k);
+        	ReplyContent replyContent = list.get(k);
         	//删除之前数据之前，也要删除图片
     		//提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
-    		String[] url = reply.getContent().split("/");
+    		String[] url = replyContent.getContent().split("/");
             String imgName;
             for (int i = 0 ; i <url.length ; i++ ) {
                 if(url[i].contains(".png")){
@@ -243,7 +246,7 @@ public class TopicAction {
         
         //删除数据之前，也要删除图片
         //提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
-        String[] url = tmp.getContent().split("/");
+        String[] url = topicContent.getContent().split("/");
         String imgName;
         for (int i = 0 ; i <url.length ; i++ ) {
         	if(url[i].contains(".png")){
@@ -282,14 +285,15 @@ public class TopicAction {
 		//更新小版块对应的数目
         Topic tmp = topicService.findTopicById(topicId);
         Section section = tmp.getSection();
+        TopicContent topicContent = topicService.findTopicContentByTopicId(topicId);
         
         //先删除和帖子一起的回复的对应的图片
-        List<Reply> list = replyService.findReplyListByTopicId(topicId, MaxPageSize, 0);
+        List<ReplyContent> list = replyService.findReplyContentListByTopicId(topicId, MaxPageSize, 0);
         for(int k =0; k<list.size(); k++){
-        	Reply reply = list.get(k);
+        	ReplyContent replyContent = list.get(k);
         	//删除之前数据之前，也要删除图片
     		//提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
-    		String[] url = reply.getContent().split("/");
+    		String[] url = replyContent.getContent().split("/");
             String imgName;
             for (int i = 0 ; i <url.length ; i++ ) {
                 if(url[i].contains(".png")){
@@ -304,7 +308,7 @@ public class TopicAction {
         
         //删除数据之前，也要删除图片
         //提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
-        String[] url = tmp.getContent().split("/");
+        String[] url = topicContent.getContent().split("/");
         String imgName;
         for (int i = 0 ; i <url.length ; i++ ) {
         	if(url[i].contains(".png")){
@@ -336,10 +340,14 @@ public class TopicAction {
 		
 		Topic topic = topicService.findTopicById(id);
 		pageNo = PageUtil.initPageNo(pageNo);
-		List<Reply> replyList=replyService.findReplyListByTopicId(id, PageSize,pageNo);
+		List<Reply> replyList =replyService.findReplyListByTopicId(id, PageSize,pageNo);
+		List<ReplyContent> replyContentList = replyService.getReplyContentListByTopicId(id, PageSize, pageNo);
 		Long totalNum =replyService.getReplyCountByTopicId(id);
 		int totalPages = PageUtil.getTotalPages(totalNum, PageSize);
+		TopicContent topicContent = topicService.getTopicContent(id);
 		
+		model.addAttribute("topicContentValue",topicContent.getContent()); 
+		model.addAttribute("replyContentList",replyContentList); 
 		model.addAttribute("pageNo",pageNo); 
 		model.addAttribute("totalPages",totalPages); 
 		model.addAttribute("topic",topic); 
@@ -447,7 +455,6 @@ public class TopicAction {
         //System.out.println("after : "+buf.toString());	//这就是实际应当报错到数据库里的内容
 		
 		topic.setTitle(topicTitle);
-		topic.setContent(buf.toString());
 		
 		//保存摘要
 		String remark = HtmlUtil.getTextFromHtml(topicContent);
@@ -465,6 +472,11 @@ public class TopicAction {
 		topic.setModifyTime(new Date());
 		
 		topic = topicService.saveTopic2(topic);
+		
+		TopicContent topicContentEmpty = new TopicContent();
+		topicContentEmpty.setContent(buf.toString());
+		topicContentEmpty.setTopicId(topic.getId());
+		topicService.saveTopicContent(topicContentEmpty);
 		
 		//更新小版块对应的数目
 		Long totalCount=topicService.getTotalTopicCount(section.getId());			
