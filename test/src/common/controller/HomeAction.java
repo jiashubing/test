@@ -86,12 +86,6 @@ public class HomeAction {
 		return ValidatePcMobile.checkRequest(request, "/video");
 	}
 	
-	@RequestMapping("/music")
-	public String loadMusic(Model model,HttpServletRequest request)throws Exception{
-		model.addAttribute("flag","music.html");  //此属性用来给前台确定当前是哪个页面
-		return ValidatePcMobile.checkRequest(request, "/music");
-	}
-	
 	@RequestMapping("/regist")
 	public String loadRegist(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
 		if(dbUser != null){

@@ -28,21 +28,17 @@
 	<div class="tab_head tab_index_head j_tab_index_head blue_kit light_tab_head tab_index_head_clone" style="display: -webkit-box; opacity: 1;"> 
      	<a class="tab_head_item j_tab_discovery" href="" th:href="@{/index}">首页</a>
 		<a class="tab_head_item j_tab_selected" href="" th:href="@{/forum}">读书</a>
-		<a class="tab_head_item j_tab_selected active" href="" th:href="@{/mobilegames}">游戏</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/mobilegames}">游戏</a>
 		<!-- <a class="tab_head_item j_tab_selected" href="" th:href="@{/}">助眠</a>
 		<a class="tab_head_item j_tab_selected" href="" th:href="@{/}">调查</a> -->
-		<a class="tab_head_item j_tab_selected" href="" th:href="@{/mobilesubscribe}">订阅</a>
+		<a class="tab_head_item j_tab_selected active" href="" th:href="@{/mobilesubscribe}">订阅</a>
 		<a class="tab_head_item j_tab_selected" href="" th:href="@{/beforelogin}">个人</a>
     </div>
     <div class="selected_list">
-    <a class="list-item list-item1 clearfix" th:href="@{/mobilegames/sudoku}" target="_self">
+    	<a class="list-item list-item1 clearfix" th:href="@{/subscribe(showId=1)}" target="_self">
         <div class="thumbnails1"> 
-         <img class="image" th:src="@{/image/mobile/images/sudoku.jpg}" /> 
-        </div><p class="title">简单数独</p><p class="abstract">据说玩数独的都是聪明人哦</p> <span class="tag">益智</span> </a>
-       <a class="list-item list-item1 clearfix" th:href="@{/mobilegames/flappy}" target="_self">
-        <div class="thumbnails1"> 
-         <img class="image" th:src="@{/image/mobile/images/flappy.jpg}" /> 
-        </div><p class="title">奇葩版Flappy Bird</p><p class="abstract">打开它，然后折磨你的神经，同时缓解你的压力</p> <span class="tag">动作</span> </a>
+         <img class="image" th:src="@{/image/mobile/images/blog.jpg}" /> 
+        </div><p class="title">我的博客园</p><p class="abstract">博客园是一个面向开发者的知识分享社区，记录了对知识的学习与分享</p> <span class="tag">学习</span> </a>
 	</div>
   </div>
  	<div th:if="${session.dbUser==null}" class="j_footer footer">

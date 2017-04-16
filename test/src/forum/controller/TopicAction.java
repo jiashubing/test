@@ -373,7 +373,7 @@ public class TopicAction {
 	}
 	
 	@RequestMapping("/forum/preSave")
-	public String preSave(Model model,HttpServletRequest request)throws Exception{
+	public String preSave(Model model,HttpServletRequest request,@RequestParam(required = false) Integer sectionId)throws Exception{
 		//这个路径不使用安全登陆框架了，手动添加跳转
 		HttpSession session = request.getSession(false);
 		DbUser tmpUser = null;
@@ -389,7 +389,10 @@ public class TopicAction {
 		if(tmpUser!=null && tmpUser.getAccess()!=1){
 			sectionList.remove(0);
 		}
-		
+		if(sectionId != null){
+			Section section = sectionService.findSectionById(sectionId);
+			model.addAttribute("section",section); 
+		}
 		model.addAttribute("sectionList",sectionList); 
 		model.addAttribute("flag","forum.html");  //此属性用来给前台确定当前是哪个页面
 		model.addAttribute("progressFlag",4); //导航条显示标志
