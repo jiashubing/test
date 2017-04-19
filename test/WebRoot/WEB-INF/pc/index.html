@@ -8,7 +8,12 @@
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/css/pc/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/pc/css/index.css}"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/css/pc/css/indexnew.css}"/>
-    <!-- <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/css/pc/css/main.css}"/> -->
+    <style type="text/css">
+    .homeleft{float:left;width:500px; height:500px;}
+    .homeright{float:right;width:500px;height:500px;}
+    .homep1{text-align:center; line-height: 100px; font-size: 30px; color: blue;}
+    .homep2{text-indent:2em; font-size:20px; line-height:30px;}
+    </style>
 </head>
 <body>
 <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
@@ -29,19 +34,52 @@
         </li>
     </ul>
 </div>
-<div style="background: rgba(0,0,0,.04);">
+<div style="background: rgba(0,0,0,.04); padding-top:30px;">
 		<p style="clear:both"></p>
-   	 	<p style="height:400px;"></p>
+   	 	<!-- <p style="height:400px;"></p>
    	 	<p style="text-align:center;color:red;font-size:50px;"><strong>首页要大改版</strong></p>
-   	 	<p style="height:400px;"></p>
+   	 	<p style="height:400px;"></p> -->
 		<div style="width:1000px; margin:auto;" >
-	 		<div  style="float:left;width:500px; height:500px; background:red"></div>
-	    	<div  style="float:right;width:500px;height:500px; background:blue;"></div>
-	 		<div  style="float:left;width:500px; height:500px; background:blue"></div>
-	    	<div  style="float:right;width:500px;height:500px; background:red"></div>
-	 		<div  style="float:left;width:500px; height:500px; background:green"></div>
-	    	<div  style="float:right;width:500px;height:500px; background:blue;"></div>
+	 		<div class="homeleft"><img src="images/home/1.jpg" width="100%" th:src="@{/image/pc/images/home/1.jpg}"/></div>
+	    	<div class="homeright">
+		    	<p style="height:100px;"></p>
+		    	<p class="homep1" style="padding-left:20px;">欢迎来到我的网站</p>
+				<p class="homep2" style="color:green; padding-left:20px;">个人网站建立以来，最大的价值就是带给我自娱自乐的满足感。看到自己的代码变成生动的网页，对每一个程序员来说都是一件幸福的事情吧！感谢浏览网站的各位，希望能在这里看到些有用的东西。</p></div>
+	 		<div class="homeleft">
+	 			<p style="height:100px;"></p>
+		    	<p class="homep1" style="padding-right:20px;">概览</p>
+				<p class="homep2" style="color:orange; padding-right:20px;">网站内容很杂，有【杂文阅读】、【在线工具】、【我的订阅】等诸多模块。不同于个人博客，有时候想起什么来放什么。网站区分PC端和移动端，移动端内容相对少，但是排版整齐、统一。这自然是为了提升逼格，至少看起来很厉害的样子。</p>
+	 		</div>
+	    	<div class="homeright"><img src="images/home/2.jpg" width="100%" th:src="@{/image/pc/images/home/2.jpg}"/></div>
+	 		<div class="homeleft"><img src="images/home/3.jpg" width="100%" th:src="@{/image/pc/images/home/3.jpg}"/></div>
+	    	<div class="homeright">
+	    		<p style="height:100px;"></p>
+		    	<p class="homep1" style="padding-left:20px;">杂文阅读</p>
+				<p class="homep2" style="color:#FF6A6A; padding-left:20px;">网站最主要的功能是“论坛系统”，用户注册登录和权限部分等功能都是为此服务的。论坛可以发表、评论帖子，我会不定时分享一些觉得有意义的文章。不过几乎没什么人看，更没有人发表和评论了，所以后来更名为“杂文阅读”。</p>
+	    	</div>
+	 		<div class="homeleft">
+	    		<p style="height:80px;"></p>
+		    	<p class="homep1" style="padding-right:20px;">在线游戏&amp;在线工具</p>
+				<p class="homep2" style="color:#9B30FF ; padding-right:20px;">目前移动端拥有简单数独、Flappy Bird两个游戏，电脑端有简单数独、大转盘、推箱子三个游戏。闲时无聊，可以用来打发时间。</p>
+				<p class="homep2" style="color:#9B30FF ; padding-right:20px;">在线工具有“每行文本的首尾增加相同字符工具”、“自定义加密工具”、“每个段落后增加空行工具”、“删除行首到指定字符工具”、“删除空白行”五个工具。</p>
+	 		</div>
+	    	<div class="homeright"><img src="images/home/4.jpg" width="100%" th:src="@{/image/pc/images/home/4.jpg}"/></div>
+	 		<div class="homeleft"><img src="images/home/6.jpg" width="100%" th:src="@{/image/pc/images/home/6.jpg}"/></div>
+	    	<div class="homeright">
+	 			<p style="height:120px;"></p>
+		    	<p class="homep1" style="padding-left:20px;">我的订阅&amp;成长之路</p>
+				<p class="homep2" style="color:#FF4040; padding-left:20px;">【我的订阅】暂时只有将我的博客园订阅添加进来，可以查看最新的十条博客。</p>
+				<p class="homep2" style="color:#FF4040; padding-left:20px;">【成长之路】记录我曾做过的一些项目，留下历史的足迹。</p>
+	    	</div>
+	 		<div class="homeleft">
+	 			<p style="height:100px;"></p>
+	 			<p class="homep1" style="padding-right:20px;">个性化&amp;我的视频</p>
+		    	<p class="homep2" style="color:#CD950C; padding-right:20px;">【个性化】罗列一些大学里的成绩，一张简历，还有一幅关键的“支付宝打赏”图片。未来这里会胡乱搞些难加载的东西！</p>
+				<p class="homep2" style="color:#CD950C; padding-right:20px;">【我的视频】里将要放一些自己视频，可能是游戏录制 ，也可能是自恋的旅行视频。录这些是我的一个梦想，只是一直未曾实现。</p>
+	 		</div>
+	    	<div class="homeright"><img src="images/home/5.jpg" width="100%" th:src="@{/image/pc/images/home/5.jpg}"/></div>
  		</div>
+ 		<p style="clear:both"></p>
 </div>
 
 <div th:include="pc/loginPopup::footerDiv" class="footer">
