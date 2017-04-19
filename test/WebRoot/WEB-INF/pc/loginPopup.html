@@ -41,7 +41,7 @@
     <div class="headeri"><img src="images/logo.png" class="logoimgi" th:src="@{/image/pc/images/shubinglogo.png}" style="margin-top:0; width:161px;"/>
         <ul class="navi" th:style="${session.dbUser==null}?'margin-right:0px':'margin-right:64px'">
 			<li th:class="${flag=='index.html'}?'active'" class="active"><a href="index.html" th:href="@{/index}">首页</a></li>
-			<li th:class="${flag=='forum.html'}?'active'"><a th:href="@{/forum}">杂文书社</a></li>
+			<li th:class="${flag=='forum.html'}?'active'"><a th:href="@{/forum}">杂文阅读</a></li>
 			<li th:class="${flag=='tools.html'}?'active'"><a th:href="@{/tools}">在线工具</a></li>
 			<li th:class="${flag=='history.html'}?'active'"><a href="#" th:href="@{/history}">成长之路</a></li>
 			<li th:class="${flag=='games.html'}?'active'"><a th:href="@{/games}">在线游戏</a></li>

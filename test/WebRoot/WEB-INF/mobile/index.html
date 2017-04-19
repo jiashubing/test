@@ -28,7 +28,7 @@
   <div class="j_tab_index tab_index"> 
 	<div class="tab_head tab_index_head j_tab_index_head blue_kit light_tab_head tab_index_head_clone" style="display: -webkit-box; opacity: 1;"> 
      	<a class="tab_head_item j_tab_discovery active" href="" th:href="@{/index}">首页</a>
-		<a class="tab_head_item j_tab_selected" href="" th:href="@{/forum}">读书</a>
+		<a class="tab_head_item j_tab_selected" href="" th:href="@{/forum}">阅读</a>
 		<a class="tab_head_item j_tab_selected" href="" th:href="@{/mobilegames}">游戏</a>
 		<!-- <a class="tab_head_item j_tab_selected" href="" th:href="@{/}">助眠</a>
 		<a class="tab_head_item j_tab_selected" href="" th:href="@{/}">调查</a> -->
@@ -44,7 +44,7 @@
 	<!--1-->
 	<!--2-->
 	<p style="line-height:50%;"><img width="100%" src="../mobile/images/zhanzhangjiyu.png" th:src="@{/image/mobile/images/zhanzhangjiyu.png}"/></p>
-	<p style="line-height:50%;"><img width="100%" src="../mobile/images/pc2.jpg" th:src="@{/image/mobile/images/pc2.jpg}"/></p>  
+	<!-- <p style="line-height:50%;"><img width="100%" src="../mobile/images/pc2.jpg" th:src="@{/image/mobile/images/pc2.jpg}"/></p> -->  
 	<!--2-->
 	<!--3-->
 	<div style="margin-top:25px">
@@ -55,15 +55,19 @@
 	        <p><b>论坛系统</b></p>
 	        <p style="border-bottom:1px solid #fff;"></p>
 	        <p style="text-indent:2em;">
-	            这是我的网站上主要的功能，注册用户可以发表帖子、回复，管理员可以对用户，论坛大模块、小模块、帖子、回复等进行删查操作。
-	欢迎每一位同学在我的论坛里发表帖子和回复，我每天都会查看回帖，也会时常搜集一些觉得有趣的文章发表出来。希望同学闲着的时候，可以多来看看，说不定就有哪篇文章感动你了呢。</p>
+	            这是网站最主要的功能，用户注册登录和权限控制等功能都是为此服务的。论坛可以发表、评论帖子，我会不定时分享一些觉得有意义的文章。不过几乎没什么人看，更没有人发表和评论了，所以后来更名为“杂文阅读”</p>
 	 		<p style="text-indent:2em;">
 	需要注意的是，手机端的论坛系统样式要好看的多，但是发帖回帖不能上传图片，也不能对样式进行修改。而PC端的论坛系统可以实现图片上传和样式修改，只是样子丑了点。那是我最开始的时候做的，以后会再调整。</p>
 	    </div>
 	    <div style="background-color:blue;color: #fff;font-size: 14px;padding: 10px;">
 	        <p><b>在线游戏</b></p>
 	        <p style="border-bottom:1px solid #fff;"></p>
-	        <p style="text-indent:2em;">目前拥有简单数独、Flappy Bird两个游戏，闲时无聊，可以用来打发时间。</p>
+	        <p style="text-indent:2em;">目前拥有简单数独、Flappy Bird两个游戏，电脑端有简单数独、大转盘、推箱子三个游戏。闲时无聊，可以用来打发时间。</p>
+	    </div>
+	    <div style="background-color:orange;color: #fff;font-size: 14px;padding: 10px;">
+	        <p><b>我的订阅</b></p>
+	        <p style="border-bottom:1px solid #fff;"></p>
+	        <p style="text-indent:2em;">暂时只有将我的博客园订阅添加进来，可以查看最新的十条博客。</p>
 	    </div>
 	</div>
 	<!--3-->
@@ -77,10 +81,10 @@
 	        <p style="border-bottom:1px solid #fff;"></p>
 	        <p style="text-indent:2em;">目前有“每行文本的首尾增加相同字符工具”、“自定义加密工具”、“每个段落后增加空行工具”、“删除行首到指定字符工具”四个工具</p>
 	    </div>
-		 <div style="background-color:orange;color: #fff;font-size: 14px;padding: 10px;">
-	        <p><b>在线游戏</b></p>
+	    <div style="background-color:#FF6666;color: #fff;font-size: 14px;padding: 10px;">
+	        <p><b>成长之路</b></p>
 	        <p style="border-bottom:1px solid #fff;"></p>
-	        <p style="text-indent:2em;">电脑端有三个简单的游戏：数独、大转盘、推箱子。</p>
+	        <p style="text-indent:2em;">这里会放我从前开发过的项目，计划整理以下项目：宿舍管理系统、外包项目管理系统、公司后台管理系统（前端框架）、“信天游”APP、jar包小工具（可以下载到本地查看）。但为公司开发的项目，还有不容易展示出的项目，我就不放了，太麻烦了。</p>
 	    </div>
 	</div>
 	<!--4-->
@@ -89,11 +93,7 @@
 	    <p style="margin:0 auto;width:90%">
 	    	<img style="width:100%" src="../mobile/images/3.png" th:src="@{/image/mobile/images/3.png}"/>
 	    </p>
-	    <div style="background-color:#FF6666;color: #fff;font-size: 14px;padding: 10px;">
-	        <p><b>历史项目</b></p>
-	        <p style="border-bottom:1px solid #fff;"></p>
-	        <p style="text-indent:2em;">这里会放我从前开发过的项目，计划整理以下项目：宿舍管理系统、外包项目管理系统、公司后台管理系统（前端框架）、“信天游”APP、jar包小工具（可以下载到本地查看）。但为公司开发的项目，还有不容易展示出的项目，我就不放了，太麻烦了。</p>
-	    </div>
+	    
 	    <div style="background-color:#6633FF;color: #fff;font-size: 14px;padding: 10px;">
 	        <p><b>自然之声</b></p>
 	        <p style="border-bottom:1px solid #fff;"></p>
