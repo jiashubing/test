@@ -14,7 +14,7 @@
 					<ul class="shubinghistorylist">
 						<li th:each="subscribe:${subscribeList}">
 							<strong><span style="color: #2d64b3;font-size:16px;" th:text="${subscribe.title}">Java菜鸟学习网站</span></strong>
-							<p style="text-indent:2em;margin-top:5px;"><span style="color: red;"> 摘要：</span><span th:text="${subscribe.description}"></span>&nbsp;&nbsp;&nbsp;<span class="subscribehref"><a th:href="${subscribe.uri}">阅读全文</a></span></p>
+							<p style="text-indent:2em;margin-top:5px;"><span style="color: red;"> 摘要：</span><span th:text="${subscribe.description}"></span>&nbsp;&nbsp;&nbsp;<span class="subscribehref"><a th:href="${subscribe.uri}" target="_blank">阅读全文</a></span></p>
 							<p style="text-align:right;"><span style="color:green;" th:text="${#calendars.format(subscribe.updateDate,'yyyy-MM-dd')}">2016-11-11</span></p>
 						</li>
 					</ul>
