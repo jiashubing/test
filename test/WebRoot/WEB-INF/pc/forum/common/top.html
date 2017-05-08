@@ -16,11 +16,13 @@
 	            <div class="pross-dir"><span class="bing-outside"></span><span class="bing-inside"></span></div>
 	          </div>
 	          <div class="pross pross-ok" th:unless="${progressFlag==null}"><span class="bing-index">2</span>
-	            <a th:if="${progressFlag==1}" th:href="@{/forum/tuijian}" style="color:#fff;">版主推荐</a>
-	            <a th:if="${progressFlag==2}" th:href="@{/forum/topicList(sectionId=${section.id})}" style="color:#fff;"><span th:text="${section.name }">作者公告</span></a>
-	            <a th:if="${progressFlag==3}" th:href="@{/forum/newsTopicList}" style="color:#fff;">最新动态</a>
-	            <a th:if="${progressFlag==4}" th:href="@{/forum/preSave}" style="color:#fff;">发表帖子</a>
-	            <a th:if="${progressFlag==5}" th:href="@{/forum/topicList(sectionId=${topic.section.id})}" style="color:#fff;"><span th:text="${topic.section.name }">作者公告</span></a>
+	            <span th:switch="${progressFlag}">
+		          <a th:case="1" th:href="@{/forum/tuijian}" style="color:#fff;">版主推荐</a>
+		          <a th:case="2" th:href="@{/forum/topicList(sectionId=${section.id})}" style="color:#fff;"><span th:text="${section.name }">作者公告</span></a>
+		          <a th:case="3" th:href="@{/forum/newsTopicList}" style="color:#fff;">最新动态</a>
+		          <a th:case="4" th:href="@{/forum/preSave}" style="color:#fff;">发表帖子</a>
+		          <a th:case="5" th:href="@{/forum/topicList(sectionId=${topic.section.id})}" style="color:#fff;"><span th:text="${topic.section.name }">作者公告</span></a>
+	            </span> 
 	            <div class="pross-dir"><span class="bing-outside"></span><span class="bing-inside"></span></div>
 	          </div>
 	          <div th:unless="${progressFlag==null || progressFlag!=5}" class="pross pross-ok"><span class="bing-index">3</span>

@@ -48,6 +48,14 @@
 		<div th:if="${showId==5}">
 			<div th:replace="pc/onlinetools/five::fiveDiv"></div>
 		</div>
+		
+		<div th:switch="${showId}">
+			<div th:case="1" th:replace="pc/onlinetools/one::oneDiv"></div>
+			<div th:case="2" th:replace="pc/onlinetools/two::twoDiv"></div>
+			<div th:case="3" th:replace="pc/onlinetools/three::threeDiv"></div>
+			<div th:case="4" th:replace="pc/onlinetools/four::fourDiv"></div>
+			<div th:case="5" th:replace="pc/onlinetools/five::fiveDiv"></div>
+		</div>
    	 	
 	</div>
 </div>

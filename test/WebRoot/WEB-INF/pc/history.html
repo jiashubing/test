@@ -40,12 +40,17 @@
 		</div>
 		<p style="clear:both"></p>
    	 	<p style="height:20px"></p>
-   	 	<div th:if="${showId==1}">
+   	 	<!-- <div th:if="${showId==1}">
 			<div th:replace="pc/historyproject/one::oneDiv"></div>
 		</div>
    	 	<div th:if="${showId==2}">
 			<div th:replace="pc/historyproject/two::twoDiv"></div>
+		</div> -->
+		<div th:switch="${showId}">
+			<div th:case="1" th:replace="pc/historyproject/one::oneDiv"></div>
+			<div th:case="2" th:replace="pc/historyproject/two::twoDiv"></div>
 		</div>
+		
 	</div>
 </div>
 <p style="clear:both"></p>

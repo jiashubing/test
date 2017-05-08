@@ -65,7 +65,6 @@ public class FileUploadController {
 			StringBuffer requestURL = request.getRequestURL();
 			returnUri = requestURL.toString().substring(0,requestURL.length()-servletPath.length());
 			returnUri += "/image/images/tmpImg"+imgPath;
-			//System.out.println("returnUri = "+returnUri);
 			
 		} catch (IOException e) {
 //			e.printStackTrace();
