@@ -16,15 +16,15 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
 import common.service.SubscribeService;
-import common.vo.DingYueVo;
+import common.vo.BlogVo;
 
 @Service
 public class SubscribeServiceImpl implements SubscribeService{
 
 	@Override
-	public List<DingYueVo> parseXml(URL url) throws IllegalArgumentException,
+	public List<BlogVo> parseXml(URL url) throws IllegalArgumentException,
 	FeedException {
-		List<DingYueVo> lists = new ArrayList<DingYueVo>();
+		List<BlogVo> lists = new ArrayList<BlogVo>();
 		try {
 			SyndFeedInput input = new SyndFeedInput();
 			SyndFeed feed = null;
@@ -42,7 +42,7 @@ public class SubscribeServiceImpl implements SubscribeService{
 			List<SyndEntry> entries = feed.getEntries();// 得到所有的标题<title></title>
 			for (int i = 0; i < entries.size(); i++) {
 				SyndEntry entry = (SyndEntry) entries.get(i);
-				DingYueVo tmp = new DingYueVo();
+				BlogVo tmp = new BlogVo();
 				tmp.setTitle(entry.getTitle());
 				tmp.setDescription(entry.getDescription().getValue());
 				tmp.setUpdateDate(entry.getUpdatedDate());

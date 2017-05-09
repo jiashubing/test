@@ -2,7 +2,7 @@ package common.vo;
 
 import java.util.Date;
 
-public class DingYueVo {
+public class BlogVo {
 	private String title;
 	private String description;
 	private String uri;

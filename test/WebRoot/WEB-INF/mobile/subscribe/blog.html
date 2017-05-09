@@ -28,7 +28,8 @@
        </a>
        <span style="padding-left:10px;">博客园订阅</span>
       </div> 
-      <div class="blue_kit_right"> 
+      <div class="blue_kit_right">
+      	<a th:href="@{/subscribe/updateBlog}">刷新</a>&nbsp;&nbsp;
       </div> 
      </div>
      <div class="top_operation"> 
@@ -45,17 +46,23 @@
 	
     <div id="frs-tuijian"></div>
     <div id="tlist" class="post_list"> 
-     <ul class="threads_list" id="frslistcontent">
-	  
-      <li class="tl_shadow" th:each="subscribe:${subscribeList}">
-      	<a href="" th:href="${subscribe.uri}" class="j_common ti_item">
+    
+     <ul th:if="${blogList==null}" class="shubinghistorylist">
+		<li>
+			<strong><span style="color: red;font-size:16px;">Sorry，未查询到博客信息！</span></strong>
+		</li>
+	 </ul>
+    
+     <ul th:unless="${blogList==null}" class="threads_list" id="frslistcontent">
+      <li class="tl_shadow" th:each="blog:${blogList}">
+      	<a href="" th:href="${blog.uri}" class="j_common ti_item">
         <div class="ti_title"> 
-         <span th:text="${subscribe.title}">S.U.N.女神「原创」太阳☀女神-谢娜</span>
+         <span th:text="${blog.title}">S.U.N.女神「原创」太阳☀女神-谢娜</span>
         </div>
-		<p class="ti_abs" style="text-indent:2em;"><span class="topiccontent" th:text="${subscribe.description}">哈哈哈，我也爱</span></p>
+		<p class="ti_abs" style="text-indent:2em;"><span class="topiccontent" th:text="${blog.description}">哈哈哈，我也爱</span></p>
         <div class="ti_infos clearfix">
          <div class="ti_author_time"> 
-          <span class="ti_time" th:text="${#calendars.format(subscribe.updateDate,'yyyy-MM-dd')}">19:33</span>
+          <span class="ti_time" th:text="${#calendars.format(blog.updateDate,'yyyy-MM-dd')}">19:33</span>
          </div>
          <div class="ti_zan_reply"> 
          </div>

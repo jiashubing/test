@@ -1,5 +1,7 @@
 package common.service;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -36,6 +38,9 @@ public class QuartzService {
 	
 	 @Resource(name="sectionServiceImpl")
 	 private SectionService sectionService;
+	 
+	 @Resource(name="blogServiceImpl")
+	 private BlogService blogService;
 	
 	@Scheduled(cron = "0 */60 * * * *")//每六十分钟执行一次  
 	public void reportCurrentTime() {  
@@ -56,6 +61,15 @@ public class QuartzService {
 				sectionService.saveSection(section);
 			}
 		}
+		
+		
+		//更新博客园的数据库
+		try {
+			blogService.updateBlogList(new URL("http://www.cnblogs.com/acm-bingzi/article/rss"));
+		} catch (MalformedURLException e) {
+			//do nothing
+		}
+		
 		
 	}  
 	

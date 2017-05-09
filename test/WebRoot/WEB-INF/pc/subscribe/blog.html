@@ -5,17 +5,22 @@
 	<div th:fragment="blogDiv">
 		<div id="bootstrap-shubing">
 			<div id="mainContent" class="shubing-tool-wrapper">
-				<div class="shubing-toolName">博客园</div>
+				<div class="shubing-toolName">博客园&nbsp;&nbsp;(<a th:href="@{/subscribe/updateBlog}" style="color:orange;">点我刷新</a>)</div>
 				<div class="shubing-toolUsing shubing-clearfix" style="padding-bottom:50px;">
 					<ul class="shubing-nav shubing-nav-tabs">
 						<li class="active"><a th:href="@{/subscribe(showId=1)}">博客园</a></li>
 						<li><a>待开发</a></li>
 					</ul>
-					<ul class="shubinghistorylist">
-						<li th:each="subscribe:${subscribeList}">
-							<strong><span style="color: #2d64b3;font-size:16px;" th:text="${subscribe.title}">Java菜鸟学习网站</span></strong>
-							<p style="text-indent:2em;margin-top:5px;"><span style="color: red;"> 摘要：</span><span th:text="${subscribe.description}"></span>&nbsp;&nbsp;&nbsp;<span class="subscribehref"><a th:href="${subscribe.uri}" target="_blank">阅读全文</a></span></p>
-							<p style="text-align:right;"><span style="color:green;" th:text="${#calendars.format(subscribe.updateDate,'yyyy-MM-dd')}">2016-11-11</span></p>
+					<ul th:if="${blogList==null}" class="shubinghistorylist">
+						<li>
+							<strong><span style="color: red;font-size:16px;">Sorry，未查询到博客信息！</span></strong>
+						</li>
+					</ul>
+					<ul th:unless="${blogList==null}" class="shubinghistorylist">
+						<li th:each="blog:${blogList}">
+							<strong><span style="color: #2d64b3;font-size:16px;" th:text="${blog.title}">Java菜鸟学习网站</span></strong>
+							<p style="text-indent:2em;margin-top:5px;"><span style="color: red;"> 摘要：</span><span th:text="${blog.description}"></span>&nbsp;&nbsp;&nbsp;<span class="bloghref"><a th:href="${blog.uri}" target="_blank">阅读全文</a></span></p>
+							<p style="text-align:right;"><span style="color:green;" th:text="${#calendars.format(blog.updateDate,'yyyy-MM-dd')}">2016-11-11</span></p>
 						</li>
 					</ul>
 				</div>
