@@ -42,11 +42,8 @@
 
    	 	<p style="height:20px"></p>
    	 	
-   	 	<!-- <div th:if="${showId==1}">
+		<div th:if="${showId==1}">
 			<div th:replace="pc/subscribe/blog::blogDiv"></div>
-		</div> -->
-		<div th:switch="${showId}">
-			<div th:case="1" th:replace="pc/subscribe/blog::blogDiv"></div>
 		</div>
 		
 	</div>
