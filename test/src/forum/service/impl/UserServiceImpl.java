@@ -80,6 +80,7 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
+		@SuppressWarnings("unchecked")
 		List<User> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
 		return result;

@@ -1,5 +1,6 @@
 package common.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,13 +12,15 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * 意见反馈
+ * 博客园订阅
  * @author JiaShubing
  *
  */
 @Entity
 @Table(name="db_blog")
-public class Blog {
+public class Blog implements Serializable{
+
+	private static final long serialVersionUID = 1084726341264882370L;
 
 	private long id;
 	

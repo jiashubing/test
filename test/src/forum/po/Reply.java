@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,9 +17,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="t_reply")
 public class Reply implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4004727124500298705L;
 	private int id;				//
 	private Topic topic;		//

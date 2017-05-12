@@ -31,6 +31,7 @@ public class ReplyServiceImpl implements ReplyService {
 		hql.append(" order by publishTime desc");
 		
 		Query query = em.createQuery(hql.toString());
+		@SuppressWarnings("unchecked")
 		List<Reply> result = query.getResultList();
 		em.clear();
 		if (result != null && result.size()>0) {
@@ -56,6 +57,7 @@ public class ReplyServiceImpl implements ReplyService {
 	public List<Reply> findReplyListByTopicId(int topicId, int pageSize,int pageNo) {
 		String hql="from Reply where topicId="+topicId;
 		Query query = em.createQuery(hql);
+		@SuppressWarnings("unchecked")
 		List<Reply> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
 		return result;
@@ -102,6 +104,7 @@ public class ReplyServiceImpl implements ReplyService {
 			int pageNo) {
 		String hql = "from ReplyContent where topicId=" + topicId;
 		Query query = em.createQuery(hql);
+		@SuppressWarnings("unchecked")
 		List<ReplyContent> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
 		return result;
@@ -128,6 +131,7 @@ public class ReplyServiceImpl implements ReplyService {
 			int pageSize, int pageNo) {
 		String hql="from ReplyContent where topicId="+topicId;
 		Query query = em.createQuery(hql);
+		@SuppressWarnings("unchecked")
 		List<ReplyContent> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
 		em.clear();
 		return result;

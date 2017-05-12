@@ -20,9 +20,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="t_topic_content")
 public class TopicContent implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6048877910376797346L;
 	
 	

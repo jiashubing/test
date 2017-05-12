@@ -20,9 +20,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="t_reply_content")
 public class ReplyContent implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private int id;

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,9 +23,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="t_zone")
 public class Zone implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4068643059985798778L;
 	private int id;				//
 	private String name;		//

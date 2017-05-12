@@ -1,8 +1,5 @@
 package forum.util;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 字符串静态方法类
  * @author jiashubing

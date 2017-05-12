@@ -23,9 +23,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="t_user")
 public class User implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5669788973183715241L;
 	private int id;        		//
 	private String nickName;	//

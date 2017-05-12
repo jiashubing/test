@@ -27,9 +27,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="t_topic")
 public class Topic implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6734394733551567366L;
 	/**帖子表的id*/
 	private int id;						//

@@ -23,46 +23,49 @@ import forum.util.ImgUtil;
 @Lazy(false) 
 public class QuartzService {
 
-	
-	 @Value("#{configProperties['http.windows']}")  
-	 private String windowsUrl;   
-	 
-	 @Value("#{configProperties['http.linux']}")  
-	 private String linuxUrl;   
-	 
-	 @Resource(name="zoneServiceImpl")
-	 private ZoneService zoneService;
-		
-	 @Resource(name="topicServiceImpl")
-	 private TopicService topicService;
-	
-	 @Resource(name="sectionServiceImpl")
-	 private SectionService sectionService;
-	 
-	 @Resource(name="blogServiceImpl")
-	 private BlogService blogService;
-	
+
+	@Value("#{configProperties['http.windows']}")  
+	private String windowsUrl;   
+
+	@Value("#{configProperties['http.linux']}")  
+	private String linuxUrl;   
+
+	@Resource(name="zoneServiceImpl")
+	private ZoneService zoneService;
+
+	@Resource(name="topicServiceImpl")
+	private TopicService topicService;
+
+	@Resource(name="sectionServiceImpl")
+	private SectionService sectionService;
+
+	@Resource(name="blogServiceImpl")
+	private BlogService blogService;
+
+	@Resource(name="weatherServiceImpl")
+	private WeatherService weatherService;
+
 	@Scheduled(cron = "0 */60 * * * *")//每六十分钟执行一次  
 	public void reportCurrentTime() {  
 		List<Zone> zoneList=zoneService.findZoneList(null, 10,0);
-		
+
 		//定时任务，计算帖子总数
 		for (Zone zone : zoneList) {
 			for (Section section : zone.getSectionList()) {
-				
+
 				Long totalCount=topicService.getTotalTopicCount(section.getId());			
 				Long goodCount=topicService.getGoodTopicCount(section.getId());			
 				Long noReplyCount=topicService.getNoReplyTopicCount(section.getId());	
-				
+
 				section.setTotalCount(totalCount);
 				section.setGoodCount(goodCount);
 				section.setNoReplyCount(noReplyCount);
-				
+
 				sectionService.saveSection(section);
 			}
 		}
-		
-		
+
+
 		//更新博客园的数据库
 		try {
 			blogService.updateBlogList(new URL("http://www.cnblogs.com/acm-bingzi/article/rss"));
@@ -70,9 +73,11 @@ public class QuartzService {
 			//do nothing
 		}
 		
-		
+		//更新天气数据库
+		weatherService.getRemoteBeijingWeather();
+
 	}  
-	
+
 	/**
 	 * 定时删除在线工具生成的临时txt
 	 */
@@ -81,7 +86,7 @@ public class QuartzService {
 		String inPath = linuxUrl+ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT+'/';
 		FileEcodeUtil.deleteDirectoryChildren(inPath);
 	}  
-	
+
 	/**
 	 * 定时删除论坛生成的临时png
 	 */

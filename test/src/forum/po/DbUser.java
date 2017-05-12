@@ -25,9 +25,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name="dbuser")
 public class DbUser implements UserDetails,Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3275519034298486048L;
 	
 	@Id 

@@ -25,9 +25,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="t_section")
 public class Section implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2041979783711373439L;
 	private int id;				//
 	private String name;		//

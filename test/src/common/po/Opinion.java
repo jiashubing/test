@@ -1,5 +1,7 @@
 package common.po;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +17,10 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name="db_opinion")
-public class Opinion {
+public class Opinion implements Serializable{
 
+	private static final long serialVersionUID = 6658188134198161827L;
+	
 	private int id;
 	/**
 	 * 1、咨询  2、建议  3、其他

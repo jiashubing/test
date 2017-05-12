@@ -2,6 +2,7 @@ package common.controller;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -22,11 +23,17 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import common.entity.Result;
 import common.po.Opinion;
+import common.po.Weather;
 import common.service.OpinionService;
+import common.service.WeatherService;
+import common.util.WeatherUtil;
+import common.vo.WeatherVo;
 import config.ValidatePcMobile;
 import forum.po.DbUser;
+import forum.po.Topic;
 import forum.po.User;
 import forum.service.DbUserService;
+import forum.service.TopicService;
 import forum.service.UserService;
 import forum.util.DateUtil;
 import forum.util.ImgUtil;
@@ -44,6 +51,12 @@ public class HomeAction {
 	@Resource(name="opinionServiceImpl")
 	private OpinionService opinionService;
 	
+	@Resource(name="topicServiceImpl")
+	private TopicService topicService;
+	
+	@Resource(name="weatherServiceImpl")
+	private WeatherService weatherService;
+	
 	@RequestMapping("/index")
 	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
 		/*HttpSession session = request.getSession();
@@ -54,6 +67,16 @@ public class HomeAction {
 				return "redirect:/admin";
 			}
 		}*/
+		if(ValidatePcMobile.checkRequest(request)){
+			List<Topic> goodTopicList = topicService.findGoodTopicListDesc(7, 0);
+			Weather weather = weatherService.getLocalBeijingWeather();
+			if(weather == null){
+				weather = weatherService.getRemoteBeijingWeather();
+			}
+			WeatherVo weatherVo = WeatherUtil.weatherToWeatherVo(weather);
+			model.addAttribute("weatherVo",weatherVo);
+			model.addAttribute("goodTopicList",goodTopicList);
+		}
 		model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/index");
 	}
