@@ -13,6 +13,19 @@ public class WeatherVo {
 	private String yundong2;
 	private String wuran1;
 	private String wuran2;
+	private String city;		//城市
+	private String lastUpdateDate;	//最后更新时间
+	private String todayTemperature;	//当天气温
+	private String todaySituation;	//当天概况
+	private String todayWind;	//当天风向和风力
+	private String todayIconOne;	//当天图标一
+	private String todayIconTwo;	//当天图标一
+	private String realTemperature;	//实时气温
+	private String realWind;	//实时风向和风力
+	private String realShidu;	//实时湿度
+	private String realZiwaixian;	//实时紫外线强度
+	private String realAir;	//实时空气质量
+	
 	public String getZiwaixian1() {
 		return ziwaixian1;
 	}
@@ -85,4 +98,78 @@ public class WeatherVo {
 	public void setWuran2(String wuran2) {
 		this.wuran2 = wuran2;
 	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+	public void setLastUpdateDate(String lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
+	}
+	public String getTodayTemperature() {
+		return todayTemperature;
+	}
+	public void setTodayTemperature(String todayTemperature) {
+		this.todayTemperature = todayTemperature;
+	}
+	public String getTodaySituation() {
+		return todaySituation;
+	}
+	public void setTodaySituation(String todaySituation) {
+		this.todaySituation = todaySituation;
+	}
+	public String getTodayWind() {
+		return todayWind;
+	}
+	public void setTodayWind(String todayWind) {
+		this.todayWind = todayWind;
+	}
+	public String getTodayIconOne() {
+		return todayIconOne;
+	}
+	public void setTodayIconOne(String todayIconOne) {
+		this.todayIconOne = todayIconOne;
+	}
+	public String getTodayIconTwo() {
+		return todayIconTwo;
+	}
+	public void setTodayIconTwo(String todayIconTwo) {
+		this.todayIconTwo = todayIconTwo;
+	}
+	public String getRealTemperature() {
+		return realTemperature;
+	}
+	public void setRealTemperature(String realTemperature) {
+		this.realTemperature = realTemperature;
+	}
+	public String getRealWind() {
+		return realWind;
+	}
+	public void setRealWind(String realWind) {
+		this.realWind = realWind;
+	}
+	public String getRealShidu() {
+		return realShidu;
+	}
+	public void setRealShidu(String realShidu) {
+		this.realShidu = realShidu;
+	}
+	public String getRealZiwaixian() {
+		return realZiwaixian;
+	}
+	public void setRealZiwaixian(String realZiwaixian) {
+		this.realZiwaixian = realZiwaixian;
+	}
+	public String getRealAir() {
+		return realAir;
+	}
+	public void setRealAir(String realAir) {
+		this.realAir = realAir;
+	}
+
+	
 }

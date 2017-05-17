@@ -34,7 +34,16 @@
 <div style="background: rgba(0,0,0,.04);">
 		<p style="clear:both"></p>
 		<div style="width:1000px; margin:auto;">
-			<div style="float:left; width:322px;" >asfdsfdas </div>
+			<div style="float:left; width:322px; font-size:15px; line-height:20px;" >
+			<p style="color:orange; font-size:18px; line-height:36px;"><strong>北京市</strong>天气预报</p>
+			最后更新时间：<span style="color:green" th:text="${weatherVo.lastUpdateDate}"></span><br/>
+			<div style="width:100%; margin:auto; text-align:center;"><img th:src="@{'/image/pc/images/weather/a_'+${weatherVo.todayIconOne}}" /></div>
+			<p>实时气温：<span style="color:blue" th:text="${weatherVo.realTemperature}"></span></p>
+			<p>风向/风力：<span style="color:blue" th:text="${weatherVo.realWind}"></span></p>
+			<p>湿度：<span style="color:blue" th:text="${weatherVo.realShidu}"></span></p>
+			<p>紫外线强度：<span style="color:blue" th:text="${weatherVo.realZiwaixian}"></span></p>
+			<p>空气质量：<span style="color:blue" th:text="${weatherVo.realAir}"></span></p>
+			</div>
 	   	 	<div class="shubing-weather" style="float:right; width:678px;">
 				<ul class="shubing-weather-clearfix"> 
 				    <li> <img src="images/weather/001.jpg" th:src="@{/image/pc/images/weather/001.jpg}" /> <span th:text="${weatherVo.ziwaixian1}">中等</span> <em>紫外线指数</em> <p th:text="${weatherVo.ziwaixian2}">涂擦SPF大于15、PA+防晒护肤品。</p> </li> 
