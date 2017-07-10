@@ -35,7 +35,7 @@
 <div style="width: 1200px; margin: 0 auto; min-height:100px;">
 	<div style="margin-bottom: 10px;">
 		<form id="preSaveForm" th:action="@{/forum/preSave}"></form>
-		<a onclick="checkUser()"><img alt="发帖" src="images/post.jpg"  th:src="@{/image/pc/forum/images/post.jpg}"/></a>
+		<a onclick="checkUser()"><img alt="发帖" src="images/post.jpg"  th:src="@{/image/pc/forum/images/post.png}"/></a>
 		<div class="pagination alternate pull-right" th:align="center" style="margin: 0px;">
 			<span th:if="${totalPages}==0"  th:text="该版面没有发表任何帖子">该版面没有发表任何帖子</span>
 			<span th:unless="${totalPages}==0" >

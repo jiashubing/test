@@ -4,11 +4,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   	<meta charset="utf-8" />
   	<meta name="baidu-site-verification" content="3uYjxVgfa1" />
-  	<meta content="width=device-width,initial-scale=1,user-scalable=no" name="viewport" />
+  	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
   	<meta name="format-detection" content="telephone=no" />
   	<title th:text="${topic.title } +' - '+ ${topic.section.name}+' - 杂文阅读 - 阿丙的私人订制'">阿丙的私人订制</title>
   	<meta name="apple-mobile-web-app-capable" content="yes" />
   	<meta name="mobile-web-app-capable" content="yes" />
+  	<meta name="viewport" content="width=device-width,initial-scale=1"/>
 	<link rel="shortcut icon" href="favicon.ico" th:href="@{/image/favicon.ico}" />
 	<link rel="stylesheet" href="" th:href="@{/css/mobile/css/common.shubing.css}"/> 
   	<link rel="stylesheet" href="" th:href="@{/css/mobile/forum/css/details.shubing.css}"/> 
@@ -39,15 +40,23 @@
 					<span class="post_title_text" style="padding-left:10px;">主题贴</span>
                 </div>
             <div class="blue_kit_right" style="padding-right:10px">
-                    <span
+                    <!--<span
                     id="j_see_lz" class="icon_btn blue_kit_icon blue_kit_icon_see_lz" 
                     th:attr="style='background:url('+@{/image/mobile/images/louzhu1.png}+') no-repeat; background-size:45px 45px;'">
                         楼主
                     </span>
-                   <!--  <a href="https://tieba.baidu.com/mo/q/searchpage?page=pb&amp;word=%E8%B0%A2%E5%A8%9C"
+                     <a href="https://tieba.baidu.com/mo/q/searchpage?page=pb&amp;word=%E8%B0%A2%E5%A8%9C"
                     data-blue-kit="1" class="blue_kit_icon blue_kit_icon_search pb_icon icon_btn">
                         搜索
                     </a> -->
+                    <span id="bigger" class="icon_btn blue_kit_icon blue_kit_icon_see_lz" 
+                    th:attr="style='background:url('+@{/image/mobile/images/big.png}+') no-repeat; background-size:45px 45px;'">
+                        楼主
+                    </span>
+                    <span id="smaller" class="icon_btn blue_kit_icon blue_kit_icon_see_lz" 
+                    th:attr="style='background:url('+@{/image/mobile/images/small.png}+') no-repeat; background-size:45px 45px;'">
+                        楼主
+                    </span>
                 </div>
             </div>
             

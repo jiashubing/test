@@ -41,7 +41,10 @@
 				</h1>
 			</div>
 		</div>
-		<span class="bigger" >放大</span> <span class="smaller" >缩小</span>
+		<div style="margin-bottom:10px;">
+			<span id="bigger" ><img alt="放大" th:src="@{/image/pc/forum/images/big.png}"/></span>&nbsp;&nbsp;
+			<span id="smaller" ><img alt="small" th:src="@{/image/pc/forum/images/small.png}"/></span>
+		</div>
 		<div class="detailed">
 			<table border="0" cellspacing="0" cellpadding="0" class="post topic" data-is-topic-locked="false">
 				<colgroup>
@@ -329,30 +332,5 @@
 <script charset="utf-8" src="pc/kindeditor-4.1.10/kindeditor-min.js" th:src="@{/js/pc/kindeditor-4.1.10/kindeditor-min.js}"></script>
 <script charset="utf-8" src="pc/kindeditor-4.1.10/lang/zh_CN.js" th:src="@{/js/pc/kindeditor-4.1.10/lang/zh_CN.js}"></script>
 <script charset="utf-8" src="pc/kindeditor-4.1.10/init.js"  th:src="@{/js/pc/kindeditor-4.1.10/init.js}"></script>
-<script type="text/javascript"> 
-$(function(){ 
-	$(".bigger").click(function(){ 
-		var thisEle = $(".show_e").css("font-size"); 
-		var textFontSize = parseFloat(thisEle , 10); 
-		var unit = thisEle.slice(-2); //获取单位 
-		if( 24 >= textFontSize){ 
-			textFontSize += 2; 
-		} 
-		$(".show_e").css("font-size", textFontSize + unit);
-		$(".show_e").css("line-height", (textFontSize-2)*2 + unit); 
-	}); 
-	$(".smaller").click(function(){ 
-		var thisEle = $(".show_e").css("font-size"); 
-		var textFontSize = parseFloat(thisEle , 10); 
-		var unit = thisEle.slice(-2); //获取单位 
-		var cName = $(this).attr("class"); 
-		if( textFontSize >= 10 ){ 
-			textFontSize -= 2; 
-		} 
-		$(".show_e").css("font-size", textFontSize + unit); 
-		$(".show_e").css("line-height", (textFontSize-2)*2 + unit); 
-	}); 
-}); 
-</script>
 </body>
 </html>

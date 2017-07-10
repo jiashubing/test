@@ -21,3 +21,23 @@ function deleteReply(obj){
 		});
 	}
 }
+$("#bigger").click(function(){ 
+	var thisEle = $(".show_e").css("font-size"); 
+	var textFontSize = parseFloat(thisEle , 10); 
+	var unit = thisEle.slice(-2); //获取单位 
+	if( 24 >= textFontSize){ 
+		textFontSize += 2; 
+	} 
+	$(".show_e").css("font-size", textFontSize + unit);
+	$(".show_e").css("line-height", (textFontSize-2)*2 + unit); 
+}); 
+$("#smaller").click(function(){ 
+	var thisEle = $(".show_e").css("font-size"); 
+	var textFontSize = parseFloat(thisEle , 10); 
+	var unit = thisEle.slice(-2); //获取单位 
+	if( textFontSize >= 10 ){ 
+		textFontSize -= 2; 
+	} 
+	$(".show_e").css("font-size", textFontSize + unit); 
+	$(".show_e").css("line-height", (textFontSize-2)*2 + unit); 
+}); 
