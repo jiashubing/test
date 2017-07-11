@@ -64,7 +64,20 @@
 					<span class="news-span-right" th:text="${#calendars.format(topic.publishTime,'yyyy-MM-dd')}">2016-11-11</span></li>   
 				</ul>   
 	        </div>   
+	        <div class="div_model" style="width:333px; background-color:#C6E2FF;"><p class="p_model">在线人数(Session)统计</p>
+	       		<p th:unless="${application==null}" th:text="${application.lineCount}" class="p_session">42</p>
+	       		<p th:if="${application==null}" class="p_session">0</p>
+	        </div>
+			<div class="div_model" style="width:334px; background-color:#90EE90;">
+				<p class="p_model">邮箱：<span style="color:#5a5a5a">jiashubing@foxmail.com</span></p>
+				<p class="p_model">微博：<span style="color:#5a5a5a">贾树丙</span></p>
+				<p class="p_model">微信：<span style="color:#5a5a5a">Jia_Shubing</span></p>
+			</div>
+			<div class="div_model" style="width:333px; background-color:#CAFF70;"><p class="p_model">我的博客园</p>
+				<p class="p_model"><a href="http://www.cnblogs.com/acm-bingzi">http://www.cnblogs.com/acm-bingzi</a></p>
+			</div>
 		</div>
+		
 		<div style="width:1000px; margin:auto;" >
 	 		<div class="homeleft"><img src="images/home/1.jpg" width="100%" th:src="@{/image/pc/images/home/1.jpg}"/></div>
 	    	<div class="homeright">
@@ -83,6 +96,7 @@
 		    	<p class="homep1" style="padding-left:20px;">杂文阅读</p>
 				<p class="homep2" style="color:#FF6A6A; padding-left:20px;">网站最主要的功能是“论坛系统”，用户注册登录和权限部分等功能都是为此服务的。论坛可以发表、评论帖子，我会不定时分享一些觉得有意义的文章。不过几乎没什么人看，更没有人发表和评论了，所以后来更名为“杂文阅读”。</p>
 	    	</div>
+	    	
 	 		<div class="homeleft">
 	    		<p style="height:80px;"></p>
 		    	<p class="homep1" style="padding-right:20px;">在线游戏&amp;在线工具</p>
