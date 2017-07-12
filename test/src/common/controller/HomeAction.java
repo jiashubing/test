@@ -67,15 +67,17 @@ public class HomeAction {
 				return "redirect:/admin";
 			}
 		}*/
+		Weather weather = weatherService.getLocalBeijingWeather();
+		if(weather == null){
+			weather = weatherService.getRemoteBeijingWeather();
+		}
 		if(ValidatePcMobile.checkRequest(request)){
 			List<Topic> goodTopicList = topicService.findGoodTopicListDesc(7, 0);
-			Weather weather = weatherService.getLocalBeijingWeather();
-			if(weather == null){
-				weather = weatherService.getRemoteBeijingWeather();
-			}
 			WeatherVo weatherVo = WeatherUtil.weatherToWeatherVo(weather);
 			model.addAttribute("weatherVo",weatherVo);
 			model.addAttribute("goodTopicList",goodTopicList);
+		}else{
+			model.addAttribute("weatherIcon",weather.getTodayIconOne());
 		}
 		model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/index");
