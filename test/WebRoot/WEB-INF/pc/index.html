@@ -46,12 +46,18 @@
 			</div>
 	   	 	<div class="shubing-weather" style="float:right; width:678px;">
 				<ul class="shubing-weather-clearfix"> 
-				    <li> <img src="images/weather/001.jpg" th:src="@{/image/pc/images/weather/001.jpg}" /> <span th:text="${weatherVo.ziwaixian1}">中等</span> <em>紫外线指数</em> <p th:text="${weatherVo.ziwaixian2}">涂擦SPF大于15、PA+防晒护肤品。</p> </li> 
-				    <li> <img src="images/weather/002.jpg" th:src="@{/image/pc/images/weather/002.jpg}" /> <span th:text="${weatherVo.ganmao1}">较易发</span> <em>感冒指数</em> <p th:text="${weatherVo.ganmao2}">风较大，较易发生感冒，注意防护。</p> </li> 
-				    <li> <img src="images/weather/003.jpg" th:src="@{/image/pc/images/weather/003.jpg}" /> <span th:text="${weatherVo.chuanyi1}">热</span> <em>穿衣指数</em> <p th:text="${weatherVo.chuanyi2}">适合穿T恤、短薄外套等夏季服装。</p> </li> 
-				    <li style="margin-top:3px;"> <img src="images/weather/004.jpg" th:src="@{/image/pc/images/weather/004.jpg}" /> <span th:text="${weatherVo.xiche1}">较不宜</span> <em>洗车指数</em> <p th:text="${weatherVo.xiche2}">风力较大，洗车后会蒙上灰尘。</p> </li> 
-				    <li style="margin-top:3px;"> <img src="images/weather/005.jpg" th:src="@{/image/pc/images/weather/005.jpg}" /> <span th:text="${weatherVo.yundong1}">较适宜</span> <em>运动指数</em> <p th:text="${weatherVo.yundong2}">风力稍强，推荐您进行室内运动。</p> </li> 
-				    <li style="margin-top:3px;"> <img src="images/weather/006.jpg" th:src="@{/image/pc/images/weather/006.jpg}" /> <span th:text="${weatherVo.wuran1}">良</span> <em>空气污染扩散指数</em> <p th:text="${weatherVo.wuran2}">气象条件有利于空气污染物扩散。</p> </li> 
+				    <li> <img class="shubing-weather-img" src="images/weather/001.jpg" th:src="@{/image/pc/images/weather/001.jpg}" /> <span th:text="${weatherVo.ziwaixian1}">中等</span> <em>紫外线指数</em> <p th:text="${weatherVo.ziwaixian2}">涂擦SPF大于15、PA+防晒护肤品。</p> </li> 
+				    <li> <img class="shubing-weather-img" src="images/weather/002.jpg" th:src="@{/image/pc/images/weather/002.jpg}" /> <span th:text="${weatherVo.ganmao1}">较易发</span> <em>感冒指数</em> <p th:text="${weatherVo.ganmao2}">风较大，较易发生感冒，注意防护。</p> </li> 
+				    <li> <a href="#"><img class="shubing-weather-img" src="images/weather/003.jpg" th:src="@{/image/pc/images/weather/003.jpg}" /> 
+					    <div class="pageflip" id="chuanyi"> 
+					        <img src="images/page_flip.png" th:src="@{/image/pc/images/page_flip.png}" style="overflow: hidden; width: 30px; height: 30px; top: -1px; right: -3px;" /> 
+					        <div class="msg_block" style="overflow: hidden; width: 25px; height: 25px;"> </div> 
+					    </div>
+					    <span th:text="${weatherVo.chuanyi1}">热</span> <em>穿衣指数</em> <p th:text="${weatherVo.chuanyi2}">适合穿T恤、短薄外套等夏季服装。</p></a> 
+					</li> 
+				    <li style="margin-top:3px;"> <img class="shubing-weather-img" src="images/weather/004.jpg" th:src="@{/image/pc/images/weather/004.jpg}" /> <span th:text="${weatherVo.xiche1}">较不宜</span> <em>洗车指数</em> <p th:text="${weatherVo.xiche2}">风力较大，洗车后会蒙上灰尘。</p> </li> 
+				    <li style="margin-top:3px;"> <img class="shubing-weather-img" src="images/weather/005.jpg" th:src="@{/image/pc/images/weather/005.jpg}" /> <span th:text="${weatherVo.yundong1}">较适宜</span> <em>运动指数</em> <p th:text="${weatherVo.yundong2}">风力稍强，推荐您进行室内运动。</p> </li> 
+				    <li style="margin-top:3px;"> <img class="shubing-weather-img" src="images/weather/006.jpg" th:src="@{/image/pc/images/weather/006.jpg}" /> <span th:text="${weatherVo.wuran1}">良</span> <em>空气污染扩散指数</em> <p th:text="${weatherVo.wuran2}">气象条件有利于空气污染物扩散。</p> </li> 
 			    </ul> 
 			</div> 
 		</div>
@@ -137,6 +143,7 @@
 <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 <script type="text/javascript" src="js/myjson.js" th:src="@{/js/pc/js/myjson.js}" ></script>
 <script type="text/javascript" src="js/bing-news.js" th:src="@{/js/pc/js/bing-news.js}" ></script>
+<script type="text/javascript" src="js/pagefilp.js" th:src="@{/js/pc/js/pagefilp.js}" ></script>
 
 <script th:inline="javascript">
     /*<![CDATA[*/

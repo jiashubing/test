@@ -1,64 +1,10 @@
-.shubing-weather-clearfix {
-	zoom: 1
-}
-
-.shubing-weather-clearfix:after {
-	content: ".";
-	display: block;
-	clear: both;
-	visibility: hidden;
-	height: 0
-}
-.shubing-weather ul li {
-    background: #daedff none repeat scroll 0 0;
-    float: left;
-    height: 120px;
-    margin-left: 3px;
-    /*margin-right: 2px;
-     margin-top: 5px; */
-    overflow: hidden;
-    position: relative;
-    width: 223px;
-}
-.shubing-weather ul li img {
-    display: block;
-    height: 46px;
-    left: 22px;
-    margin: 0 auto;
-    position: absolute;
-    top: 19px;
-    width: 46px;
-}
-.shubing-weather ul li span {
-    color: #187db6;
-    display: block;
-    font-size: 20px;
-    height: 24px;
-    left: 90px;
-    line-height: 24px;
-    position: absolute;
-    top: 20px;
-    width: 100px;
-}
-.shubing-weather ul li em {
-    color: #1570a6;
-    display: block;
-    font-size: 13px;
-    left: 5px;
-    line-height: 22px;
-    position: absolute;
-    text-align: center;
-    top: 69px;
-    width: 80px;
-    font-style: normal;
-}
-.shubing-weather ul li p {
-    color: #818181;
-    font-size: 13px;
-    left: 90px;
-    line-height: 21px;
-    position: absolute;
-    text-align: left;
-    top: 54px;
-    width: 129px;
-}
+.shubing-weather-clearfix{zoom:1}
+.shubing-weather-clearfix:after{clear:both;display:block;visibility:hidden;height:0;content:"."}
+.shubing-weather ul li{position:relative;float:left;overflow:hidden;margin-left:3px;width:223px;height:120px;background:#daedff none repeat scroll 0 0}
+.shubing-weather-img{position:absolute;top:19px;left:22px;display:block;margin:0 auto;width:46px;height:46px}
+.shubing-weather ul li span{position:absolute;top:20px;left:90px;display:block;width:100px;height:24px;color:#187db6;font-size:20px;line-height:24px}
+.shubing-weather ul li em{position:absolute;top:69px;left:5px;display:block;width:80px;color:#1570a6;text-align:center;font-style:normal;font-size:13px;line-height:22px}
+.shubing-weather ul li p{position:absolute;top:54px;left:90px;width:129px;color:#818181;text-align:left;font-size:13px;line-height:21px}
+.pageflip{position:relative;top:0;right:0;float:right}
+.pageflip img{position:absolute;top:-1px;right:-3px;left:auto;z-index:99;width:30px;height:30px;ms-interpolation-mode:bicubic}
+.pageflip .msg_block{position:absolute;top:0;right:0;overflow:hidden;width:25px;height:25px;background:url(images/subscribe.png) no-repeat right top}

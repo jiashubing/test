@@ -115,9 +115,7 @@
 	<!--6-->
 	
 	<span th:unless="${weatherIcon==null}" class="client_weather_icon" 
-	th:attr="style='background-image:url('+@{'/image/pc/images/weather/b_'+${weatherIcon}}+');'">
-	
-	</span>
+		th:attr="style='background-image:url('+@{'/image/pc/images/weather/b_'+${weatherIcon}}+');'"></span>
 	<span th:unless="${application==null}" class="client_online_icon" th:text="${application.lineCount}"></span>
 	<span th:if="${application==null}" class="client_online_icon" th:text="0"></span>
 	<a href="" th:href="@{/shang}" class="client_ghost_icon"></a>
