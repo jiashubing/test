@@ -36,7 +36,8 @@
 		<div style="width:1000px; margin:auto;">
 			<div style="float:left; width:322px; font-size:15px; line-height:20px;" >
 			<p style="color:orange; font-size:18px; line-height:36px;"><strong>北京市</strong>天气预报</p>
-			最后更新时间：<span style="color:green" th:text="${weatherVo.lastUpdateDate}"></span><br/>
+			<p style="text-align:center;color:red;" th:if="${weatherVo.weatherFlag}">Sorry，该城市获取天气信息失败啦！ </p>
+			<p>最后更新时间：<span style="color:green" th:text="${weatherVo.lastUpdateDate}"></span></p>
 			<div style="width:100%; margin:auto; text-align:center;"><img th:src="@{'/image/pc/images/weather/a_'+${weatherVo.todayIconOne}}" /></div>
 			<p>实时气温：<span style="color:blue" th:text="${weatherVo.realTemperature}"></span></p>
 			<p>风向/风力：<span style="color:blue" th:text="${weatherVo.realWind}"></span></p>
@@ -48,7 +49,7 @@
 				<ul class="shubing-weather-clearfix"> 
 				    <li> <img class="shubing-weather-img" src="images/weather/001.jpg" th:src="@{/image/pc/images/weather/001.jpg}" /> <span th:text="${weatherVo.ziwaixian1}">中等</span> <em>紫外线指数</em> <p th:text="${weatherVo.ziwaixian2}">涂擦SPF大于15、PA+防晒护肤品。</p> </li> 
 				    <li> <img class="shubing-weather-img" src="images/weather/002.jpg" th:src="@{/image/pc/images/weather/002.jpg}" /> <span th:text="${weatherVo.ganmao1}">较易发</span> <em>感冒指数</em> <p th:text="${weatherVo.ganmao2}">风较大，较易发生感冒，注意防护。</p> </li> 
-				    <li> <a href="#"><img class="shubing-weather-img" src="images/weather/003.jpg" th:src="@{/image/pc/images/weather/003.jpg}" /> 
+				    <li> <a th:href="@{/subscribe(showId=2)}"><img class="shubing-weather-img" src="images/weather/003.jpg" th:src="@{/image/pc/images/weather/003.jpg}" /> 
 					    <div class="pageflip" id="chuanyi"> 
 					        <img src="images/page_flip.png" th:src="@{/image/pc/images/page_flip.png}" style="overflow: hidden; width: 30px; height: 30px; top: -1px; right: -3px;" /> 
 					        <div class="msg_block" style="overflow: hidden; width: 25px; height: 25px;"> </div> 

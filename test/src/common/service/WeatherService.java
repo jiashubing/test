@@ -7,6 +7,7 @@ public interface WeatherService {
 	void deleteAllWeather();
 	void saveWeather(Weather weather);
 	Weather getRemoteBeijingWeather();
+	Weather getRemoteWeather(String cityName);
 	Weather getLocalBeijingWeather();
 	
 }

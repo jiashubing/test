@@ -39,6 +39,10 @@
         <div class="thumbnails1"> 
          <img class="image" th:src="@{/image/mobile/images/blog.jpg}" /> 
         </div><p class="title">我的博客园</p><p class="abstract">博客园是一个面向开发者的知识分享社区，记录了对知识的学习与分享</p> <span class="tag">学习</span> </a>
+        <a class="list-item list-item1 clearfix" th:href="@{/subscribe(showId=2)}" target="_self">
+        <div class="thumbnails1"> 
+         <img class="image" th:src="@{/image/mobile/images/weather.jpg}" /> 
+        </div><p class="title">天气预报</p><p class="abstract">调用天气预报Web服务接口，数据每2.5小时左右自动更新一次，准确可靠</p> <span class="tag">查询</span> </a>
 	</div>
   </div>
  	<div th:if="${session.dbUser==null}" class="j_footer footer">

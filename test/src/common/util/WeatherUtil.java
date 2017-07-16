@@ -18,6 +18,10 @@ public class WeatherUtil {
 		if(weather == null){
 			return ans;
 		}
+		if("".endsWith(weather.getCity())){
+			ans.setWeatherFlag(true);
+			return ans;
+		}
 		
 		try {
 //			String str = "紫外线指数：强，涂擦SPF大于15、PA+防晒护肤品。感冒指数：少发，无明显降温，感冒机率较低。穿衣指数：热，适合穿T恤、短薄外套等夏季服装。洗车指数：较适宜，无雨且风力较小，易保持清洁度。运动指数：较适宜，风力稍强，推荐您进行室内运动。空气污染指数：良，气象条件有利于空气污染物扩散。";

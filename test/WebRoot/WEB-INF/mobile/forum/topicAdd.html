@@ -49,7 +49,7 @@
 				<input type="text" id="title" name="topicTitle" th:value="${topicTitle}" placeholder="标题（必填）" class="j_editor_input editor_input editor_title" maxlength="100" style="width: 100%;"/>
 			</div>
 			<div class="j_editor_title_panel editor_title_panel">
-				<select id="section" name="topicSectionId" class="j_editor_input editor_input editor_title" style="width: 100%;">
+				<select id="section" name="topicSectionId" class="editor_input editor_title" style="width: 100%;">
 					<option value="0">请选择板块...</option>
 					<option th:each="section:${sectionList}" th:value="${section.id}" th:text="${section.name}" 
 					th:selected="${section.id}==${topicSectionId}?true:false">123</option>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  	<meta charset="utf-8" />
+	<meta name="baidu-site-verification" content="3uYjxVgfa1" />
+  	<meta content="width=device-width,initial-scale=1,user-scalable=no" name="viewport" />
+  	<meta name="format-detection" content="telephone=no" />
+  	<title>天气预报 - 阿丙的私人定制</title>
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+  	<meta name="mobile-web-app-capable" content="yes" />
+	<link rel="shortcut icon" href="favicon.ico" th:href="@{/image/favicon.ico}" />
+	<link rel="stylesheet" href="./css/common.shubing.css" th:href="@{/css/mobile/css/common.shubing.css}"/> 
+  	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/forum/css/topic.shubing.css}"/> 
+  	<link rel="stylesheet" href="./css/myweather.css" th:href="@{/css/mobile/css/myweather.css}"/> 
+  	
+</head>
+<body class="ue_revision" onload="initProvince()">
+  <div class="container j_container">
+   <a name="goTop"></a>
+   <div class="bz_app_prompt_back bz_app_prompt j_bz_app_prompt"></div>
+   <div class="blue_kit_outer_w">
+    <div id="blue_kit_wrapper" class="blue_kit_wrapper blue_kit_wrapper_light ">
+     <div id="top_kit" class="blue_kit">
+      <div class="blue_kit_left"> 
+       <a th:href="@{/mobilesubscribe}" class="j_back_btn blue_kit_btn blue_kit_btn_back"><!-- <span class="icon_tieba_logo blue_kit_btn_logo"></span> -->
+       	<span style="display: inline-block;width: 10px;"></span>
+       </a>
+       <span style="padding-left:10px;">天气预报</span>
+      </div> 
+     </div>
+     <div class="top_operation"> 
+      <div class="mode_setup light_app_mode_setup j_mode_setup" id="mode_setup">
+       <div class="mode_setup_style">
+       </div>
+       <a href="javascript:" class="j_close_setup close_setup"></a>
+      </div>
+     </div>
+    </div>
+   </div>
+
+    <div class="form-wrapper">
+    	<p class="weather_text">选择省市:</p>  
+        <select class="myselect" name="province" id="selProvince" onChange = "shubingGetCity(this.options[this.selectedIndex].value)">  
+        </select>  
+        <select class="myselect" name="city" id="selCity">
+            <option>北京</option>  
+        </select>  
+        <p class="form-item form-item-btn">
+        	<input value="查询" id="weatherBtn" class="pass-button-full pass-button-full-disabled" type="button"/>
+        </p>
+        <div id="weatherTable" style="display:none;">
+	        <p style="color:blue; font-weight:bold;">省份</p>
+	        <p style="text-indent:2em;" id="weather_province"></p>
+	        <p style="color:blue; font-weight:bold;">城市</p>
+	        <p style="text-indent:2em;" id="weather_city"></p>
+	        <p style="color:blue; font-weight:bold;">城市代码</p>
+	        <p style="text-indent:2em;" id="weather_cityCode"></p>
+	        <p style="color:blue; font-weight:bold;">最后更新时间</p>
+	        <p style="text-indent:2em;" id="weather_lastUpdateDate"></p>
+	        <p style="color:blue; font-weight:bold;">当天气温</p>
+	        <p style="text-indent:2em;" id="weather_todayTemperature"></p>
+	        <p style="color:blue; font-weight:bold;">当天概况</p>
+	        <p style="text-indent:2em;" id="weather_todaySituation"></p>
+	        <p style="color:blue; font-weight:bold;">当天风向和风力</p>
+	        <p style="text-indent:2em;" id="weather_todayWind"></p>
+	        <p style="color:blue; font-weight:bold;">当天天气实况</p>
+	        <p style="text-indent:2em;" id="weather_todayActual"></p>
+	        <p style="color:blue; font-weight:bold;">当天生活指数</p>
+	        <p style="text-indent:2em;" id="weather_todayLife"></p>
+	        <p style="color:blue; font-weight:bold;">第二天的气温</p>
+	        <p style="text-indent:2em;" id="weather_secondTemperature"></p>
+	        <p style="color:blue; font-weight:bold;">第二天的概况</p>
+	        <p style="text-indent:2em;" id="weather_secondSituation"></p>
+	        <p style="color:blue; font-weight:bold;">第二天的风向和风力</p>
+	        <p style="text-indent:2em;" id="weather_secondWind"></p>
+	        <p style="color:blue; font-weight:bold;">第三天的气温</p>
+	        <p style="text-indent:2em;" id="weather_thirdTemperature"></p>
+	        <p style="color:blue; font-weight:bold;">第三天的风向和风力</p>
+	        <p style="text-indent:2em;" id="weather_thirdWind"></p>
+	        <p style="color:blue; font-weight:bold;">被查询的城市或地区的介绍</p>
+	        <p style="text-indent:2em;" id="weather_cityIntroduce"></p>
+        </div>
+     </div>
+    
+    	<div th:if="${session.dbUser==null}" class="j_footer footer">
+			<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
+			<a class="footer_link" href="" th:href="@{/login(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">登录</a><span class="separator">|</span>
+			<a class="footer_link" href="" th:href="@{/regist}">注册</a><br/>
+		</div>
+	 	<div th:unless="${session.dbUser==null}" class="j_footer footer">
+			<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
+			<a class="footer_link" href="" th:href="@{/mylogout(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">注销</a><br/>
+		</div>
+    </div>
+    <!-- <a id="j_light_see_index" class="light_see_index" href="https://tieba.baidu.com/">去首页，发现更多精彩内容<span class="si_arrow arrow arrow_right arrow_line arrow_position_right">&nbsp;</span></a> -->
+    
+<script type="text/javascript" src="js/myweather.js" th:src="@{/js/pc/subscribe/js/myweather.js}" ></script>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/myweatherjson.js" th:src="@{/js/mobile/js/myweatherjson.js}" ></script>
+ <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?18e0f33db7609c8e4d02a81149c37a31";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+ </body>
+</html>

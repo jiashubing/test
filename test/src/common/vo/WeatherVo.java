@@ -1,6 +1,7 @@
 package common.vo;
 
 public class WeatherVo {
+	private boolean weatherFlag;
 	private String ziwaixian1;
 	private String ziwaixian2;
 	private String ganmao1;
@@ -26,6 +27,12 @@ public class WeatherVo {
 	private String realZiwaixian;	//实时紫外线强度
 	private String realAir;	//实时空气质量
 	
+	public boolean isWeatherFlag() {
+		return weatherFlag;
+	}
+	public void setWeatherFlag(boolean weatherFlag) {
+		this.weatherFlag = weatherFlag;
+	}
 	public String getZiwaixian1() {
 		return ziwaixian1;
 	}

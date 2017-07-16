@@ -10,10 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import common.entity.Result;
 import common.po.Blog;
+import common.po.Weather;
 import common.service.BlogService;
 import common.service.SubscribeService;
+import common.service.WeatherService;
 import config.ValidatePcMobile;
 
 @Controller
@@ -24,6 +28,9 @@ public class SubscribeAction {
 	
 	@Resource(name="blogServiceImpl")
 	private BlogService blogService;
+	
+	@Resource(name="weatherServiceImpl")
+	private WeatherService weatherService;
 	
 	@RequestMapping("/subscribe")
 	public String loadSubscribe(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
@@ -43,7 +50,9 @@ public class SubscribeAction {
 				return ValidatePcMobile.checkRequest(request, "/subscribe/blog");
 			}
 		}else if(showId == 2){
-			
+			if(!ValidatePcMobile.checkRequest(request)){
+				return ValidatePcMobile.checkRequest(request, "/subscribe/weather");
+			}
 		}
 		
 		model.addAttribute("showId",showId);
@@ -74,5 +83,25 @@ public class SubscribeAction {
 	@RequestMapping("/mobilesubscribe")
 	public String loadMobileSubscribe(Model model,HttpServletRequest request)throws Exception{
 		return ValidatePcMobile.checkRequest(request, "/subscribes");
+	}
+	
+	@RequestMapping(value={"/subscribe/mobileweather","/pcweather"})
+	@ResponseBody
+	public Result getWeather(String cityName) {
+		Weather weather = null;
+		try{
+			String tmp = cityName.substring(cityName.indexOf('(')+1,cityName.indexOf(')'));
+			weather = weatherService.getRemoteWeather(tmp);
+		}catch (Exception e){
+			//do nothing
+		}
+		Result result = new Result();
+		if(weather!=null){
+			result.setStatus(1);
+			result.setBody(weather);
+		}else{
+			result.setStatus(0);
+		}
+		return result;
 	}
 }
