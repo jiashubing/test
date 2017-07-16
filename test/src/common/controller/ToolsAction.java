@@ -31,19 +31,11 @@ public class ToolsAction {
 	@Resource(name="dbUserServiceImpl")
 	private DbUserService dbUserService;
 	
-	@RequestMapping("/tools")
+	@RequestMapping(value={"/tools","/tools/one"})
 	public String loadTools(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
 		if(showId == null){
 			showId = 1;
 		}
-		model.addAttribute("showId",showId); 
-		model.addAttribute("flag","tools.html");  //此属性用来给前台确定当前是哪个页面
-		return ValidatePcMobile.checkRequest(request, "/tools");
-	}
-	
-	@RequestMapping("/tools/one")
-	public String loadToolOne(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
-		showId = 1;
 		model.addAttribute("showId",showId); 
 		model.addAttribute("flag","tools.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/tools");

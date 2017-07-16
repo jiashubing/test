@@ -30,9 +30,17 @@ public class WeatherServiceImpl implements WeatherService{
 
 	@Override
 	public Weather getRemoteBeijingWeather() {
+        Weather weather = getRemoteWeather("54511");
+        deleteAllWeather();
+        saveWeather(weather);
+        return weather;
+	}
+	
+	@Override
+	public Weather getRemoteWeather(String cityName) {
 		WeatherWebService weatherWebService = new WeatherWebService();
         WeatherWebServiceSoap  soap = weatherWebService.getWeatherWebServiceSoap();
-        ArrayOfString weatherInfo = soap.getWeatherbyCityName("54511");
+        ArrayOfString weatherInfo = soap.getWeatherbyCityName(cityName);
         List<String> strs = weatherInfo.getString();
         if(strs == null || strs.size()<23){
         	return new Weather();
@@ -41,8 +49,6 @@ public class WeatherServiceImpl implements WeatherService{
         		strs.get(2),strs.get(3),strs.get(4),strs.get(5),strs.get(6),strs.get(7),strs.get(8),strs.get(9),
         		strs.get(10),strs.get(11),strs.get(12),strs.get(13),strs.get(14),strs.get(15),strs.get(16),strs.get(17),
         		strs.get(17),strs.get(19),strs.get(20),strs.get(21),strs.get(22));
-        deleteAllWeather();
-        saveWeather(weather);
         return weather;
 	}
 

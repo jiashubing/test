@@ -161,7 +161,7 @@ public class Weather implements Serializable{
 		this.todayTemperature = todayTemperature;
 	}
 
-	@Column(length=20)
+	@Column(length=100)
 	public String getTodaySituation() {
 		return todaySituation;
 	}
