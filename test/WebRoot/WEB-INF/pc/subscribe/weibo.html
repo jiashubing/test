@@ -1,0 +1,41 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div th:fragment="weiboDiv">
+		<div id="bootstrap-shubing">
+			<div id="mainContent" class="shubing-tool-wrapper">
+				<div class="shubing-toolName">微博&nbsp;&nbsp;(<a th:href="@{/subscribe/updateWeiBo}" style="color:orange;">点我刷新</a>)</div>
+				<div class="shubing-toolUsing shubing-clearfix" style="padding-bottom:50px;">
+					<ul class="shubing-nav shubing-nav-tabs">
+						<li><a th:href="@{/subscribe(showId=1)}">博客园</a></li>
+						<li><a th:href="@{/subscribe(showId=2)}">天气预报</a></li>
+						<li class="active"><a th:href="@{/subscribe(showId=3)}">微博</a></li>
+						<li><a>待开发</a></li>
+					</ul>
+					<ul th:if="${weiBoList==null}" class="shubinghistorylist">
+						<li>
+							<strong><span style="color: red;font-size:16px;">Sorry，未查询到微博信息！</span></strong>
+						</li>
+					</ul>
+					<ul th:unless="${weiBoList==null}" class="shubinghistorylist">
+						<li th:each="weibo:${weiBoList}">
+							<strong><span style="color: #2d64b3;font-size:16px;" th:text="${#strings.abbreviate(weibo.title,30)}">Java菜鸟学习网站</span></strong>
+							<p style="text-indent:2em;margin-top:5px;"><span style="color: red;"> 摘要：</span>
+								<span class="weibodes">哈哈哈，我也爱</span>
+								<script th:inline="javascript">
+									/*<![CDATA[*/
+										$(".weibodes:last").html(/*[[${weiBoList[weiboStat.count-1].description}]]*/);
+   									 /*]]>*/
+								</script>
+								&nbsp;&nbsp;&nbsp;
+								<span class="weibohref"><a th:href="${weibo.uri}" target="_blank">阅读全文</a></span>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

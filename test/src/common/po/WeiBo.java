@@ -1,35 +1,35 @@
 package common.po;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * 博客园订阅
+ * 微博订阅
  * @author JiaShubing
  *
  */
 @Entity
-@Table(name="s_blog")
-public class Blog implements Serializable{
+@Table(name="s_weibo")
+public class WeiBo implements Serializable{
 
-	private static final long serialVersionUID = 1084726341264882370L;
+	private static final long serialVersionUID = -6552319538568181157L;
 
 	private long id;
 	
 	private String title;
 	private String description;
 	private String uri;
-	private Date updateDate;
 	
-	@Column
+	@Lob
+	@Column(columnDefinition="TEXT")
 	public String getTitle() {
 		return title;
 	}
@@ -38,31 +38,14 @@ public class Blog implements Serializable{
 		this.title = title;
 	}
 
-	@Column(length=1000)
+	@Lob
+	@Column(columnDefinition="TEXT")
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	@Column
-	public String getUri() {
-		return uri;
-	}
-
-	public void setUri(String uri) {
-		this.uri = uri;
-	}
-
-	@Column
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
 	}
 
 	@Id
@@ -75,5 +58,16 @@ public class Blog implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
+
+	@Column
+	public String getUri() {
+		return uri;
+	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
 	
+	
+
 }

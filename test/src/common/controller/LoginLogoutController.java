@@ -34,7 +34,7 @@ public class LoginLogoutController {
 		}
 		model.put("loginFlag", 1);
 		if(ValidatePcMobile.checkRequest(request)){
-			return "/pc/index";
+			return "/pc/happy";
 		}else{
 			if(session!=null && session.getAttribute("dbUser") != null){
 				return "/mobile/person";
