@@ -2,6 +2,7 @@ package common.test;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
@@ -20,7 +21,8 @@ public class BlogTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		test2();
-
+//		String csn =  Charset.defaultCharset().name(); 
+//		System.out.println(csn); 
 	}
 	
 	private static void test1(){

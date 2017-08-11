@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  	<meta charset="utf-8" />
+	<meta name="baidu-site-verification" content="3uYjxVgfa1" />
+  	<meta content="width=device-width,initial-scale=1,user-scalable=no" name="viewport" />
+  	<meta name="format-detection" content="telephone=no" />
+  	<title>博客园订阅 - 阿丙的私人定制</title>
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+  	<meta name="mobile-web-app-capable" content="yes" />
+	<link rel="shortcut icon" href="favicon.ico" th:href="@{/image/favicon.ico}" />
+	<link rel="stylesheet" href="./css/common.shubing.css" th:href="@{/css/mobile/css/common.shubing.css}"/> 
+  	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/forum/css/topic.shubing.css}"/> 
+  	<link rel="stylesheet" href="./css/daoliu.shubing.css" th:href="@{/css/mobile/forum/css/daoliu.shubing.css}"/> 
+  	<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+</head>
+<body class="ue_revision">
+  <div class="container j_container">
+   <a name="goTop"></a>
+   <div class="bz_app_prompt_back bz_app_prompt j_bz_app_prompt"></div>
+   <div class="blue_kit_outer_w">
+    <div id="blue_kit_wrapper" class="blue_kit_wrapper blue_kit_wrapper_light ">
+     <div id="top_kit" class="blue_kit">
+      <div class="blue_kit_left"> 
+       <a th:href="@{/mobilesubscribe}" class="j_back_btn blue_kit_btn blue_kit_btn_back"><!-- <span class="icon_tieba_logo blue_kit_btn_logo"></span> -->
+       	<span style="display: inline-block;width: 10px;"></span>
+       </a>
+       <span style="padding-left:10px;">微博订阅</span>
+      </div> 
+      <div class="blue_kit_right">
+      	<a th:href="@{/subscribe/updateWeiBo}">刷新</a>&nbsp;&nbsp;
+      </div> 
+     </div>
+     <div class="top_operation"> 
+      <div class="mode_setup light_app_mode_setup j_mode_setup" id="mode_setup">
+       <div class="mode_setup_style">
+       </div>
+       <a href="javascript:" class="j_close_setup close_setup"></a>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="j_main main">
+
+	
+    <div id="frs-tuijian"></div>
+    <div id="tlist" class="post_list"> 
+    
+     <ul th:if="${weiBoList==null}" class="threads_list">
+		<li class="tl_shadow">
+			<strong><span style="color: red;font-size:16px; line-height:36px;">Sorry，未查询到博客信息！</span></strong>
+		</li>
+	 </ul>
+    
+     <ul th:unless="${weiBoList==null}" class="threads_list" id="frslistcontent">
+      <li class="tl_shadow" th:each="weibo:${weiBoList}">
+      	<a href="" th:href="${weibo.uri}" class="j_common ti_item">
+        <div class="ti_title"> 
+         <span class="weibotitle" style="width:1200px;">S.U.N.女神「原创」太阳☀女神-谢娜</span>
+		 <script th:inline="javascript">
+			/*<![CDATA[*/
+				$(".weibotitle:last").html(/*[[${weiBoList[weiboStat.count-1].description}]]*/);
+			/*]]>*/
+		 </script>
+        </div>
+		<!-- <p class="ti_abs" style="text-indent:2em;"><span class="topiccontent" th:text="${weibo.description}">哈哈哈，我也爱</span></p> -->
+        <div class="ti_infos clearfix">
+         <!-- <div class="ti_author_time"> 
+          <span class="ti_time" th:text="${#calendars.format(weibo.updateDate,'yyyy-MM-dd')}">19:33</span>
+         </div> -->
+         <div class="ti_zan_reply"> 
+         </div>
+        </div> </a></li>
+		
+     </ul>
+    	<div th:if="${session.dbUser==null}" class="j_footer footer">
+			<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
+			<a class="footer_link" href="" th:href="@{/login(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">登录</a><span class="separator">|</span>
+			<a class="footer_link" href="" th:href="@{/regist}">注册</a><br/>
+		</div>
+	 	<div th:unless="${session.dbUser==null}" class="j_footer footer">
+			<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
+			<a class="footer_link" href="" th:href="@{/mylogout(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">注销</a><br/>
+		</div>
+    </div>
+    <!-- <a id="j_light_see_index" class="light_see_index" href="https://tieba.baidu.com/">去首页，发现更多精彩内容<span class="si_arrow arrow arrow_right arrow_line arrow_position_right">&nbsp;</span></a> -->
+    
+   </div>
+  </div>
+ <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?18e0f33db7609c8e4d02a81149c37a31";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+ </body>
+</html>

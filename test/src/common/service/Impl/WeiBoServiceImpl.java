@@ -31,11 +31,7 @@ public class WeiBoServiceImpl implements WeiBoService{
 
 	@Override
 	public void saveWeiBo(WeiBo weiBo) {
-		try{		
-			em.persist(weiBo);
-		}catch (Exception e){
-			//do nothing
-		}
+		em.persist(weiBo);
 	}
 
 	@Override
@@ -81,20 +77,25 @@ public class WeiBoServiceImpl implements WeiBoService{
 
 			@SuppressWarnings("unchecked")
 			List<SyndEntry> entries = feed.getEntries();// 得到所有的标题<title></title>
-			for (int i = 0; i < entries.size(); i++) {
+			int len = entries.size()>10 ? 10 : entries.size();
+			for (int i = 0; i < len; i++) {
 				SyndEntry entry = (SyndEntry) entries.get(i);
 				WeiBo tmp = new WeiBo();
-				String title = new String(entry.getTitle().getBytes());
-				tmp.setTitle(title);
-				String description = new String(entry.getDescription().getValue().getBytes());
+				tmp.setTitle(entry.getTitle());
+				String description = entry.getDescription().getValue();
+				description = description.replaceAll("img src=","img style=\"max-width:100%\" src=");
 				tmp.setDescription(description);
 				tmp.setUri(entry.getUri());
 				lists.add(tmp);
 			}
-//			if(lists != null && lists.size()>0){
-//				deleteAllWeiBo();
-//				saveWeiBoList(lists);
-//			}
+			if(lists != null && lists.size()>0){
+				deleteAllWeiBo();
+				try{
+					saveWeiBoList(lists);
+				} catch (Exception e){
+					//do nothing
+				}
+			}
 			return lists;
 		} catch (Exception e) {
 			return null;

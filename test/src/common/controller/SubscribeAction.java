@@ -62,7 +62,7 @@ public class SubscribeAction {
 				return ValidatePcMobile.checkRequest(request, "/subscribe/weather");
 			}
 		}else if(showId == 3){
-			List<WeiBo> weiBoList = weiBoService.findWeiBoList(25, 0);
+			List<WeiBo> weiBoList = weiBoService.findWeiBoList(10, 0);
 			//先从数据库里获取，主要目的是为了快速
 			//数据库每一个小时更新一次微博的数据，或者点击“更新”按钮，更新实时动态到数据库
 			if(weiBoList == null || weiBoList.size()==0){

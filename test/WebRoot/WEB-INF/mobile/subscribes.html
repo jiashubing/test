@@ -43,6 +43,10 @@
         <div class="thumbnails1"> 
          <img class="image" th:src="@{/image/mobile/images/weather.jpg}" /> 
         </div><p class="title">天气预报</p><p class="abstract">调用天气预报Web服务接口，数据每2.5小时左右自动更新一次，准确可靠</p> <span class="tag">查询</span> </a>
+        <a class="list-item list-item1 clearfix" th:href="@{/subscribe(showId=3)}" target="_self">
+        <div class="thumbnails1"> 
+         <img class="image" th:src="@{/image/mobile/images/weibo.jpg}" /> 
+        </div><p class="title">我的微博</p><p class="abstract">朋友圈越来越像一个谄媚的工具了，然后慢慢喜欢上了微博</p> <span class="tag">社交</span> </a>
 	</div>
   </div>
  	<div th:if="${session.dbUser==null}" class="j_footer footer">
