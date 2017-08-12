@@ -61,6 +61,17 @@
     	$(".zhizheni").fadeOut("fast");
     });
     
+    //鼠标悬停在首页文字上
+    $("#homeLi").on("mouseover",function(){
+ 	   $("#lbpo2").fadeIn("fast");
+ 	   $("#zhizheni2").fadeIn("fast");
+ 	});
+    
+    $("#lbpo2").on("mouseleave",function(){
+    	$(this).fadeOut("fast");
+    	$("#zhizheni2").fadeOut("fast");
+    });
+    
     $("input[id=password]").keypress(function(e){
         var eCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
         if (eCode == 13){

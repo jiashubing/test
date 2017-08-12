@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import common.entity.Result;
 import forum.util.FileEcodeUtil;
+import forum.util.ImgUtil;
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
@@ -52,7 +53,7 @@ public class FileUploadController {
 			}
 			
 			//上传至服务器，先将图片保存到临时文件夹
-			String realPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/tmpImg");
+			String realPath=request.getSession().getServletContext().getRealPath(ImgUtil.TMPIMG_PATH);
 			String imgName = UUID.randomUUID().toString();
 			String imgPath = "/"+imgName+ ".png";
 			File myFile = new File(realPath+imgPath);
@@ -108,7 +109,7 @@ public class FileUploadController {
             bais = new ByteArrayInputStream(bytes1);
 
             //上传至服务器，先将图片保存到临时文件夹
-			String realPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/tmpImg");
+			String realPath=request.getSession().getServletContext().getRealPath(ImgUtil.TMPIMG_PATH);
 			String imgName = UUID.randomUUID().toString();
 			String imgPath = "/"+imgName+ ".png";
 			File myFile = new File(realPath+imgPath);

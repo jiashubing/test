@@ -83,7 +83,7 @@ public class WeiBoServiceImpl implements WeiBoService{
 				WeiBo tmp = new WeiBo();
 				tmp.setTitle(entry.getTitle());
 				String description = entry.getDescription().getValue();
-				description = description.replaceAll("img src=","img style=\"max-width:100%\" src=");
+				description = description.replaceAll("img src=","img style=\"max-width:55%;\" src=");
 				tmp.setDescription(description);
 				tmp.setUri(entry.getUri());
 				lists.add(tmp);

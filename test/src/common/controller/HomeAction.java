@@ -26,6 +26,7 @@ import common.po.Opinion;
 import common.po.Weather;
 import common.service.OpinionService;
 import common.service.WeatherService;
+import common.service.ZXingService;
 import common.util.WeatherUtil;
 import common.vo.WeatherVo;
 import config.ValidatePcMobile;
@@ -56,6 +57,9 @@ public class HomeAction {
 	
 	@Resource(name="weatherServiceImpl")
 	private WeatherService weatherService;
+	
+	@Resource(name="zxingServiceImpl")
+	private ZXingService zxingService;
 	
 	@RequestMapping("/index")
 	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
@@ -95,13 +99,13 @@ public class HomeAction {
 	
 	@RequestMapping("/happy")
 	public String loadHappy(Model model,HttpServletRequest request)throws Exception{
-		model.addAttribute("flag","happy.html");  //此属性用来给前台确定当前是哪个页面
+		model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/happy");
 	}
 	
 	@RequestMapping("/happy/hahaha")
 	public String loadHahaha(Model model,HttpServletRequest request)throws Exception{
-		model.addAttribute("flag","happy.html");  //此属性用来给前台确定当前是哪个页面
+		model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/happys/hahaha");
 	}
 	
@@ -537,5 +541,24 @@ public class HomeAction {
 	 public String shang(HttpServletRequest request){
 		 return ValidatePcMobile.checkRequest(request, "/shang");
 	 }
+	 
+	 /**
+	  * 生成二维码
+	  * @param request
+	  * @return
+	  */
+	 @RequestMapping("/zxing")
+	 public String getZXing(Model model,HttpServletRequest request){
+		String str = "";
+		try {
+			String ansPath=request.getSession().getServletContext().getRealPath(ImgUtil.TMPIMG_PATH);
+			str = zxingService.getLogoQRCode("https://jiashubing.cn/forum",ansPath);
+		} catch (Exception e) {
+			str = "抱歉，生成二维码图片出错了！";
+		}
+		model.addAttribute("imgCode", str);
+		return ValidatePcMobile.checkRequest(request, "/zxing");
+	 }
+	 
 	
 }

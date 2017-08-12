@@ -34,7 +34,7 @@ public class LoginLogoutController {
 		}
 		model.put("loginFlag", 1);
 		if(ValidatePcMobile.checkRequest(request)){
-			return "/pc/happy";
+			return "redirect:/happy";
 		}else{
 			if(session!=null && session.getAttribute("dbUser") != null){
 				return "/mobile/person";
@@ -116,7 +116,7 @@ public class LoginLogoutController {
 	/**
 	 * 登录前，将跳转页面保存到session中
 	*/
-	@RequestMapping("/mylogin")
+	@RequestMapping(value={"/mylogin","/tools/mylogin","/forum/mylogin"})
     @ResponseBody
     public Result getLoginReturnPage(String beforepath,String beforepar,HttpServletRequest request) {
 		//拼接登录前的路径
@@ -139,7 +139,7 @@ public class LoginLogoutController {
 	
 	/**
 	 * 登录前，将跳转页面保存到session中
-	 */
+	 *//*
 	@RequestMapping("/tools/mylogin")
 	@ResponseBody
 	public Result getLoginToolsReturnPage(String beforepath,String beforepar,HttpServletRequest request) {
@@ -159,11 +159,11 @@ public class LoginLogoutController {
 		Result result = new Result();
 		result.setStatus(1);
 		return result;
-	}
+	}*/
 	
 	/**
 	 * 登录前，将跳转页面保存到session中
-	 */
+	 *//*
 	@RequestMapping("/forum/mylogin")
 	@ResponseBody
 	public Result getLoginForumReturnPage(String beforepath,String beforepar,HttpServletRequest request) {
@@ -183,6 +183,6 @@ public class LoginLogoutController {
 		Result result = new Result();
 		result.setStatus(1);
 		return result;
-	}
+	}*/
 
 }

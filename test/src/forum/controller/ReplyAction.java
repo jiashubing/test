@@ -20,6 +20,7 @@ import forum.service.ReplyService;
 import forum.service.TopicService;
 import forum.service.UserService;
 import forum.util.FileEcodeUtil;
+import forum.util.ImgUtil;
 
 @Controller
 public class ReplyAction {
@@ -55,7 +56,7 @@ public class ReplyAction {
         for (i = 0 ; i <url.length ; i++ ) {
             if(url[i].contains(".png")){
                 imgName = url[i].substring(0,40);
-                String realOutPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/reaImg");
+                String realOutPath=request.getSession().getServletContext().getRealPath(ImgUtil.REAL_PATH);
                 String outName=realOutPath + '/' + imgName;
                 //删除图片
                 FileEcodeUtil.deleteFile(outName);
@@ -101,8 +102,8 @@ public class ReplyAction {
             if(url[i].contains(".png")){
                 imgName = url[i].substring(0,40);
                 //System.out.println("imgName = "+imgName);
-                String realInPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/tmpImg");
-                String realOutPath=request.getSession().getServletContext().getRealPath("/WEB-INF/images/reaImg");
+                String realInPath=request.getSession().getServletContext().getRealPath(ImgUtil.TMPIMG_PATH);
+                String realOutPath=request.getSession().getServletContext().getRealPath(ImgUtil.REAL_PATH);
                 String inName=realInPath + '/' + imgName;
                 String outName=realOutPath + '/' + imgName;
                 boolean flag = FileEcodeUtil.fileRemove(inName, outName);
