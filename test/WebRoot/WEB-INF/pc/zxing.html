@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		<div class="bing-progress">
-	          <div class="pross pross-ok"><span class="bing-index">1</span><a th:href="@{/forum}" style="color:#fff;">返回上一页</a>
+	          <div class="pross pross-ok"><span class="bing-index">1</span><a th:href="${beforePath}" style="color:#fff;">返回上一页</a>
 	            <div class="pross-dir"><span class="bing-outside"></span><span class="bing-inside"></span></div>
 	          </div>
 	          <div class="pross pross-ok"><span class="bing-index">2</span>
@@ -37,8 +37,8 @@
 		
 		<p style="clear:both"></p>
    	 	<p style="height:20px"></p>
-   	 	<p style="clear:both;font-size: 23px;line-height: 40px;text-indent: 2em;">以下二维码的内容，是上一个页面（点击【二维码】菜单时的那个页面）的URL，扫一扫以后会自动跳转到那个页面。当在此网站看到感兴趣的内容时，还请尝试下这个功能进行分享哦！</p>
-   	 	<p style="text-align:center; margin-top:20px;">
+   	 	<p style="clear:both;font-size: 23px;line-height: 40px;text-indent: 2em;">以下二维码的内容，是上一个页面（点击【二维码】菜单时的页面）对应的URL，扫码后会自动跳转到那个页面。当在此网站看到感兴趣的内容时，还请尝试下这个功能进行分享哦！</p>
+   	 	<p style="text-align:center; margin-top:40px;">
 	    	<img th:src="@{'/image/images/tmpImg/'+${imgCode}}" />
    	 	</p>
 	</div>

@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="./css/common.shubing.css" th:href="@{/css/mobile/css/common.shubing.css}"/> 
   	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/forum/css/topic.shubing.css}"/> 
   	<link rel="stylesheet" href="./css/daoliu.shubing.css" th:href="@{/css/mobile/forum/css/daoliu.shubing.css}"/> 
+  	<link rel="stylesheet" href="./css/icon.shubing.css" th:href="@{/css/mobile/css/icon.shubing.css}"/>
   	<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
 </head>
 <body class="ue_revision">
@@ -97,5 +98,13 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
+<!--二维码相关-->
+<a onclick="zxingClick()" class="client_zxing_icon"></a>
+<input type="hidden" id="beforeloginpath"  th:value="${#httpServletRequest.getServletPath()}" />
+<input type="hidden" id="beforeloginpar"  th:value="${#httpServletRequest.getQueryString()}" />
+<form id="zxing_form" th:action="@{/zxing}">
+	<input type="hidden" id="zxingpath" name="zxingpath"/>
+</form>
+<script type="text/javascript" src="js/mobilecommon.js" th:src="@{/js/mobile/js/mobilecommon.js}" ></script>
  </body>
 </html>

@@ -6,14 +6,13 @@
 	<meta name="baidu-site-verification" content="3uYjxVgfa1" />
   	<meta content="width=device-width,initial-scale=1,user-scalable=no" name="viewport" />
   	<meta name="format-detection" content="telephone=no" />
-  	<title>博客园订阅 - 阿丙的私人定制</title>
+  	<title>二维码 - 阿丙的私人定制</title>
   	<meta name="apple-mobile-web-app-capable" content="yes" />
   	<meta name="mobile-web-app-capable" content="yes" />
 	<link rel="shortcut icon" href="favicon.ico" th:href="@{/image/favicon.ico}" />
 	<link rel="stylesheet" href="./css/common.shubing.css" th:href="@{/css/mobile/css/common.shubing.css}"/> 
   	<link rel="stylesheet" href="./css/resource.shubing.css" th:href="@{/css/mobile/forum/css/topic.shubing.css}"/> 
-  	<link rel="stylesheet" href="./css/daoliu.shubing.css" th:href="@{/css/mobile/forum/css/daoliu.shubing.css}"/> 
-  	<link rel="stylesheet" href="./css/icon.shubing.css" th:href="@{/css/mobile/css/icon.shubing.css}"/>
+  	
 </head>
 <body class="ue_revision">
   <div class="container j_container">
@@ -23,15 +22,13 @@
     <div id="blue_kit_wrapper" class="blue_kit_wrapper blue_kit_wrapper_light ">
      <div id="top_kit" class="blue_kit">
       <div class="blue_kit_left"> 
-       <a th:href="@{/mobilesubscribe}" class="j_back_btn blue_kit_btn blue_kit_btn_back"><!-- <span class="icon_tieba_logo blue_kit_btn_logo"></span> -->
+       <a th:href="${beforePath}" class="j_back_btn blue_kit_btn blue_kit_btn_back"><!-- <span class="icon_tieba_logo blue_kit_btn_logo"></span> -->
        	<span style="display: inline-block;width: 10px;"></span>
        </a>
-       <span style="padding-left:10px;">博客园订阅</span>
-      </div> 
-      <div class="blue_kit_right">
-      	<a th:href="@{/subscribe/updateBlog}">刷新</a>&nbsp;&nbsp;
+       <span style="padding-left:10px;">二维码</span>
       </div> 
      </div>
+     
      <div class="top_operation"> 
       <div class="mode_setup light_app_mode_setup j_mode_setup" id="mode_setup">
        <div class="mode_setup_style">
@@ -42,33 +39,14 @@
     </div>
    </div>
    <div class="j_main main">
-
+	<p style="text-align:center; margin-top:55px;  margin-bottom:5px;">
+   		<img width="80%" th:src="@{'/image/images/tmpImg/'+${imgCode}}" />
+ 	</p>
+    <p style="text-indent:2em; line-height:1.5em;"><span style="color:orange;">以上二维码的内容，是上一个页面（点击【二维码】图标时的页面）对应的URL，扫码后会自动跳转到那个页面。</span></p>
+	<p style="text-indent:2em; line-height:1.5em; margin-bottom:5px;">当在此网站看到感兴趣的内容时，还请尝试下这个功能进行分享哦！</p>
 	
-    <div id="frs-tuijian"></div>
     <div id="tlist" class="post_list"> 
     
-     <ul th:if="${blogList==null}" class="threads_list">
-		<li class="tl_shadow">
-			<strong><span style="color: red;font-size:16px; line-height:36px;">Sorry，未查询到博客信息！</span></strong>
-		</li>
-	 </ul>
-    
-     <ul th:unless="${blogList==null}" class="threads_list" id="frslistcontent">
-      <li class="tl_shadow" th:each="blog:${blogList}">
-      	<a href="" th:href="${blog.uri}" class="j_common ti_item">
-        <div class="ti_title"> 
-         <span th:text="${blog.title}">S.U.N.女神「原创」太阳☀女神-谢娜</span>
-        </div>
-		<p class="ti_abs" style="text-indent:2em;"><span class="topiccontent" th:text="${blog.description}">哈哈哈，我也爱</span></p>
-        <div class="ti_infos clearfix">
-         <div class="ti_author_time"> 
-          <span class="ti_time" th:text="${#calendars.format(blog.updateDate,'yyyy-MM-dd')}">19:33</span>
-         </div>
-         <div class="ti_zan_reply"> 
-         </div>
-        </div> </a></li>
-		
-     </ul>
     	<div th:if="${session.dbUser==null}" class="j_footer footer">
 			<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
 			<a class="footer_link" href="" th:href="@{/login(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">登录</a><span class="separator">|</span>
@@ -92,14 +70,5 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-<!--二维码相关-->
-<a onclick="zxingClick()" class="client_zxing_icon"></a>
-<input type="hidden" id="beforeloginpath"  th:value="${#httpServletRequest.getServletPath()}" />
-<input type="hidden" id="beforeloginpar"  th:value="${#httpServletRequest.getQueryString()}" />
-<form id="zxing_form" th:action="@{/zxing}">
-	<input type="hidden" id="zxingpath" name="zxingpath"/>
-</form>
-<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
-<script type="text/javascript" src="js/mobilecommon.js" th:src="@{/js/mobile/js/mobilecommon.js}" ></script>
  </body>
 </html>

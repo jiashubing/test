@@ -119,7 +119,8 @@
 	<span th:unless="${application==null}" class="client_online_icon" th:text="${application.lineCount}"></span>
 	<span th:if="${application==null}" class="client_online_icon" th:text="0"></span>
 	<a href="" th:href="@{/shang}" class="client_ghost_icon"></a>
-</div>
+	<a onclick="zxingClick()" class="client_zxing_icon"></a>
+  </div>
  	<div th:if="${session.dbUser==null}" class="j_footer footer">
 		<a class="footer_link" href="" th:href="@{/feedback}">反馈</a><span class="separator">|</span>
 		<a class="footer_link" href="" th:href="@{/login(beforepath=${#httpServletRequest.getServletPath()},beforepar=${#httpServletRequest.getQueryString()})}">登录</a><span class="separator">|</span>
@@ -138,5 +139,14 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
+
+<!--二维码相关-->
+<input type="hidden" id="beforeloginpath"  th:value="${#httpServletRequest.getServletPath()}" />
+<input type="hidden" id="beforeloginpar"  th:value="${#httpServletRequest.getQueryString()}" />
+<form id="zxing_form" th:action="@{/zxing}">
+	<input type="hidden" id="zxingpath" name="zxingpath"/>
+</form>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/js/pc/js/jquery-1.7.2.min.js}" ></script>
+<script type="text/javascript" src="js/mobilecommon.js" th:src="@{/js/mobile/js/mobilecommon.js}" ></script>
  </body>
 </html>

@@ -33,6 +33,9 @@
     </div>
     <input type="hidden" id="beforeloginpath"  th:value="${#httpServletRequest.getServletPath()}" />
     <input type="hidden" id="beforeloginpar"  th:value="${#httpServletRequest.getQueryString()}" />
+    <form id="zxing_form" th:action="@{/zxing}">
+		<input type="hidden" id="zxingpath" name="zxingpath"/>
+    </form>
 </div>
 <!--登录弹窗end-->
 
@@ -51,7 +54,7 @@
 			<li th:class="${flag=='forum.html'}?'active'"><a th:href="@{/forum}">杂文阅读</a></li>
 			<li th:class="${flag=='tools.html'}?'active'"><a th:href="@{/tools}">在线工具</a></li>
 			<li th:class="${flag=='history.html'}?'active'"><a href="#" th:href="@{/history}">成长之路</a></li>
-			<li th:class="${flag=='happy.html'}?'active'"><a href="#" th:href="@{/zxing}" title="生成当前页面的二维码">二维码</a></li>
+			<li th:class="${flag=='zxing.html'}?'active'"><a href="#" onclick="zxingClick()" title="生成当前页面的二维码">二维码</a></li>
 			<li th:class="${flag=='games.html'}?'active'"><a th:href="@{/games}">在线游戏</a></li>
 			<li th:class="${flag=='subscribe.html'}?'active'"><a href="" th:href="@{/subscribe}">我的订阅</a></li>
 			<li th:class="${flag=='video.html'}?'active'"><a href="#" th:href="@{/video}">我的视频</a></li>

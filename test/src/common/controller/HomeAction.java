@@ -42,25 +42,25 @@ import forum.util.Md5Util;
 
 @Controller
 public class HomeAction {
-	
+
 	@Resource(name="dbUserServiceImpl")
 	private DbUserService dbUserService;
-	
+
 	@Resource(name="userServiceImpl")
 	private UserService userService;
-	
+
 	@Resource(name="opinionServiceImpl")
 	private OpinionService opinionService;
-	
+
 	@Resource(name="topicServiceImpl")
 	private TopicService topicService;
-	
+
 	@Resource(name="weatherServiceImpl")
 	private WeatherService weatherService;
-	
+
 	@Resource(name="zxingServiceImpl")
 	private ZXingService zxingService;
-	
+
 	@RequestMapping("/index")
 	public String loadIndex(Model model,HttpServletRequest request)throws Exception{
 		/*HttpSession session = request.getSession();
@@ -86,7 +86,7 @@ public class HomeAction {
 		model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/index");
 	}
-	
+
 	@RequestMapping("/history")
 	public String loadHistory(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
 		model.addAttribute("flag","history.html");  //此属性用来给前台确定当前是哪个页面
@@ -96,31 +96,31 @@ public class HomeAction {
 		model.addAttribute("showId",showId); 
 		return ValidatePcMobile.checkRequest(request, "/history");
 	}
-	
+
 	@RequestMapping("/happy")
 	public String loadHappy(Model model,HttpServletRequest request)throws Exception{
 		model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/happy");
 	}
-	
+
 	@RequestMapping("/happy/hahaha")
 	public String loadHahaha(Model model,HttpServletRequest request)throws Exception{
 		model.addAttribute("flag","index.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/happys/hahaha");
 	}
-	
+
 	@RequestMapping("/video")
 	public String loadVedio(Model model,HttpServletRequest request)throws Exception{
 		model.addAttribute("flag","video.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/video");
 	}
-	
+
 	@RequestMapping("/regist")
 	public String loadRegist(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request)throws Exception{
 		if(dbUser != null){
 			return "redirect:/index";
 		}
-		
+
 		//返回上一页的路径，赋值到页面中
 		String prePage = request.getHeader("Referer");
 		if(prePage != null && !"".equals(prePage) && !prePage.contains("/do")){
@@ -129,11 +129,11 @@ public class HomeAction {
 			String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
 			model.addAttribute("prePage", tmpPage);
 		}
-		
+
 		model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/regist");
 	}
-	
+
 	/**
 	 * 异步 校验昵称
 	 */
@@ -150,7 +150,7 @@ public class HomeAction {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 异步 校验邮箱
 	 */
@@ -167,7 +167,7 @@ public class HomeAction {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping(value="/doRegist")
 	public String doRegist(Model model,HttpServletRequest request,
 			@RequestParam String nickName,
@@ -177,12 +177,12 @@ public class HomeAction {
 			@RequestParam(required = false) Integer sex,
 			@RequestParam(required = false) CommonsMultipartFile face,
 			@RequestParam String newPwd )throws Exception{
-		
+
 		HttpSession session = request.getSession(false);
 		if(session != null && session.getAttribute("dbUser")!=null){
 			return "redirect:/index";
 		}
-		
+
 		if(!userService.checkEmail(email)){
 			if(ValidatePcMobile.checkRequest(request)){
 				model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
@@ -192,8 +192,8 @@ public class HomeAction {
 				return "/mobile/person";
 			}
 		}
-		
-	    DbUser tmpDbUser = new DbUser();
+
+		DbUser tmpDbUser = new DbUser();
 		User tmpUser = new User();
 
 		//保存图片到本地，并且在数据库中赋值为路径
@@ -223,7 +223,7 @@ public class HomeAction {
 		}else{
 			tmpUser.setFace("");
 		}
-	        
+
 		tmpDbUser.setUsername(nickName);
 		tmpUser.setPassword(newPwd);
 		//密码需要md5加密
@@ -249,24 +249,24 @@ public class HomeAction {
 		tmpUser.setDbUser(tmpDbUser);
 
 		dbUserService.save(tmpDbUser);
-		
-//		DbUser dbUser = dbUserService.getByName(nickName);
+
+		//		DbUser dbUser = dbUserService.getByName(nickName);
 		DbUser dbUser = tmpDbUser;
-		
-		
+
+
 		//注册后直接登陆
-        PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(dbUser, dbUser.getPassword(),dbUser.getAuthorities());
+		PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(dbUser, dbUser.getPassword(),dbUser.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		
+
 		if(session != null){
 			session.removeAttribute("dbUser");
 			session.setAttribute("dbUser",dbUser);
 		} 
-		
+
 		//发送邮件
-//		SendMailThread ss = new SendMailThread(nickName,email);
-//		ss.start();
-		
+		//		SendMailThread ss = new SendMailThread(nickName,email);
+		//		ss.start();
+
 		if(ValidatePcMobile.checkRequest(request)){
 			model.addAttribute("flag","regist.html");  //此属性用来给前台确定当前是哪个页面
 			model.addAttribute("successFlag", 0);
@@ -276,16 +276,16 @@ public class HomeAction {
 			return "/mobile/person";
 		}
 	}
-	
+
 	@RequestMapping(value="/doUpdate")
 	public String doUpdate(@AuthenticationPrincipal DbUser dbUser,Model model,HttpServletRequest request,
 			@RequestParam(required = false) String trueName,
 			@RequestParam(required = false) String mobile,
 			@RequestParam(required = false) Integer sex,
 			@RequestParam(required = false) CommonsMultipartFile face)throws Exception{
-		
+
 		User tmpUser = dbUser.getUser();
-		
+
 		//保存图片到本地，并且在数据库中赋值为路径
 		if (face!=null && face.getSize()!=0) {
 			InputStream tmpStream = null;
@@ -311,7 +311,7 @@ public class HomeAction {
 				tmpUser.setFace("");
 			}
 		}
-		
+
 		if(sex!=null && sex==1){
 			tmpUser.setSex("男");
 		}else if(sex!=null && sex==2){
@@ -321,16 +321,16 @@ public class HomeAction {
 		}
 		tmpUser.setMobile(mobile);
 		tmpUser.setTrueName(trueName);
-		
+
 		dbUserService.merge(dbUser);
-		
+
 		HttpSession session = request.getSession();
 		session.setAttribute("dbUser", dbUser);
-		
+
 		model.addAttribute("successFlag", 1);
 		return ValidatePcMobile.checkRequest(request, "/registsuccess");
 	}
-	
+
 
 	@RequestMapping("/changePassword")
 	@ResponseBody
@@ -357,12 +357,12 @@ public class HomeAction {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping("/lottery")
-    @ResponseBody
-    public Result loadLottery() {
-        Result result = new Result();
-        Object[][] prizeArr = new  Object[][]{
+	@ResponseBody
+	public Result loadLottery() {
+		Result result = new Result();
+		Object[][] prizeArr = new  Object[][]{
 				//id,min,max，prize【奖项】,v【中奖率】
 				//里面的指针转动（没有）
 				//外面的转盘转动
@@ -380,14 +380,14 @@ public class HomeAction {
 				{12,286,314,"恭喜你中了一千块",0},
 				{13,316,344,"谢谢参与",10}
 		};
-        Object ans[] = award(prizeArr);//抽奖后返回角度和奖品等级
-        result.setStatus(1);
-        result.setBody(ans[0]);
-        result.setMessage((String)ans[2]);
+		Object ans[] = award(prizeArr);//抽奖后返回角度和奖品等级
+		result.setStatus(1);
+		result.setBody(ans[0]);
+		result.setMessage((String)ans[2]);
 
-        return result;
-    }
-	
+		return result;
+	}
+
 	//抽奖并返回角度和奖项
 	public Object[] award(Object[][] prizeArr){
 		//概率数组
@@ -401,7 +401,7 @@ public class HomeAction {
 		String msg = (String) prizeArr[prizeId][3];//提示信息
 		return new Object[]{angle,prizeId,msg};
 	}
-	
+
 	//根据概率获取奖项
 	public Integer getRand(Integer obj[]){
 		Integer result = null;
@@ -424,31 +424,31 @@ public class HomeAction {
 		}
 		return result;
 	}
-	
-	 /**
-	  * 跳转到adminpage页面
-	  * @return
-	  *//*
+
+	/**
+	 * 跳转到adminpage页面
+	 * @return
+	 *//*
 	 @RequestMapping("/admin")
 	 public String getAdminPage(HttpServletRequest request){
 		 return ValidatePcMobile.checkRequest(request, "/adminpage");
 	 }*/
-	
-	 /**
-	  * 跳转到admin控制台页面
-	  * @return
-	  */
-	 @RequestMapping("/admin")
-	 public String getAdminPage(HttpServletRequest request){
+
+	/**
+	 * 跳转到admin控制台页面
+	 * @return
+	 */
+	@RequestMapping("/admin")
+	public String getAdminPage(HttpServletRequest request){
 		return ValidatePcMobile.checkRequest(request, "/admin/main");
-	 }
-	 
-	 /**
-	  * 跳转到意见反馈页面
-	  * @return
-	  */
-	 @RequestMapping("/feedback")
-	 public String getFeedback(ModelMap model, HttpServletRequest request){
+	}
+
+	/**
+	 * 跳转到意见反馈页面
+	 * @return
+	 */
+	@RequestMapping("/feedback")
+	public String getFeedback(ModelMap model, HttpServletRequest request){
 		//返回上一页的路径，赋值到页面中
 		String prePage = request.getHeader("Referer");
 		if(prePage != null && !"".equals(prePage) && !prePage.contains("/do")){
@@ -457,25 +457,25 @@ public class HomeAction {
 			String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
 			model.addAttribute("prePage", tmpPage);
 		}
-		 return ValidatePcMobile.checkRequest(request, "/feedback");
-	 }
-	 
-	 /**
-	  * 增加意见反馈页面
-	  * @return
-	  */
-	 @RequestMapping("/doFeedback")
-	 public String doFeedback(@AuthenticationPrincipal DbUser dbUser,@RequestParam Integer type,
-			 @RequestParam String content,
-			 @RequestParam(required = false) String email, ModelMap model, HttpServletRequest request){
-		 
-		 Opinion opinion = new Opinion();
-		 opinion.setType(type);
-		 opinion.setContent(content);
-		 opinion.setEmail(email);
-		 opinionService.saveOpinion(opinion);
-		 
-		 if(ValidatePcMobile.checkRequest(request)){
+		return ValidatePcMobile.checkRequest(request, "/feedback");
+	}
+
+	/**
+	 * 增加意见反馈页面
+	 * @return
+	 */
+	@RequestMapping("/doFeedback")
+	public String doFeedback(@AuthenticationPrincipal DbUser dbUser,@RequestParam Integer type,
+			@RequestParam String content,
+			@RequestParam(required = false) String email, ModelMap model, HttpServletRequest request){
+
+		Opinion opinion = new Opinion();
+		opinion.setType(type);
+		opinion.setContent(content);
+		opinion.setEmail(email);
+		opinionService.saveOpinion(opinion);
+
+		if(ValidatePcMobile.checkRequest(request)){
 			model.addAttribute("successFlag", 2);
 			return "/pc/registsuccess";
 		}else{
@@ -486,79 +486,103 @@ public class HomeAction {
 				return "/mobile/beforelogin";
 			}
 		}
-		 
-	 }
-	 
-	 /**
-	  * 跳转到基本信息页面
-	  */
-	 @RequestMapping("/basicinfo")
-	 public String basicinfo(HttpServletRequest request){
-		 return ValidatePcMobile.checkRequest(request, "/basicinfo");
-	 }
-	 
-	 /**
-	  * 跳转到修改基本信息页面
-	  */
-	 @RequestMapping("/updateinfo")
-	 public String updateinfo(@AuthenticationPrincipal DbUser dbUser,HttpServletRequest request,Model model){
-		 model.addAttribute("dbUser", dbUser);
-		 return ValidatePcMobile.checkRequest(request, "/updateinfo");
-	 }
-	 
-	 /**
-	  * 跳转到修改密码页面
-	  */
-	 @RequestMapping("/updatepassword")
-	 public String updatepassword(@AuthenticationPrincipal DbUser dbUser,HttpServletRequest request,Model model){
-		 model.addAttribute("dbUser", dbUser);
-		 
+
+	}
+
+	/**
+	 * 跳转到基本信息页面
+	 */
+	@RequestMapping("/basicinfo")
+	public String basicinfo(HttpServletRequest request){
+		return ValidatePcMobile.checkRequest(request, "/basicinfo");
+	}
+
+	/**
+	 * 跳转到修改基本信息页面
+	 */
+	@RequestMapping("/updateinfo")
+	public String updateinfo(@AuthenticationPrincipal DbUser dbUser,HttpServletRequest request,Model model){
+		model.addAttribute("dbUser", dbUser);
+		return ValidatePcMobile.checkRequest(request, "/updateinfo");
+	}
+
+	/**
+	 * 跳转到修改密码页面
+	 */
+	@RequestMapping("/updatepassword")
+	public String updatepassword(@AuthenticationPrincipal DbUser dbUser,HttpServletRequest request,Model model){
+		model.addAttribute("dbUser", dbUser);
+
 		//返回上一页的路径，赋值到页面中
 		String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
 		model.addAttribute("prePage", tmpPage);
-		 
-		 return ValidatePcMobile.checkRequest(request, "/updatepassword");
-	 }
-	 
-	 @RequestMapping("/registsu")
-	 public String registsu(Model model,HttpServletRequest request){
-		 model.addAttribute("msgInfo","感谢您的注册");
-		 return ValidatePcMobile.checkRequest(request, "/person");
-	 }
-	 
-	 /**
-	  * 跳转到简历页面
-	  */
-	 @RequestMapping("/resume")
-	 public String resume(HttpServletRequest request){
-		 return ValidatePcMobile.checkRequest(request, "/resume");
-	 }
-	 
-	 /**
-	  * 跳转到打赏页面
-	  */
-	 @RequestMapping("/shang")
-	 public String shang(HttpServletRequest request){
-		 return ValidatePcMobile.checkRequest(request, "/shang");
-	 }
-	 
-	 /**
-	  * 生成二维码
-	  * @param request
-	  * @return
-	  */
-	 @RequestMapping("/zxing")
-	 public String getZXing(Model model,HttpServletRequest request){
+
+		return ValidatePcMobile.checkRequest(request, "/updatepassword");
+	}
+
+	@RequestMapping("/registsu")
+	public String registsu(Model model,HttpServletRequest request){
+		model.addAttribute("msgInfo","感谢您的注册");
+		return ValidatePcMobile.checkRequest(request, "/person");
+	}
+
+	/**
+	 * 跳转到简历页面
+	 */
+	@RequestMapping("/resume")
+	public String resume(HttpServletRequest request){
+		return ValidatePcMobile.checkRequest(request, "/resume");
+	}
+
+	/**
+	 * 跳转到打赏页面
+	 */
+	@RequestMapping("/shang")
+	public String shang(HttpServletRequest request){
+		return ValidatePcMobile.checkRequest(request, "/shang");
+	}
+
+	/**
+	 * 生成二维码
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/zxing")
+	public String getZXing(Model model,HttpServletRequest request, String zxingpath){
+		if(zxingpath == null){
+			zxingpath = "/zxing";
+		}
 		String str = "";
+		String tmpPath = "";
 		try {
+			String tmp = request.getRequestURL().toString();
+			tmpPath = tmp.replace("/zxing",zxingpath);
 			String ansPath=request.getSession().getServletContext().getRealPath(ImgUtil.TMPIMG_PATH);
-			str = zxingService.getLogoQRCode("https://jiashubing.cn/forum",ansPath);
+			str = zxingService.getLogoQRCode(tmpPath,ansPath);
 		} catch (Exception e) {
-			str = "抱歉，生成二维码图片出错了！";
+			str = "null";
 		}
 		model.addAttribute("imgCode", str);
+		model.addAttribute("beforePath", tmpPath);
+		model.addAttribute("flag","zxing.html");  //此属性用来给前台确定当前是哪个页面
 		return ValidatePcMobile.checkRequest(request, "/zxing");
-	 }
-	 
-	
+	}
+
+	@RequestMapping(value={"/qrcode","/tools/qrcode","/forum/qrcode"})
+	@ResponseBody
+	public Result getLoginReturnPage(String beforepath,String beforepar,HttpServletRequest request) {
+		//拼接登录前的路径
+		String loginPath ="";
+		if(beforepath != null && !"/login".equals(beforepath)){
+			loginPath += beforepath;
+			if(beforepar != null && !"".equals(beforepar)){
+				loginPath +='?'+beforepar;
+			}
+		}
+		Result result = new Result();
+		result.setStatus(1);
+		result.setMessage(loginPath);
+		return result;
+	}
+
 }
