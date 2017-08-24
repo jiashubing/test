@@ -33,7 +33,7 @@ public class ZoneServiceImpl implements ZoneService {
 	}
 	
 	@Override
-	public void deleteZoneById(Integer id) {
+	public void deleteZoneById(long id) {
 		Query query=em.createQuery("delete from Zone where id= "+id);
 		query.executeUpdate();
 	}
@@ -69,7 +69,7 @@ public class ZoneServiceImpl implements ZoneService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public Zone findZoneById(int zoneId) {
+	public Zone findZoneById(long zoneId) {
 		return em.find(Zone.class, zoneId);
 	}
 

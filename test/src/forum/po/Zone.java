@@ -24,7 +24,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Zone implements Serializable{
 
 	private static final long serialVersionUID = 4068643059985798778L;
-	private int id;				//
+	private long id;				//
 	private String name;		//
 	private String description;	//
 	
@@ -33,11 +33,11 @@ public class Zone implements Serializable{
 	@Id
 	@GeneratedValue(generator="_native")
 	@GenericGenerator(name="_native",strategy="native")
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

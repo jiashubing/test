@@ -29,7 +29,7 @@ public class Topic implements Serializable{
 
 	private static final long serialVersionUID = -6734394733551567366L;
 	/**帖子表的id*/
-	private int id;						//
+	private long id;						//
 	private Section section;			//
 	private User user;					//
 	private String title;				//标题
@@ -45,10 +45,10 @@ public class Topic implements Serializable{
 	@Id
 	@GeneratedValue(generator="_native")
 	@GenericGenerator(name="_native",strategy="native")
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	

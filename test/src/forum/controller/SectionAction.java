@@ -57,8 +57,8 @@ public class SectionAction {
 	public String loadSectionList(
 			@RequestParam(required = false) Integer pageNo,
 			@RequestParam(required = false) String s_name,
-			@RequestParam(required = false) Integer s_zoneId,
-			@RequestParam(required = false) Integer s_masterId,
+			@RequestParam(required = false) Long s_zoneId,
+			@RequestParam(required = false) Long s_masterId,
 			Model model,HttpServletRequest request)throws Exception{
 		
 		pageNo = PageUtil.initPageNo(pageNo);
@@ -100,9 +100,9 @@ public class SectionAction {
 	
 	@RequestMapping("/admin/sectionSave")
 	public String saveSection(@RequestParam(required = false) Integer pageNo,
-			@RequestParam Integer secId,
-			@RequestParam Integer secMasterId,
-			@RequestParam Integer secZoneId,
+			@RequestParam Long secId,
+			@RequestParam Long secMasterId,
+			@RequestParam Long secZoneId,
 			@RequestParam String secName,
 			@RequestParam(required = false) CommonsMultipartFile logo,
 			HttpServletRequest request)throws Exception{
@@ -170,7 +170,7 @@ public class SectionAction {
 	 */
 	@RequestMapping("/admin/sectionDelete")
     @ResponseBody
-    public Result deleteSection(Integer sectionId,HttpServletRequest request) {
+    public Result deleteSection(Long sectionId,HttpServletRequest request) {
         Result result = new Result();
         this.deleteSectionLogo(sectionId,request);
         sectionService.deleteSectionById(sectionId);
@@ -207,7 +207,7 @@ public class SectionAction {
 	 * @param request
 	 * @return
 	 */
-	public boolean deleteSectionLogo(Integer secId,HttpServletRequest request){
+	public boolean deleteSectionLogo(Long secId,HttpServletRequest request){
 		if(secId != null){
 			Section tmpSec = sectionService.findSectionById(secId);
 			String tmpLogo = tmpSec.getLogo();

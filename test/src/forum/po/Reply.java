@@ -18,7 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Reply implements Serializable{
 
 	private static final long serialVersionUID = 4004727124500298705L;
-	private int id;				//
+	private long id;				//
 	private Topic topic;		//
 	private User user;			//
 	private String title;		//
@@ -28,10 +28,10 @@ public class Reply implements Serializable{
 	@Id
 	@GeneratedValue(generator="_native")
 	@GenericGenerator(name="_native",strategy="native")
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	

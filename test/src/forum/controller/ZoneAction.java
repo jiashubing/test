@@ -49,7 +49,7 @@ public class ZoneAction {
 	}
 	
 	@RequestMapping("/admin/zoneAdd")
-	public String saveZone(@RequestParam(required = false) Integer pageNo,@RequestParam Integer zid,
+	public String saveZone(@RequestParam(required = false) Integer pageNo,@RequestParam Long zid,
 			@RequestParam String zname,@RequestParam String zdescription)throws Exception{
 		Zone zone =new Zone();
 		if(zid != null){
@@ -64,7 +64,7 @@ public class ZoneAction {
 	
 	@RequestMapping("/admin/zoneDelete")
     @ResponseBody
-    public Result loadLottery(Integer id) {
+    public Result loadLottery(Long id) {
         Result result = new Result();
         zoneService.deleteZoneById(id);
         result.setStatus(1);

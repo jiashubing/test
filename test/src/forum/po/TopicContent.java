@@ -23,17 +23,17 @@ public class TopicContent implements Serializable{
 	private static final long serialVersionUID = -6048877910376797346L;
 	
 	
-	private int id;
+	private long id;
 	private String content;				//内容
-	private int topicId;
+	private long topicId;
 	
 	@Id
 	@GeneratedValue(generator="_native")
 	@GenericGenerator(name="_native",strategy="native")
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
@@ -46,10 +46,10 @@ public class TopicContent implements Serializable{
 		this.content = content;
 	}
 	
-	public int getTopicId() {
+	public long getTopicId() {
 		return topicId;
 	}
-	public void setTopicId(int topicId) {
+	public void setTopicId(long topicId) {
 		this.topicId = topicId;
 	}
 

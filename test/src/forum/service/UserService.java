@@ -19,7 +19,7 @@ public interface UserService {
 	
 	public void delete(User user);
 	
-	public User getUserById(int id);
+	public User getUserById(long id);
 	
 	public User getUserByNickName(String nickName);
 }

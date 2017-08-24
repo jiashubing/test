@@ -22,18 +22,18 @@ public class ReplyContent implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
+	private long id;
 	private String content;				//内容
-	private int topicId;
-	private int replyId;
+	private long topicId;
+	private long replyId;
 	
 	@Id
 	@GeneratedValue(generator="_native")
 	@GenericGenerator(name="_native",strategy="native")
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
@@ -46,16 +46,16 @@ public class ReplyContent implements Serializable{
 		this.content = content;
 	}
 	
-	public int getTopicId() {
+	public long getTopicId() {
 		return topicId;
 	}
-	public void setTopicId(int topicId) {
+	public void setTopicId(long topicId) {
 		this.topicId = topicId;
 	}
-	public int getReplyId() {
+	public long getReplyId() {
 		return replyId;
 	}
-	public void setReplyId(int replyId) {
+	public void setReplyId(long replyId) {
 		this.replyId = replyId;
 	}
 

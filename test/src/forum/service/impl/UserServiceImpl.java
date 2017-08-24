@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public User getUserById(int id) {
+	public User getUserById(long id) {
 		return em.find(User.class, id);
 	}
 

@@ -56,7 +56,7 @@ public class TopicAction {
 	private UserService userService;
 
 	@RequestMapping("/forum/topicList")
-	public String loadTopicList(Integer sectionId,@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
+	public String loadTopicList(Long sectionId,@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
 		
 		pageNo = PageUtil.initPageNo(pageNo);
 		
@@ -164,7 +164,7 @@ public class TopicAction {
 			@RequestParam(required = false) Integer pageNo,
 			@RequestParam(required = false) String s_title,
 			@RequestParam(required = false) String s_userNickName,
-			@RequestParam(required = false) Integer s_sectionId,
+			@RequestParam(required = false) Long s_sectionId,
 			@RequestParam(required = false) Integer s_top,
 			@RequestParam(required = false) Integer s_good,
 			Model model,HttpServletRequest request)throws Exception{
@@ -218,7 +218,7 @@ public class TopicAction {
 	 */
 	@RequestMapping("/admin/topicDelete")
     @ResponseBody
-    public Result deleteTopicAdmin(Integer topicId,HttpServletRequest request) {
+    public Result deleteTopicAdmin(Long topicId,HttpServletRequest request) {
         Result result = new Result();
         
         //更新小版块对应的数目
@@ -280,7 +280,7 @@ public class TopicAction {
 	 */
 	@RequestMapping("/forum/topicDelete")
 	@ResponseBody
-	public Result deleteTopicForum(Integer topicId,HttpServletRequest request) {
+	public Result deleteTopicForum(Long topicId,HttpServletRequest request) {
 		Result result = new Result();
 		
 		//更新小版块对应的数目
@@ -336,7 +336,7 @@ public class TopicAction {
 	}
 	
 	@RequestMapping("/forum/details")
-	public String loadDetails(Integer id,Model model,@RequestParam(required = false) Integer pageNo,@RequestParam(required = false) boolean errorFlag,
+	public String loadDetails(Long id,Model model,@RequestParam(required = false) Integer pageNo,@RequestParam(required = false) boolean errorFlag,
 			@RequestParam(required = false) Integer addTopicFlag,HttpServletRequest request)throws Exception{
 		
 		Topic topic = topicService.findTopicById(id);
@@ -374,7 +374,7 @@ public class TopicAction {
 	}
 	
 	@RequestMapping("/forum/preSave")
-	public String preSave(Model model,HttpServletRequest request,@RequestParam(required = false) Integer sectionId)throws Exception{
+	public String preSave(Model model,HttpServletRequest request,@RequestParam(required = false) Long sectionId)throws Exception{
 		//这个路径不使用安全登陆框架了，手动添加跳转
 		HttpSession session = request.getSession(false);
 		DbUser tmpUser = null;
@@ -411,7 +411,7 @@ public class TopicAction {
 	public String saveTopic(
 			@RequestParam(required = false) String topicTitle,
 			@RequestParam(required = false) String topicContent,
-			@RequestParam(required = false) Integer topicSectionId,
+			@RequestParam(required = false) Long topicSectionId,
 			Model model,HttpServletRequest request)throws Exception{
 		Topic topic = new Topic();
 		DbUser dbUser = null;
@@ -508,10 +508,10 @@ public class TopicAction {
 	@RequestMapping("/forum/topicUpdate")
 	public String updateToipc(
 			@RequestParam(required = false) Integer pageNo,
-			@RequestParam(required = false) Integer topicId,
+			@RequestParam(required = false) Long topicId,
 			@RequestParam(required = false) Integer topicGood,
 			@RequestParam(required = false) Integer topicTop,
-			@RequestParam(required = false) Integer sectionId,
+			@RequestParam(required = false) Long sectionId,
 			@RequestParam(required = false) Integer newTopicFlag
 			)throws Exception{
 		

@@ -29,7 +29,7 @@ public class DbUser implements UserDetails,Serializable{
 	
 	@Id 
 	@GeneratedValue
-	private Integer id;
+	private long id;
 	
 	@Column(length=20)
     private String username;
@@ -59,11 +59,11 @@ public class DbUser implements UserDetails,Serializable{
 		
 	}
     
-	public Integer getId() {
+	public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

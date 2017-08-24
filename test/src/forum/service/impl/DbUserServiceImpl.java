@@ -27,7 +27,7 @@ public class DbUserServiceImpl implements DbUserService {
 	
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override	
-	public DbUser getById(int id) {
+	public DbUser getById(long id) {
 		return em.find(DbUser.class, id);
 	}
 	

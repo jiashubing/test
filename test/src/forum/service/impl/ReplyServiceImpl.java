@@ -23,7 +23,7 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public Reply findLastReplyByTopicId(int topicId) {
+	public Reply findLastReplyByTopicId(long topicId) {
 		StringBuffer hql=new StringBuffer("from Reply");
 		if (topicId>0) {
 			hql.append(" where topicId = ").append(topicId);
@@ -43,7 +43,7 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public Long getReplyCountByTopicId(int topicId) {
+	public Long getReplyCountByTopicId(long topicId) {
 		StringBuffer hql=new StringBuffer("select count(*) from Reply");
 		if (topicId>0) {
 			hql.append(" where topicId =").append(topicId);
@@ -54,7 +54,7 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public List<Reply> findReplyListByTopicId(int topicId, int pageSize,int pageNo) {
+	public List<Reply> findReplyListByTopicId(long topicId, int pageSize,int pageNo) {
 		String hql="from Reply where topicId="+topicId;
 		Query query = em.createQuery(hql);
 		@SuppressWarnings("unchecked")
@@ -79,12 +79,12 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public Reply findReplyById(int replyId) {
+	public Reply findReplyById(long replyId) {
 		return em.find(Reply.class, replyId);
 	}
 
 	@Override
-	public void deleteReplyByTopicId(Integer topicId) {
+	public void deleteReplyByTopicId(long topicId) {
 		Query query=em.createQuery("delete from ReplyContent where topicId= "+topicId);
 		query.executeUpdate();
 		query=em.createQuery("delete from Reply where topicId= "+topicId);
@@ -92,7 +92,7 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public void deleteReplyById(Integer replyId) {
+	public void deleteReplyById(long replyId) {
 		Query query=em.createQuery("delete from Reply where id= "+replyId);
 		query.executeUpdate();
 		query=em.createQuery("delete from ReplyContent where replyId= "+replyId);
@@ -100,7 +100,7 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyContent> getReplyContentListByTopicId(int topicId, int pageSize,
+	public List<ReplyContent> getReplyContentListByTopicId(long topicId, int pageSize,
 			int pageNo) {
 		String hql = "from ReplyContent where topicId=" + topicId;
 		Query query = em.createQuery(hql);
@@ -117,7 +117,7 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public ReplyContent findReplyContentByReplyId(int replyId) {
+	public ReplyContent findReplyContentByReplyId(long replyId) {
 		String hql="from ReplyContent where replyId = "+replyId;
 		Query query = em.createQuery(hql);
 		ReplyContent replyContent = null;
@@ -127,7 +127,7 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyContent> findReplyContentListByTopicId(int topicId,
+	public List<ReplyContent> findReplyContentListByTopicId(long topicId,
 			int pageSize, int pageNo) {
 		String hql="from ReplyContent where topicId="+topicId;
 		Query query = em.createQuery(hql);

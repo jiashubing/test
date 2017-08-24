@@ -6,7 +6,7 @@ import forum.po.DbUser;
 
 public interface DbUserService {
 	public void save(DbUser user);
-	public DbUser getById(int id);
+	public DbUser getById(long id);
 	public DbUser getByName(String name);
 	/**
 	 * 校验用户名是否唯一

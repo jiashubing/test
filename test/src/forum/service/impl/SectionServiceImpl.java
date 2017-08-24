@@ -34,7 +34,7 @@ public class SectionServiceImpl implements SectionService {
 	}
 	
 	@Override
-	public void deleteSectionById(Integer sectionId) {
+	public void deleteSectionById(long sectionId) {
 		Query query=em.createQuery("delete from Section where id= "+sectionId);
 		query.executeUpdate();
 	}
@@ -63,7 +63,7 @@ public class SectionServiceImpl implements SectionService {
 	
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public List<Section> findSectionListByZoneId(int zoneId,int pageSize,int pageNo) {
+	public List<Section> findSectionListByZoneId(long zoneId,int pageSize,int pageNo) {
 		String hql="from Section where zoneId = "+zoneId;
 		Query query = em.createQuery(hql);
 		@SuppressWarnings("unchecked")
@@ -93,7 +93,7 @@ public class SectionServiceImpl implements SectionService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public Section findSectionById(int sectionId) {
+	public Section findSectionById(long sectionId) {
 		return em.find(Section.class, sectionId);
 	}
 

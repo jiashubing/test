@@ -48,7 +48,7 @@ public class TopicServiceImpl implements TopicService {
 	}
 	
 	@Override
-	public void deleteTopicById(Integer topicId) {
+	public void deleteTopicById(long topicId) {
 		replyService.deleteReplyByTopicId(topicId);
 		Query query = em.createQuery("delete from TopicContent where topicId= "+topicId);
 		query.executeUpdate();
@@ -154,13 +154,13 @@ public class TopicServiceImpl implements TopicService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public Topic findTopicById(int topicId) {
+	public Topic findTopicById(long topicId) {
 		return em.find(Topic.class, topicId);
 	}
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public List<Topic> findZdTopicListBySectionId(int sectionId,int pageSize,int pageNo) {
+	public List<Topic> findZdTopicListBySectionId(long sectionId,int pageSize,int pageNo) {
 		StringBuffer hql=new StringBuffer("from Topic where top=1");
 		if (sectionId>0) {
 			hql.append(" and sectionId=").append(sectionId);
@@ -174,7 +174,7 @@ public class TopicServiceImpl implements TopicService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public List<Topic> findPtTopicListBySectionId(int sectionId,int pageSize,int pageNo) {
+	public List<Topic> findPtTopicListBySectionId(long sectionId,int pageSize,int pageNo) {
 		StringBuffer hql=new StringBuffer("from Topic");
 		if (sectionId>0) {
 			hql.append(" and sectionId=").append(sectionId);
@@ -189,7 +189,7 @@ public class TopicServiceImpl implements TopicService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public Long getNoReplyTopicCount(int sectionId) {
+	public Long getNoReplyTopicCount(long sectionId) {
 		String hql="select count(*) from Topic where replySum=0 and sectionId="+sectionId;
 		Query query = em.createQuery(hql);
 		return (Long)query.getSingleResult();
@@ -197,7 +197,7 @@ public class TopicServiceImpl implements TopicService {
 	
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public Long getGoodTopicCount(int sectionId) {
+	public Long getGoodTopicCount(long sectionId) {
 		String hql="select count(*) from Topic where good=1 and sectionId="+sectionId;
 		Query query = em.createQuery(hql);
 		return (Long)query.getSingleResult();
@@ -213,7 +213,7 @@ public class TopicServiceImpl implements TopicService {
 	
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public Long getTotalTopicCount(int sectionId) {
+	public Long getTotalTopicCount(long sectionId) {
 		String hql="select count(*) from Topic where sectionId="+sectionId;
 		Query query = em.createQuery(hql);
 		return (Long)query.getSingleResult();
@@ -221,7 +221,7 @@ public class TopicServiceImpl implements TopicService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public List<Topic> findGoodTopicListBySectionId(int sectionId,
+	public List<Topic> findGoodTopicListBySectionId(long sectionId,
 			int pageSize,int pageNo) {
 		StringBuffer hql=new StringBuffer("from Topic where good=1");
 		if (sectionId>0) {
@@ -236,7 +236,7 @@ public class TopicServiceImpl implements TopicService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public List<Topic> findNotGoodTopicListBySectionId(int sectionId,
+	public List<Topic> findNotGoodTopicListBySectionId(long sectionId,
 			int pageSize,int pageNo) {
 		StringBuffer hql=new StringBuffer("from Topic where good=0");
 		if (sectionId>0) {
@@ -251,7 +251,7 @@ public class TopicServiceImpl implements TopicService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public Long getPtTopicCountBySectionId(int sectionId) {
+	public Long getPtTopicCountBySectionId(long sectionId) {
 		String hql="select count(*) from Topic where top=0 and sectionId="+sectionId;
 		Query query = em.createQuery(hql);
 		return (Long)query.getSingleResult();
@@ -259,7 +259,7 @@ public class TopicServiceImpl implements TopicService {
 
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
-	public TopicContent getTopicContent(int topicId) {
+	public TopicContent getTopicContent(long topicId) {
 		String hql="from TopicContent t where t.topicId="+topicId;
 		Query query = em.createQuery(hql);
 		TopicContent result = (TopicContent) query.getSingleResult();
@@ -278,7 +278,7 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	@Override
-	public TopicContent findTopicContentByTopicId(int topicId) {
+	public TopicContent findTopicContentByTopicId(long topicId) {
 		String hql="from TopicContent where topicId = "+topicId;
 		Query query = em.createQuery(hql.toString());
 		TopicContent result = null;

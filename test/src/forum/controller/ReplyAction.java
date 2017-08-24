@@ -42,7 +42,7 @@ public class ReplyAction {
 	 */
 	@RequestMapping("/forum/replyDelete")
 	@ResponseBody
-	public Result deleteReply(Integer replyId,HttpServletRequest request) {
+	public Result deleteReply(Long replyId,HttpServletRequest request) {
 		Result result = new Result();
 		
 		ReplyContent replyContent = replyService.findReplyContentByReplyId(replyId);
@@ -82,7 +82,7 @@ public class ReplyAction {
 	public String addReply(
 			@AuthenticationPrincipal DbUser dbUser,
 			@RequestParam(required = false) Integer pageNo,
-			@RequestParam(required = false) Integer replyTopicId,
+			@RequestParam(required = false) Long replyTopicId,
 			@RequestParam(required = false) String replyContent,
 			HttpServletRequest request
 			)throws Exception{
