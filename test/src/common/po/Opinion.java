@@ -21,7 +21,7 @@ public class Opinion implements Serializable{
 
 	private static final long serialVersionUID = 6658188134198161827L;
 	
-	private int id;
+	private long id;
 	/**
 	 * 1、咨询  2、建议  3、其他
 	 */
@@ -32,11 +32,11 @@ public class Opinion implements Serializable{
 	@Id
 	@GeneratedValue(generator="_native")
 	@GenericGenerator(name="_native",strategy="native")
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
