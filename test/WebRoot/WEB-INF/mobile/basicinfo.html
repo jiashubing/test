@@ -1,0 +1,66 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" style="font-size: 66.67%;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<meta name="baidu-site-verification" content="3uYjxVgfa1" />
+<title>我的信息 - 阿丙的私人定制</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="viewport" content="width=240, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<link rel="shortcut icon" href="favicon.ico" th:href="@{/image/favicon.ico}" />
+<link rel="stylesheet" href="./css/base.shubing.css" th:href="@{/css/mobile/css/base.shubing.css}" />
+<link rel="stylesheet" href="" th:href="@{/css/mobile/css/common.shubing.css}" />
+<link rel="stylesheet" href="" th:href="@{/css/mobile/css/feedback.shubing.css}" />
+<style type="text/css">
+.basicinfo-p {
+    text-indent:2em;
+    line-height: 2em;
+    color: #444;
+}
+  	</style>
+</head>
+<body>
+
+<div id="pageWrapper" style="min-height:0%; padding-bottom:15px; background:#f0f1f2">
+	<header class="pass-header ">
+	<a class="pass-header-back" th:href="@{/beforelogin}"></a>
+	<span class="pass-header-title">
+       	我的信息     
+	</span>
+	</header>
+</div>
+<div class="feedback-form">
+	<div class="bg-white" style="padding-bottom:8px;">
+		<p class="question-title">基本信息</p>
+		<p class="basicinfo-p">真实姓名：<span th:text="${session.dbUser.user.trueName}==null?'未设置':${session.dbUser.user.trueName}">你好</span></p>
+		<p class="basicinfo-p">性别：<span th:text="${session.dbUser.user.sex==null || session.dbUser.user.sex=='未知' || session.dbUser.user.sex==''}?'未知':${session.dbUser.user.sex}">未知</span></p>
+		<p class="basicinfo-p">邮箱：<span th:text="${session.dbUser.user.email}">131060@a.com</span></p>
+		<p class="basicinfo-p">电话号码：<span th:text="${session.dbUser.user.mobile}==null?'未设置':${session.dbUser.user.mobile}">2105.01.01</span></p>
+	</div>
+	<div style="position:relative; margin:12px 0;">
+		<div class="bg-white" style="padding-bottom:8px;">
+			<p class="question-title">登录信息</p>
+			<p class="basicinfo-p">上次登录时间：<span th:text="${session.dbUser.lasttime}==null?'未登录':${#dates.format(session.dbUser.lasttime, 'yyyy-MM-dd HH:mm:ss')}" style="color:blue;">2105.01.01</span></p>
+			<p class="basicinfo-p">上次登录IP：<span th:text="${session.dbUser.ipaddr}==null?'未登录':${session.dbUser.ipaddr}">啦啦啦</span></p>
+		</div>
+	</div>
+	<div style="padding-bottom:5px;">
+		<p style="text-align:center;line-height: 2em;color: #444;">若要更改基本信息，请移步PC端</p>
+	</div>
+	<div class="submit-box">
+		<button class="btn btn_default submit" onclick="window.location.href='index'">返回主页</button>
+	</div>
+</div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?18e0f33db7609c8e4d02a81149c37a31";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body>
+</html>

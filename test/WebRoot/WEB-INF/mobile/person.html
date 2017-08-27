@@ -56,7 +56,7 @@
   	<div class="j_tab_content tab_index_content">
 		<div class="j_tab_content_item">
 			<div class="j_user user">
-				<a class="index_press_area user_info arrow arrow_line arrow_right">
+				<a class="index_press_area user_info arrow arrow_line arrow_right" th:href="@{/basicinfo}">
 				<span th:if="${session!=null &amp;&amp; session.dbUser!=null &amp;&amp; session.dbUser.user!=null}">
 				<img class="user_info_portrait" th:if="${session.dbUser.user.face!=null  &amp;&amp; session.dbUser.user.face!=''}" src="images/toux.png" th:src="@{'/image/pc/forum/'+${session.dbUser.user.face}}" width="100%"/>
 				<span th:if="${session.dbUser.user.face==null || session.dbUser.user.face==''}">
@@ -74,7 +74,7 @@
 					</p>
 				</div>
 				</a>
-				<a class="index_press_area user_entrance_item index_icon user_collect">我的信息</a>
+				<a th:href="@{/basicinfo}" class="index_press_area user_entrance_item index_icon user_collect">我的信息</a>
 				<!-- <a href="" class="index_press_area user_entrance_item index_icon user_tbean j_user_tbean">我的T豆</a> -->
 				<a th:href="@{/feedback}" class="index_press_area user_entrance_item index_icon user_feedback j_user_feedback">意见反馈</a>
 				<a th:href="@{/updatepassword}" class="index_press_area user_entrance_item index_icon user_safe_entrance j_user_safe_entrance">修改密码</a>
