@@ -1,4 +1,4 @@
-.myselect{margin-top:15px;height: 53.33px; font-size: 17.06px; line-height:21px; border:1px solid #ccc; border-top-right-radius:0; border-top-left-radius:0; border-bottom-right-radius:2px; border-bottom-left-radius:2px; padding: 0px 11.93px; width: 100%; background-color: #FFFFFF; color: #ccc; box-sizing:border-box; -webkit-box-sizing:border-box; -o-box-sizing:border-box; -ms-box-sizing:border-box; -moz-box-sizing:border-box; -moz-box-flex:1; -webkit-box-flex:1; box-flex:1; position:relative;}
+.myselect{margin-top:15px;height: 53.33px; font-size: 17.06px; line-height:21px; border:1px solid #ccc; border-top-right-radius:0; border-top-left-radius:0; border-bottom-right-radius:2px; border-bottom-left-radius:2px; padding: 0px 11.93px; width: 100%; background-color: #FFFFFF; color: #666; box-sizing:border-box; -webkit-box-sizing:border-box; -o-box-sizing:border-box; -ms-box-sizing:border-box; -moz-box-sizing:border-box; -moz-box-flex:1; -webkit-box-flex:1; box-flex:1; position:relative;}
 .pass-button-full {
 	color:#fff;
 	font-size:18px;
@@ -28,10 +28,6 @@
 	background:#3c76ff;
 	margin:12px 0;
 	margin:1.2rem 0;
-}
-.pass-button-full-disabled {
-	color:#90b6ff;
-	opacity:1;
 }
 .pass-button-full-active{color:#fff;background:#3c76ff}
 .form-item{display:-webkit-box;display:-moz-box;display:box;width:100%;background:#fff;margin-bottom:10px;margin-bottom:1rem}

@@ -24,13 +24,18 @@ import java.util.Date;
 @Service
 public class EmailNotifyServiceImpl implements EmailNotifyService
 {
+    
+    private final JavaMailSender emailTemplate;
+    
     @Autowired
-    private JavaMailSender emailTemplate;
-
-    public void setEmailTemplate(JavaMailSender emailTemplate)
-    {
-        this.emailTemplate = emailTemplate;
+    public EmailNotifyServiceImpl(JavaMailSender emailTemplate){
+    	this.emailTemplate = emailTemplate;
     }
+
+//    public void setEmailTemplate(JavaMailSender emailTemplate)
+//    {
+//        this.emailTemplate = emailTemplate;
+//    }
 
     /**
      * 发送简单文本Email消息
