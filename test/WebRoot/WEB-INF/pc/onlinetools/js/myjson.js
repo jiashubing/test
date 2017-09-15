@@ -193,9 +193,9 @@
       
       $("#downloadBtn").click(function(){
     	  var outName= $("#outName").val();
-    	  console.log("outName = "+outName);
+//    	  console.log("outName = "+outName);
     	  $("#downloadHref").attr("href",$("#tempHref").attr("href")+"?outName="+outName);
-    	  console.log($("#downloadHref").attr("href"));
+//    	  console.log($("#downloadHref").attr("href"));
       }); 
       
       $("#deleteStringBtn").click(function(){

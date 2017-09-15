@@ -4,6 +4,8 @@ package common.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -242,27 +244,22 @@ public class ToolsAction {
 	
 	@RequestMapping(value = "/tools/printContract")
     public void cell(HttpServletResponse response,HttpServletRequest request,String outName) {
+		//根据outName获取到保存在服务器上的文件
         String filePath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+outName+".txt";
-        OutputStream out = null;
-        try {
-			out = response.getOutputStream();
-	        byte[] bytes = FileEcodeUtil.File2byte(filePath);
+        try(OutputStream out = response.getOutputStream()) {
+        	Date currentTime = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            String dateString = formatter.format(currentTime);
+            //fileName是输出的文件的名字（不支持中文），包括了后缀
+            String fileName = "EncryptFile_" + dateString + ".txt";
+	        byte[] bytes = FileEcodeUtil.file2byte(filePath);
 	        response.setContentType("application/x-msdownload");
-	        response.setHeader("Content-Disposition", "attachment;filename=" + "ttt.txt");
+	        response.setHeader("Content-Disposition","attachment;filename=" + fileName);
 	        response.setContentLength(bytes.length);
 	        out.write(bytes);
 	        out.flush();
-	        out.close();
         } catch (IOException e) {
 //        	e.printStackTrace();
-        }finally{
-	        try {
-	        	if(out != null){
-	        		out.close();
-	        	}
-			} catch (IOException e) {
-//				e.printStackTrace();
-			}
         }
     }
 	

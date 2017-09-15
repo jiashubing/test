@@ -24,9 +24,9 @@ import common.service.WeiBoService;
 
 @Service
 @Transactional
-public class WeiBoServiceImpl implements WeiBoService{
-	
-	@PersistenceContext 
+public class WeiBoServiceImpl implements WeiBoService {
+
+	@PersistenceContext
 	protected EntityManager em;
 
 	@Override
@@ -42,22 +42,22 @@ public class WeiBoServiceImpl implements WeiBoService{
 
 	@Override
 	public void saveWeiBoList(List<WeiBo> weiBoList) {
-		for(WeiBo weibo:weiBoList){
+		for (WeiBo weibo : weiBoList) {
 			saveWeiBo(weibo);
 		}
 	}
 
-	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
+	@Transactional(readOnly = true, propagation = Propagation.NOT_SUPPORTED)
 	@Override
 	public List<WeiBo> findWeiBoList(int pageSize, int pageNo) {
-		String hql="from WeiBo";
+		String hql = "from WeiBo";
 		Query query = em.createQuery(hql);
 		@SuppressWarnings("unchecked")
-		List<WeiBo> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
+		List<WeiBo> result = query.setMaxResults(pageSize)
+				.setFirstResult(pageNo * pageSize).getResultList();
 		em.clear();
 		return result;
 	}
-
 
 	@Override
 	public List<WeiBo> updateWeiBoList(URL url) {
@@ -69,7 +69,8 @@ public class WeiBoServiceImpl implements WeiBoService{
 			conn = url.openConnection();
 			String content_encoding = conn.getHeaderField("Content-Encoding");
 			if (content_encoding != null && content_encoding.contains("gzip")) {
-				GZIPInputStream gzin = new GZIPInputStream(conn.getInputStream());
+				GZIPInputStream gzin = new GZIPInputStream(
+						conn.getInputStream());
 				feed = input.build(new XmlReader(gzin));
 			} else {
 				feed = input.build(new XmlReader(conn.getInputStream()));
@@ -77,29 +78,30 @@ public class WeiBoServiceImpl implements WeiBoService{
 
 			@SuppressWarnings("unchecked")
 			List<SyndEntry> entries = feed.getEntries();// 得到所有的标题<title></title>
-			int len = entries.size()>10 ? 10 : entries.size();
+			int len = entries.size() > 10 ? 10 : entries.size();
 			for (int i = 0; i < len; i++) {
 				SyndEntry entry = (SyndEntry) entries.get(i);
 				WeiBo tmp = new WeiBo();
 				tmp.setTitle(entry.getTitle());
 				String description = entry.getDescription().getValue();
-				description = description.replaceAll("img src=","img style=\"max-width:55%;\" src=");
+				description = description.replaceAll("img src=",
+						"img style=\"max-width:55%;\" src=");
 				tmp.setDescription(description);
 				tmp.setUri(entry.getUri());
 				lists.add(tmp);
 			}
-			if(lists != null && lists.size()>0){
+			if (lists != null && lists.size() > 0) {
 				deleteAllWeiBo();
-				try{
+				try {
 					saveWeiBoList(lists);
-				} catch (Exception e){
-					//do nothing
+				} catch (Exception e) {
+					// do nothing
 				}
 			}
 			return lists;
 		} catch (Exception e) {
 			return null;
 		}
-	}	
+	}
 
 }

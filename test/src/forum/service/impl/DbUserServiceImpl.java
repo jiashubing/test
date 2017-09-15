@@ -50,7 +50,7 @@ public class DbUserServiceImpl implements DbUserService {
 			em.clear();
 			return list;
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			return null;
 		}
 	}

@@ -53,7 +53,7 @@ public class SendMailThread extends Thread {
 
 	        emailTemplate.send(message);
 		} catch (MessagingException e) {
-			System.out.println("发送邮件失败");
+//			System.out.println("发送邮件失败");
 		}
     	
     }

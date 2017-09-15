@@ -59,7 +59,7 @@ public class BlogTest {
 				System.out.println("");
 			}
 		} catch (Exception e) {
-			System.out.println("出错了！");
+//			System.out.println("出错了！");
 		}
 	}
 	

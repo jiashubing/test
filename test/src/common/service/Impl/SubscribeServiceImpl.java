@@ -51,7 +51,7 @@ public class SubscribeServiceImpl implements SubscribeService{
 			}
 			return lists;
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		return null;
 	}
