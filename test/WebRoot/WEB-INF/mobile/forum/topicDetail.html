@@ -320,6 +320,10 @@ var _hmt = _hmt || [];
 })();
 </script>
 
+<a onclick="printPdf()" class="client_pdf_icon"></a>
+<form id="printPdfForm" th:action="@{/forum/topicToPdf}" method="post">
+	<input type="hidden" name="topicId" th:value="${topic.id}"/>
+</form>
 <!--二维码相关-->
 <a onclick="zxingClick()" class="client_zxing_icon"></a>
 <input type="hidden" id="beforeloginpath"  th:value="${#httpServletRequest.getServletPath()}" />

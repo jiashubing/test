@@ -83,8 +83,8 @@ public class QuartzService {
 	 */
 	@Scheduled(cron = "0 10 2 * * ?")//每天2：10触发
 	public void deleteTxtFiles() {  
-		String inPath = linuxUrl+ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT+'/';
-		FileEcodeUtil.deleteDirectoryChildren(inPath);
+//		String inPath = linuxUrl+ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT+'/';
+		FileEcodeUtil.deleteDirectoryChildren(ImgUtil.ABSOLUTE_TOOLS_TXT_PATH);
 	}  
 
 	/**
@@ -92,8 +92,17 @@ public class QuartzService {
 	 */
 	@Scheduled(cron = "0 20 2 * * ?")//每天2：20触发
 	public void deleteImgFiles() {  
-		String inPath = linuxUrl+ImgUtil.TMPIMG_PATH;
-		FileEcodeUtil.deleteDirectoryChildren(inPath);
+		//使用注解的方式获取
+		//String inPath = linuxUrl+ImgUtil.TMPIMG_PATH;
+		FileEcodeUtil.deleteDirectoryChildren(ImgUtil.ABSOLUTE_TMPIMG_PATH);
+	}
+	
+	/**
+	 * 定时删除论坛生成的临时pdf
+	 */
+	@Scheduled(cron = "0 30 2 * * ?")//每天2：20触发
+	public void deletePdfFiles() {  
+		FileEcodeUtil.deleteDirectoryChildren(ImgUtil.ABSOLUTE_TMPPDF_PATH);
 	}  
 
 }

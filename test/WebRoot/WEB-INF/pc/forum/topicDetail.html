@@ -42,8 +42,12 @@
 			</div>
 		</div>
 		<div style="margin-bottom:10px;">
-			<span id="bigger" ><img alt="放大" th:src="@{/image/pc/forum/images/big.png}"/></span>&nbsp;&nbsp;
-			<span id="smaller" ><img alt="small" th:src="@{/image/pc/forum/images/small.png}"/></span>
+			<span id="bigger"> <img alt="放大" th:src="@{/image/pc/forum/images/big.png}" style="cursor:pointer"/></span>&nbsp;&nbsp;
+			<span id="smaller"> <img alt="缩小" th:src="@{/image/pc/forum/images/small.png}" style="cursor:pointer"/></span>&nbsp;&nbsp;
+			<span id="printPdf"> <img alt="打印" th:src="@{/image/pc/forum/images/print.png}" style="cursor:pointer" /></span>
+			<form id="printPdfForm" th:action="@{/forum/topicToPdf}" method="post">
+				<input type="hidden" name="topicId" th:value="${topic.id}"/>
+			</form>
 		</div>
 		<div class="detailed">
 			<table border="0" cellspacing="0" cellpadding="0" class="post topic" data-is-topic-locked="false">

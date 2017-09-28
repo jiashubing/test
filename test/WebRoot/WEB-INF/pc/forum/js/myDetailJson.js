@@ -41,3 +41,8 @@ $("#smaller").click(function(){
 	$(".show_e").css("font-size", textFontSize + unit); 
 	$(".show_e").css("line-height", (textFontSize-2)*2 + unit); 
 }); 
+$("#printPdf").click(function(){ 
+	if(confirm("生成当前帖子的PDF文件，可以保存起来！" + "\n确定要继续吗？")){
+		$("#printPdfForm").submit();
+	}
+}); 
