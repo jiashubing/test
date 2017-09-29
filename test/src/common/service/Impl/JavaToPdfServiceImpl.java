@@ -106,7 +106,7 @@ public class JavaToPdfServiceImpl implements JavaToPdfService {
 
 	private String checkImage(String html) {
 		String tmp = html.trim();
-		if (tmp.startsWith("<img ") && tmp.endsWith(".png\" />")) {
+		if (tmp.startsWith("<img ") && tmp.contains("reaImg/") && tmp.contains(".png")) {
 			return tmp;
 		} else {
 			html = html.replaceAll("\\<img[^>]*>|</img>(?i)", "");
@@ -251,7 +251,7 @@ public class JavaToPdfServiceImpl implements JavaToPdfService {
 	private void addContentCustom(Document document, String str) {
 
 		try {
-			if (str.startsWith("<img ") && str.endsWith(".png\" />")) {
+			if (str.startsWith("<img ") && str.contains("reaImg/") && str.contains(".png")) {
 				String real = str.substring(str.indexOf("reaImg/"),
 						str.indexOf(".png"));
 				real = real.substring(7);
