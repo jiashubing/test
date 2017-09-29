@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -15,15 +16,29 @@ public class FileEcodeUtil {
 
 	public static boolean fileEncrypt(File inFile, File outFile) {
 		boolean flag = false;
-		try (FileInputStream in = new FileInputStream(inFile);
-				FileOutputStream out = new FileOutputStream(outFile);) {
+		FileInputStream in = null;
+		FileOutputStream out = null;
+		try {
+			in = new FileInputStream(inFile);
+			out = new FileOutputStream(outFile);
 			int c;
 			while ((c = in.read()) != -1) {
 				out.write(c ^ 0xFFFFFFFF);
+				flag = true;
 			}
-			flag = true;
 		} catch (Exception e) {
 			// do nothing
+		}finally{
+			try {
+				if(in != null){
+					in.close();
+				}
+				if(out != null){
+					out.close();
+				}
+			} catch (IOException e) {
+				//do nothing
+			}
 		}
 		return flag;
 	}
@@ -33,8 +48,11 @@ public class FileEcodeUtil {
 			return false;
 		}
 		boolean flag = false;
-		try (FileInputStream in = new FileInputStream(inFile);
-				FileOutputStream out = new FileOutputStream(outFile)) {
+		FileInputStream in = null;
+		FileOutputStream out = null;
+		try {
+			in = new FileInputStream(inFile);
+			out = new FileOutputStream(outFile);
 			int c;
 			while ((c = in.read()) != -1) {
 				out.write(c ^ mykey);
@@ -42,6 +60,17 @@ public class FileEcodeUtil {
 			flag = true;
 		} catch (Exception e) {
 			// do nothing
+		} finally{
+			try {
+				if(in != null){
+					in.close();
+				}
+				if(out != null){
+					out.close();
+				}
+			} catch (IOException e) {
+				//do nothing
+			}
 		}
 		return flag;
 	}
@@ -176,13 +205,27 @@ public class FileEcodeUtil {
 	 */
 	public static boolean writeStrToFile(String xml, File outFile) {
 		boolean flag = false;
-		try (FileOutputStream fos = new FileOutputStream(outFile);
-				Writer os = new OutputStreamWriter(fos, "UTF-8")) {
+		FileOutputStream fos = null;
+		Writer os = null;
+		try {
+			fos = new FileOutputStream(outFile);
+			os = new OutputStreamWriter(fos, "UTF-8");
 			os.write(xml);
 			os.flush();
 			flag = true;
 		} catch (Exception e) {
-			// e.printStackTrace();
+			// do nothing
+		}finally{
+			try {
+				if(fos != null){
+					fos.close();
+				}
+				if(os != null){
+					os.close();
+				}
+			} catch (IOException e) {
+				//do nothing
+			}
 		}
 		return flag;
 	}
@@ -200,9 +243,11 @@ public class FileEcodeUtil {
 		String encoding = "UTF-8";
 		if (file.isFile() && file.exists()) { // 判断文件是否存在
 			// 考虑到编码格式
-			try (InputStreamReader read = new InputStreamReader(
-					new FileInputStream(file), encoding);
-					BufferedReader bufferedReader = new BufferedReader(read)) {
+			InputStreamReader read = null;
+			BufferedReader bufferedReader = null;
+			try{
+				read = new InputStreamReader( new FileInputStream(file), encoding);
+				bufferedReader = new BufferedReader(read);
 				String lineTxt = null;
 				// 写入新文件
 				// FileWriter writer = new FileWriter("D:\\smc_menu123.unl",
@@ -215,7 +260,19 @@ public class FileEcodeUtil {
 				// System.out.println("执行成功");
 			} catch (Exception e) {
 				// do nothing
+			}finally{
+				try {
+					if(read != null){
+						read.close();
+					}
+					if(bufferedReader != null){
+						bufferedReader.close();
+					}
+				} catch (IOException e) {
+					//do nothing
+				}
 			}
+			
 		} else {
 			// System.out.println("找不到指定的文件");
 		}
@@ -226,9 +283,11 @@ public class FileEcodeUtil {
 		String ans = "";
 		String encoding = "UTF-8";
 		if (file.isFile() && file.exists()) { // 判断文件是否存在
-			try (InputStreamReader read = new InputStreamReader(
-					new FileInputStream(file), encoding);
-					BufferedReader bufferedReader = new BufferedReader(read)) {
+			InputStreamReader read = null;
+			BufferedReader bufferedReader = null;
+			try {
+				read = new InputStreamReader(new FileInputStream(file), encoding);
+				bufferedReader = new BufferedReader(read);
 				String lineTxt = null;
 				// 写入新文件
 				// FileWriter writer = new FileWriter("D:\\smc_menu123.unl",
@@ -241,6 +300,17 @@ public class FileEcodeUtil {
 				// System.out.println("执行成功");
 			} catch (Exception e) {
 				// System.out.println("读取文件内容出错");
+			}finally{
+				try {
+					if(read != null){
+						read.close();
+					}
+					if(bufferedReader != null){
+						bufferedReader.close();
+					}
+				} catch (IOException e) {
+					//do nothing
+				}
 			}
 		} else {
 			// System.out.println("找不到指定的文件");
@@ -252,9 +322,11 @@ public class FileEcodeUtil {
 		String ans = "";
 		String encoding = "UTF-8";
 		if (file.isFile() && file.exists()) { // 判断文件是否存在
-			try (InputStreamReader read = new InputStreamReader(
-					new FileInputStream(file), encoding);
-					BufferedReader bufferedReader = new BufferedReader(read)) {
+			InputStreamReader read = null;
+			BufferedReader bufferedReader = null;
+			try {
+				read = new InputStreamReader(new FileInputStream(file), encoding);
+				bufferedReader = new BufferedReader(read);
 				String lineTxt = null;
 				// 写入新文件
 				// FileWriter writer = new FileWriter("D:\\smc_menu123.unl",
@@ -266,6 +338,17 @@ public class FileEcodeUtil {
 				// System.out.println("执行成功");
 			} catch (Exception e) {
 				// System.out.println("读取文件内容出错");
+			}finally{
+				try {
+					if(read != null){
+						read.close();
+					}
+					if(bufferedReader != null){
+						bufferedReader.close();
+					}
+				} catch (IOException e) {
+					//do nothing
+				}
 			}
 		} else {
 			// System.out.println("找不到指定的文件");
@@ -277,10 +360,11 @@ public class FileEcodeUtil {
 		String ans = "";
 		String encoding = "UTF-8";
 		if (file.isFile() && file.exists()) { // 判断文件是否存在
-			try (InputStreamReader read = new InputStreamReader(
-					new FileInputStream(file), encoding);
-					BufferedReader bufferedReader = new BufferedReader(read)) {
-
+			InputStreamReader read = null;
+			BufferedReader bufferedReader = null;
+			try {
+				read = new InputStreamReader(new FileInputStream(file), encoding);
+				bufferedReader = new BufferedReader(read);
 				String lineTxt = null;
 				// 写入新文件
 				while ((lineTxt = bufferedReader.readLine()) != null) {
@@ -290,6 +374,17 @@ public class FileEcodeUtil {
 				}
 			} catch (Exception e) {
 				// do nothing
+			}finally{
+				try {
+					if(read != null){
+						read.close();
+					}
+					if(bufferedReader != null){
+						bufferedReader.close();
+					}
+				} catch (IOException e) {
+					//do nothing
+				}
 			}
 		} else {
 			// System.out.println("找不到指定的文件");
@@ -328,9 +423,13 @@ public class FileEcodeUtil {
 		String content = "";
 		String tempString = null;
 
-		try (FileInputStream file = new FileInputStream(fileName);
-				InputStreamReader inputFileReader = new InputStreamReader(file);
-				BufferedReader reader = new BufferedReader(inputFileReader)) {
+		FileInputStream file = null;
+		InputStreamReader inputFileReader = null;
+		BufferedReader reader = null;
+		try{
+			file = new FileInputStream(fileName);
+			inputFileReader = new InputStreamReader(file);
+			reader = new BufferedReader(inputFileReader);
 			// inputFileReader = new InputStreamReader(file, "UTF-8");
 			// inputFileReader = new InputStreamReader(file,"GBK");
 			// 我的电脑上本地好像只有使用这个才行
@@ -340,6 +439,20 @@ public class FileEcodeUtil {
 			}
 		} catch (Exception e) {
 			return null;
+		}finally{
+			try {
+				if(file != null){
+					file.close();
+				}
+				if(inputFileReader != null){
+					inputFileReader.close();
+				}
+				if(reader != null){
+					reader.close();
+				}
+			} catch (IOException e) {
+				//do nothing
+			}
 		}
 		return content;
 	}
@@ -353,8 +466,11 @@ public class FileEcodeUtil {
 	public static byte[] file2byte(String filePath) {
 		byte[] buffer = null;
 		File file = new File(filePath);
-		try (FileInputStream fis = new FileInputStream(file);
-				ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+		FileInputStream fis = null;
+		ByteArrayOutputStream bos = null;
+		try {
+			fis = new FileInputStream(file);
+			bos = new ByteArrayOutputStream();
 			byte[] b = new byte[1024];
 			int n;
 			while ((n = fis.read(b)) != -1) {
@@ -363,6 +479,17 @@ public class FileEcodeUtil {
 			buffer = bos.toByteArray();
 		} catch (Exception e) {
 			// e.printStackTrace();
+		} finally{
+			try {
+				if(fis != null){
+					fis.close();
+				}
+				if(bos != null){
+					bos.close();
+				}
+			} catch (IOException e) {
+				//e.printStackTrace();
+			}
 		}
 		return buffer;
 	}
@@ -374,7 +501,6 @@ public class FileEcodeUtil {
 	 * @param file
 	 */
 	public static void inputStreamToFile(InputStream ins, File file) {
-		// TODO 这里需要看看啊，把stream作为参数好不好
 		int bytesRead = 0;
 		byte[] buffer = new byte[8192];
 		try (OutputStream os = new FileOutputStream(file);) {
@@ -405,5 +531,5 @@ public class FileEcodeUtil {
 		}
 		return flag;
 	}
-
+	
 }

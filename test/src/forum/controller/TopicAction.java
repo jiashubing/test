@@ -617,13 +617,14 @@ public class TopicAction {
 				String fileName = "TopicFile_" + dateString + ".pdf";
 
 				byte[] bytes = FileEcodeUtil.file2byte(filePath);
-				
-				response.setContentType("application/x-msdownload");
-				response.setHeader("Content-Disposition",
-						"attachment;filename=" + fileName);
-				response.setContentLength(bytes.length);
-				out.write(bytes);
-				out.flush();
+				if(bytes != null){
+					response.setContentType("application/x-msdownload");
+					response.setHeader("Content-Disposition",
+							"attachment;filename=" + fileName);
+					response.setContentLength(bytes.length);
+					out.write(bytes);
+					out.flush();
+				}
 			} catch (IOException e) {
 				// e.printStackTrace();
 			}

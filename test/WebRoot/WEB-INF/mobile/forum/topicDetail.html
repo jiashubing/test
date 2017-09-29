@@ -321,7 +321,7 @@ var _hmt = _hmt || [];
 </script>
 
 <a onclick="printPdf()" class="client_pdf_icon"></a>
-<form id="printPdfForm" th:action="@{/forum/topicToPdf}" method="post">
+<form id="printPdfForm" th:action="@{/forum/topicToPdf}" method="post" target="_blank">
 	<input type="hidden" name="topicId" th:value="${topic.id}"/>
 </form>
 <!--二维码相关-->

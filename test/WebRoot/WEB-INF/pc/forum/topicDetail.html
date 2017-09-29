@@ -45,7 +45,7 @@
 			<span id="bigger"> <img alt="放大" th:src="@{/image/pc/forum/images/big.png}" style="cursor:pointer"/></span>&nbsp;&nbsp;
 			<span id="smaller"> <img alt="缩小" th:src="@{/image/pc/forum/images/small.png}" style="cursor:pointer"/></span>&nbsp;&nbsp;
 			<span id="printPdf"> <img alt="打印" th:src="@{/image/pc/forum/images/print.png}" style="cursor:pointer" /></span>
-			<form id="printPdfForm" th:action="@{/forum/topicToPdf}" method="post">
+			<form id="printPdfForm" th:action="@{/forum/topicToPdf}" method="post" target="_blank">
 				<input type="hidden" name="topicId" th:value="${topic.id}"/>
 			</form>
 		</div>
