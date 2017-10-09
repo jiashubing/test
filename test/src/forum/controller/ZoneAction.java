@@ -24,8 +24,6 @@ import forum.util.PageUtil;
  */
 @Controller
 public class ZoneAction {
-	
-	public static int PageSize = 10;
 
 	@Resource(name="zoneServiceImpl")
 	private ZoneService zoneService;
@@ -34,11 +32,12 @@ public class ZoneAction {
 	public String loadZoneList(@RequestParam(required = false) Integer pageNo,Model model,HttpServletRequest request)throws Exception{
 		
 		pageNo = PageUtil.initPageNo(pageNo);
-		List<Zone> zoneList = zoneService.findZoneList(null, PageSize,pageNo);
+		int pageSize = 10;
+		List<Zone> zoneList = zoneService.findZoneList(null, pageSize,pageNo);
 		String mainPage="zone.html";
 		
 		long totalNum = zoneService.getZoneCount(null);
-		int totalPages = PageUtil.getTotalPages(totalNum, PageSize);
+		int totalPages = PageUtil.getTotalPages(totalNum, pageSize);
 		
 		model.addAttribute("pageNo",pageNo); 
 		model.addAttribute("mainPage",mainPage); 

@@ -22,7 +22,6 @@ import forum.po.Section;
 import forum.po.User;
 import forum.po.Zone;
 import forum.service.SectionService;
-import forum.service.TopicService;
 import forum.service.UserService;
 import forum.service.ZoneService;
 import forum.util.DateUtil;
@@ -39,14 +38,8 @@ import forum.util.PageUtil;
 @Controller
 public class SectionAction {
 
-	public static int PageSize = 10;
-	public static int MaxPageSize = 100;
-
 	@Resource(name = "zoneServiceImpl")
 	private ZoneService zoneService;
-
-	@Resource(name = "topicServiceImpl")
-	private TopicService topicService;
 
 	@Resource(name = "sectionServiceImpl")
 	private SectionService sectionService;
@@ -76,19 +69,21 @@ public class SectionAction {
 			User tmp = userService.getUserById(s_masterId);
 			s_section.setMaster(tmp);
 		}
+		int pageSize = 10;
 		List<Section> sectionList = sectionService.findSectionList(s_section,
-				PageSize, pageNo);
+				pageSize, pageNo);
 
 		User master = new User();
 		master.setType(2);
+		int maxPageSize = 100;
 		List<User> masterList = userService
-				.findUserList(master, MaxPageSize, 0);
+				.findUserList(master, maxPageSize, 0);
 
-		List<Zone> zoneList = zoneService.findZoneList(null, MaxPageSize, 0);
+		List<Zone> zoneList = zoneService.findZoneList(null, maxPageSize, 0);
 		String mainPage = "section.html";
 
 		long totalNum = sectionService.getSectionCount(null);
-		int totalPages = PageUtil.getTotalPages(totalNum, PageSize);
+		int totalPages = PageUtil.getTotalPages(totalNum, pageSize);
 
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("mainPage", mainPage);
@@ -159,10 +154,6 @@ public class SectionAction {
 
 	/**
 	 * 异步 删除section
-	 * 
-	 * @param sectionId
-	 * @param request
-	 * @return
 	 */
 	@RequestMapping("/admin/sectionDelete")
 	@ResponseBody
@@ -176,9 +167,6 @@ public class SectionAction {
 
 	/**
 	 * 异步 通过昵称获取用户
-	 * 
-	 * @param nickName
-	 * @return
 	 */
 	@RequestMapping("/admin/getUserByNickName")
 	@ResponseBody
@@ -200,10 +188,6 @@ public class SectionAction {
 
 	/**
 	 * 删除section对应的logo
-	 * 
-	 * @param secId
-	 * @param request
-	 * @return
 	 */
 	public boolean deleteSectionLogo(Long secId, HttpServletRequest request) {
 		if (secId != null) {

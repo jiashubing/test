@@ -41,7 +41,7 @@ public class SendMailThread extends Thread {
 
 	        helper.setFrom(emailVo.getSender());
 	        helper.setValidateAddresses(true);
-	        if(emailVo.getEmailContent().trim()!="")
+	        if(emailVo.getEmailContent()!=null && !"".equals(emailVo.getEmailContent().trim()))
 	        {
 	            helper.setText(emailVo.getEmailContent(), true);
 	        }

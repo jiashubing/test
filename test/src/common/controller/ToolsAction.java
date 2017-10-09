@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,16 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import common.entity.Result;
 import config.ValidatePcMobile;
-import forum.service.DbUserService;
 import forum.util.DateUtil;
 import forum.util.FileEcodeUtil;
 import forum.util.ImgUtil;
 
 @Controller
 public class ToolsAction {
-	
-	@Resource(name="dbUserServiceImpl")
-	private DbUserService dbUserService;
 	
 	@RequestMapping(value={"/tools","/tools/one"})
 	public String loadTools(@RequestParam(required=false)Integer showId,Model model,HttpServletRequest request)throws Exception{
@@ -45,7 +40,6 @@ public class ToolsAction {
 	
 	/**
 	 * 异步 将文件信息打印在前端
-	 * @throws Exception 
 	 */
 	@RequestMapping("/tools/loadFile")
 	@ResponseBody
@@ -69,7 +63,6 @@ public class ToolsAction {
 	
 	/**
 	 * 异步 加密
-	 * @throws Exception 
 	 */
 	@RequestMapping("/tools/customEncryption")
 	@ResponseBody
@@ -94,7 +87,7 @@ public class ToolsAction {
 		String outPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+outName+".txt";
 		File cin =  new File(inPath);
 		File cout =  new File(outPath);
-		boolean flag = FileEcodeUtil.fileEncrypt(cin,cout,(int)customKey);
+		boolean flag = FileEcodeUtil.fileEncrypt(cin,cout, customKey);
 		if(!flag){
 			result.setStatus(0);
 			result.setMessage("加密失败，文件为空");
@@ -104,7 +97,7 @@ public class ToolsAction {
 		FileEcodeUtil.deleteFile(inPath);
 		
 		result.setStatus(1);
-		Map<String,String> map = new HashMap<String,String>();
+		Map<String,String> map = new HashMap<>();
 		map.put("endPassText", endPassText);
 		map.put("outName", outName);
 		map.put("outPath", outPath);
@@ -117,14 +110,13 @@ public class ToolsAction {
 	
 	/**
 	 * 异步 删除文件
-	 * @throws Exception 
 	 */
 	@RequestMapping("/tools/deleteFile")
 	@ResponseBody
 	public Result deleteFile(@RequestParam(required = false) String outName,HttpServletRequest request) throws Exception {
 		Result result = new Result();
 		
-		if(outName == null || outName==""){
+		if(outName == null || "".equals(outName)){
 			result.setStatus(0);
 			result.setMessage("不存在待删除文件！");
 		}
@@ -189,14 +181,8 @@ public class ToolsAction {
 	
 	/**
 	 * 每行文本的首尾增加相同字符工具
-	 * @param startText
-	 * @param startChar
-	 * @param endChar
-	 * @param request
-	 * @return
-	 * @throws Exception
 	 */
-	@RequestMapping("/tools/insertString")
+	@RequestMapping(value={"/tools/insertString","/insertString"})
     @ResponseBody
     public Result insertString(String startText,String startChar,String endChar,
     		HttpServletRequest request) throws Exception {
@@ -218,29 +204,6 @@ public class ToolsAction {
 
         return result;
     }
-	
-	@RequestMapping("/insertString")
-	@ResponseBody
-	public Result insertStringOne(String startText,String startChar,String endChar,
-			HttpServletRequest request) throws Exception {
-		Result result = new Result();
-		
-		String inName = DateUtil.getRadomStr();
-		String inPath = request.getSession().getServletContext().getRealPath(ImgUtil.TOOLS_PATH+ImgUtil.TOOLS_TXT)+'/'+inName+".txt";
-		File cin =  new File(inPath);
-		String ans = "";
-		boolean flag= FileEcodeUtil.writeStrToFile(startText, cin);
-		
-		if(flag){
-			ans = FileEcodeUtil.modifyString(cin,startChar,endChar);
-		}
-		FileEcodeUtil.deleteFile(inPath);
-		
-		result.setStatus(1);
-		result.setBody(ans);
-		
-		return result;
-	}
 	
 	@RequestMapping(value = "/tools/printContract")
     public void cell(HttpServletResponse response,HttpServletRequest request,String outName) {
@@ -289,9 +252,6 @@ public class ToolsAction {
 	
 	/**
 	 * 每个段落后增加空白行工具
-	 * @param startText
-	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping("/tools/insertLine")
     @ResponseBody
@@ -317,11 +277,6 @@ public class ToolsAction {
 	
 	/**
 	 * 删除行首到指定字符工具
-	 * @param startText
-	 * @param startChar
-	 * @param request
-	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping("/tools/deleteString")
 	@ResponseBody
@@ -348,10 +303,6 @@ public class ToolsAction {
 	
 	/**
 	 * 删除所有空白行工具
-	 * @param startText
-	 * @param request
-	 * @return
-	 * @throws Exception
 	 */
 	@RequestMapping("/tools/deleteLine")
 	@ResponseBody

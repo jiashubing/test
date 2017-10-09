@@ -9,31 +9,31 @@ import java.io.PushbackInputStream;
 import java.nio.ByteBuffer;
 
 public abstract class CharacterDecoder {
-    public CharacterDecoder() {
+    CharacterDecoder() {
     }
 
     protected abstract int bytesPerAtom();
 
     protected abstract int bytesPerLine();
 
-    protected void decodeBufferPrefix(PushbackInputStream var1, OutputStream var2) throws IOException {
+    private void decodeBufferPrefix(PushbackInputStream var1, OutputStream var2) throws IOException {
     }
 
-    protected void decodeBufferSuffix(PushbackInputStream var1, OutputStream var2) throws IOException {
+    private void decodeBufferSuffix(PushbackInputStream var1, OutputStream var2) throws IOException {
     }
 
-    protected int decodeLinePrefix(PushbackInputStream var1, OutputStream var2) throws IOException {
+    private int decodeLinePrefix(PushbackInputStream var1, OutputStream var2) throws IOException {
         return this.bytesPerLine();
     }
 
-    protected void decodeLineSuffix(PushbackInputStream var1, OutputStream var2) throws IOException {
+    private void decodeLineSuffix(PushbackInputStream var1, OutputStream var2) throws IOException {
     }
 
     protected void decodeAtom(PushbackInputStream var1, OutputStream var2, int var3) throws IOException {
         throw new IOException();
     }
 
-    protected int readFully(InputStream var1, byte[] var2, int var3, int var4) throws IOException {
+    int readFully(InputStream var1, byte[] var2, int var3, int var4) throws IOException {
         for(int var5 = 0; var5 < var4; ++var5) {
             int var6 = var1.read();
             if(var6 == -1) {
@@ -46,7 +46,7 @@ public abstract class CharacterDecoder {
         return var4;
     }
 
-    public void decodeBuffer(InputStream var1, OutputStream var2) throws IOException {
+    private void decodeBuffer(InputStream var1, OutputStream var2) throws IOException {
         PushbackInputStream var5 = new PushbackInputStream(var1);
         this.decodeBufferPrefix(var5, var2);
 

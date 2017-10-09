@@ -110,11 +110,7 @@ public class Square {
 	}
 	
 	public boolean equals(Square square) {
-		if (this.value == square.value){
-			return true;
-		} else {
-			return false;
-		}
+		return this.value == square.value;
 		
 	}
 	

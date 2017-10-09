@@ -34,24 +34,9 @@ public class GamesAction {
 	}
 	
 	
-	@RequestMapping("/mobilegames/checkSudoku")
+	@RequestMapping(value={"/mobilegames/checkSudoku","/checkSudoku"})
 	@ResponseBody
 	public Result checkMobilegamesSudoku(String sudokuList) {
-		SolutionAlgorithm solution = new SolutionAlgorithm();
-		List<Square> ansList = solution.convertStringToSquareList(sudokuList);
-		boolean flag = solution.isValid(ansList);
-		Result result = new Result();
-		if(flag){
-			result.setStatus(1);
-		}else{
-			result.setStatus(0);
-		}
-		return result;
-	}
-	
-	@RequestMapping("/checkSudoku")
-	@ResponseBody
-	public Result ceckSudoku(String sudokuList) {
 		SolutionAlgorithm solution = new SolutionAlgorithm();
 		List<Square> ansList = solution.convertStringToSquareList(sudokuList);
 		boolean flag = solution.isValid(ansList);

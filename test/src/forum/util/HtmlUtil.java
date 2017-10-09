@@ -10,11 +10,9 @@ public class HtmlUtil {
     private static final String regEx_space = "\\s*|\t|\r|\n";//定义空格回车换行符
     
     /**
-     * @param htmlStr
-     * @return
      *  删除Html标签
      */
-    public static String delHTMLTag(String htmlStr) {
+    private static String delHTMLTag(String htmlStr) {
         Pattern p_script = Pattern.compile(regEx_script, Pattern.CASE_INSENSITIVE);
         Matcher m_script = p_script.matcher(htmlStr);
         htmlStr = m_script.replaceAll(""); // 过滤script标签

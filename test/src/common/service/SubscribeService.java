@@ -7,5 +7,5 @@ import common.vo.BlogVo;
 
 
 public interface SubscribeService {
-	public List<BlogVo> parseXml(URL url) throws IllegalArgumentException,FeedException;
+	List<BlogVo> parseXml(URL url) throws IllegalArgumentException,FeedException;
 }

@@ -148,7 +148,7 @@ public class HomeAction {
 	public Result checkUserName(String name) {
 		Result result = new Result();
 		boolean flag = dbUserService.checkUserName(name);
-		if (flag == true) {
+		if (flag) {
 			result.setStatus(1);
 		} else {
 			result.setStatus(0);
@@ -165,7 +165,7 @@ public class HomeAction {
 	public Result checkEmail(String email) {
 		Result result = new Result();
 		boolean flag = userService.checkEmail(email);
-		if (flag == true) {
+		if (flag) {
 			result.setStatus(1);
 		} else {
 			result.setStatus(0);
@@ -204,25 +204,7 @@ public class HomeAction {
 
 		// 保存图片到本地，并且在数据库中赋值为路径
 		if (face != null && face.getSize() != 0) {
-			try (InputStream tmpStream = face.getInputStream()) {
-				if (ImageIO.read(tmpStream) == null) {
-					throw new Exception("上传文件不是图片！");
-				}
-			} catch (Exception e1) {
-				// e1.printStackTrace();
-			}
-			String realPath = request.getSession().getServletContext()
-					.getRealPath(ImgUtil.FORUM_PATH + ImgUtil.USER_FACE);
-			String imgName = DateUtil.getRadomStr();
-			String imgPath = "/" + imgName + ".png";
-			File file = new File(realPath + imgPath);
-			try {
-				face.getFileItem().write(file);
-				tmpUser.setFace(ImgUtil.USER_FACE + imgPath);
-			} catch (Exception e) {
-				// e.printStackTrace();
-				tmpUser.setFace("");
-			}
+			savePictureToLocal(request, face, tmpUser);
 		} else {
 			tmpUser.setFace("");
 		}
@@ -234,13 +216,7 @@ public class HomeAction {
 		tmpDbUser.setPassword(newPwd);
 		tmpDbUser.setAccess(0);
 
-		if (sex != null && sex == 1) {
-			tmpUser.setSex("男");
-		} else if (sex != null && sex == 2) {
-			tmpUser.setSex("女");
-		} else {
-			tmpUser.setSex("未知");
-		}
+		setUserSex(sex, tmpUser);
 		tmpUser.setNickName(nickName);
 		tmpUser.setType(0);
 		tmpUser.setMobile(mobile);
@@ -254,16 +230,15 @@ public class HomeAction {
 		dbUserService.save(tmpDbUser);
 
 		// DbUser dbUser = dbUserService.getByName(nickName);
-		DbUser dbUser = tmpDbUser;
 
 		// 注册后直接登陆
 		PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(
-				dbUser, dbUser.getPassword(), dbUser.getAuthorities());
+				tmpDbUser, tmpDbUser.getPassword(), tmpDbUser.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		if (session != null) {
 			session.removeAttribute("dbUser");
-			session.setAttribute("dbUser", dbUser);
+			session.setAttribute("dbUser", tmpDbUser);
 		}
 
 		// 发送邮件
@@ -280,6 +255,16 @@ public class HomeAction {
 		}
 	}
 
+	private void setUserSex(@RequestParam(required = false) Integer sex, User tmpUser) {
+		if (sex != null && sex == 1) {
+			tmpUser.setSex("男");
+		} else if (sex != null && sex == 2) {
+			tmpUser.setSex("女");
+		} else {
+			tmpUser.setSex("未知");
+		}
+	}
+
 	@RequestMapping(value = "/doUpdate")
 	public String doUpdate(@AuthenticationPrincipal DbUser dbUser, Model model,
 			HttpServletRequest request,
@@ -293,34 +278,10 @@ public class HomeAction {
 
 		// 保存图片到本地，并且在数据库中赋值为路径
 		if (face != null && face.getSize() != 0) {
-			try (InputStream tmpStream = face.getInputStream()) {
-				if (ImageIO.read(tmpStream) == null) {
-					throw new Exception("上传文件不是图片！");
-				}
-			} catch (Exception e1) {
-				// e1.printStackTrace();
-			}
-			String realPath = request.getSession().getServletContext()
-					.getRealPath(ImgUtil.FORUM_PATH + ImgUtil.USER_FACE);
-			String imgName = DateUtil.getRadomStr();
-			String imgPath = "/" + imgName + ".png";
-			File file = new File(realPath + imgPath);
-			try {
-				face.getFileItem().write(file);
-				tmpUser.setFace(ImgUtil.USER_FACE + imgPath);
-			} catch (Exception e) {
-				// e.printStackTrace();
-				tmpUser.setFace("");
-			}
+			savePictureToLocal(request, face, tmpUser);
 		}
 
-		if (sex != null && sex == 1) {
-			tmpUser.setSex("男");
-		} else if (sex != null && sex == 2) {
-			tmpUser.setSex("女");
-		} else {
-			tmpUser.setSex("未知");
-		}
+		setUserSex(sex, tmpUser);
 		tmpUser.setMobile(mobile);
 		tmpUser.setTrueName(trueName);
 
@@ -331,6 +292,28 @@ public class HomeAction {
 
 		model.addAttribute("successFlag", 1);
 		return ValidatePcMobile.checkRequest(request, "/registsuccess");
+	}
+
+	private void savePictureToLocal(HttpServletRequest request, @RequestParam(required = false) CommonsMultipartFile face, User tmpUser) throws Exception {
+		try (InputStream tmpStream = face.getInputStream()) {
+            if (ImageIO.read(tmpStream) == null) {
+                throw new Exception("上传文件不是图片！");
+            }
+        } catch (Exception e1) {
+            // e1.printStackTrace();
+        }
+		String realPath = request.getSession().getServletContext()
+                .getRealPath(ImgUtil.FORUM_PATH + ImgUtil.USER_FACE);
+		String imgName = DateUtil.getRadomStr();
+		String imgPath = "/" + imgName + ".png";
+		File file = new File(realPath + imgPath);
+		try {
+            face.getFileItem().write(file);
+            tmpUser.setFace(ImgUtil.USER_FACE + imgPath);
+        } catch (Exception e) {
+            // e.printStackTrace();
+            tmpUser.setFace("");
+        }
 	}
 
 	@RequestMapping("/changePassword")
@@ -384,7 +367,7 @@ public class HomeAction {
 	}
 
 	// 抽奖并返回角度和奖项
-	public Object[] award(Object[][] prizeArr) {
+	private Object[] award(Object[][] prizeArr) {
 		// 概率数组
 		Integer obj[] = new Integer[prizeArr.length];
 		for (int i = 0; i < prizeArr.length; i++) {
@@ -400,12 +383,12 @@ public class HomeAction {
 	}
 
 	// 根据概率获取奖项
-	public Integer getRand(Integer obj[]) {
+	private Integer getRand(Integer obj[]) {
 		Integer result = null;
 		try {
 			int sum = 0;// 概率数组的总概率精度
-			for (int i = 0; i < obj.length; i++) {
-				sum += obj[i];
+			for (Integer anObj : obj) {
+				sum += anObj;
 			}
 			for (int i = 0; i < obj.length; i++) {// 概率数组循环
 				int randomNum = new Random().nextInt(sum);// 随机生成1到sum的整数
@@ -422,11 +405,7 @@ public class HomeAction {
 		return result;
 	}
 
-	/**
-	 * 跳转到adminpage页面
-	 * 
-	 * @return
-	 */
+//	跳转到adminpage页面
 	/*
 	 * @RequestMapping("/admin") public String getAdminPage(HttpServletRequest
 	 * request){ return ValidatePcMobile.checkRequest(request, "/adminpage"); }
@@ -434,8 +413,6 @@ public class HomeAction {
 
 	/**
 	 * 跳转到admin控制台页面
-	 * 
-	 * @return
 	 */
 	@RequestMapping("/admin")
 	public String getAdminPage(HttpServletRequest request) {
@@ -444,8 +421,6 @@ public class HomeAction {
 
 	/**
 	 * 跳转到意见反馈页面
-	 * 
-	 * @return
 	 */
 	@RequestMapping("/feedback")
 	public String getFeedback(ModelMap model, HttpServletRequest request) {
@@ -462,8 +437,6 @@ public class HomeAction {
 
 	/**
 	 * 增加意见反馈页面
-	 * 
-	 * @return
 	 */
 	@RequestMapping("/doFeedback")
 	public String doFeedback(@AuthenticationPrincipal DbUser dbUser,
@@ -548,9 +521,6 @@ public class HomeAction {
 
 	/**
 	 * 生成二维码
-	 * 
-	 * @param request
-	 * @return
 	 */
 	@RequestMapping("/zxing")
 	public String getZXing(Model model, HttpServletRequest request,
@@ -577,8 +547,7 @@ public class HomeAction {
 
 	@RequestMapping(value = { "/qrcode", "/tools/qrcode", "/forum/qrcode" })
 	@ResponseBody
-	public Result getLoginReturnPage(String beforepath, String beforepar,
-			HttpServletRequest request) {
+	public Result getLoginReturnPage(String beforepath, String beforepar) {
 		// 拼接登录前的路径
 		String loginPath = "";
 		if (beforepath != null && !"/login".equals(beforepath)) {

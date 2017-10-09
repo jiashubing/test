@@ -7,27 +7,25 @@ import forum.po.ReplyContent;
 
 public interface ReplyService {
 
-	public Reply findLastReplyByTopicId(long topicId);
+	Reply findLastReplyByTopicId(long topicId);
 	
-	public ReplyContent findReplyContentByReplyId(long replyId);
+	ReplyContent findReplyContentByReplyId(long replyId);
 	
-	public List<ReplyContent> findReplyContentListByTopicId(long topicId,  int pageSize,int pageNo);
+	Long getReplyCountByTopicId(long topicId);
 	
-	public Long getReplyCountByTopicId(long topicId);
+	List<Reply> findReplyListByTopicId(long topicId,  int pageSize,int pageNo);
 	
-	public List<Reply> findReplyListByTopicId(long topicId,  int pageSize,int pageNo);
+	List<ReplyContent> getReplyContentListByTopicId(long topicId,  int pageSize,int pageNo);
 	
-	public List<ReplyContent> getReplyContentListByTopicId(long topicId,  int pageSize,int pageNo);
+	Reply saveReply(Reply reply);
 	
-	public Reply saveReply(Reply reply);
+	ReplyContent saveReplyContent(ReplyContent replyContent);
 	
-	public ReplyContent saveReplyContent(ReplyContent replyContent);
+	void deleteReply(Reply reply);
 	
-	public void deleteReply(Reply reply);
+	void deleteReplyById(long replyId);
 	
-	public void deleteReplyById(long replyId);
+	void deleteReplyByTopicId(long topicId);
 	
-	public void deleteReplyByTopicId(long topicId);
-	
-	public Reply findReplyById(long replyId);
+	Reply findReplyById(long replyId);
 }

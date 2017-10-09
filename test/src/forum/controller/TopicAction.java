@@ -34,7 +34,6 @@ import forum.service.ReplyService;
 import forum.service.SectionService;
 import forum.service.TopicService;
 import forum.service.UserService;
-import forum.service.ZoneService;
 import forum.util.FileEcodeUtil;
 import forum.util.HtmlUtil;
 import forum.util.ImgUtil;
@@ -43,11 +42,8 @@ import forum.util.PageUtil;
 @Controller
 public class TopicAction {
 
-	public static int PageSize = 10;
-	public static int MaxPageSize = 100;
-
-	@Resource(name = "zoneServiceImpl")
-	private ZoneService zoneService;
+	private static int PageSize = 10;
+	private static int MaxPageSize = 100;
 
 	@Resource(name = "topicServiceImpl")
 	private TopicService topicService;
@@ -80,29 +76,11 @@ public class TopicAction {
 		List<Topic> ptTopicList = topicService.findPtTopicListBySectionId(
 				sectionId, PageSize, pageNo);
 
-		Map<Topic, Reply> topicLastReply = new HashMap<Topic, Reply>(0);
-		Map<Topic, Long> topicReplyCount = new HashMap<Topic, Long>(0);
-		for (int i = 0; i < zdTopicList.size(); i++) {
-			Topic topic = zdTopicList.get(i);
-			Reply reply = replyService.findLastReplyByTopicId(topic.getId());
-			Long replyCount = replyService
-					.getReplyCountByTopicId(topic.getId());
-			if (reply != null) {
-				topicLastReply.put(topic, reply);
-			}
-			topicReplyCount.put(topic, replyCount);
-		}
+		Map<Topic, Reply> topicLastReply = new HashMap<>(0);
+		Map<Topic, Long> topicReplyCount = new HashMap<>(0);
+		putTopicReplyCount(zdTopicList, topicLastReply, topicReplyCount);
 
-		for (int i = 0; i < ptTopicList.size(); i++) {
-			Topic topic = ptTopicList.get(i);
-			Reply reply = replyService.findLastReplyByTopicId(topic.getId());
-			Long replyCount = replyService
-					.getReplyCountByTopicId(topic.getId());
-			if (reply != null) {
-				topicLastReply.put(topic, reply);
-			}
-			topicReplyCount.put(topic, replyCount);
-		}
+		putTopicReplyCount(ptTopicList, topicLastReply, topicReplyCount);
 
 		long totalNum = topicService.getPtTopicCountBySectionId(sectionId);
 		int totalPages = PageUtil.getTotalPages(totalNum, PageSize);
@@ -124,6 +102,18 @@ public class TopicAction {
 		}
 
 		return ValidatePcMobile.checkRequest(request, "/forum/topicList");
+	}
+
+	private void putTopicReplyCount(List<Topic> zdTopicList, Map<Topic, Reply> topicLastReply, Map<Topic, Long> topicReplyCount) {
+		for (Topic topic : zdTopicList) {
+			Reply reply = replyService.findLastReplyByTopicId(topic.getId());
+			Long replyCount = replyService
+					.getReplyCountByTopicId(topic.getId());
+			if (reply != null) {
+				topicLastReply.put(topic, reply);
+			}
+			topicReplyCount.put(topic, replyCount);
+		}
 	}
 
 	/**
@@ -148,31 +138,11 @@ public class TopicAction {
 			String tmpPage = ValidatePcMobile.getDefaultPrePage(request);
 			model.addAttribute("prePage", tmpPage);
 		} else {
-			Map<Topic, Reply> topicLastReply = new HashMap<Topic, Reply>(0);
-			Map<Topic, Long> topicReplyCount = new HashMap<Topic, Long>(0);
-			for (int i = 0; i < newTopicList.size(); i++) {
-				Topic topic = newTopicList.get(i);
-				Reply reply = replyService
-						.findLastReplyByTopicId(topic.getId());
-				Long replyCount = replyService.getReplyCountByTopicId(topic
-						.getId());
-				if (reply != null) {
-					topicLastReply.put(topic, reply);
-				}
-				topicReplyCount.put(topic, replyCount);
-			}
+			Map<Topic, Reply> topicLastReply = new HashMap<>(0);
+			Map<Topic, Long> topicReplyCount = new HashMap<>(0);
+			putTopicReplyCount(newTopicList, topicLastReply, topicReplyCount);
 
-			for (int i = 0; i < newTopicList.size(); i++) {
-				Topic topic = newTopicList.get(i);
-				Reply reply = replyService
-						.findLastReplyByTopicId(topic.getId());
-				Long replyCount = replyService.getReplyCountByTopicId(topic
-						.getId());
-				if (reply != null) {
-					topicLastReply.put(topic, reply);
-				}
-				topicReplyCount.put(topic, replyCount);
-			}
+			putTopicReplyCount(newTopicList, topicLastReply, topicReplyCount);
 			model.addAttribute("topicLastReply", topicLastReply);
 			model.addAttribute("topicReplyCount", topicReplyCount);
 			model.addAttribute("progressFlag", 3); // 导航条显示标志
@@ -241,74 +211,9 @@ public class TopicAction {
 	}
 
 	/**
-	 * 管理员页面 异步 删除topic
-	 */
-	@RequestMapping("/admin/topicDelete")
-	@ResponseBody
-	public Result deleteTopicAdmin(Long topicId, HttpServletRequest request) {
-		Result result = new Result();
-
-		// 更新小版块对应的数目
-		Topic tmp = topicService.findTopicById(topicId);
-		Section section = tmp.getSection();
-		TopicContent topicContent = topicService
-				.findTopicContentByTopicId(topicId);
-
-		// 先删除和帖子一起的回复的对应的图片
-		List<ReplyContent> list = replyService.findReplyContentListByTopicId(
-				topicId, MaxPageSize, 0);
-		for (int k = 0; k < list.size(); k++) {
-			ReplyContent replyContent = list.get(k);
-			// 删除之前数据之前，也要删除图片
-			// 提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
-			String[] url = replyContent.getContent().split("/");
-			String imgName;
-			for (int i = 0; i < url.length; i++) {
-				if (url[i].contains(".png")) {
-					imgName = url[i].substring(0, 40);
-					String realOutPath = request.getSession()
-							.getServletContext().getRealPath(ImgUtil.REAL_PATH);
-					String outName = realOutPath + '/' + imgName;
-					// 删除图片
-					FileEcodeUtil.deleteFile(outName);
-				}
-			}
-		}
-
-		// 删除数据之前，也要删除图片
-		// 提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
-		String[] url = topicContent.getContent().split("/");
-		String imgName;
-		for (int i = 0; i < url.length; i++) {
-			if (url[i].contains(".png")) {
-				imgName = url[i].substring(0, 40);
-				String realOutPath = request.getSession().getServletContext()
-						.getRealPath(ImgUtil.REAL_PATH);
-				String outName = realOutPath + '/' + imgName;
-				// 删除图片
-				FileEcodeUtil.deleteFile(outName);
-			}
-		}
-
-		topicService.deleteTopicById(topicId);
-
-		Long totalCount = topicService.getTotalTopicCount(section.getId());
-		Long goodCount = topicService.getGoodTopicCount(section.getId());
-		Long noReplyCount = topicService.getNoReplyTopicCount(section.getId());
-
-		section.setTotalCount(totalCount);
-		section.setGoodCount(goodCount);
-		section.setNoReplyCount(noReplyCount);
-		sectionService.saveSection(section);
-
-		result.setStatus(1);
-		return result;
-	}
-
-	/**
 	 * 论坛页面 异步 删除topic
 	 */
-	@RequestMapping("/forum/topicDelete")
+	@RequestMapping(value={"/forum/topicDelete","/admin/topicDelete"})
 	@ResponseBody
 	public Result deleteTopicForum(Long topicId, HttpServletRequest request) {
 		Result result = new Result();
@@ -320,40 +225,19 @@ public class TopicAction {
 				.findTopicContentByTopicId(topicId);
 
 		// 先删除和帖子一起的回复的对应的图片
-		List<ReplyContent> list = replyService.findReplyContentListByTopicId(
+		List<ReplyContent> list = replyService.getReplyContentListByTopicId(
 				topicId, MaxPageSize, 0);
-		for (int k = 0; k < list.size(); k++) {
-			ReplyContent replyContent = list.get(k);
+		for (ReplyContent replyContent : list) {
 			// 删除之前数据之前，也要删除图片
 			// 提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
 			String[] url = replyContent.getContent().split("/");
-			String imgName;
-			for (int i = 0; i < url.length; i++) {
-				if (url[i].contains(".png")) {
-					imgName = url[i].substring(0, 40);
-					String realOutPath = request.getSession()
-							.getServletContext().getRealPath(ImgUtil.REAL_PATH);
-					String outName = realOutPath + '/' + imgName;
-					// 删除图片
-					FileEcodeUtil.deleteFile(outName);
-				}
-			}
+			deleteDataPicture(request, url);
 		}
 
 		// 删除数据之前，也要删除图片
 		// 提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
 		String[] url = topicContent.getContent().split("/");
-		String imgName;
-		for (int i = 0; i < url.length; i++) {
-			if (url[i].contains(".png")) {
-				imgName = url[i].substring(0, 40);
-				String realOutPath = request.getSession().getServletContext()
-						.getRealPath(ImgUtil.REAL_PATH);
-				String outName = realOutPath + '/' + imgName;
-				// 删除图片
-				FileEcodeUtil.deleteFile(outName);
-			}
-		}
+		deleteDataPicture(request, url);
 
 		topicService.deleteTopicById(topicId);
 
@@ -367,6 +251,20 @@ public class TopicAction {
 
 		result.setStatus(1);
 		return result;
+	}
+
+	private void deleteDataPicture(HttpServletRequest request, String[] url) {
+		String imgName;
+		for (String anUrl : url) {
+			if (anUrl.contains(".png")) {
+				imgName = anUrl.substring(0, 40);
+				String realOutPath = request.getSession()
+						.getServletContext().getRealPath(ImgUtil.REAL_PATH);
+				String outName = realOutPath + '/' + imgName;
+				// 删除图片
+				FileEcodeUtil.deleteFile(outName);
+			}
+		}
 	}
 
 	@RequestMapping("/forum/details")
@@ -407,7 +305,7 @@ public class TopicAction {
 
 		if (errorFlag) {
 			// 手机端抛出异常
-			model.addAttribute("errorFlag", errorFlag);
+			model.addAttribute("errorFlag", true);
 		}
 		return ValidatePcMobile.checkRequest(request, "/forum/topicDetail");
 	}
@@ -454,7 +352,7 @@ public class TopicAction {
 			@RequestParam(required = false) Long topicSectionId, Model model,
 			HttpServletRequest request) throws Exception {
 		Topic topic = new Topic();
-		DbUser dbUser = null;
+		DbUser dbUser;
 		HttpSession session = request.getSession();
 		if (session.getAttribute("dbUser") != null) {
 			dbUser = (DbUser) session.getAttribute("dbUser");
@@ -470,7 +368,7 @@ public class TopicAction {
 			String imgName;
 			StringBuffer buf = new StringBuffer();
 			boolean tmpFlag = true; // 判断是否有一张图片，只取第一张图片
-			int i = 0;
+			int i;
 			for (i = 0; i < url.length; i++) {
 				if (url[i].contains(".png")) {
 					imgName = url[i].substring(0, 40);
@@ -594,8 +492,8 @@ public class TopicAction {
 	}
 
 	@RequestMapping("/forum/topicToPdf")
-	public void topicToPdf(Model model, HttpServletResponse response,
-			HttpServletRequest request, Long topicId) {
+	public void topicToPdf(HttpServletResponse response,
+						   HttpServletRequest request, Long topicId) {
 		if (topicId != null) {
 			Map<String, Object> map = javaToPdfService.htmlToMap(topicId);
 			String tmp = request.getRequestURL().toString();
@@ -603,7 +501,7 @@ public class TopicAction {
 			tmp += topicId;
 			String ansPath = request.getSession().getServletContext()
 					.getRealPath(ImgUtil.TMPIMG_PATH);
-			String str = zxingService.getLogoQRCode(tmp, ansPath);;
+			String str = zxingService.getLogoQRCode(tmp, ansPath);
 			map.put("zxing", str);
 
 			String filePath = javaToPdfService.mapToPdf(map);

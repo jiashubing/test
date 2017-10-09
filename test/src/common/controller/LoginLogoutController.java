@@ -18,16 +18,12 @@ public class LoginLogoutController {
 
 	/**
 	 * 指向登录界面
-	 * 
-	 * @param error
-	 * @param model
-	 * @return
 	 */
 	@RequestMapping(value = "/login")
 	public String getLoginPage(@RequestParam(required = false) boolean error,@RequestParam( required = false)String beforepath,
 			@RequestParam( required = false)String beforepar, ModelMap model,HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if (error == true) {
+		if (error) {
 			model.put("errInfo", "用户名或密码错误!");
 		} else {
 			model.put("errInfo", "");
@@ -65,10 +61,6 @@ public class LoginLogoutController {
 	
 	/**
 	 * 手机端指向登录前界面
-	 * 
-	 * @param error
-	 * @param model
-	 * @return
 	 */
 	@RequestMapping(value = "/beforelogin")
 	public String getBeforeLoginPage(HttpServletRequest request) {
@@ -81,8 +73,6 @@ public class LoginLogoutController {
 
 	/**
 	 * 指定无权限访问界面
-	 * 
-	 * @return
 	 */
 	@RequestMapping(value = "/denied")
 	public String getDeniedPage(HttpServletRequest request) {
@@ -91,8 +81,6 @@ public class LoginLogoutController {
 	
 	/**
 	 * 退出登录前，将退出后的跳转页面保存到session中
-	 * 
-	 * @return
 	 */
 	@RequestMapping(value = "/mylogout")
 	public String getLogoutReturnPage(HttpServletRequest request,@RequestParam( required = false) String beforepath,
@@ -137,9 +125,8 @@ public class LoginLogoutController {
         	return result;
     }
 	
-	/**
-	 * 登录前，将跳转页面保存到session中
-	 *//*
+//	登录前，将跳转页面保存到session中
+	/*
 	@RequestMapping("/tools/mylogin")
 	@ResponseBody
 	public Result getLoginToolsReturnPage(String beforepath,String beforepar,HttpServletRequest request) {
@@ -161,9 +148,9 @@ public class LoginLogoutController {
 		return result;
 	}*/
 	
-	/**
-	 * 登录前，将跳转页面保存到session中
-	 *//*
+
+	//登录前，将跳转页面保存到session中
+	/*
 	@RequestMapping("/forum/mylogin")
 	@ResponseBody
 	public Result getLoginForumReturnPage(String beforepath,String beforepar,HttpServletRequest request) {

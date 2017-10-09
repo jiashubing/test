@@ -5,9 +5,9 @@ import java.util.List;
 import forum.po.DbUser;
 
 public interface DbUserService {
-	public void save(DbUser user);
-	public DbUser getById(long id);
-	public DbUser getByName(String name);
+	void save(DbUser user);
+	DbUser getById(long id);
+	DbUser getByName(String name);
 	/**
 	 * 校验用户名是否唯一
 	 * @param name

@@ -75,7 +75,7 @@ public class JavaToPdfServiceImpl implements JavaToPdfService {
 		List<String> list = new ArrayList<String>();
 		getPdfContent(topicContent.getContent(), list);
 		
-		List<ReplyContent> replyContentList = replyService.findReplyContentListByTopicId(topicId,100,0);
+		List<ReplyContent> replyContentList = replyService.getReplyContentListByTopicId(topicId,100,0);
 		for(int i=0; i<replyContentList.size(); i++){
 			ReplyContent replyContent = replyContentList.get(i);
 			list.add(" ");

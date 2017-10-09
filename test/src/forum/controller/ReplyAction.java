@@ -18,25 +18,18 @@ import forum.po.ReplyContent;
 import forum.po.Topic;
 import forum.service.ReplyService;
 import forum.service.TopicService;
-import forum.service.UserService;
 import forum.util.FileEcodeUtil;
 import forum.util.ImgUtil;
 
 @Controller
 public class ReplyAction {
 	
-	public static int PageSize = 10;
-	public static int MaxPageSize = 100;
-
 	@Resource(name="topicServiceImpl")
 	private TopicService topicService;
 
 	@Resource(name="replyServiceImpl")
 	private ReplyService replyService;
 	
-	@Resource(name="userServiceImpl")
-	private UserService userService;
-
 	/**
 	 * 论坛详情页面 异步 删除reply
 	 */
@@ -52,7 +45,7 @@ public class ReplyAction {
 		//提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
 		String[] url = replyContent.getContent().split("/");
         String imgName;
-        int i = 0;
+        int i;
         for (i = 0 ; i <url.length ; i++ ) {
             if(url[i].contains(".png")){
                 imgName = url[i].substring(0,40);
@@ -97,7 +90,7 @@ public class ReplyAction {
 		String[] url = replyContent.split("/");
         String imgName;
         StringBuffer buf = new StringBuffer();
-        int i = 0;
+        int i;
         for (i = 0 ; i <url.length ; i++ ) {
             if(url[i].contains(".png")){
                 imgName = url[i].substring(0,40);

@@ -43,6 +43,15 @@ public class SectionServiceImpl implements SectionService {
 	@Override
 	public List<Section> findSectionList(Section s_section,int pageSize,int pageNo) {
 		StringBuffer hql=new StringBuffer("from Section");
+		addQueryCondition(s_section, hql);
+		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
+		@SuppressWarnings("unchecked")
+		List<Section> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
+		em.clear();
+		return result;
+	}
+
+	private void addQueryCondition(Section s_section, StringBuffer hql) {
 		if (s_section!=null) {
 			if (StringUtil.isNotEmpty(s_section.getName())) {
 				hql.append(" and name like '%").append(s_section.getName()).append("%'");
@@ -54,13 +63,8 @@ public class SectionServiceImpl implements SectionService {
 				hql.append(" and masterId = ").append(s_section.getMaster().getId());
 			}
 		}
-		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
-		@SuppressWarnings("unchecked")
-		List<Section> result = query.setMaxResults(pageSize).setFirstResult(pageNo*pageSize).getResultList();
-		em.clear();
-		return result;
 	}
-	
+
 	@Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public List<Section> findSectionListByZoneId(long zoneId,int pageSize,int pageNo) {
@@ -76,17 +80,7 @@ public class SectionServiceImpl implements SectionService {
 	@Override
 	public Long getSectionCount(Section s_section) {
 		StringBuffer hql=new StringBuffer("select count(*) from Section");
-		if (s_section!=null) {
-			if (StringUtil.isNotEmpty(s_section.getName())) {
-				hql.append(" and name like '%").append(s_section.getName()).append("%'");
-			}
-			if (s_section.getZone()!=null&&s_section.getZone().getId()>0) {
-				hql.append(" and zoneId = ").append(s_section.getZone().getId());
-			}
-			if (s_section.getMaster()!=null&&s_section.getMaster().getId()>0) {
-				hql.append(" and masterId = ").append(s_section.getMaster().getId());
-			}
-		}
+		addQueryCondition(s_section, hql);
 		Query query = em.createQuery(hql.toString().replaceFirst("and", "where"));
 		return (Long)query.getSingleResult();
 	}

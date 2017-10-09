@@ -17,7 +17,6 @@ import common.po.Blog;
 import common.po.Weather;
 import common.po.WeiBo;
 import common.service.BlogService;
-import common.service.SubscribeService;
 import common.service.WeatherService;
 import common.service.WeiBoService;
 import config.ValidatePcMobile;
@@ -27,9 +26,6 @@ public class SubscribeAction {
 	
 	private static final String URL_BLOG = "http://www.cnblogs.com/acm-bingzi/article/rss";
 	private static final String URL_WEIBO = "http://rss.weibodangan.com/weibo/rss/3225300442/";
-	
-	@Resource(name="subscribeServiceImpl")
-	private SubscribeService subscribeService;
 	
 	@Resource(name="blogServiceImpl")
 	private BlogService blogService;
@@ -118,7 +114,7 @@ public class SubscribeAction {
 	
 	
 	@RequestMapping("/mobilesubscribe")
-	public String loadMobileSubscribe(Model model,HttpServletRequest request)throws Exception{
+	public String loadMobileSubscribe(HttpServletRequest request)throws Exception{
 		return ValidatePcMobile.checkRequest(request, "/subscribes");
 	}
 	

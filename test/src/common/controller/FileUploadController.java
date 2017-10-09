@@ -31,7 +31,7 @@ import java.util.UUID;
 @Controller
 public class FileUploadController {
 
-	static BASE64Decoder decoder = new BASE64Decoder();
+	private static BASE64Decoder decoder = new BASE64Decoder();
 
 	@RequestMapping(value = "/forum/fileUploadImage", method = RequestMethod.POST)
 	@ResponseBody
@@ -80,7 +80,6 @@ public class FileUploadController {
 	 * 
 	 * @param imgsrc
 	 *            图片网络地址
-	 * @throws Exception
 	 */
 	@RequestMapping("/forum/ajaxEditorFileUpload")
 	@ResponseBody

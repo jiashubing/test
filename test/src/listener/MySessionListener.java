@@ -11,7 +11,7 @@ public class MySessionListener implements HttpSessionListener {
 	public void sessionCreated(HttpSessionEvent arg0) {
 //		System.out.println("sessionCreated" + "," + new Date());
 		Object lineCount = arg0.getSession().getServletContext().getAttribute("lineCount");
-		Integer count = 0;
+		Integer count;
 		if (lineCount == null) {
 			lineCount = "0";
 		}

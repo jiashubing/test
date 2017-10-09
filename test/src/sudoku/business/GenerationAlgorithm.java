@@ -27,17 +27,17 @@ public class GenerationAlgorithm {
 		this.puzzle = createPuzzle(this.squares);
 	}
 
-	public int getRandomNumber(Integer[] available) {
-		int random = 0;
+	private int getRandomNumber(Integer[] available) {
+		int random;
 		Random r = new Random();
 		random = r.nextInt(available.length);
 		return available[random];
 	}
 	
 	//生成了一个有解的数独
-	public List<Square> generate() {
-		List<Square> squares = new ArrayList<Square>();
-		List<Integer[]> available = new ArrayList<Integer[]>();
+	private List<Square> generate() {
+		List<Square> squares = new ArrayList<>();
+		List<Integer[]> available = new ArrayList<>();
 		//81个格子，每一个格子都可能是9个数字，从1到9赋值
 		for(int x = 0; x < 81; x++) {
 			Integer[] numbers = new Integer[9];
@@ -60,7 +60,7 @@ public class GenerationAlgorithm {
 				
 				Square square = new Square(i, n);
 				
-				if(validSquare(squares, square) == true) {
+				if(validSquare(squares, square)) {
 					squares.add(square);
 					
 					available.set(i, ArrayUtils.remove(available.get(i), l));
@@ -84,16 +84,16 @@ public class GenerationAlgorithm {
 			}
 		}
 //		System.out.println("******" +squares );
-		this.solution = new ArrayList<Square>(squares);
+		this.solution = new ArrayList<>(squares);
 			
 		return squares;
 	}
 	
-	public boolean validSquare(List<Square> squares, Square square) {
-		for(int i = 0; i < squares.size(); i++) {
-			if(squares.get(i).getRow() == square.getRow() | squares.get(i).getCol() == square.getCol() | 
-					squares.get(i).getZone() == square.getZone()) {
-				if(squares.get(i).getValue() == square.getValue()) {
+	private boolean validSquare(List<Square> squares, Square square) {
+		for (Square square1 : squares) {
+			if (square1.getRow() == square.getRow() | square1.getCol() == square.getCol() |
+					square1.getZone() == square.getZone()) {
+				if (square1.getValue() == square.getValue()) {
 					return false;
 				}
 			}
@@ -101,9 +101,9 @@ public class GenerationAlgorithm {
 		return true;
 	}
 	
-	public List<List<Square>> createPuzzle(List<Square> squares) {
+	private List<List<Square>> createPuzzle(List<Square> squares) {
 		
-		List<List<Square>> zoneArray = new ArrayList<List<Square>>();
+		List<List<Square>> zoneArray = new ArrayList<>();
 		
 		//第一个3*3的九宫格块
 		List<Square> zoneSquares1 = new ArrayList<Square>();
@@ -157,17 +157,12 @@ public class GenerationAlgorithm {
 	
 	/**
 	 * 把有解的序列生成去除一些值的序列
-	 * @param squares
-	 * @param numberToRemove
-	 * @return
 	 */
-	public List<Square> removeSquaresFromZone(List<Square> squares, int numberToRemove) {
+	private List<Square> removeSquaresFromZone(List<Square> squares, int numberToRemove) {
 		Integer[] temp = createArrayOfNineRandomNumbers();
 		Integer[] indexesToBeRemoved = new Integer[numberToRemove];
 
-		for (int i = 0; i < numberToRemove; i++) {
-			indexesToBeRemoved[i] = temp[i];
-		}
+		System.arraycopy(temp, 0, indexesToBeRemoved, 0, numberToRemove);
 		
 		for (int i = 0; i < numberToRemove; i++) {
 			int squareIndex = indexesToBeRemoved[i] - 1;
@@ -180,8 +175,8 @@ public class GenerationAlgorithm {
 	}
 	
 	
-	public List<Square> getZoneSquares(List<Square> squares, int zone) {
-		List<Square> tempSquares = new ArrayList<Square>();
+	private List<Square> getZoneSquares(List<Square> squares, int zone) {
+		List<Square> tempSquares = new ArrayList<>();
 		for (int i = 0; i < 81; i++) {
 			if(squares.get(i).getZone() == zone) {
 				tempSquares.add(squares.get(i));
@@ -191,7 +186,7 @@ public class GenerationAlgorithm {
 		return tempSquares;
 	}
 	
-	public static Integer[] createArrayOfNineRandomNumbers() {
+	private static Integer[] createArrayOfNineRandomNumbers() {
 		Integer[] randomArray = new Integer[9];
 		Random random = new Random();
 		

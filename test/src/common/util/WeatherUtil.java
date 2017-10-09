@@ -1,6 +1,7 @@
 package common.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import common.po.Weather;
@@ -10,8 +11,6 @@ public class WeatherUtil {
 	
 	/**
 	 * 提取Weather中的部分信息到WeatherVo
-	 * @param weather
-	 * @return
 	 */
 	public static WeatherVo weatherToWeatherVo(Weather weather){
 		WeatherVo ans = new WeatherVo();
@@ -29,26 +28,26 @@ public class WeatherUtil {
 			str = str.replaceAll("\n", "");
 
 			String x[] = str.split("。");
-			for(int i=0;i<x.length; i++){
-				String a = x[i].substring(0, x[i].indexOf('：'));
-				String b = x[i].substring(x[i].indexOf('：')+1, x[i].indexOf('，'));
-				String c = x[i].substring(x[i].indexOf('，')+1);
-				if("紫外线指数".equals(a)){
+			for (String aX : x) {
+				String a = aX.substring(0, aX.indexOf('：'));
+				String b = aX.substring(aX.indexOf('：') + 1, aX.indexOf('，'));
+				String c = aX.substring(aX.indexOf('，') + 1);
+				if ("紫外线指数".equals(a)) {
 					ans.setZiwaixian1(b);
 					ans.setZiwaixian2(c);
-				}else if("感冒指数".equals(a)){
+				} else if ("感冒指数".equals(a)) {
 					ans.setGanmao1(b);
 					ans.setGanmao2(c);
-				}else if("穿衣指数".equals(a)){
+				} else if ("穿衣指数".equals(a)) {
 					ans.setChuanyi1(b);
 					ans.setChuanyi2(c);
-				}else if("洗车指数".equals(a)){
+				} else if ("洗车指数".equals(a)) {
 					ans.setXiche1(b);
 					ans.setXiche2(c);
-				}else if("运动指数".equals(a)){
+				} else if ("运动指数".equals(a)) {
 					ans.setYundong1(b);
 					ans.setYundong2(c);
-				}else if("空气污染指数".equals(a)){
+				} else if ("空气污染指数".equals(a)) {
 					ans.setWuran1(b);
 					ans.setWuran2(c);
 				}
@@ -65,15 +64,13 @@ public class WeatherUtil {
 			}
 			
 			String x[] = str.split("；");
-			List<String> y = new ArrayList<String>();
-			for(int i=0;i<x.length; i++){
-				if(x[i].contains("。")){
-					String tmp[] = x[i].split("。");
-					for(int j=0; j<tmp.length; j++){
-						y.add(tmp[j]);
-					}
-				}else{
-					y.add(x[i]);
+			List<String> y = new ArrayList<>();
+			for (String aX : x) {
+				if (aX.contains("。")) {
+					String tmp[] = aX.split("。");
+					Collections.addAll(y, tmp);
+				} else {
+					y.add(aX);
 				}
 			}
 			for(String s : y){
