@@ -166,7 +166,7 @@ public class FileEcodeUtil {
 
     public static String modifyString(File file, String startChar,
                                       String endChar) {
-        StringBuffer ans = new StringBuffer();
+        StringBuilder ans = new StringBuilder();
         String encoding = "UTF-8";
         if (file.isFile() && file.exists()) { // 判断文件是否存在
             // 考虑到编码格式
@@ -193,7 +193,7 @@ public class FileEcodeUtil {
     }
 
     public static String deleteString(File file, String startChar) {
-        StringBuffer ans = new StringBuffer();
+        StringBuilder ans = new StringBuilder();
         String encoding = "UTF-8";
         if (file.isFile() && file.exists()) { // 判断文件是否存在
             try (InputStreamReader read = new InputStreamReader(
@@ -219,7 +219,7 @@ public class FileEcodeUtil {
     }
 
     public static String addBlankLine(File file) {
-        StringBuffer ans = new StringBuffer();
+        StringBuilder ans = new StringBuilder();
         String encoding = "UTF-8";
         if (file.isFile() && file.exists()) { // 判断文件是否存在
             try (InputStreamReader read = new InputStreamReader(
@@ -244,7 +244,7 @@ public class FileEcodeUtil {
     }
 
     public static String deleteBlankLine(File file) {
-        StringBuffer ans = new StringBuffer();
+        StringBuilder ans = new StringBuilder();
         String encoding = "UTF-8";
         if (file.isFile() && file.exists()) { // 判断文件是否存在
             try (InputStreamReader read = new InputStreamReader(
@@ -269,7 +269,7 @@ public class FileEcodeUtil {
 
     // 修改数据
     private static String modifyLine(String x, String a, String b) {
-        StringBuffer sb = new StringBuffer(x);
+        StringBuilder sb = new StringBuilder(x);
         sb.insert(0, a);
         sb.append(b);
         x = sb.toString();
@@ -292,7 +292,7 @@ public class FileEcodeUtil {
      * file 转字 String
      */
     public static String readFileByLines(String fileName) {
-        StringBuffer content = new StringBuffer();
+        StringBuilder content = new StringBuilder();
         String tempString;
 
         try (FileInputStream file = new FileInputStream(fileName);

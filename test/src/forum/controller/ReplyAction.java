@@ -89,7 +89,7 @@ public class ReplyAction {
 		//提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
 		String[] url = replyContent.split("/");
         String imgName;
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         int i;
         for (i = 0 ; i <url.length ; i++ ) {
             if(url[i].contains(".png")){

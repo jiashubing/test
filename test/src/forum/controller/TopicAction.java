@@ -366,7 +366,7 @@ public class TopicAction {
 			// 提交的文件，先检查图片，将用到的图片移动到realImg文件夹下
 			String[] url = topicContent.split("/");
 			String imgName;
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			boolean tmpFlag = true; // 判断是否有一张图片，只取第一张图片
 			int i;
 			for (i = 0; i < url.length; i++) {
